@@ -21,18 +21,18 @@ public class Component extends Actor
 	public Component(float x, float y,float m) throws IllegalArgumentException {
 		this.x=x;
 		this.y=y;
-		this.vx=10;
-		this.vy=1;
+		this.vx=0;
+		this.vy=0;
 		if (m>0)this.m=m; else throw new IllegalArgumentException();
-		if(texture==null)texture=reloadTexture();
+		if(texture==null)texture=getTexture();
 		this.density=1;
 		this.r=(float)Math.sqrt(this.m/Math.PI/this.density);
 		this.owner=null;
 
 		this.textureRegion=loadTextureRegion();
 	}
-	private Texture reloadTexture(){return texture=new Texture("circle01.png");}
-	private Texture getTexture(){return texture=isReloadTextureNeeded?reloadTexture():texture;}
+	private Texture reloadTexture(){isReloadTextureNeeded=false; return texture=new Texture("circle01.png");}
+	private Texture getTexture(){return texture=isReloadTextureNeeded?( reloadTexture()):texture;}
 	private TextureRegion getTextureRegion(){return this.textureRegion;}
 	public TextureRegion loadTextureRegion(){
 		return textureRegion=new TextureRegion(getTexture());
@@ -108,4 +108,5 @@ public class Component extends Actor
 		super.draw(batch, parentAlpha);
 		batch.draw(this.getTextureRegion(),this.getX()-this.getR(),this.getY()-this.getR(),this.getR()*2,this.getR()*2);
 	}
+
 }

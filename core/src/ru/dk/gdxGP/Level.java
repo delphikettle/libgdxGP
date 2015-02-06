@@ -2,9 +2,12 @@ package ru.dk.gdxGP;
 
 //import android.util.*;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+import java.math.MathContext;
 import java.util.ArrayList;
+import java.util.Random;
 
 import static ru.dk.gdxGP.Component.getDistance;
 
@@ -42,17 +45,8 @@ public abstract class Level extends Thread implements Runnable
 		System.out.println("Time: " + "LevelCreated" + System.currentTimeMillis());
 	}
 	abstract public void setParticles(int w, int h);
-	synchronized final public ArrayList<Component> getComponents(){
-		return particles;
-	}
+
 	public Stage getStage(){return this.stage;}
-	synchronized final public Object[] getComponentArray(){
-		if(isComponentsChanged){
-			componentArray=particles.toArray();
-			isComponentsChanged=false;
-		}
-		return componentArray;
-	}
 
 	synchronized final public void addComponent(Component component){
 		particles.add(component);
@@ -62,21 +56,25 @@ public abstract class Level extends Thread implements Runnable
 	}
 	synchronized final private void Interaction(Component c1, Component c2){
 		float d=getDistance(c1,c2);
-		float F= (float) (c1.getF(c2)*c2.getF(c1)/Math.pow(d,2));
+		float F= (float) (G*c1.getF(c2)*c2.getF(c1)/Math.pow(d,2));
 		float F1=F/c1.getM(),F2=F/c2.getM();
-		c1.informXAcceleration(F1*Component.getXDiff(c1,c2)/d);
-		c2.informXAcceleration(F2*Component.getXDiff(c2,c1)/d);
+		c1.informXAcceleration(F1 * Component.getXDiff(c1,c2) / d);
+		c2.informXAcceleration(F2 * Component.getXDiff(c2,c1) / d);
 		c1.informYAcceleration(F1 * Component.getYDiff(c1, c2) / d);
 		c2.informYAcceleration(F2 * Component.getYDiff(c2, c1) / d);
+		if(d<=c1.getR()+c2.getR()){
+			//collision
+		}
+
 		//Log.i("Level.Interaction",F1+"");
 	}
 	synchronized private void Move(float time){
-		int j=0;
 		for(int i=0;i<particles.size();i++) {
 			try {
-				for (j = i + 1; j < particles.size(); j++)
+				for (int j = i + 1; j < particles.size(); j++) {
 					this.Interaction(particles.get(i), particles.get(j));
-				particles.get(i).nextStep(time*0.0001f);
+				}
+				particles.get(i).nextStep(time*1f);
 			}catch (NullPointerException e){particles.remove(i);}
 		}
 	}
