@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import ru.dk.gdxGP.*;
 
 public class Component extends Actor
 {
@@ -70,6 +69,23 @@ public class Component extends Actor
 		}
 	}
 
+	@Override
+	public void setX(float x) {
+		if(this.getX()!=x){
+			super.setX(x);
+			if(onCoordinateChangedListener != null) onCoordinateChangedListener.onCoordinateChanged(this);
+		}
+
+	}
+	@Override
+	public void setY(float y) {
+		if(this.getY()!=y){
+			super.setY(y);
+			if(onCoordinateChangedListener != null) onCoordinateChangedListener.onCoordinateChanged(this);
+		}
+
+	}
+
 	public float getM() {
 		return m;
 	}
@@ -108,5 +124,17 @@ public class Component extends Actor
 		super.draw(batch, parentAlpha);
 		batch.draw(this.getTextureRegion(),this.getX()-this.getR(),this.getY()-this.getR(),this.getR()*2,this.getR()*2);
 	}
+	OnCoordinateChangedListener onCoordinateChangedListener =null;
+	OnMassChangedListener onMassChangedListener=null;
+	OnEachStepListener onEachStepListener=null;
 
+	public interface OnCoordinateChangedListener {
+		public void onCoordinateChanged(Component c);
+	}
+	public interface OnMassChangedListener {
+		public void onMassChanged(Component c);
+	}
+	public interface OnEachStepListener {
+		public void onEachStep(Component c);
+	}
 }

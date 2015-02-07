@@ -68,6 +68,7 @@ public abstract class Level extends Thread implements Runnable
 
 		//Log.i("Level.Interaction",F1+"");
 	}
+
 	synchronized private void Move(float time){
 		for(int i=0;i<particles.size();i++) {
 			try {
