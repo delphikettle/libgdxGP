@@ -34,6 +34,12 @@ public class GDXGameGP extends ApplicationAdapter implements com.badlogic.gdx.in
 	}
 
 	@Override
+	public void dispose() {
+		super.dispose();
+		System.out.println(lvl.maxOpName+lvl.maxOp);
+	}
+
+	@Override
 	public boolean touchDown(float x, float y, int pointer, int button) {
 		return false;
 	}

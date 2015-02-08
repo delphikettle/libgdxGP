@@ -3,6 +3,9 @@ package ru.dk.gdxGP;
 //import android.util.*;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import java.math.MathContext;
@@ -16,9 +19,17 @@ public abstract class Level extends Thread implements Runnable
 	private ArrayList<Component> particles;
 	private LevelStage stage;
 	private class LevelStage extends Stage{
+
+		LevelStage(){
+		}
 		@Override
 		public void draw() {
+			this.act();
 			super.draw();
+			this.getCamera().position.set((particles.get(0).getX()+255*this.getCamera().position.x)/256,(particles.get(0).getY()+255*this.getCamera().position.y)/256,0);
+			//this.getCamera().lookAt(particles.get(0).getX(),particles.get(0).getY(),-10);
+			//this.getCamera().normalizeUp();
+			this.getCamera().update();
 		}
 	}
 	//borders:
@@ -30,6 +41,16 @@ public abstract class Level extends Thread implements Runnable
 	private boolean isMove=false, isEnd=false;
 	private volatile boolean isComponentsChanged=true;
 	private Object[] componentArray=null;
+
+	public long getMaxDistance() {
+		return maxDistance;
+	}
+
+	public void setMaxDistance(long maxDistance) {
+		if(maxDistance>0)this.maxDistance = maxDistance;
+	}
+
+	private long maxDistance=10000;
 	public Level(int w, int h) {
 		stage=new LevelStage();
 		particles = new ArrayList<Component>();
@@ -52,16 +73,51 @@ public abstract class Level extends Thread implements Runnable
 		particles.add(component);
 		isComponentsChanged=true;
 		stage.addActor(component);
+		stage.setScrollFocus(component);
 		System.out.println("Time: "+"ComponentAdded "+System.currentTimeMillis());
 	}
+	long maxOp=0;
+	 String maxOpName=""; long time=System.nanoTime(),elTime;
 	synchronized final private void Interaction(Component c1, Component c2){
+		time=System.nanoTime();
 		float d=getDistance(c1,c2);
-		float F= (float) (G*c1.getF(c2)*c2.getF(c1)/Math.pow(d,2));
+		elTime=System.nanoTime()-time;
+		if(elTime>maxOp){
+			//maxOp=elTime;
+			//maxOpName="detDistance";
+		}
+		time=System.nanoTime();
+		if(d==0) return;
+		//if(d>this.maxDistance)return;
+		elTime=System.nanoTime()-time;
+		if(elTime>maxOp){
+			//maxOp=elTime;
+			//maxOpName="if...if";
+		}
+		time=System.nanoTime();
+		float F= (float) (G*c1.getF(c2)*c2.getF(c1)/(d));
+		elTime=System.nanoTime()-time;
+		if(elTime>maxOp){
+			//maxOp=elTime;
+			//maxOpName="F=...";
+		}
+		time=System.nanoTime();
 		float F1=F/c1.getM(),F2=F/c2.getM();
+		elTime=System.nanoTime()-time;
+		if(elTime>maxOp){
+			//maxOp=elTime;
+			//maxOpName="F1=..., F2...";
+		}
+		time=System.nanoTime();
 		c1.informXAcceleration(F1 * Component.getXDiff(c1,c2) / d);
 		c2.informXAcceleration(F2 * Component.getXDiff(c2,c1) / d);
 		c1.informYAcceleration(F1 * Component.getYDiff(c1, c2) / d);
 		c2.informYAcceleration(F2 * Component.getYDiff(c2, c1) / d);
+		elTime=System.nanoTime()-time;
+		if(elTime>maxOp){
+			//maxOp=elTime;
+			//maxOpName="InformAcceleration";
+		}
 		if(d<=c1.getR()+c2.getR()){
 			//collision
 		}
@@ -75,7 +131,13 @@ public abstract class Level extends Thread implements Runnable
 				for (int j = i + 1; j < particles.size(); j++) {
 					this.Interaction(particles.get(i), particles.get(j));
 				}
-				particles.get(i).nextStep(time*1f);
+				this.time=System.nanoTime();
+				particles.get(i).nextStep(time*0.001f);
+				elTime=System.nanoTime()-this.time;
+				if(elTime>maxOp){
+					maxOp=elTime;
+					maxOpName="nextStep";
+				}
 			}catch (NullPointerException e){particles.remove(i);}
 		}
 	}
