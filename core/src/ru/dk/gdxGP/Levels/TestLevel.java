@@ -11,15 +11,18 @@ public class TestLevel extends Level {
     public TestLevel(int w, int h) {
         super(w, h);
 		this.setG(1f);
-        this.setTimeFactor(0.01f);
+        this.setTimeFactor(1f);
 
+        this.setXMax(this.getXMax()*2);
+        this.setYMax(this.getYMax()*2);
         this.setMaxDistance(1000);
     }
 
     @Override
     public void setParticles(int w, int h) {
 		Random rnd=new Random();
-		for(int i=0;i<500;i++)
-        	this.addComponent(new Component(rnd.nextInt(w*3)-w,rnd.nextInt(h*3)-h,rnd.nextInt(400)+100));
+        this.addComponent(new Component(100,100,4000));
+		for(int i=0;i<1000;i++)
+        	this.addComponent(new Component((rnd.nextInt(w*3)-w)*1f,(rnd.nextInt(h*3)-h)*1f,rnd.nextInt(400)+100));
     }
 }

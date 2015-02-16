@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import java.util.Random;
+
 public class Component extends Actor
 {
 	private float vx,vy;
@@ -20,8 +22,9 @@ public class Component extends Actor
 	public Component(float x, float y,float m) throws IllegalArgumentException {
 		this.x=x;
 		this.y=y;
-		this.vx=0;
-		this.vy=0;
+        Random rnd=new Random();
+		this.vx=rnd.nextInt(200)-100;
+		this.vy=rnd.nextInt(200)-100;
 		if (m>0)this.m=m; else throw new IllegalArgumentException();
 		if(texture==null)texture=getTexture();
 		this.density=1;
@@ -55,7 +58,16 @@ public class Component extends Actor
 		//if(time==0f) throw new IllegalArgumentException(""+time);
 		//Log.i("Component",""+this.getX()+" ; "+this.getY());
 	}
-	final public float getF(Component cAnother){
+
+    public float getVx() {
+        return vx;
+    }
+
+    public float getVy() {
+        return vy;
+    }
+
+    final public float getF(Component cAnother){
 		if(isNeedRecount)return lastF=recountF(cAnother);else
 			return lastF;
 	}
@@ -118,6 +130,32 @@ public class Component extends Actor
 		this.owner=owner;
 		this.x=this.y=0;
 	}
+    public void onBorderContact(Integer l,Integer r,Integer t,Integer b){
+        //left
+        if(l!=null){
+            this.vx=-this.vx*0.99f;
+            this.x=l.intValue()+this.r+1;
+        }
+
+        //right
+        if(r!=null){
+            this.vx=-this.vx*0.99f;
+            this.x=r.intValue()-this.r-1;
+        }
+
+        //top
+        if(t!=null){
+            this.vy=-this.vy*0.99f;
+            this.y=t.intValue()+this.r+1;
+        }
+
+        //bottom
+        if(b!=null){
+            this.vy=-this.vy*0.99f;
+            this.y=b.intValue()-this.r-1;
+        }
+        if(this.onBorderContactListener!=null)this.onBorderContactListener.onBorderContact(l,r,t,b);
+    }
 
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
@@ -127,7 +165,11 @@ public class Component extends Actor
 	OnCoordinateChangedListener onCoordinateChangedListener =null;
 	OnMassChangedListener onMassChangedListener=null;
 	OnEachStepListener onEachStepListener=null;
+    OnBorderContactListener onBorderContactListener=null;
 
+    public interface OnBorderContactListener{
+        public void onBorderContact(Integer l,Integer r,Integer t,Integer b);
+    }
 	public interface OnCoordinateChangedListener {
 		public void onCoordinateChanged(Component c);
 	}

@@ -2,6 +2,8 @@ package ru.dk.gdxGP;
 
 //import android.util.*;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
@@ -26,10 +28,18 @@ public abstract class Level extends Thread implements Runnable
 		public void draw() {
 			this.act();
 			super.draw();
+            this.getBatch().begin();
+            this.getBatch().draw(borderTexture, getXMin()-5, getYMin()-5, getXMax() - getXMin()+10, 10);
+            this.getBatch().draw(borderTexture,getXMin()-5,getYMin()-5,10,getYMax()-getYMin()+10);
+            this.getBatch().draw(borderTexture,getXMin()-5,getYMax()-5,getXMax()-getXMin()+10,10);
+            this.getBatch().draw(borderTexture,getXMax()-5,getYMin()-5,10,getYMax()-getYMin()+10);
+            this.getBatch().end();
 			this.getCamera().position.set((particles.get(0).getX()+255*this.getCamera().position.x)/256,(particles.get(0).getY()+255*this.getCamera().position.y)/256,0);
+            this.getCamera().far=10;
+            this.getCamera().near=1;
 			//this.getCamera().lookAt(particles.get(0).getX(),particles.get(0).getY(),-10);
 			//this.getCamera().normalizeUp();
-			this.getCamera().update();
+			//this.getCamera().update();
 		}
 	}
 	//borders:
@@ -41,7 +51,9 @@ public abstract class Level extends Thread implements Runnable
 	private boolean isMove=false, isEnd=false;
 	private volatile boolean isComponentsChanged=true;
 	private Object[] componentArray=null;
+    private Texture borderTexture;
 
+    private float timeFromLastRecount=0;
 	public long getMaxDistance() {
 		return maxDistance;
 	}
@@ -58,6 +70,7 @@ public abstract class Level extends Thread implements Runnable
 		xMin = yMin =0;
 		xMax = w;
 		yMax = h;
+        borderTexture=new Texture("border01.png");
 		currentRealTime=System.currentTimeMillis();
 		currentGameTime=0;
 		setParticles(w,h);
@@ -79,6 +92,7 @@ public abstract class Level extends Thread implements Runnable
 	long maxOp=0;
 	 String maxOpName=""; long time=System.nanoTime(),elTime;
 	synchronized final private void Interaction(Component c1, Component c2){
+
 		time=System.nanoTime();
 		float d=getDistance(c1,c2);
 		elTime=System.nanoTime()-time;
@@ -128,18 +142,29 @@ public abstract class Level extends Thread implements Runnable
 	synchronized private void Move(float time){
 		for(int i=0;i<particles.size();i++) {
 			try {
-				for (int j = i + 1; j < particles.size(); j++) {
-					this.Interaction(particles.get(i), particles.get(j));
-				}
 				this.time=System.nanoTime();
 				particles.get(i).nextStep(time*0.001f);
+                CollisionWithBorders(particles.get(i));
 				elTime=System.nanoTime()-this.time;
 				if(elTime>maxOp){
 					maxOp=elTime;
 					maxOpName="nextStep";
 				}
+                //for (int j = i + 1; j < particles.size(); j++) {
+                //    this.Interaction(particles.get(i), particles.get(j));
+                //}
 			}catch (NullPointerException e){particles.remove(i);}
 		}
+        this.timeFromLastRecount+=time;
+        if(this.timeFromLastRecount<100||true)return;
+        this.timeFromLastRecount=0;
+        for(int i=0;i<particles.size();i++) {
+            try {
+                for (int j = i + 1; j < particles.size(); j++) {
+                    this.Interaction(particles.get(i), particles.get(j));
+                }
+            }catch (NullPointerException e){particles.remove(i);}
+        }
 	}
 
 	synchronized final private float getNextStepTime(){
@@ -196,6 +221,47 @@ public abstract class Level extends Thread implements Runnable
 	final public float getCurrentGameTime(){
 		return this.currentGameTime;
 	}
+    public boolean CollisionWithBorders(Component c)
+    {
+        boolean f=false,l,r,t,b;
+        l=r=t=b=false;
+
+        //left
+        if(c.getX()-c.getR()<=getXMin()){
+            //this.vx=-this.vx*0.99f;
+            //c.informXAcceleration(-1.99f*c.getVx());
+            //this.x=getXMin()+this.r+1;
+            //c.setX(getXMin()+c.getR()+1);
+            l=true;
+            f=true;
+        }
+
+        //right
+        if(c.getX()+c.getR()>=getXMax()){
+            //this.vx=-this.vx*0.99f;
+            //this.x=getXMax()-this.r-1;
+            r=true;
+            f=true;
+        }
+
+        //top
+        if(c.getY()-c.getR()<=getYMin()){
+            //this.vy=-this.vy*0.99f;
+            //this.y=getYMin()+this.r+1;
+            t=true;
+            f=true;
+        }
+
+        //bottom
+        if(c.getY()+c.getR()>=getYMax()){
+            //this.vy=-this.vy*0.99f;
+            //this.y=getYMax()-this.r-1;
+            b=true;
+            f=true;
+        }
+        if(f)c.onBorderContact(l?getXMin():null,r?getXMax():null,t?getYMin():null,b?getYMax():null);
+        return f;
+    }
 	public void Pause(){
 
 	}
