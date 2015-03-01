@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Levels.TestLevel;
+import ru.dk.gdxGP.GameWorld.Levels.TestLevel01;
 
 public class GDXGameGP extends ApplicationAdapter implements com.badlogic.gdx.input.GestureDetector.GestureListener {
 	SpriteBatch batch;
@@ -20,8 +21,8 @@ public class GDXGameGP extends ApplicationAdapter implements com.badlogic.gdx.in
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 
-		lvl = new TestLevel(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		lvl.start();
+		lvl = new TestLevel01(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		//lvl.start();
 	}
 
 	@Override

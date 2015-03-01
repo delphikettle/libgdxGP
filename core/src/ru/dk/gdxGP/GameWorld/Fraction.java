@@ -3,6 +3,7 @@ package ru.dk.gdxGP.GameWorld;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -31,7 +32,6 @@ public class Fraction extends Actor {
         Random rnd=new Random();
         BodyDef bodyDef=new BodyDef();
         bodyDef.bullet=true;
-        bodyDef.angularVelocity=0.0f;
         bodyDef.active=true;
         bodyDef.linearVelocity.set(vx*mass,vy*mass);
         bodyDef.position.set(x,y);
@@ -39,7 +39,7 @@ public class Fraction extends Actor {
         bodyDef.allowSleep=false;
         bodyDef.awake=true;
         bodyDef.linearDamping=0.0f;
-        bodyDef.angularDamping=0.0001f;
+        bodyDef.angularDamping=0.001f;
         bodyDef.angularVelocity=0*(rnd.nextFloat()-rnd.nextFloat())*500.0f;
         body=world.createBody(bodyDef);
         FixtureDef fixtureDef=new FixtureDef();
@@ -47,13 +47,10 @@ public class Fraction extends Actor {
         circleShape.setRadius((float) Math.sqrt(mass / Math.PI / 1.0f));
         circleShape.setPosition(new Vector2(0, 0));
         fixtureDef.shape=circleShape;
-        fixtureDef.friction=1.0f;
-        fixtureDef.density=0.5f;
-        fixtureDef.restitution=0.5f;
+        fixtureDef.friction=2.5f;
+        fixtureDef.density=0.25f;
+        fixtureDef.restitution=0.75f;
         fixtureDef.isSensor=false;
-        for(int i=0;i<body.getFixtureList().size;i++) {
-            body.destroyFixture(body.getFixtureList().get(i));
-        }
         MassData massData=new MassData();
         massData.mass=mass;
         massData.center.set(circleShape.getRadius(),circleShape.getRadius());
@@ -61,7 +58,6 @@ public class Fraction extends Actor {
         body.createFixture(fixtureDef);
         body.setUserData(this);
         body.setBullet(true);
-        body.getPosition().set(x, y);
         body.setFixedRotation(false);
         this.textureRegion=loadTextureRegion();
     }
@@ -80,7 +76,7 @@ public class Fraction extends Actor {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         float r=this.body.getFixtureList().get(0).getShape().getRadius();
-        batch.draw(this.getTextureRegion(), this.body.getPosition().x - 1.0f*r, this.body.getPosition().y - 1.0f*r ,r*2.0f, r*2.0f);
+        batch.draw(this.getTextureRegion(), this.body.getPosition().x - 1.0f*r, this.body.getPosition().y - 1.0f*r ,r,r,r*2.0f, r*2.0f,1,1, MathUtils.radiansToDegrees* this.getBody().getAngle());
 
 
     }

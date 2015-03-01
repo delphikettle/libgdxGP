@@ -1,5 +1,6 @@
 package ru.dk.gdxGP.GameWorld.Levels;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import ru.dk.gdxGP.GameWorld.Component;
 import ru.dk.gdxGP.GameWorld.Fraction;
@@ -34,7 +35,7 @@ public class TestLevel extends Level {
             this.addFraction(new Fraction(this.getWorld(),
                     (rnd.nextInt(this.getXMax()-this.getXMin())+this.getXMin()),
                     (rnd.nextInt(this.getYMax()-this.getYMin())+this.getYMin()),
-                    (rnd.nextInt(200)-100)*10000,(rnd.nextInt(200)-100)*10000,(rnd.nextInt(10000)+81)*0.25f));
+                    (rnd.nextInt(200)-100),(rnd.nextInt(200)-100),(rnd.nextInt(10000)+81)*0.25f));
         }
         for(int i=0;i<0;i++)
         	this.addComponent(new Component((rnd.nextInt(w*3)-w)*0.2f,(rnd.nextInt(h*3)-h)*0.2f,rnd.nextInt(400)+100));
@@ -45,26 +46,19 @@ public class TestLevel extends Level {
 
         BodyDef bodyDef=new BodyDef();
         bodyDef.type= BodyDef.BodyType.StaticBody;
-        bodyDef.position.set(0,0);
+        bodyDef.position.set(250,250);
         bodyDef.fixedRotation=false;
         bodyDef.allowSleep=false;
         System.out.println(getXMax());
         System.out.println(getYMax());
-        ChainShape shape=new ChainShape();
-        shape.createChain(new float[]{
-
-
-                getXMin(), getYMin(),
-                getXMin(), getYMax(),
-                getXMax(), getYMax(),
-                getXMax(), getYMin(),
-                getXMin(), getYMin()
-        });
+        CircleShape shape=new CircleShape();
+        shape.setRadius(250);
+        shape.setPosition(new Vector2(0,0));
         FixtureDef fixtureDef=new FixtureDef();
         fixtureDef.shape=shape;
         fixtureDef.friction=1.0f;
         fixtureDef.density=0.5f;
-        fixtureDef.restitution=0.0f;
+        fixtureDef.restitution=0.5f*1000;
         Body body=this.getWorld().createBody(bodyDef);
         body.createFixture(fixtureDef);
         MassData massData=new MassData();

@@ -36,25 +36,28 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		@Override
 		public void draw() {
 			super.draw();
-            this.getBatch().begin();
-            testParticle.draw(this.getBatch(),1);
+            //this.getBatch().begin();
+            //testParticle.draw(this.getBatch(),1);
             //this.getBatch().draw(Component.getTextureRegion(),0,0,50,50);
-            this.getBatch().end();
+            //this.getBatch().end();
 
             //this.getCamera().position.set((testParticle.getBody().getPosition().x+25*this.getCamera().position.x)/26,
                     //(testParticle.getBody().getPosition().y+25*this.getCamera().position.y)/26,0);
             //this.getCamera().position.set((getXMin()+25*this.getCamera().position.x)/26,
                     //(getYMin()+25*this.getCamera().position.y)/26,0);
 
+            /*
             this.getCamera().position.set(
-                    (particles.get(0).getX()+25*this.getCamera().position.x)/26,
-                    (particles.get(0).getY()+25*this.getCamera().position.y)/26,0);
+                    (particles.get(0).getX()+255*this.getCamera().position.x)/256,
+                    (particles.get(0).getY()+255*this.getCamera().position.y)/256,0);
+                    */
 			//this.getCamera().lookAt(particles.get(0).getX(),particles.get(0).getY(),0);
 			//this.getCamera().normalizeUp();
 			//this.getCamera().update();
             drawBorders(this.getBatch());
             this.act();
-            box2DDebugRenderer.render(world, this.getCamera().combined);
+            getWorld().step(getNextStepTime(),6,2);
+            //box2DDebugRenderer.render(world, this.getCamera().combined);
 		}
 	}
 	//borders:
@@ -100,7 +103,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		currentGameTime=0;
 		this.isMove=true;
 		this.setDaemon(true);
-        this.testParticle=new Fraction(this.world,0,0,100,50,400);
+        //this.testParticle=new Fraction(this.world,0,0,100,50,400);
 		System.out.println("Time: " + "LevelCreated" + System.currentTimeMillis());
 	}
     abstract public void setSizes();
@@ -116,12 +119,6 @@ public abstract class Level extends Thread implements Runnable,ContactListener
         System.out.println(getYMax());
         ChainShape shape=new ChainShape();
         shape.createChain(new float[]{
-                /*
-                getXMin(),getYMin(),
-                getXMin(),getYMax(),
-                getXMax(),getYMax(),
-                getXMax(),getYMin(),
-                getXMin(),getYMin()*/
 
                 getXMin(), getYMin(),
                 getXMin(), getYMax(),
@@ -152,10 +149,11 @@ public abstract class Level extends Thread implements Runnable,ContactListener
         return world;
     }
 
-    synchronized final public void addFraction(Fraction f){
+    synchronized final public Fraction addFraction(Fraction f){
         particles.add(f);
         isComponentsChanged=true;
         stage.addActor(f);
+        return f;
     }
 
 	synchronized final public void addComponent(Component component){
@@ -263,7 +261,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
     }
 	synchronized private void Move(float time){
         this.world.step(time,10, 10);
-        //if(9==9)return;
+        if(9==9)return;
 		for(int i=0;i<particles.size();i++) {
 			try {
                 if(!(particles.get(i) instanceof  Component)) {
@@ -422,11 +420,13 @@ public abstract class Level extends Thread implements Runnable,ContactListener
     @Override
     public void postSolve (Contact contact, ContactImpulse impulse){
         //contact.setFriction(-1f);
+        /*
         if(contact.getFixtureA().getBody().getUserData().equals("border")&&contact.getFixtureB().getBody().getUserData() instanceof Fraction) {
             CollisionWithBorder((Fraction) contact.getFixtureB().getBody().getUserData());
         }
         if(contact.getFixtureB().getBody().getUserData().equals("border")&&contact.getFixtureA().getBody().getUserData() instanceof Fraction) {
             CollisionWithBorder((Fraction) contact.getFixtureA().getBody().getUserData());
         }
+        */
     }
 }
