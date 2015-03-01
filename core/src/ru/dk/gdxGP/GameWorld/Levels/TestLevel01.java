@@ -3,7 +3,6 @@ package ru.dk.gdxGP.GameWorld.Levels;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.joints.*;
-import ru.dk.gdxGP.Box2DFactory;
 import ru.dk.gdxGP.GameWorld.Fraction;
 import ru.dk.gdxGP.GameWorld.Level;
 
@@ -23,8 +22,8 @@ public class TestLevel01 extends Level {
     public void setSizes() {
         //setYMin(-8);
         //setXMin(-8);
-        setXMax(800);
-        setYMax(800);
+        //setXMax(800);
+        //setYMax(800);
     }
 
     @Override
@@ -46,35 +45,26 @@ public class TestLevel01 extends Level {
                 (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()),
                 (rnd.nextInt(200) - 100), (rnd.nextInt(200) - 100),
                 (rnd.nextInt(10000) + 81) * 0.00025f)).getBody());*/
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 100; i++) {
 
             bodies.add(this.addFraction(new Fraction(this.getWorld(),
                     (rnd.nextInt(this.getXMax() - this.getXMin()) + this.getXMin()),
                     (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()),
-                    (rnd.nextInt(200) - 100), (rnd.nextInt(200) - 100),
+                    (rnd.nextInt(200) - 100)*1000000, (rnd.nextInt(200) - 100)*100000,
                     (rnd.nextInt(10000) + 81) * 0.25f)).getBody());
 
-
-            /*
-            Shape shape = Box2DFactory.createCircleShape(1);
-            FixtureDef fixtureDef = Box2DFactory.createFixture(shape, 2.5f,
-                    0.25f, 1f, false);
-            bodies.add(Box2DFactory.createBody(this.getWorld(), BodyDef.BodyType.DynamicBody, fixtureDef,
-                    new Vector2(
-                            (rnd.nextInt(this.getXMax() - this.getXMin()) + this.getXMin()),
-                            (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()))));*/
-            for (int j = 0; j < bodies.size(); j++) {
+            /*for (int j = 0; j < bodies.size(); j++) {
                 if(i==j)continue;
                 DistanceJointDef jointDef= new DistanceJointDef();
                 jointDef.bodyA=bodies.get(i);
                 jointDef.bodyB=bodies.get(j);
                 jointDef.collideConnected=true;
-                jointDef.frequencyHz=0.025f;
+                jointDef.frequencyHz=0.05f;
                 jointDef.length=
-                        (bodies.get(i).getFixtureList().get(0).getShape().getRadius()+bodies.get(j).getFixtureList().get(0).getShape().getRadius())*1.5f*5f;
+                        (bodies.get(i).getFixtureList().get(0).getShape().getRadius()+bodies.get(j).getFixtureList().get(0).getShape().getRadius())*1f;
                 Joint joint1=
                         this.getWorld().createJoint(jointDef);
-            }
+            }*/
         }
         /*
         if(bodies.get(0)==null)System.out.println("A is null!");

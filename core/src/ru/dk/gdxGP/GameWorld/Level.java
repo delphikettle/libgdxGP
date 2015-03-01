@@ -15,7 +15,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-import static ru.dk.gdxGP.GameWorld.Component.getDistance;
 
 public abstract class Level extends Thread implements Runnable,ContactListener
 {
@@ -38,26 +37,13 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		}
 		@Override
 		public void draw() {
-			super.draw();
-            //this.getBatch().begin();
-            //testParticle.draw(this.getBatch(),1);
-            //this.getBatch().draw(Component.getTextureRegion(),0,0,50,50);
-            //this.getBatch().end();
-
-            //this.getCamera().position.set((testParticle.getBody().getPosition().x+25*this.getCamera().position.x)/26,
-                    //(testParticle.getBody().getPosition().y+25*this.getCamera().position.y)/26,0);
-            //this.getCamera().position.set((getXMin()+25*this.getCamera().position.x)/26,
-            //(getYMin()+25*this.getCamera().position.y)/26,0);
-
-
 			/*
-            camera.position.set(
-                    (particles.get(0).getX() + 255 * this.getCamera().position.x)/256,
-                    (particles.get(0).getY()+255*this.getCamera().position.y)/256,
-                    0);*/
-			//this.getCamera().lookAt(particles.get(0).getX(),particles.get(0).getY(),0);
-			//this.getCamera().normalizeUp();
-			//this.getCamera().update();
+			this.getCamera().position.set(
+					(particles.get(0).getX()+this.getCamera().position.x*255)/256,
+					(particles.get(0).getY()+this.getCamera().position.y*255)/256,
+					0);
+					*/
+			super.draw();
             drawBorders(this.getBatch());
             this.act();
 			world.step(getNextStepTime() / 60f, 6, 2);
@@ -89,7 +75,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	public Level(int w, int h) {
         System.out.println(w+";"+h);
 		stage=new LevelStage();
-        this.world=new World(new Vector2(0.0f,0.0f),true);
+        this.world=new World(new Vector2(0.0f,-1f),false);
         this.world.setContactListener(this);
 		particles = new ArrayList<Actor>();
         borders=new ArrayList<Border>();
@@ -133,7 +119,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 
         fixtureDef.friction=1.0f;
         fixtureDef.density = 0.5f;
-        fixtureDef.restitution=0.0f;
+        fixtureDef.restitution=1.0f;
         /*fixtureDef.isSensor=false;*/
         Body body=world.createBody(bodyDef);
         Fixture fixture=body.createFixture(fixtureDef);
@@ -161,54 +147,6 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 
 	public long maxOp=0;
 	public String maxOpName=""; long time=System.nanoTime(),elTime;
-	synchronized final private void Interaction(Component c1, Component c2){
-        if(!(c1.ifUnderGravitation()&&c2.ifUnderGravitation()))
-            return;
-		time=System.nanoTime();
-		float d=getDistance(c1,c2);
-		elTime=System.nanoTime()-time;
-		if(elTime>maxOp){
-			//maxOp=elTime;
-			//maxOpName="detDistance";
-		}
-		time=System.nanoTime();
-		if(d==0) return;
-		//if(d>this.maxDistance)return;
-		elTime=System.nanoTime()-time;
-		if(elTime>maxOp){
-			//maxOp=elTime;
-			//maxOpName="if...if";
-		}
-		time=System.nanoTime();
-		float F= (float) (G*c1.getF(c2)*c2.getF(c1)/(d));
-		elTime=System.nanoTime()-time;
-		if(elTime>maxOp){
-			//maxOp=elTime;
-			//maxOpName="F=...";
-		}
-		time=System.nanoTime();
-		float F1=F/c1.getM(),F2=F/c2.getM();
-		elTime=System.nanoTime()-time;
-		if(elTime>maxOp){
-			//maxOp=elTime;
-			//maxOpName="F1=..., F2...";
-		}
-		time=System.nanoTime();
-		c1.informXAcceleration(F1 * Component.getXDiff(c1,c2) / d);
-		c2.informXAcceleration(F2 * Component.getXDiff(c2,c1) / d);
-		c1.informYAcceleration(F1 * Component.getYDiff(c1, c2) / d);
-		c2.informYAcceleration(F2 * Component.getYDiff(c2, c1) / d);
-		elTime=System.nanoTime()-time;
-		if(elTime>maxOp){
-			//maxOp=elTime;
-			//maxOpName="InformAcceleration";
-		}
-		if(d<=c1.getR()+c2.getR()){
-			//collision
-		}
-
-		//Log.i("Level.Interaction",F1+"");
-	}
 
     synchronized private void drawBorders(Batch b){
 
@@ -222,40 +160,6 @@ public abstract class Level extends Thread implements Runnable,ContactListener
     }
 	synchronized private void Move(float time){
         this.world.step(time,10, 10);
-        if(9==9)return;
-		for(int i=0;i<particles.size();i++) {
-			try {
-                if(!(particles.get(i) instanceof  Component)) {
-
-                    continue;
-                }
-				//this.time=System.nanoTime();
-				if(particles.get(i) instanceof  Component)((Component) (particles.get(i))).updateActorPosition();
-                //CollisionWithBorders(particles.get(i));
-				//elTime=System.nanoTime()-this.time;
-				//if(elTime>maxOp){
-				//	maxOp=elTime;
-				//	maxOpName="nextStep";
-				//}
-
-                //for (int j = i + 1; j < particles.size(); j++) {
-                 //   this.Interaction(particles.get(i), particles.get(j));
-                //}
-			}catch (NullPointerException e){particles.remove(i);}
-		}
-        //this.timeFromLastRecount+=time;
-        //if(this.timeFromLastRecount<100||true)return;
-        //this.timeFromLastRecount=0;
-        if(true)return;
-        for(int i=0;i<particles.size();i++) {
-            if(!(particles.get(i) instanceof  Component))continue;
-            try {
-                for (int j = i + 1; j < particles.size(); j++) {
-                    if(!(particles.get(j) instanceof  Component))continue;
-                    this.Interaction((Component)particles.get(i), (Component)particles.get(j));
-                }
-            }catch (NullPointerException e){particles.remove(i);}
-        }
 	}
 
 	synchronized final private float getNextStepTime(){

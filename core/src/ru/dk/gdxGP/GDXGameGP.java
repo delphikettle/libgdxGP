@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import ru.dk.gdxGP.GameWorld.Fraction;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Levels.TestLevel;
@@ -19,16 +20,16 @@ public class GDXGameGP extends ApplicationAdapter implements GestureDetector.Ges
 	SpriteBatch batch;
 	Texture img;
 	Level lvl;
-	//private ArrayList<Component> currentSetOfParticles;
 
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
-		//Gdx.input.setInputProcessor(this);
-		//Gdx.input.setInputProcessor(new GestureDetector(this));
+		Gdx.input.setInputProcessor(this);
+		Gdx.input.setInputProcessor(new GestureDetector(this));
 		lvl = new TestLevel01(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		//lvl.start();
+		Stage stage=new Stage();
 	}
 
 	@Override
@@ -53,6 +54,7 @@ public class GDXGameGP extends ApplicationAdapter implements GestureDetector.Ges
 
 	@Override
 	public boolean tap(float x, float y, int count, int button) {
+		System.out.println("GestureListener");
 		return false;
 	}
 
@@ -108,6 +110,7 @@ public class GDXGameGP extends ApplicationAdapter implements GestureDetector.Ges
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		System.out.println("InputProcessor");
 		return false;
 	}
 

@@ -43,18 +43,18 @@ public class Fraction extends Actor {
         CircleShape circleShape=new CircleShape();
         circleShape.setRadius((float) Math.sqrt(mass / Math.PI / 1.0f));
 
-        /*MassData massData=new MassData();
+        MassData massData=new MassData();
         massData.mass=mass;
         massData.center.set(circleShape.getRadius(),circleShape.getRadius());
         massData.I=0.0f;
-        //body.setMassData(massData);*/
+        body.setMassData(massData);
 
         FixtureDef fixtureDef=new FixtureDef();
         fixtureDef.shape=circleShape;
-        fixtureDef.friction=1.0f*100;
+        fixtureDef.friction=1.0f;
         fixtureDef.density=0.25f;
-        fixtureDef.restitution=1.1f;
-        /*fixtureDef.isSensor=false;*/
+        fixtureDef.restitution=1.0f;
+        fixtureDef.isSensor=false;
         body.createFixture(fixtureDef);
         body.setUserData(this);
         this.textureRegion=loadTextureRegion();
