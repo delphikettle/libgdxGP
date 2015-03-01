@@ -28,7 +28,7 @@ public class GDXGameGP extends ApplicationAdapter implements GestureDetector.Ges
 		Gdx.input.setInputProcessor(this);
 		Gdx.input.setInputProcessor(new GestureDetector(this));
 		lvl = new TestLevel01(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		//lvl.start();
+		lvl.start();
 		Stage stage=new Stage();
 	}
 

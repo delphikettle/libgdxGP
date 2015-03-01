@@ -22,6 +22,9 @@ public abstract class Level extends Thread implements Runnable,ContactListener
     private World world;
 	private LevelStage stage;
     private ArrayList<Border> borders;
+	private float prevAccelX;
+	private float prevAccelY;
+
 	private class LevelStage extends Stage{
         private Box2DDebugRenderer box2DDebugRenderer;
         private OrthographicCamera camera;
@@ -46,7 +49,6 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 			super.draw();
             drawBorders(this.getBatch());
             this.act();
-			world.step(getNextStepTime() / 60f, 6, 2);
             //box2DDebugRenderer.render(world, this.getCamera().combined);
 		}
 	}
@@ -75,7 +77,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	public Level(int w, int h) {
         System.out.println(w+";"+h);
 		stage=new LevelStage();
-        this.world=new World(new Vector2(0.0f,-1f),false);
+        this.world=new World(new Vector2(0.0f,0.0f),false);
         this.world.setContactListener(this);
 		particles = new ArrayList<Actor>();
         borders=new ArrayList<Border>();
@@ -159,7 +161,8 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 
     }
 	synchronized private void Move(float time){
-        this.world.step(time,10, 10);
+		world.step(time/ 60f, 6, 2);
+		processAccelerometer();
 	}
 
 	synchronized final private float getNextStepTime(){
@@ -238,4 +241,26 @@ public abstract class Level extends Thread implements Runnable,ContactListener
     @Override
     public void postSolve (Contact contact, ContactImpulse impulse){
     }
+
+
+	private void processAccelerometer() {
+
+		/* Get accelerometer values */
+		float y = Gdx.input.getAccelerometerY();
+		float x = Gdx.input.getAccelerometerX();
+
+		/*
+		 * If accelerometer values have changed since previous processing,
+		 * change world gravity.
+		 */
+		if (prevAccelX != x || prevAccelY != y) {
+
+			/* Negative on the x axis but not in the y */
+			world.setGravity(new Vector2(y, -x));
+
+			/* Store new accelerometer values */
+			prevAccelX = x;
+			prevAccelY = y;
+		}
+	}
 }

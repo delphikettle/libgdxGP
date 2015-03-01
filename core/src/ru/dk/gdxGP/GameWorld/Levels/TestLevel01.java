@@ -15,7 +15,7 @@ import java.util.Random;
 public class TestLevel01 extends Level {
     public TestLevel01(int w, int h) {
         super(w, h);
-        this.setTimeFactor(0.1f);
+        this.setTimeFactor(1f);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class TestLevel01 extends Level {
             bodies.add(this.addFraction(new Fraction(this.getWorld(),
                     (rnd.nextInt(this.getXMax() - this.getXMin()) + this.getXMin()),
                     (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()),
-                    (rnd.nextInt(200) - 100)*1000000, (rnd.nextInt(200) - 100)*100000,
+                    (rnd.nextInt(200) - 100)*1000000000, (rnd.nextInt(200) - 100)*1000000000,
                     (rnd.nextInt(10000) + 81) * 0.25f)).getBody());
 
             /*for (int j = 0; j < bodies.size(); j++) {
