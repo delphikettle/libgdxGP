@@ -2,15 +2,20 @@ package ru.dk.gdxGP;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
+import ru.dk.gdxGP.GameWorld.Fraction;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Levels.TestLevel;
 import ru.dk.gdxGP.GameWorld.Levels.TestLevel01;
 
-public class GDXGameGP extends ApplicationAdapter implements com.badlogic.gdx.input.GestureDetector.GestureListener {
+import java.util.Random;
+
+public class GDXGameGP extends ApplicationAdapter implements GestureDetector.GestureListener, InputProcessor {
 	SpriteBatch batch;
 	Texture img;
 	Level lvl;
@@ -20,7 +25,8 @@ public class GDXGameGP extends ApplicationAdapter implements com.badlogic.gdx.in
 	public void create() {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
-
+		//Gdx.input.setInputProcessor(this);
+		//Gdx.input.setInputProcessor(new GestureDetector(this));
 		lvl = new TestLevel01(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		//lvl.start();
 	}
@@ -77,6 +83,46 @@ public class GDXGameGP extends ApplicationAdapter implements com.badlogic.gdx.in
 
 	@Override
 	public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
+		return false;
+	}
+
+	@Override
+	public boolean keyDown(int keycode) {
+		return false;
+	}
+
+	@Override
+	public boolean keyUp(int keycode) {
+		return false;
+	}
+
+	@Override
+	public boolean keyTyped(char character) {
+		return false;
+	}
+
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		return false;
+	}
+
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		return false;
+	}
+
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		return false;
+	}
+
+	@Override
+	public boolean mouseMoved(int screenX, int screenY) {
+		return false;
+	}
+
+	@Override
+	public boolean scrolled(int amount) {
 		return false;
 	}
 }

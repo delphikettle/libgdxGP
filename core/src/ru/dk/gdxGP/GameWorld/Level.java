@@ -28,10 +28,13 @@ public abstract class Level extends Thread implements Runnable,ContactListener
         private OrthographicCamera camera;
 		LevelStage(){
             box2DDebugRenderer = new Box2DDebugRenderer();
-            box2DDebugRenderer.SHAPE_AWAKE.set(Color.GREEN);
-            camera=new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+            /*camera = new OrthographicCamera(20,
+                    20 * (Gdx.graphics.getHeight() / (float) Gdx.graphics
+                            .getWidth()));
+			this.getViewport().setCamera(camera);*/
+            //camera=new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
             //camera.position.set(particles.get(0).getX(),particles.get(0).getY(),0);
-            camera.far=0;
+            //camera.far=0;
 		}
 		@Override
 		public void draw() {
@@ -44,19 +47,20 @@ public abstract class Level extends Thread implements Runnable,ContactListener
             //this.getCamera().position.set((testParticle.getBody().getPosition().x+25*this.getCamera().position.x)/26,
                     //(testParticle.getBody().getPosition().y+25*this.getCamera().position.y)/26,0);
             //this.getCamera().position.set((getXMin()+25*this.getCamera().position.x)/26,
-                    //(getYMin()+25*this.getCamera().position.y)/26,0);
+            //(getYMin()+25*this.getCamera().position.y)/26,0);
 
-            /*
-            this.getCamera().position.set(
-                    (particles.get(0).getX()+255*this.getCamera().position.x)/256,
-                    (particles.get(0).getY()+255*this.getCamera().position.y)/256,0);
-                    */
+
+			/*
+            camera.position.set(
+                    (particles.get(0).getX() + 255 * this.getCamera().position.x)/256,
+                    (particles.get(0).getY()+255*this.getCamera().position.y)/256,
+                    0);*/
 			//this.getCamera().lookAt(particles.get(0).getX(),particles.get(0).getY(),0);
 			//this.getCamera().normalizeUp();
 			//this.getCamera().update();
             drawBorders(this.getBatch());
             this.act();
-            getWorld().step(getNextStepTime(),6,2);
+			world.step(getNextStepTime() / 60f, 6, 2);
             //box2DDebugRenderer.render(world, this.getCamera().combined);
 		}
 	}
@@ -85,7 +89,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	public Level(int w, int h) {
         System.out.println(w+";"+h);
 		stage=new LevelStage();
-        this.world=new World(new Vector2(0.0f,0.0f),false);
+        this.world=new World(new Vector2(0.0f,0.0f),true);
         this.world.setContactListener(this);
 		particles = new ArrayList<Actor>();
         borders=new ArrayList<Border>();
@@ -113,10 +117,8 @@ public abstract class Level extends Thread implements Runnable,ContactListener
         BodyDef bodyDef=new BodyDef();
         bodyDef.type= BodyDef.BodyType.StaticBody;
         bodyDef.position.set(0,0);
-        bodyDef.fixedRotation=false;
-        bodyDef.allowSleep=false;
-        System.out.println(getXMax());
-        System.out.println(getYMax());
+        bodyDef.active=true;
+
         ChainShape shape=new ChainShape();
         shape.createChain(new float[]{
 
@@ -128,15 +130,16 @@ public abstract class Level extends Thread implements Runnable,ContactListener
         });
         FixtureDef fixtureDef=new FixtureDef();
         fixtureDef.shape=shape;
+
         fixtureDef.friction=1.0f;
-        fixtureDef.density=0.5f;
+        fixtureDef.density = 0.5f;
         fixtureDef.restitution=0.0f;
+        /*fixtureDef.isSensor=false;*/
         Body body=world.createBody(bodyDef);
-        body.createFixture(fixtureDef);
-        MassData massData=new MassData();
-        massData.mass=Integer.MAX_VALUE;
-        massData.center.set(getXMax()-getXMin(),getYMax()-getYMin());
-        body.setMassData(massData);
+        Fixture fixture=body.createFixture(fixtureDef);
+		fixture.setFriction(1.0f);
+		fixture.setDensity(1.0f);
+		fixture.setRestitution(1.0f);
         body.setUserData("border");
     }
     synchronized public void addBorder(Border border){
@@ -156,48 +159,6 @@ public abstract class Level extends Thread implements Runnable,ContactListener
         return f;
     }
 
-	synchronized final public void addComponent(Component component){
-		particles.add(component);
-		isComponentsChanged=true;
-		stage.addActor(component);
-        component.setBody(addBodyByComponent(component));
-		System.out.println("Time: "+"ComponentAdded "+System.currentTimeMillis());
-	}
-    synchronized final public Body addBodyByComponent(@NotNull Component c){
-
-        BodyDef bodyDef=new BodyDef();
-        bodyDef.type= BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(c.getX(),c.getY());
-        bodyDef.linearVelocity.set(c.getVx(),c.getVy());
-        bodyDef.fixedRotation=true;
-        bodyDef.bullet=true;
-        bodyDef.active=true;
-        Body body= world.createBody(bodyDef);
-
-        CircleShape circleShape=new CircleShape();
-        circleShape.setRadius(c.getR());
-        FixtureDef fixtureDef=new FixtureDef();
-        fixtureDef.shape=circleShape;
-        fixtureDef.friction=-1;
-        fixtureDef.density=c.getDensity();
-        body.createFixture(fixtureDef).setFriction(-1f);
-
-        MassData massData=new MassData();
-        massData.mass=c.getM();
-        massData.I=0;
-        massData.center.set(c.getR(), c.getR());
-        body.setMassData(massData);
-        body.setBullet(true);
-        body.getPosition().set(c.getX(), c.getY());
-        body.setLinearVelocity(c.getVx(), c.getVy());
-        body.setUserData(c);
-        for(int i=0;i<body.getFixtureList().size;i++) {
-            body.getFixtureList().get(i).setRestitution(0f);
-            body.getFixtureList().get(i).setFriction(0f);
-        }
-        return body;
-
-    }
 	public long maxOp=0;
 	public String maxOpName=""; long time=System.nanoTime(),elTime;
 	synchronized final private void Interaction(Component c1, Component c2){
@@ -351,49 +312,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	final public float getCurrentGameTime(){
 		return this.currentGameTime;
 	}
-    public boolean CollisionWithBorders(Component c)
-    {
-        boolean f=false,l,r,t,b;
-        l=r=t=b=false;
-
-        //left
-        if(c.getX()-c.getR()<=getXMin()){
-            //this.vx=-this.vx*0.99f;
-            //c.informXAcceleration(-1.99f*c.getVx());
-            //this.x=getXMin()+this.r+1;
-            //c.setX(getXMin()+c.getR()+1);
-            l=true;
-            f=true;
-        }
-
-        //right
-        if(c.getX()+c.getR()>=getXMax()){
-            //this.vx=-this.vx*0.99f;
-            //this.x=getXMax()-this.r-1;
-            r=true;
-            f=true;
-        }
-
-        //top
-        if(c.getY()-c.getR()<=getYMin()){
-            //this.vy=-this.vy*0.99f;
-            //this.y=getYMin()+this.r+1;
-            t=true;
-            f=true;
-        }
-
-        //bottom
-        if(c.getY()+c.getR()>=getYMax()){
-            //this.vy=-this.vy*0.99f;
-            //this.y=getYMax()-this.r-1;
-            b=true;
-            f=true;
-        }
-        if(f)c.onBorderContact(l?getXMin():null,r?getXMax():null,t?getYMin():null,b?getYMax():null);
-        return f;
-    }
     public void CollisionWithBorder(Fraction fraction){
-        //System.out.println(fraction.getBody().getLinearVelocity());
         fraction.getBody().getLinearVelocity().set(-fraction.getBody().getLinearVelocity().x,-fraction.getBody().getLinearVelocity().y);
     }
 	public void Pause(){
@@ -404,29 +323,15 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	}
     @Override
     public void endContact(Contact contact) {
-        //contact.setFriction(-1f);
 
     }
     @Override
     public void beginContact(Contact contact) {
-        //contact.setFriction(-1f);
     }
     @Override
     public void preSolve (Contact contact, Manifold oldManifold){
-
-        //if(contact.getFixtureA().getBody().getUserData() instanceof Fraction)System.out.println("fraction found");
-        //contact.setFriction(-1f);
     }
     @Override
     public void postSolve (Contact contact, ContactImpulse impulse){
-        //contact.setFriction(-1f);
-        /*
-        if(contact.getFixtureA().getBody().getUserData().equals("border")&&contact.getFixtureB().getBody().getUserData() instanceof Fraction) {
-            CollisionWithBorder((Fraction) contact.getFixtureB().getBody().getUserData());
-        }
-        if(contact.getFixtureB().getBody().getUserData().equals("border")&&contact.getFixtureA().getBody().getUserData() instanceof Fraction) {
-            CollisionWithBorder((Fraction) contact.getFixtureA().getBody().getUserData());
-        }
-        */
     }
 }
