@@ -54,7 +54,7 @@ public class Fraction extends Actor {
         fixtureDef.isSensor=false;
         body.createFixture(fixtureDef);
         body.setUserData(this);
-        this.textureRegion= TextureKeeper.getTexture('c');
+        this.textureRegion= TextureKeeper.getTextureRegion('c', (char) 0);
     }
 
     public Body getBody() {

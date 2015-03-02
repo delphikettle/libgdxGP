@@ -28,7 +28,7 @@ public  class TextureKeeper {
      * @param addr no of texture
      */
     static public void loadTextureRegion(char name, char addr){
-        textureRegions[name][addr]=new TextureRegion(getTexture(name),width*addr/4,width*addr%4,width,width);
+        textureRegions[name][addr]=new TextureRegion(getTexture(name),width*addr/4,width*(addr%4),width,width);
     }
 
     /**

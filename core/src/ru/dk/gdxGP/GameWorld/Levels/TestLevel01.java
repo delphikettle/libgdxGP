@@ -30,8 +30,8 @@ public class TestLevel01 extends Level {
 
     @Override
     public void render() {
-        this.getStage().getBatch().enableBlending();
-        //this.getStage().getBatch().setColor(0,0,1,0.5f);
+        //this.getStage().getBatch().enableBlending();
+        //this.getStage().getBatch().setColor(1,0,0,0.9f);
         this.getStage().superDraw();
         //this.getStage().getBatch().disableBlending();
         this.drawBorders(this.getStage().getBatch());
@@ -39,20 +39,15 @@ public class TestLevel01 extends Level {
 
     @Override
     public void setSizes() {
-        //setYMin(-8);
-        //setXMin(-8);
-        //setXMax(800);
-        //setYMax(800);
+        setYMin(0);
+        setXMin(0);
+        setXMax(800);
+        setYMax(800);
     }
 
     @Override
     public void createWalls() {
         super.createWalls();
-		/* Create the walls */
-        /*
-        Box2DFactory.createWalls(this.getWorld(), this.getStage().getCamera().viewportWidth,
-                this.getStage().getCamera().viewportHeight, 1);
-                */
     }
 
     @Override
