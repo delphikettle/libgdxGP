@@ -6,15 +6,28 @@ import ru.dk.gdxGP.GameWorld.Fraction;
 import ru.dk.gdxGP.GameWorld.Level;
 import java.util.*;
 
-/**
- * Created by Андрей on 12.01.2015.
- */
+
 public class TestLevel extends Level {
     public TestLevel(int w, int h) {
         super(w, h);
 		//this.setG(1f);
         this.setTimeFactor(1f);
         //this.setMaxDistance(1000);
+    }
+
+    @Override
+    public void setCameraPosition() {
+
+    }
+
+    @Override
+    public void preRender() {
+
+    }
+
+    @Override
+    public void render() {
+
     }
 
     @Override

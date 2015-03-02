@@ -3,55 +3,47 @@ package ru.dk.gdxGP.GameWorld;
 //import android.util.*;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 
 public abstract class Level extends Thread implements Runnable,ContactListener
 {
-	private ArrayList<Actor> particles;
+	private ArrayList<Fraction> particles;
     private World world;
 	private LevelStage stage;
     private ArrayList<Border> borders;
 	private float prevAccelX;
 	private float prevAccelY;
 
-	private class LevelStage extends Stage{
+	public class LevelStage extends Stage{
         private Box2DDebugRenderer box2DDebugRenderer;
         private OrthographicCamera camera;
-		LevelStage(){
+		private Level level;
+		LevelStage(Level level){
+			this.level=level;
             box2DDebugRenderer = new Box2DDebugRenderer();
-            /*camera = new OrthographicCamera(20,
-                    20 * (Gdx.graphics.getHeight() / (float) Gdx.graphics
-                            .getWidth()));
-			this.getViewport().setCamera(camera);*/
-            //camera=new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-            //camera.position.set(particles.get(0).getX(),particles.get(0).getY(),0);
-            //camera.far=0;
 		}
 		@Override
-		public void draw() {
-			/*
-			this.getCamera().position.set(
-					(particles.get(0).getX()+this.getCamera().position.x*255)/256,
-					(particles.get(0).getY()+this.getCamera().position.y*255)/256,
-					0);
-					*/
-			super.draw();
-            drawBorders(this.getBatch());
-            this.act();
+		final public void draw() {
+			this.level.setCameraPosition();
+			this.level.preRender();
+			this.level.render();
+			this.level.afterRender();
             //box2DDebugRenderer.render(world, this.getCamera().combined);
 		}
+		final public void superDraw(){
+			super.draw();
+		}
 	}
+
+
 	//borders:
 	private int xMin, xMax, yMin, yMax;
 	private float G=1;
@@ -65,21 +57,12 @@ public abstract class Level extends Thread implements Runnable,ContactListener
     private Fraction testParticle;
 
     private float timeFromLastRecount=0;
-	public long getMaxDistance() {
-		return maxDistance;
-	}
-
-	public void setMaxDistance(long maxDistance) {
-		if(maxDistance>0)this.maxDistance = maxDistance;
-	}
-
-	private long maxDistance=10000;
 	public Level(int w, int h) {
         System.out.println(w+";"+h);
-		stage=new LevelStage();
+		stage=new LevelStage(this);
         this.world=new World(new Vector2(0.0f,0.0f),false);
         this.world.setContactListener(this);
-		particles = new ArrayList<Actor>();
+		particles = new ArrayList<Fraction>();
         borders=new ArrayList<Border>();
 		componentArray=particles.toArray();
 		xMin = yMin =0;
@@ -98,6 +81,14 @@ public abstract class Level extends Thread implements Runnable,ContactListener
         //this.testParticle=new Fraction(this.world,0,0,100,50,400);
 		System.out.println("Time: " + "LevelCreated" + System.currentTimeMillis());
 	}
+
+	abstract public void setCameraPosition();
+	abstract public void preRender();
+	abstract public void render();
+	public void afterRender(){
+		this.getStage().act();
+	}
+
     abstract public void setSizes();
 	abstract public void setParticles(int w, int h);
     abstract public void setBorders(int w, int h);
@@ -130,11 +121,8 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		fixture.setRestitution(1.0f);
         body.setUserData("border");
     }
-    synchronized public void addBorder(Border border){
-        stage.addActor(border);
-        borders.add(border);
-    }
-	final public Stage getStage(){return this.stage;}
+
+	final public LevelStage getStage(){return this.stage;}
 
     public World getWorld() {
         return world;
@@ -146,11 +134,10 @@ public abstract class Level extends Thread implements Runnable,ContactListener
         stage.addActor(f);
         return f;
     }
-
 	public long maxOp=0;
 	public String maxOpName=""; long time=System.nanoTime(),elTime;
 
-    synchronized private void drawBorders(Batch b){
+    public synchronized void drawBorders(Batch b){
 
         b.begin();
         b.draw(borderTexture, this.getXMin()-5, getYMin()-5, getXMax() - getXMin()+10, 10);
@@ -219,9 +206,11 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	final public float getCurrentGameTime(){
 		return this.currentGameTime;
 	}
-    public void CollisionWithBorder(Fraction fraction){
-        fraction.getBody().getLinearVelocity().set(-fraction.getBody().getLinearVelocity().x,-fraction.getBody().getLinearVelocity().y);
-    }
+
+	public ArrayList<Fraction> getParticles() {
+		return particles;
+	}
+
 	public void Pause(){
 
 	}

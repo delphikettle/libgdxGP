@@ -10,9 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import java.util.Random;
 
-/**
- * Created by DK on 20.02.15.
- */
 public class Fraction extends Actor {
     private Body body;
 
