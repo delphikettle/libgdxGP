@@ -71,7 +71,7 @@ public class TestLevel01 extends Level {
             bodies.add(this.addFraction(new Fraction(this.getWorld(),
                     (rnd.nextInt(this.getXMax() - this.getXMin()) + this.getXMin()),
                     (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()),
-                    (rnd.nextInt(200) - 100)*1, (rnd.nextInt(200) - 100)*1,
+                    (rnd.nextInt(200) - 100)*0.1f, (rnd.nextInt(200) - 100)*0.1f,
                     (rnd.nextInt(2500) + 4) * 1f)).getBody());
 
             /*for (int j = 0; j < bodies.size(); j++) {
@@ -88,16 +88,6 @@ public class TestLevel01 extends Level {
                         this.getWorld().createJoint(jointDef);
             }*/
         }
-        /*
-        if(bodies.get(0)==null)System.out.println("A is null!");
-        if(bodies.get(1)==null)System.out.println("B is null!");
-        JointDef jointDef=new DistanceJointDef();
-        jointDef.bodyA=bodies.get(0);
-        jointDef.bodyB=bodies.get(1);
-        jointDef.collideConnected=true;
-        Joint joint1=
-                this.getWorld().createJoint(jointDef);
-                */
     }
 
     @Override

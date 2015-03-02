@@ -148,7 +148,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 
     }
 	synchronized private void Move(float time){
-		world.step(time/ 60f, 6, 2);
+		world.step(time/60f, 1, 1);
 		processAccelerometer();
 	}
 

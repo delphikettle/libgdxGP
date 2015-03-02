@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import ru.dk.gdxGP.TextureKeeper;
 
 import java.util.Random;
 
@@ -23,7 +24,6 @@ public class Fraction extends Actor {
 
     private static boolean isReloadTextureNeeded=true;
     private TextureRegion textureRegion;
-    private static Texture texture;
 
     public Fraction(World world,float x,float y,float vx, float vy,float mass){
         Random rnd=new Random();
@@ -54,24 +54,17 @@ public class Fraction extends Actor {
         fixtureDef.isSensor=false;
         body.createFixture(fixtureDef);
         body.setUserData(this);
-        this.textureRegion=loadTextureRegion();
+        this.textureRegion= TextureKeeper.getTexture('c');
     }
 
     public Body getBody() {
         return body;
     }
-
-    private Texture reloadTexture(){isReloadTextureNeeded=false; return texture=new Texture("circle01.png");}
-    private Texture getTexture(){return texture=isReloadTextureNeeded?( reloadTexture()):texture;}
-    public TextureRegion getTextureRegion(){return this.textureRegion;}
-    public TextureRegion loadTextureRegion(){
-        return textureRegion=new TextureRegion(getTexture());
-    }
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         float r=this.body.getFixtureList().get(0).getShape().getRadius();
-        batch.draw(this.getTextureRegion(), this.body.getPosition().x - 1.0f*r, this.body.getPosition().y - 1.0f*r ,r,r,r*2.0f, r*2.0f,1,1, MathUtils.radiansToDegrees* this.getBody().getAngle());
+        batch.draw(this.textureRegion, this.body.getPosition().x - 1.0f*r, this.body.getPosition().y - 1.0f*r ,r,r,r*2.0f, r*2.0f,1,1, MathUtils.radiansToDegrees* this.getBody().getAngle());
 
 
     }
