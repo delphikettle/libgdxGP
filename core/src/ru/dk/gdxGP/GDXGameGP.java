@@ -32,7 +32,7 @@ public class GDXGameGP extends ApplicationAdapter implements GestureDetector.Ges
 
 	@Override
 	public void create() {
-		this.screen=new LogoScreen(3);
+		this.screen=new LogoScreen(5);
 		screen.show();
 
 		/*

@@ -3,9 +3,6 @@ package ru.dk.gdxGP.Screens;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-/**
- * Created by Андрей on 03.03.2015.
- */
 public class LoadingScreen extends Stage implements Screen {
     @Override
     public void show() {

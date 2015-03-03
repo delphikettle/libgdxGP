@@ -23,7 +23,7 @@ public class LogoScreen extends Stage implements Screen {
     @Override
     public void show() {
         texture= TextureKeeper.getTexture('l');
-        width=height=(Gdx.graphics.getHeight()>Gdx.graphics.getWidth())?Gdx.graphics.getWidth():Gdx.graphics.getHeight();
+        width=height= 0x0.FAP0f *((Gdx.graphics.getHeight()>Gdx.graphics.getWidth())?Gdx.graphics.getWidth():Gdx.graphics.getHeight());
         spriteBatch=new SpriteBatch();
         deltaSum=0;
         this.render(Gdx.graphics.getDeltaTime());
