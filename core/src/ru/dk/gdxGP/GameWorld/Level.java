@@ -245,7 +245,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		if (prevAccelX != x || prevAccelY != y) {
 
 			/* Negative on the x axis but not in the y */
-			world.setGravity(new Vector2(y, -x));
+			world.setGravity(new Vector2(1.1f*y, -1.1f*x));
 
 			/* Store new accelerometer values */
 			prevAccelX = x;

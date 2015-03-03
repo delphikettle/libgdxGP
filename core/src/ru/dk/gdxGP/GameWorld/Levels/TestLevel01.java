@@ -41,8 +41,8 @@ public class TestLevel01 extends Level {
     public void setSizes() {
         setYMin(0);
         setXMin(0);
-        setXMax(800);
-        setYMax(800);
+        //setXMax(800);
+        //setYMax(800);
     }
 
     @Override
