@@ -32,34 +32,24 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	private float currentGameTime;
 	private boolean isMove=false, isEnd=false;
 	private volatile boolean isComponentsChanged=true;
-	private Object[] componentArray=null;
     private Texture borderTexture;
-    private Fraction testParticle;
+	private float loaded;
 
     private float timeFromLastRecount=0;
 	public Level(int w, int h) {
-        System.out.println(w+";"+h);
 		stage=new LevelScreen(this);
         this.world=new World(new Vector2(0.0f,0.0f),false);
         this.world.setContactListener(this);
 		particles = new ArrayList<Fraction>();
         borders=new ArrayList<Border>();
-		componentArray=particles.toArray();
 		xMin = yMin =0;
 		xMax = w;
 		yMax = h;
-        setSizes();
-        System.out.println(this.getXMax()+":xMax");
-        setParticles(w,h);
-        setBorders(w,h);
-        createWalls();
         borderTexture=new Texture("border01.png");
 		currentRealTime=System.currentTimeMillis();
 		currentGameTime=0;
 		this.isMove=true;
 		this.setDaemon(true);
-        //this.testParticle=new Fraction(this.world,0,0,100,50,400);
-		System.out.println("Time: " + "LevelCreated" + System.currentTimeMillis());
 	}
 
 	abstract public void setCameraPosition();
@@ -69,9 +59,40 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		this.getStage().act();
 	}
 
+	boolean isSetSizes=false,isSetParticles=false,isSetBorders=false,isCreatedWalls=false;
+	void loadNext(){
+		if(!isSetSizes){
+			setSizes();
+			isSetSizes=true;
+			this.loaded=1.0f/4;
+			System.out.println("loadedSizes");
+			return;
+		}
+		if(!isSetParticles){
+			setParticles();
+			isSetParticles=true;
+			this.loaded=2.0f/4;
+			System.out.println("loadedParticles");
+			return;
+		}
+		if(!isSetBorders){
+			setBorders();
+			isSetBorders=true;
+			this.loaded=3.0f/4;
+			System.out.println("loadedBorders");
+			return;
+		}
+		if(!isCreatedWalls){
+			createWalls();
+			isCreatedWalls=true;
+			this.loaded=1.0f;
+			System.out.println("loadedWalls");
+			return;
+		}
+	}
     abstract public void setSizes();
-	abstract public void setParticles(int w, int h);
-    abstract public void setBorders(int w, int h);
+	abstract public void setParticles();
+    abstract public void setBorders();
     public void createWalls(){
         BodyDef bodyDef=new BodyDef();
         bodyDef.type= BodyDef.BodyType.StaticBody;
@@ -137,15 +158,25 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		
 	}
 
+	public float getLoaded() {
+		return loaded;
+	}
+
 	@Override
 	final public void run() {
 		super.run();
 		currentRealTime=System.currentTimeMillis();
 		currentGameTime=0;
-		while (!isEnd)
-			if(isMove) {
-                this.Move(this.getNextStepTime());
+		while (!isEnd) {
+			if(loaded<4.0f/4){
+				loadNext();
+
+				continue;
 			}
+			if (isMove) {
+				this.Move(this.getNextStepTime());
+			}
+		}
 	}
 	final public float getG(){
 		return G;

@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import ru.dk.gdxGP.GDXGameGP;
 import ru.dk.gdxGP.TextureKeeper;
 
 import java.util.Random;
@@ -54,7 +55,7 @@ public class Fraction extends Actor {
         fixtureDef.isSensor=false;
         body.createFixture(fixtureDef);
         body.setUserData(this);
-        this.textureRegion= TextureKeeper.getTextureRegion('c', (char) 0);
+        this.textureRegion= new TextureRegion((Texture) GDXGameGP.assetManager.get("images/circle.png"));
     }
 
     public Body getBody() {

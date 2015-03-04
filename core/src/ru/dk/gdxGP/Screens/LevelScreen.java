@@ -9,6 +9,11 @@ import ru.dk.gdxGP.GameWorld.Level;
 public class LevelScreen extends Stage implements Screen {
     private Box2DDebugRenderer box2DDebugRenderer;
     private OrthographicCamera camera;
+
+    public Level getLevel() {
+        return level;
+    }
+
     private Level level;
     public LevelScreen(Level level){
         this.level=level;
@@ -33,7 +38,7 @@ public class LevelScreen extends Stage implements Screen {
 
     @Override
     public void render(float delta) {
-
+        draw();
     }
 
     @Override

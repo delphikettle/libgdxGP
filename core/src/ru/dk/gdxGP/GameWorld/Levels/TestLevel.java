@@ -40,7 +40,7 @@ public class TestLevel extends Level {
     }
 
     @Override
-    public void setParticles(int w, int h) {
+    public void setParticles() {
 		Random rnd=new Random();
         for (int i = 0; i < 500; i++) {
             this.addFraction(new Fraction(this.getWorld(),
@@ -51,7 +51,7 @@ public class TestLevel extends Level {
     }
 
     @Override
-    public void setBorders(int w, int h) {
+    public void setBorders() {
 
         BodyDef bodyDef=new BodyDef();
         bodyDef.type= BodyDef.BodyType.StaticBody;

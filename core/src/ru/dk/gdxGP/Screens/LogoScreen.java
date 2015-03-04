@@ -41,6 +41,14 @@ public class LogoScreen extends Stage implements Screen {
     }
 
 
+    public float getRotation() {
+        return rotation;
+    }
+
+    public void setRotation(float rotation) {
+        this.rotation = rotation;
+    }
+
     @Override
     public void render(float delta){
         if(active)this.width=this.height=this.height* 0.99f;
