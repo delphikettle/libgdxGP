@@ -60,7 +60,7 @@ public class TestLevel01 extends Level {
                 (rnd.nextInt(200) - 100), (rnd.nextInt(200) - 100),
                 (rnd.nextInt(10000) + 81) * 0.00025f)).getBody());*/
         for (int i = 0;
-             i < Gdx.graphics.getHeight()*Gdx.graphics.getWidth()/(10000)                            ;
+             i < Gdx.graphics.getHeight()*Gdx.graphics.getWidth()/(50000)                            ;
              i++) {
 
             bodies.add(this.addFraction(new Fraction(this.getWorld(),

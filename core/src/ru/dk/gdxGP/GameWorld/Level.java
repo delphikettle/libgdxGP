@@ -3,12 +3,14 @@ package ru.dk.gdxGP.GameWorld;
 //import android.util.*;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import ru.dk.gdxGP.Screens.LevelScreen;
 
 import java.util.ArrayList;
 
@@ -17,32 +19,10 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 {
 	private ArrayList<Fraction> particles;
     private World world;
-	private LevelStage stage;
+	private LevelScreen stage;
     private ArrayList<Border> borders;
 	private float prevAccelX;
 	private float prevAccelY;
-
-	public class LevelStage extends Stage{
-        private Box2DDebugRenderer box2DDebugRenderer;
-        private OrthographicCamera camera;
-		private Level level;
-		LevelStage(Level level){
-			this.level=level;
-            box2DDebugRenderer = new Box2DDebugRenderer();
-		}
-		@Override
-		final public void draw() {
-			this.level.setCameraPosition();
-			this.level.preRender();
-			this.level.render();
-			this.level.afterRender();
-            //box2DDebugRenderer.render(world, this.getCamera().combined);
-		}
-		final public void superDraw(){
-			super.draw();
-		}
-	}
-
 
 	//borders:
 	private int xMin, xMax, yMin, yMax;
@@ -59,7 +39,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
     private float timeFromLastRecount=0;
 	public Level(int w, int h) {
         System.out.println(w+";"+h);
-		stage=new LevelStage(this);
+		stage=new LevelScreen(this);
         this.world=new World(new Vector2(0.0f,0.0f),false);
         this.world.setContactListener(this);
 		particles = new ArrayList<Fraction>();
@@ -122,7 +102,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
         body.setUserData("border");
     }
 
-	final public LevelStage getStage(){return this.stage;}
+	final public LevelScreen getStage(){return this.stage;}
 
     public World getWorld() {
         return world;

@@ -8,12 +8,15 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import ru.dk.gdxGP.TextureKeeper;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class LogoScreen extends Stage implements Screen {
     private TextureRegion texture;
     private float width,height;
     private SpriteBatch spriteBatch;
-    private float deltaSum;
     private float time;
+    private float rotation;
 
     private boolean active;
 
@@ -25,23 +28,34 @@ public class LogoScreen extends Stage implements Screen {
         texture= TextureKeeper.getTexture('l');
         width=height= 0x0.FAP0f *((Gdx.graphics.getHeight()>Gdx.graphics.getWidth())?Gdx.graphics.getWidth():Gdx.graphics.getHeight());
         spriteBatch=new SpriteBatch();
-        deltaSum=0;
         this.render(Gdx.graphics.getDeltaTime());
         this.setActive(true);
+        Timer timer2 = new Timer();
+        TimerTask task = new TimerTask() {
+            public void run()
+            {
+                setActive(false);
+            }
+        };
+        timer2.schedule( task, (long) (time*1000));
     }
 
 
     @Override
     public void render(float delta){
-        deltaSum+=delta;
+        if(active)this.width=this.height=this.height* 0.99f;
         spriteBatch.begin();
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         spriteBatch.draw(texture,
                 (Gdx.graphics.getWidth()-width)/2,(Gdx.graphics.getHeight()-height)/2,
-                width,height);
+                width/2,height/2,
+                width,height,1,1,rotation);
         spriteBatch.end();
-        if(deltaSum>=time)this.setActive(false);
+    }
+
+    public  void rotate(float rotation){
+        this.rotation+=rotation;
     }
 
     private void setActive(boolean active) {

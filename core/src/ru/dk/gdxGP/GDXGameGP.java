@@ -32,7 +32,7 @@ public class GDXGameGP extends ApplicationAdapter implements GestureDetector.Ges
 
 	@Override
 	public void create() {
-		this.screen=new LogoScreen(5);
+		this.screen=new LogoScreen(1);
 		screen.show();
 
 		/*
@@ -48,12 +48,23 @@ public class GDXGameGP extends ApplicationAdapter implements GestureDetector.Ges
 
 	@Override
 	public void render() {
+		if(screen!=null)screen.render(Gdx.graphics.getDeltaTime());
 		switch (state){
 			case logo:
-				screen.render(Gdx.graphics.getDeltaTime());
+				assert (screen != null);
+				assert (screen instanceof LogoScreen);
 				if(!((LogoScreen) screen).isActive()){
 					this.state=State.loading;
-					this.screen=new LoadingScreen();
+					this.screen=new LoadingScreen((LogoScreen) this.screen,new char[]{
+							//'c'
+					});
+					this.screen.show();
+				}
+				break;
+			case loading:
+				assert ((LoadingScreen)screen) != null;
+				if(!((LoadingScreen)screen).isActive()){
+					this.state=State.MainMenu;
 					//временно, потом удалить!!!
 					batch = new SpriteBatch();
 					img = new Texture("badlogic.jpg");
@@ -62,11 +73,7 @@ public class GDXGameGP extends ApplicationAdapter implements GestureDetector.Ges
 					lvl = new TestLevel01(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 					lvl.start();
 					Stage stage=new Stage();
-
 				}
-				break;
-			case loading:
-				screen.render(Gdx.graphics.getDeltaTime());
 				break;
 			case MainMenu:
 				break;
@@ -76,7 +83,8 @@ public class GDXGameGP extends ApplicationAdapter implements GestureDetector.Ges
 				break;
 		}
 		//временно, потом удалить!!!
-		if(state!=State.logo) {
+
+		if(state!=State.logo&&state!=State.loading) {
 			Gdx.gl.glClearColor(1, 1, 1, 1);
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 			batch.begin();

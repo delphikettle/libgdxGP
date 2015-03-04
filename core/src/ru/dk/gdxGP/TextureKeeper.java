@@ -46,6 +46,20 @@ public  class TextureKeeper {
      * @param name marker of texture
      */
     static public void loadTexture(char name){
-        textures[name]=new TextureRegion(new Texture("data/images/"+name+".png"));
+        long time=System.currentTimeMillis();
+        textures[name]=new TextureRegion(new Texture("data"+System.getProperty("file.separator")+"images/"+name+".png"));
+        System.out.println("loadTexture "+name+" time:"+(System.currentTimeMillis()-time));
+    }
+
+    static public void loadTextures(char[][] texturesCharMassive){
+        for (int i = 0; i < texturesCharMassive.length; i++) {
+            loadTextureRegion(texturesCharMassive[i][0],texturesCharMassive[i][1]);
+        }
+    }
+    static public void loadTextures(char[] texturesCharMassive){
+        for (int i = 0; i < texturesCharMassive.length; i++) {
+            System.out.println(texturesCharMassive[i]);
+            loadTexture(texturesCharMassive[i]);
+        }
     }
 }
