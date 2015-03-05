@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import ru.dk.gdxGP.GameWorld.WorldElements.Border;
+import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
 import ru.dk.gdxGP.Screens.LevelScreen;
 
 import java.util.ArrayList;
@@ -90,7 +92,6 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 
 
 	private void setLoaded(float loaded) {
-		System.out.println("Loaded changed to "+this.loaded);
 		this.loaded = loaded;
 	}
 

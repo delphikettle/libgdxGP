@@ -1,9 +1,6 @@
 package ru.dk.gdxGP;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -36,6 +33,10 @@ public class GDXGameGP extends ApplicationAdapter implements GestureDetector.Ges
 		screen.show();
 
 		batch = new SpriteBatch();
+		InputMultiplexer inputMultiplexer=new InputMultiplexer();
+		inputMultiplexer.addProcessor(this);
+		inputMultiplexer.addProcessor(new GestureDetector(this));
+		Gdx.input.setInputProcessor(inputMultiplexer);
 		/*
 		img = new Texture("badlogic.jpg");
 		Gdx.input.setInputProcessor(this);
@@ -75,7 +76,6 @@ public class GDXGameGP extends ApplicationAdapter implements GestureDetector.Ges
 
 						@Override
 						public boolean isLoaded() {
-							System.out.println("Assets loading");
 							return GDXGameGP.assetManager.update();
 						}
 
@@ -91,7 +91,6 @@ public class GDXGameGP extends ApplicationAdapter implements GestureDetector.Ges
 
 						@Override
 						public boolean isLoaded() {
-							System.out.println("LevelLoading " + level.getLoaded());
 							if(level.getLoaded()>=1.0f)level.start();
 							return level.getLoaded()>=1.0f;
 						}
@@ -134,9 +133,27 @@ public class GDXGameGP extends ApplicationAdapter implements GestureDetector.Ges
 	}
 
 	@Override
+	public void resize (int width, int height) {
+		if(Gdx.app.getType()!= Application.ApplicationType.Android)
+			screen.resize(width, height);
+	}
+
+
+	@Override
+	public void pause () {
+		screen.pause();
+	}
+
+	@Override
+	public void resume () {
+		screen.resume();
+	}
+	@Override
 	public void dispose() {
+		screen.dispose();
 		super.dispose();
 	}
+
 
 	@Override
 	public boolean touchDown(float x, float y, int pointer, int button) {
@@ -145,9 +162,9 @@ public class GDXGameGP extends ApplicationAdapter implements GestureDetector.Ges
 
 	@Override
 	public boolean tap(float x, float y, int count, int button) {
-		System.out.println("GestureListener");
 		return false;
 	}
+
 
 	@Override
 	public boolean longPress(float x, float y) {
@@ -171,6 +188,9 @@ public class GDXGameGP extends ApplicationAdapter implements GestureDetector.Ges
 
 	@Override
 	public boolean zoom(float initialDistance, float distance) {
+		if(screen instanceof LevelScreen){
+			return ((LevelScreen)screen).zoom(initialDistance, distance);
+		}
 		return false;
 	}
 
@@ -196,17 +216,22 @@ public class GDXGameGP extends ApplicationAdapter implements GestureDetector.Ges
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		if(screen instanceof LevelScreen){
+			((LevelScreen) screen).setInitialScale(((LevelScreen) screen).getCameraZoom());
+		}
 		return false;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		System.out.println("InputProcessor");
 		return false;
 	}
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		if(screen instanceof LevelScreen){
+			((LevelScreen) screen).drag(-Gdx.input.getDeltaX(pointer), Gdx.input.getDeltaY(pointer));
+		}
 		return false;
 	}
 

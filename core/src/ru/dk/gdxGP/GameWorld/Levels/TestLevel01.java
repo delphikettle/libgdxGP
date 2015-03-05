@@ -2,8 +2,7 @@ package ru.dk.gdxGP.GameWorld.Levels;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.physics.box2d.joints.DistanceJointDef;
-import ru.dk.gdxGP.GameWorld.Fraction;
+import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
 import ru.dk.gdxGP.GameWorld.Level;
 
 import java.util.ArrayList;
@@ -79,7 +78,7 @@ public class TestLevel01 extends Level {
 
     @Override
     public void renderBorders() {
-        super.drawBorders(this.getStage().getBatch();
+        super.drawBorders(this.getStage().getBatch());
     }
 
     @Override

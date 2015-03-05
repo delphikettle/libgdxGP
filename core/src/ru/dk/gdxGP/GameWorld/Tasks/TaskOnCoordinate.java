@@ -1,7 +1,7 @@
 package ru.dk.gdxGP.GameWorld.Tasks;
 
 import com.badlogic.gdx.math.Vector2;
-import ru.dk.gdxGP.GameWorld.Fraction;
+import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
 import ru.dk.gdxGP.GameWorld.Task;
 
 /**

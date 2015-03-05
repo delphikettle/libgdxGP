@@ -1,4 +1,4 @@
-package ru.dk.gdxGP.GameWorld;
+package ru.dk.gdxGP.GameWorld.WorldElements;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -41,7 +41,7 @@ public class Fraction extends Actor {
         fixtureDef.shape=circleShape;
         fixtureDef.friction=1.0f;
         fixtureDef.density=0.25f;
-        fixtureDef.restitution=1.0f;
+        fixtureDef.restitution=1.1f;
         fixtureDef.isSensor=false;
         body.createFixture(fixtureDef);
         body.setUserData(this);

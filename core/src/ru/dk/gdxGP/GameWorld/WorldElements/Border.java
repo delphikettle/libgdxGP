@@ -1,4 +1,4 @@
-package ru.dk.gdxGP.GameWorld;
+package ru.dk.gdxGP.GameWorld.WorldElements;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;

@@ -2,7 +2,7 @@ package ru.dk.gdxGP.GameWorld.Levels;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import ru.dk.gdxGP.GameWorld.Fraction;
+import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
 import ru.dk.gdxGP.GameWorld.Level;
 import java.util.*;
 
