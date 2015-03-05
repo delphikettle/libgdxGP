@@ -9,15 +9,19 @@ import ru.dk.gdxGP.GameWorld.Level;
 public class LevelScreen extends Stage implements Screen {
     private Box2DDebugRenderer box2DDebugRenderer;
     private OrthographicCamera camera;
+    private Stage particlesStage, bordersStage, otherStage;
 
     public Level getLevel() {
         return level;
     }
 
     private Level level;
-    public LevelScreen(Level level){
+    public LevelScreen(Level level,float w, float h){
         this.level=level;
-        box2DDebugRenderer = new Box2DDebugRenderer();
+        this.box2DDebugRenderer = new Box2DDebugRenderer();
+        this.camera=new OrthographicCamera(w,h);
+        this.particlesStage=new Stage();
+        this.particlesStage.getViewport().setCamera(camera);
     }
     @Override
     final public void draw() {

@@ -37,7 +37,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 
     private float timeFromLastRecount=0;
 	public Level(int w, int h) {
-		stage=new LevelScreen(this);
+		stage=new LevelScreen(this,w,h);
         this.world=new World(new Vector2(0.0f,0.0f),false);
         this.world.setContactListener(this);
 		particles = new ArrayList<Fraction>();
@@ -59,6 +59,26 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		this.getStage().act();
 	}
 
+	public void load(){
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				setSizes();
+				setLoaded(1.0f / 4);
+				setBorders();
+				setLoaded(2.0f / 4);
+				createWalls();
+				setLoaded(3.0f / 4);
+				setParticles();
+				setLoaded(4.0f/4);
+			}
+		}).start();
+	}
+
+	private void setLoaded(float loaded) {
+		this.loaded = loaded;
+	}
+
 	boolean isSetSizes=false,isSetParticles=false,isSetBorders=false,isCreatedWalls=false;
 	void loadNext(){
 		if(!isSetSizes){
@@ -68,25 +88,25 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 			System.out.println("loadedSizes");
 			return;
 		}
-		if(!isSetParticles){
-			setParticles();
-			isSetParticles=true;
-			this.loaded=2.0f/4;
-			System.out.println("loadedParticles");
-			return;
-		}
 		if(!isSetBorders){
 			setBorders();
 			isSetBorders=true;
-			this.loaded=3.0f/4;
+			this.loaded=2.0f/4;
 			System.out.println("loadedBorders");
 			return;
 		}
 		if(!isCreatedWalls){
 			createWalls();
 			isCreatedWalls=true;
-			this.loaded=1.0f;
+			this.loaded=3.0f/4;
 			System.out.println("loadedWalls");
+			return;
+		}
+		if(!isSetParticles){
+			setParticles();
+			isSetParticles=true;
+			this.loaded=4.0f/4;
+			System.out.println("loadedParticles");
 			return;
 		}
 	}
@@ -168,13 +188,18 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		currentRealTime=System.currentTimeMillis();
 		currentGameTime=0;
 		while (!isEnd) {
+			/*
 			if(loaded<4.0f/4){
-				loadNext();
+				//loadNext();
 
 				continue;
 			}
+			*/
 			if (isMove) {
-				this.Move(this.getNextStepTime());
+				System.console();
+				if(this.getLoaded()>=1.0f) {
+					this.Move(this.getNextStepTime());
+				}
 			}
 		}
 	}

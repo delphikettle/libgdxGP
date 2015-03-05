@@ -46,6 +46,7 @@ public class LoadingScreen extends Stage implements Screen {
                 }
                 break;
             case 1:
+                level.load();
                 System.out.println("levelStarted");
                 level.start();
                 break;
@@ -67,7 +68,7 @@ public class LoadingScreen extends Stage implements Screen {
                 System.out.println("renderLevelLoading");
                 if(logoScreen!=null){
                     logoScreen.render(delta);
-                    logoScreen.setRotation((-360*level.getLoaded()+255*logoScreen.getRotation())/256);
+                    logoScreen.setRotation((-360*level.getLoaded()+25*logoScreen.getRotation())/26);
                 }
                 if(level.getLoaded()>=1f)this.setActive(false);
                 break;
