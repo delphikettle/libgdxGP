@@ -17,10 +17,10 @@ import java.util.ArrayList;
 
 public abstract class Level extends Thread implements Runnable,ContactListener
 {
-	private World world;
-	private ArrayList<Fraction> particles;
-	private ArrayList<Border> borders;
-	private ArrayList<Actor> otherElements;
+	private final World world;
+	private final ArrayList<Fraction> particles;
+	private final ArrayList<Border> borders;
+	private final ArrayList<Actor> otherElements;
 	private LevelScreen levelScreen;
 	private float prevAccelX;
 	private float prevAccelY;
@@ -37,7 +37,6 @@ public abstract class Level extends Thread implements Runnable,ContactListener
     private Texture borderTexture;
 	private float loaded;
 
-    private float timeFromLastRecount=0;
 	public Level(int w, int h) {
         this.world=new World(new Vector2(0.0f,0.0f),false);
         this.world.setContactListener(this);
@@ -103,11 +102,6 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	abstract public void setParticles();
     abstract public void setOtherElements();
     public void createWalls(){
-        BodyDef bodyDef=new BodyDef();
-        bodyDef.type= BodyDef.BodyType.StaticBody;
-        bodyDef.position.set(0,0);
-        bodyDef.active=true;
-
         ChainShape shape=new ChainShape();
         shape.createChain(new float[]{
 
@@ -117,19 +111,8 @@ public abstract class Level extends Thread implements Runnable,ContactListener
                 getXMax(), getYMin(),
                 getXMin(), getYMin()
         });
-        FixtureDef fixtureDef=new FixtureDef();
-        fixtureDef.shape=shape;
 
-        fixtureDef.friction=1.0f;
-        fixtureDef.density = 0.5f;
-        fixtureDef.restitution=1.0f;
-        /*fixtureDef.isSensor=false;*/
-        Body body=world.createBody(bodyDef);
-        Fixture fixture=body.createFixture(fixtureDef);
-		fixture.setFriction(1.0f);
-		fixture.setDensity(1.0f);
-		fixture.setRestitution(1.0f);
-        body.setUserData("border");
+		this.addBorder(new Border(this.getWorld(),0,0,shape,true));
     }
 
 	final public LevelScreen getStage(){return this.levelScreen;}
@@ -159,22 +142,22 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	public long maxOp=0;
 	public String maxOpName=""; long time=System.nanoTime(),elTime;
 
+	/*
     public synchronized void drawBorders(Batch b){
-
         b.begin();
         b.draw(borderTexture, this.getXMin()-5, getYMin()-5, getXMax() - getXMin()+10, 10);
         b.draw(borderTexture,this.getXMin()-5,getYMin()-5,10,getYMax()-getYMin()+10);
         b.draw(borderTexture,this.getXMin()-5,getYMax()-5,getXMax()-getXMin()+10,10);
         b.draw(borderTexture,this.getXMax()-5,getYMin()-5,10,getYMax()-getYMin()+10);
         b.end();
-
     }
-	synchronized private void Move(float time){
+    */
+	 private void Move(float time){
 		world.step(time/60f, 1, 1);
 		processAccelerometer();
 	}
 
-	synchronized final private float getNextStepTime(){
+	 final private float getNextStepTime(){
 		return -currentGameTime+ (currentGameTime=(this.timeFactor*1.0f*(-currentRealTime+(currentRealTime=System.currentTimeMillis()))+currentGameTime));
 		
 	}
@@ -189,15 +172,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		currentRealTime=System.currentTimeMillis();
 		currentGameTime=0;
 		while (!isEnd) {
-			/*
-			if(loaded<4.0f/4){
-				//loadNext();
-
-				continue;
-			}
-			*/
 			if (isMove) {
-				System.console();
 				if(this.getLoaded()>=1.0f) {
 					this.Move(this.getNextStepTime());
 				}

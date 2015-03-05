@@ -76,10 +76,12 @@ public class TestLevel01 extends Level {
         }
     }
 
+    /*
     @Override
     public void renderBorders() {
         super.drawBorders(this.getStage().getBatch());
     }
+    */
 
     @Override
     public void setOtherElements() {

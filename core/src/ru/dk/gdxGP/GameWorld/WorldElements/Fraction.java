@@ -41,7 +41,7 @@ public class Fraction extends Actor {
         fixtureDef.shape=circleShape;
         fixtureDef.friction=1.0f;
         fixtureDef.density=0.25f;
-        fixtureDef.restitution=1.1f;
+        fixtureDef.restitution=1.0f;
         fixtureDef.isSensor=false;
         body.createFixture(fixtureDef);
         body.setUserData(this);
