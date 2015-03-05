@@ -3,13 +3,11 @@ package ru.dk.gdxGP.GameWorld;
 //import android.util.*;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import ru.dk.gdxGP.Screens.LevelScreen;
 
 import java.util.ArrayList;
@@ -17,102 +15,92 @@ import java.util.ArrayList;
 
 public abstract class Level extends Thread implements Runnable,ContactListener
 {
+	private World world;
 	private ArrayList<Fraction> particles;
-    private World world;
-	private LevelScreen stage;
-    private ArrayList<Border> borders;
+	private ArrayList<Border> borders;
+	private ArrayList<Actor> otherElements;
+	private LevelScreen levelScreen;
 	private float prevAccelX;
 	private float prevAccelY;
 
-	//borders:
 	private int xMin, xMax, yMin, yMax;
+
 	private float G=1;
 	private float timeFactor=1;
 	private static long currentRealTime;
 	private float currentGameTime;
+
 	private boolean isMove=false, isEnd=false;
-	private volatile boolean isComponentsChanged=true;
+
     private Texture borderTexture;
 	private float loaded;
 
     private float timeFromLastRecount=0;
 	public Level(int w, int h) {
-		stage=new LevelScreen(this,w,h);
         this.world=new World(new Vector2(0.0f,0.0f),false);
         this.world.setContactListener(this);
 		particles = new ArrayList<Fraction>();
         borders=new ArrayList<Border>();
+		otherElements=new ArrayList<Actor>();
 		xMin = yMin =0;
 		xMax = w;
 		yMax = h;
         borderTexture=new Texture("border01.png");
-		currentRealTime=System.currentTimeMillis();
-		currentGameTime=0;
 		this.isMove=true;
 		this.setDaemon(true);
 	}
 
 	abstract public void setCameraPosition();
 	abstract public void preRender();
-	abstract public void render();
-	public void afterRender(){
-		this.getStage().act();
+	public void render(float delta){
+		if(this.levelScreen!=null){
+			renderBorders();
+			renderOthers();
+			renderFractions();
+		}
 	}
+	public void renderBorders(){
+		levelScreen.drawBorders();
+	}
+	public void renderOthers(){
+		levelScreen.drawOthers();
+	}
+	public void renderFractions(){
+		levelScreen.drawFractions();
+	}
+	abstract public void afterRender();
 
-	public void load(){
+	public void load(final LevelScreen screen){
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				setSizes();
-				setLoaded(1.0f / 4);
-				setBorders();
-				setLoaded(2.0f / 4);
+				setLoaded(1.0f / 5);
+				setLevelScreen(screen);
+				setLoaded(2.0f / 5);
 				createWalls();
-				setLoaded(3.0f / 4);
+				setLoaded(3.0f / 5);
 				setParticles();
-				setLoaded(4.0f/4);
+				setLoaded(4.0f / 5);
+				setOtherElements();
+				setLoaded(5.0f / 5);
 			}
 		}).start();
 	}
 
+
 	private void setLoaded(float loaded) {
+		System.out.println("Loaded changed to "+this.loaded);
 		this.loaded = loaded;
 	}
 
-	boolean isSetSizes=false,isSetParticles=false,isSetBorders=false,isCreatedWalls=false;
-	void loadNext(){
-		if(!isSetSizes){
-			setSizes();
-			isSetSizes=true;
-			this.loaded=1.0f/4;
-			System.out.println("loadedSizes");
-			return;
-		}
-		if(!isSetBorders){
-			setBorders();
-			isSetBorders=true;
-			this.loaded=2.0f/4;
-			System.out.println("loadedBorders");
-			return;
-		}
-		if(!isCreatedWalls){
-			createWalls();
-			isCreatedWalls=true;
-			this.loaded=3.0f/4;
-			System.out.println("loadedWalls");
-			return;
-		}
-		if(!isSetParticles){
-			setParticles();
-			isSetParticles=true;
-			this.loaded=4.0f/4;
-			System.out.println("loadedParticles");
-			return;
-		}
+	public void setLevelScreen(LevelScreen screen){
+		this.levelScreen=screen;
+		//здесь нужно добавить частицы, границы и прочее к стейджам скрина
 	}
     abstract public void setSizes();
 	abstract public void setParticles();
-    abstract public void setBorders();
+    abstract public void setOtherElements();
     public void createWalls(){
         BodyDef bodyDef=new BodyDef();
         bodyDef.type= BodyDef.BodyType.StaticBody;
@@ -143,7 +131,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
         body.setUserData("border");
     }
 
-	final public LevelScreen getStage(){return this.stage;}
+	final public LevelScreen getStage(){return this.levelScreen;}
 
     public World getWorld() {
         return world;
@@ -151,10 +139,22 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 
     synchronized final public Fraction addFraction(Fraction f){
         particles.add(f);
-        isComponentsChanged=true;
-        stage.addActor(f);
+        if(levelScreen!=null)
+			levelScreen.addFractionActor(f);
         return f;
     }
+	synchronized final public Border addBorder(Border border){
+		borders.add(border);
+		if(levelScreen!=null)
+			levelScreen.addBorderActor(border);
+		return border;
+	}
+	synchronized final public Actor addActor(Actor actor){
+		otherElements.add(actor);
+		if(levelScreen!=null)
+			levelScreen.addOtherActor(actor);
+		return actor;
+	}
 	public long maxOp=0;
 	public String maxOpName=""; long time=System.nanoTime(),elTime;
 
@@ -243,9 +243,6 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		return this.currentGameTime;
 	}
 
-	public ArrayList<Fraction> getParticles() {
-		return particles;
-	}
 
 	public void Pause(){
 
@@ -266,7 +263,6 @@ public abstract class Level extends Thread implements Runnable,ContactListener
     @Override
     public void postSolve (Contact contact, ContactImpulse impulse){
     }
-
 
 	private void processAccelerometer() {
 

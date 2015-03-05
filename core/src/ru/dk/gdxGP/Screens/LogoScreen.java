@@ -14,6 +14,17 @@ import java.util.TimerTask;
 public class LogoScreen extends Stage implements Screen {
     private TextureRegion texture;
     private float width,height;
+
+    @Override
+    public float getWidth() {
+        return width;
+    }
+
+    @Override
+    public float getHeight() {
+        return height;
+    }
+
     private SpriteBatch spriteBatch;
     private float time;
     private float rotation;

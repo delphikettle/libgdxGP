@@ -29,12 +29,8 @@ public class TestLevel01 extends Level {
     }
 
     @Override
-    public void render() {
-        //this.getStage().getBatch().enableBlending();
-        //this.getStage().getBatch().setColor(1,0,0,0.9f);
-        this.getStage().superDraw();
-        //this.getStage().getBatch().disableBlending();
-        this.drawBorders(this.getStage().getBatch());
+    public void afterRender() {
+
     }
 
     @Override
@@ -45,10 +41,6 @@ public class TestLevel01 extends Level {
         //setYMax(800);
     }
 
-    @Override
-    public void createWalls() {
-        super.createWalls();
-    }
 
     @Override
     public void setParticles() {
@@ -86,7 +78,12 @@ public class TestLevel01 extends Level {
     }
 
     @Override
-    public void setBorders() {
+    public void renderBorders() {
+        super.drawBorders(this.getStage().getBatch();
+    }
+
+    @Override
+    public void setOtherElements() {
 
     }
 }

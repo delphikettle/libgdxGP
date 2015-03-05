@@ -26,7 +26,7 @@ public class TestLevel extends Level {
     }
 
     @Override
-    public void render() {
+    public void afterRender() {
 
     }
 
@@ -51,7 +51,7 @@ public class TestLevel extends Level {
     }
 
     @Override
-    public void setBorders() {
+    public void setOtherElements() {
 
         BodyDef bodyDef=new BodyDef();
         bodyDef.type= BodyDef.BodyType.StaticBody;

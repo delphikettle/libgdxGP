@@ -56,33 +56,61 @@ public class GDXGameGP extends ApplicationAdapter implements GestureDetector.Ges
 				assert (screen != null);
 				if(!((LogoScreen) screen).isActive()){
 					this.state=State.loading;
-					this.screen=new LoadingScreen((LogoScreen) this.screen,new String[]{
-							"badlogic.jpg",
-							"border01.png",
-							"circle01.png",
-							"images/circle.png",
-							"images/logo.png",
-							"data/images/c.png",
-							"data/images/l.png",
-							"data/images/soccerBall.png",
-							"data/images/molecule.png"
-					});
+					final Level level=new TestLevel01(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+					final LevelScreen levelScreen=new LevelScreen(level,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+					this.screen=new LoadingScreen((LogoScreen) screen, new LoadingScreen.LoaderForLoadingScreen() {
+						@Override
+						public void startLoad() {
+							GDXGameGP.assetManager.load("badlogic.jpg",Texture.class);
+							GDXGameGP.assetManager.load("border01.png",Texture.class);
+							GDXGameGP.assetManager.load("circle01.png",Texture.class);
+							GDXGameGP.assetManager.load("images/circle.png",Texture.class);
+							GDXGameGP.assetManager.load("images/logo.png",Texture.class);
+							GDXGameGP.assetManager.load("data/images/c.png",Texture.class);
+							GDXGameGP.assetManager.load("data/images/l.png",Texture.class);
+							GDXGameGP.assetManager.load("images/loadBall.png",Texture.class);
+							GDXGameGP.assetManager.load("data/images/soccerBall.png",Texture.class);
+							GDXGameGP.assetManager.load("data/images/molecule.png",Texture.class);
+						}
+
+						@Override
+						public boolean isLoaded() {
+							System.out.println("Assets loading");
+							return GDXGameGP.assetManager.update();
+						}
+
+						@Override
+						public float getProgress() {
+							return GDXGameGP.assetManager.getProgress();
+						}
+					},new LoadingScreen((LogoScreen) screen, new LoadingScreen.LoaderForLoadingScreen() {
+						@Override
+						public void startLoad() {
+							level.load(levelScreen);
+						}
+
+						@Override
+						public boolean isLoaded() {
+							System.out.println("LevelLoading " + level.getLoaded());
+							if(level.getLoaded()>=1.0f)level.start();
+							return level.getLoaded()>=1.0f;
+						}
+
+						@Override
+						public float getProgress() {
+							return level.getLoaded();
+						}
+					}, levelScreen ));
 					this.screen.show();
 				}
 				break;
 			case loading:
-				assert ((LoadingScreen)screen) != null;
-				if(!((LoadingScreen)screen).isActive()){
-					//this.state=State.MainMenu;
-					if(((LoadingScreen)screen).getNextScreen()==null){
-						((LoadingScreen)screen).getLogoScreen().setRotation(0);
-						this.screen=new LoadingScreen(((LoadingScreen)screen).getLogoScreen(),new TestLevel01(Gdx.graphics.getWidth(),Gdx.graphics.getHeight()));
+				if (this.screen instanceof LoadingScreen)
+					if (!((LoadingScreen) this.screen).isActive()) {
+						this.screen = ((LoadingScreen) screen).getNextScreen();
 						this.screen.show();
-					}else{
-						this.screen=((LoadingScreen)screen).getNextScreen();
-						this.state=State.Game;
 					}
-				}
+
 				break;
 			case MainMenu:
 				break;

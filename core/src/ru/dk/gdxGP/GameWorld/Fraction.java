@@ -14,16 +14,6 @@ import java.util.Random;
 
 public class Fraction extends Actor {
     private Body body;
-
-    public static boolean isIsReloadTextureNeeded() {
-        return isReloadTextureNeeded;
-    }
-
-    public static void setIsReloadTextureNeeded(boolean isReloadTextureNeeded) {
-        Fraction.isReloadTextureNeeded = isReloadTextureNeeded;
-    }
-
-    private static boolean isReloadTextureNeeded=true;
     private TextureRegion textureRegion;
 
     public Fraction(World world,float x,float y,float vx, float vy,float mass){

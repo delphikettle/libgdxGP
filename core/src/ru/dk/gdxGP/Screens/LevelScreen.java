@@ -2,14 +2,18 @@ package ru.dk.gdxGP.Screens;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import ru.dk.gdxGP.GameWorld.Border;
+import ru.dk.gdxGP.GameWorld.Fraction;
 import ru.dk.gdxGP.GameWorld.Level;
 
-public class LevelScreen extends Stage implements Screen {
+public class LevelScreen implements Screen {
     private Box2DDebugRenderer box2DDebugRenderer;
     private OrthographicCamera camera;
-    private Stage particlesStage, bordersStage, otherStage;
+    private Stage particlesStage, bordersStage, othersStage;
 
     public Level getLevel() {
         return level;
@@ -22,19 +26,28 @@ public class LevelScreen extends Stage implements Screen {
         this.camera=new OrthographicCamera(w,h);
         this.particlesStage=new Stage();
         this.particlesStage.getViewport().setCamera(camera);
-    }
-    @Override
-    final public void draw() {
-        this.level.setCameraPosition();
-        this.level.preRender();
-        this.level.render();
-        this.level.afterRender();
-        //box2DDebugRenderer.render(world, this.getCamera().combined);
-    }
-    final public void superDraw(){
-        super.draw();
+        this.bordersStage=new Stage(this.particlesStage.getViewport(),this.particlesStage.getBatch());
+        this.othersStage =new Stage(this.particlesStage.getViewport(),this.particlesStage.getBatch());
     }
 
+    public void addFractionActor(Fraction fraction){
+        particlesStage.addActor(fraction);
+    }
+    public void addBorderActor(Border border){
+        bordersStage.addActor(border);
+    }
+    public void addOtherActor(Actor actor){
+        othersStage.addActor(actor);
+    }
+    public void drawFractions(){
+        this.particlesStage.draw();
+    }
+    public void drawBorders(){
+        this.bordersStage.draw();
+    }
+    public void drawOthers(){
+        this.othersStage.draw();
+    }
     @Override
     public void show() {
 
@@ -42,9 +55,16 @@ public class LevelScreen extends Stage implements Screen {
 
     @Override
     public void render(float delta) {
-        draw();
+        this.level.setCameraPosition();
+        this.level.preRender();
+        this.level.render(delta);
+        this.level.afterRender();
+        //box2DDebugRenderer.render(world, this.getCamera().combined);
     }
 
+    public Batch getBatch(){
+        return this.particlesStage.getBatch();
+    }
     @Override
     public void resize(int width, int height) {
 
@@ -62,6 +82,11 @@ public class LevelScreen extends Stage implements Screen {
 
     @Override
     public void hide() {
+
+    }
+
+    @Override
+    public void dispose() {
 
     }
 }
