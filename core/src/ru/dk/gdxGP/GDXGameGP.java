@@ -14,6 +14,8 @@ import ru.dk.gdxGP.Screens.LevelScreen;
 import ru.dk.gdxGP.Screens.LoadingScreen;
 import ru.dk.gdxGP.Screens.LogoScreen;
 
+import java.util.Random;
+
 public class GDXGameGP extends ApplicationAdapter implements GestureDetector.GestureListener, InputProcessor {
 	SpriteBatch batch;
 	Texture img;
@@ -162,6 +164,13 @@ public class GDXGameGP extends ApplicationAdapter implements GestureDetector.Ges
 
 	@Override
 	public boolean tap(float x, float y, int count, int button) {
+		if(screen instanceof LevelScreen){
+			Random rnd=new Random();
+			//((LevelScreen) screen).getLevel().addFraction(
+					((LevelScreen) screen).getLevel().getFraction(0).divide(rnd.nextInt(100)+9, rnd.nextInt(1000)-500, rnd.nextInt(1000)-500);
+			//);
+		}
+
 		return false;
 	}
 

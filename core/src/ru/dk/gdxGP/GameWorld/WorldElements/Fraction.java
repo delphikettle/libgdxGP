@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import javafx.scene.control.SplitPane;
 import ru.dk.gdxGP.GDXGameGP;
 import ru.dk.gdxGP.GameWorld.FractionDrawer;
 import ru.dk.gdxGP.GameWorld.FractionOperator;
@@ -19,9 +20,9 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
     private TextureRegion textureRegion;
     private FractionDrawer drawer=null;
     private FractionOperator operator=null;
+    private float strength;
 
     public Fraction(World world,float x,float y,float vx, float vy,float mass){
-        Random rnd=new Random();
         BodyDef bodyDef=new BodyDef();
         bodyDef.active=true;
         bodyDef.bullet=false;
@@ -38,13 +39,12 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
         MassData massData=new MassData();
         massData.mass=mass;
         massData.center.set(circleShape.getRadius(),circleShape.getRadius());
-        massData.I=0.0f;
         body.setMassData(massData);
 
         FixtureDef fixtureDef=new FixtureDef();
         fixtureDef.shape=circleShape;
         fixtureDef.friction=1.0f;
-        fixtureDef.density=0.25f;
+        fixtureDef.density=1.0f;
         fixtureDef.restitution=1.0f;
         fixtureDef.isSensor=false;
         body.createFixture(fixtureDef);
@@ -86,11 +86,33 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
 
     }
 
+    synchronized public Fraction divide(float mass,float vx,float vy){
+        System.out.println("Division started");
+        System.out.println("mass="+mass+";vx="+vx+";vy="+vy);
+        System.out.println(this.body.getWorld().isLocked());
+        this.getBody().getWorld().setContinuousPhysics(true);
+        //if(mass>this.body.getMass()||mass==0)throw new IllegalArgumentException();
+        //MassData newMassData=new MassData();
+        //newMassData.mass=this.body.getMass()-mass;
+        //this.body.getLinearVelocity().add(-vx*mass/newMassData.mass,-vy*mass/newMassData.mass);
+        ///this.body.setMassData(newMassData);
+
+        System.out.println("Fraction that was divided:"+this.toString());
+        //creating new Fraction
+        Fraction fNew =new Fraction(this.body.getWorld(),this.body.getPosition().x,this.body.getPosition().y,vx,vy,mass);
+        System.out.println("Division ended with new Fraction:"+fNew.toString());
+        return fNew;
+    }
     @Override
     public void operateFraction(Fraction fraction, float deltaTime) {
-        this.setX(this.getBody().getPosition().x);
-        this.setY(this.getBody().getPosition().y);
+        //fraction.setX(fraction.getBody().getPosition().x);
+        //fraction.setY(fraction.getBody().getPosition().y);
 
     }
 
+    @Override
+    public String toString() {
+        String s="Fraction:mass="+this.getBody().getMass()+";vx="+this.getBody().getLinearVelocity().x+";vy="+this.getBody().getLinearVelocity().y;
+        return s;
+    }
 }

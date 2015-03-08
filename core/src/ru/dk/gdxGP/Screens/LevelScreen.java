@@ -80,7 +80,6 @@ public class LevelScreen implements Screen {
 
         //Clamp range and set zoom
         this.zoom = MathUtils.clamp(initialScale * initialDistance / distance, 0.1f, 10.0f);
-
         return true;
     }
     public void drag(float dx,float dy){

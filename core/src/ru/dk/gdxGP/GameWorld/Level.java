@@ -140,6 +140,9 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 			levelScreen.addOtherActor(actor);
 		return actor;
 	}
+	final public Fraction getFraction(int index){
+		return this.particles.get(index);
+	}
 	public long maxOp=0;
 	public String maxOpName=""; long time=System.nanoTime(),elTime;
 
