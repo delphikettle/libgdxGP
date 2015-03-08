@@ -8,13 +8,17 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import ru.dk.gdxGP.GDXGameGP;
+import ru.dk.gdxGP.GameWorld.FractionDrawer;
+import ru.dk.gdxGP.GameWorld.FractionOperator;
 import ru.dk.gdxGP.TextureKeeper;
 
 import java.util.Random;
 
-public class Fraction extends Actor {
+public class Fraction extends Actor implements FractionDrawer,FractionOperator {
     private Body body;
     private TextureRegion textureRegion;
+    private FractionDrawer drawer=null;
+    private FractionOperator operator=null;
 
     public Fraction(World world,float x,float y,float vx, float vy,float mass){
         Random rnd=new Random();
@@ -46,6 +50,16 @@ public class Fraction extends Actor {
         body.createFixture(fixtureDef);
         body.setUserData(this);
         this.textureRegion= new TextureRegion((Texture) GDXGameGP.assetManager.get("images/circle.png"));
+        this.setDrawer(this);
+        this.setOperator(this);
+    }
+
+    public void setOperator(FractionOperator operator) {
+        this.operator = operator;
+    }
+
+    public void setDrawer(FractionDrawer drawer) {
+        this.drawer = drawer;
     }
 
     public Body getBody() {
@@ -54,18 +68,29 @@ public class Fraction extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        float r=this.body.getFixtureList().get(0).getShape().getRadius();
-        batch.draw(this.textureRegion, this.body.getPosition().x - 1.0f*r, this.body.getPosition().y - 1.0f*r ,r,r,r*2.0f, r*2.0f,1,1, MathUtils.radiansToDegrees* this.getBody().getAngle());
-
-
+        if(drawer!=null)drawer.drawFraction(this,batch);
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        this.setX(this.getBody().getPosition().x);
-        this.setY(this.getBody().getPosition().y);
+        if(operator!=null)operator.operateFraction(this, delta);
         //this.getBody().getLinearVelocity().set(this.getBody().getLinearVelocity().x*1.1f,this.getBody().getLinearVelocity().y*1.1f);
         //this.getBody().applyForce(this.getBody().getLinearVelocity().x*0.1f,this.getBody().getLinearVelocity().y*0.1f,this.body.getFixtureList().get(0).getShape().getRadius(),this.body.getFixtureList().get(0).getShape().getRadius(),true);
     }
+
+    @Override
+    public void drawFraction(Fraction fraction, Batch batch) {
+        float r=fraction.body.getFixtureList().get(0).getShape().getRadius();
+        batch.draw(fraction.textureRegion, fraction.body.getPosition().x - 1.0f*r, fraction.body.getPosition().y - 1.0f*r ,r,r,r*2.0f, r*2.0f,1,1, MathUtils.radiansToDegrees* fraction.getBody().getAngle());
+
+    }
+
+    @Override
+    public void operateFraction(Fraction fraction, float deltaTime) {
+        this.setX(this.getBody().getPosition().x);
+        this.setY(this.getBody().getPosition().y);
+
+    }
+
 }

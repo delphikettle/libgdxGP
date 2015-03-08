@@ -34,7 +34,6 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 
 	private boolean isMove=false, isEnd=false;
 
-    private Texture borderTexture;
 	private float loaded;
 
 	public Level(int w, int h) {
@@ -46,7 +45,6 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		xMin = yMin =0;
 		xMax = w;
 		yMax = h;
-        borderTexture=new Texture("border01.png");
 		this.isMove=true;
 		this.setDaemon(true);
 	}
@@ -70,6 +68,9 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		levelScreen.drawFractions();
 	}
 	abstract public void afterRender();
+	public void proceed(float deltaTime){
+		this.levelScreen.proceed(deltaTime);
+	}
 
 	public void load(final LevelScreen screen){
 		new Thread(new Runnable() {
@@ -153,8 +154,9 @@ public abstract class Level extends Thread implements Runnable,ContactListener
     }
     */
 	 private void Move(float time){
-		world.step(time/60f, 1, 1);
-		processAccelerometer();
+		 world.step(time/60f, 1, 1);
+		 processAccelerometer();
+		 this.proceed(time);
 	}
 
 	 final private float getNextStepTime(){
@@ -220,11 +222,11 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	}
 
 
-	public void Pause(){
-
+	public void pauseLevel(){
+		this.isMove=false;
 	}
-	public void Resume(){
-
+	public void resumeLevel(){
+		this.isMove=true;
 	}
     @Override
     public void endContact(Contact contact) {

@@ -56,6 +56,11 @@ public class LevelScreen implements Screen {
     public void drawOthers(){
         this.othersStage.draw();
     }
+    public void proceed(float deltaTime){
+        this.bordersStage.act(deltaTime);
+        this.othersStage.act(deltaTime);
+        this.particlesStage.act(deltaTime);
+    }
     @Override
     public void show() {
 
@@ -68,12 +73,13 @@ public class LevelScreen implements Screen {
         this.level.preRender();
         this.level.render(delta);
         this.level.afterRender();
+
         //box2DDebugRenderer.render(world, this.getCamera().combined);
     }
     public boolean zoom(float initialDistance, float distance) {
 
         //Clamp range and set zoom
-        this.zoom = MathUtils.clamp(initialScale * initialDistance / distance, 0.1f, 5.0f);
+        this.zoom = MathUtils.clamp(initialScale * initialDistance / distance, 0.1f, 10.0f);
 
         return true;
     }
@@ -99,17 +105,17 @@ public class LevelScreen implements Screen {
 
     @Override
     public void pause() {
-
+        this.level.pauseLevel();
     }
 
     @Override
     public void resume() {
-
+        this.level.resumeLevel();
     }
 
     @Override
     public void hide() {
-
+        this.level.pauseLevel();
     }
 
     @Override
