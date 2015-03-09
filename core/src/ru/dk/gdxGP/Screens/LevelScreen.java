@@ -51,7 +51,7 @@ public class LevelScreen implements Screen {
         this.particlesStage.draw();
     }
     public void drawBorders(){
-        this.bordersStage.draw();
+        //this.bordersStage.draw();
     }
     public void drawOthers(){
         this.othersStage.draw();
@@ -74,7 +74,7 @@ public class LevelScreen implements Screen {
         this.level.render(delta);
         this.level.afterRender();
 
-        //box2DDebugRenderer.render(world, this.getCamera().combined);
+        box2DDebugRenderer.render(this.level.getWorld(), camera.combined);
     }
     public boolean zoom(float initialDistance, float distance) {
 

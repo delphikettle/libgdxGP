@@ -28,7 +28,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	private int xMin, xMax, yMin, yMax;
 
 	private float G=1;
-	private float timeFactor=1;
+	private float timeFactor=1f;
 	private static long currentRealTime;
 	private float currentGameTime;
 
@@ -37,7 +37,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	private float loaded;
 
 	public Level(int w, int h) {
-        this.world=new World(new Vector2(0.0f,0.0f),false);
+        this.world=new World(new Vector2(0.0f,0.0f),true);
         this.world.setContactListener(this);
 		particles = new ArrayList<Fraction>();
         borders=new ArrayList<Border>();
@@ -156,14 +156,17 @@ public abstract class Level extends Thread implements Runnable,ContactListener
         b.end();
     }
     */
-	 private void Move(float time){
-		 world.step(time/60f, 1, 1);
+	 synchronized private void Move(float time){
+		 if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024))System.out.println(time);
+		 //world.step(time/60f, 1, 1);
+		 world.step(time/60f, 10000, 10000);
 		 processAccelerometer();
 		 this.proceed(time);
 	}
 
-	 final private float getNextStepTime(){
-		return -currentGameTime+ (currentGameTime=(this.timeFactor*1.0f*(-currentRealTime+(currentRealTime=System.currentTimeMillis()))+currentGameTime));
+	 synchronized final private float getNextStepTime(){
+
+		return (-currentGameTime+(currentGameTime=(this.timeFactor*1.0f*(-currentRealTime+(currentRealTime=System.currentTimeMillis()))+currentGameTime)));
 		
 	}
 
@@ -179,6 +182,8 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		while (!isEnd) {
 			if (isMove) {
 				if(this.getLoaded()>=1.0f) {
+					//if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024))System.out.println(getNextStepTime());
+					System.console();
 					this.Move(this.getNextStepTime());
 				}
 			}

@@ -16,7 +16,7 @@ import ru.dk.gdxGP.Screens.LogoScreen;
 
 import java.util.Random;
 
-public class GDXGameGP extends ApplicationAdapter implements GestureDetector.GestureListener, InputProcessor {
+public class GDXGameGP extends Game implements GestureDetector.GestureListener, InputProcessor, ApplicationListener{
 	SpriteBatch batch;
 	Texture img;
 	Level lvl;
@@ -27,6 +27,7 @@ public class GDXGameGP extends ApplicationAdapter implements GestureDetector.Ges
 	public enum State{
 		logo,loading,MainMenu,SelectLevel,Game,Pause
 	}
+
 
 
 	@Override
@@ -167,7 +168,7 @@ public class GDXGameGP extends ApplicationAdapter implements GestureDetector.Ges
 		if(screen instanceof LevelScreen){
 			Random rnd=new Random();
 			//((LevelScreen) screen).getLevel().addFraction(
-					((LevelScreen) screen).getLevel().getFraction(0).divide(rnd.nextInt(100)+9, rnd.nextInt(1000)-500, rnd.nextInt(1000)-500);
+			((LevelScreen) screen).getLevel().getFraction(0).divide(rnd.nextInt(100)+9, rnd.nextInt(1000)-500, rnd.nextInt(1000)-500);
 			//);
 		}
 

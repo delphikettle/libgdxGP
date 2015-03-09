@@ -90,24 +90,27 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
         System.out.println("Division started");
         System.out.println("mass="+mass+";vx="+vx+";vy="+vy);
         System.out.println(this.body.getWorld().isLocked());
-        this.getBody().getWorld().setContinuousPhysics(true);
-        //if(mass>this.body.getMass()||mass==0)throw new IllegalArgumentException();
-        //MassData newMassData=new MassData();
-        //newMassData.mass=this.body.getMass()-mass;
-        //this.body.getLinearVelocity().add(-vx*mass/newMassData.mass,-vy*mass/newMassData.mass);
-        ///this.body.setMassData(newMassData);
+        if(mass>this.body.getMass()||mass<=0)throw new IllegalArgumentException();
+        MassData newMassData=new MassData();
+        newMassData.mass=this.body.getMass()-mass;
+        float r=this.body.getFixtureList().get(0).getShape().getRadius();
+        newMassData.center.set(r,r);
+        this.body.getLinearVelocity().add(-vx*mass/newMassData.mass,-vy*mass/newMassData.mass);
+        this.body.setMassData(newMassData);
+        this.body.getFixtureList().get(0).getShape().setRadius((float) Math.sqrt(newMassData.mass / Math.PI / 1.0f));
 
         System.out.println("Fraction that was divided:"+this.toString());
         //creating new Fraction
-        Fraction fNew =new Fraction(this.body.getWorld(),this.body.getPosition().x,this.body.getPosition().y,vx,vy,mass);
-        System.out.println("Division ended with new Fraction:"+fNew.toString());
+        Fraction fNew =null;
+        //new Fraction(this.body.getWorld(),this.body.getPosition().x,this.body.getPosition().y,vx,vy,mass);
+        //System.out.println("Division ended with new Fraction:"+((fNew!=null)?fNew.toString():""));
         return fNew;
     }
     @Override
     public void operateFraction(Fraction fraction, float deltaTime) {
         //fraction.setX(fraction.getBody().getPosition().x);
         //fraction.setY(fraction.getBody().getPosition().y);
-
+        //if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024))System.out.println(this.toString());
     }
 
     @Override
