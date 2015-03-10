@@ -47,19 +47,49 @@ public class LevelScreen implements Screen {
     public void addOtherActor(Actor actor){
         othersStage.addActor(actor);
     }
-    public void drawFractions(){
-        this.particlesStage.draw();
+    public void drawFractions()
+    {
+        try{
+            this.particlesStage.draw();
+        }catch (NullPointerException e){
+            this.particlesStage.getBatch().end();
+            System.out.println("Exception "+e.toString()+" in drawFractions");
+        }
     }
     public void drawBorders(){
-        //this.bordersStage.draw();
+        try {
+            this.bordersStage.draw();
+        }catch (NullPointerException e){
+            this.bordersStage.getBatch().end();
+            System.out.println("Exception " + e.toString() + " in drawBorders");
+        }
     }
-    public void drawOthers(){
-        this.othersStage.draw();
+    public void drawOthers()
+    {
+        try {
+            this.othersStage.draw();
+        } catch (NullPointerException e){
+            this.othersStage.getBatch().end();
+            System.out.println("Exception " + e.toString() + " in drawOthers");
+        }
+
     }
     public void proceed(float deltaTime){
-        this.bordersStage.act(deltaTime);
-        this.othersStage.act(deltaTime);
-        this.particlesStage.act(deltaTime);
+        try {
+            this.bordersStage.act(deltaTime);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        try {
+            this.othersStage.act(deltaTime);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        try {
+            this.particlesStage.act(deltaTime);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
     }
     @Override
     public void show() {
