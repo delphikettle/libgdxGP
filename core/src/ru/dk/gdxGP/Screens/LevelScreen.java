@@ -73,7 +73,6 @@ public class LevelScreen implements Screen {
         this.level.preRender();
         this.level.render(delta);
         this.level.afterRender();
-
         box2DDebugRenderer.render(this.level.getWorld(), camera.combined);
     }
     public boolean zoom(float initialDistance, float distance) {

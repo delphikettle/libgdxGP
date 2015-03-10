@@ -46,7 +46,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		xMax = w;
 		yMax = h;
 		this.isMove=true;
-		this.setDaemon(true);
+		//this.setDaemon(true);
 	}
 
 	abstract public void setCameraPosition();
@@ -156,15 +156,17 @@ public abstract class Level extends Thread implements Runnable,ContactListener
         b.end();
     }
     */
-	 synchronized private void Move(float time){
-		 if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024))System.out.println(time);
+	 private void Move(float time){
+		 ///if(time!=0.0f) {
+		//	 System.out.println(((double)(time)));
+		 //}
 		 //world.step(time/60f, 1, 1);
-		 world.step(time/60f, 10000, 10000);
+		 world.step(MathUtils.clamp(time,0.0f,1.0f)/60.0f, 1, 1);
 		 processAccelerometer();
 		 this.proceed(time);
 	}
 
-	 synchronized final private float getNextStepTime(){
+	 final private float getNextStepTime(){
 
 		return (-currentGameTime+(currentGameTime=(this.timeFactor*1.0f*(-currentRealTime+(currentRealTime=System.currentTimeMillis()))+currentGameTime)));
 		
@@ -232,8 +234,10 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 
 	public void pauseLevel(){
 		this.isMove=false;
+		currentRealTime=System.currentTimeMillis();
 	}
 	public void resumeLevel(){
+		currentRealTime=System.currentTimeMillis();
 		this.isMove=true;
 	}
     @Override

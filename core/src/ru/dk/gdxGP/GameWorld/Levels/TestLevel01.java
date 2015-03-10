@@ -51,14 +51,14 @@ public class TestLevel01 extends Level {
                 (rnd.nextInt(200) - 100), (rnd.nextInt(200) - 100),
                 (rnd.nextInt(10000) + 81) * 0.00025f)).getBody());*/
         for (int i = 0;
-             /*i < Gdx.graphics.getHeight()*Gdx.graphics.getWidth()/(10000);*/i<1;
+             i < Gdx.graphics.getHeight()*Gdx.graphics.getWidth()/(10000);
              i++) {
 
             bodies.add(this.addFraction(new Fraction(this.getWorld(),
                     (rnd.nextInt(this.getXMax() - this.getXMin()) + this.getXMin()),
                     (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()),
                     (rnd.nextInt(200) - 100)*0.1f, (rnd.nextInt(200) - 100)*0.1f,
-                    (rnd.nextInt(2500) + 4) * 5f)).getBody());
+                    (rnd.nextInt(2500) + 4))).getBody());
 
             /*for (int j = 0; j < bodies.size(); j++) {
                 if(i==j)continue;

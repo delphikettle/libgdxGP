@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.input.RemoteSender;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import ru.dk.gdxGP.GameWorld.Level;
@@ -254,4 +255,6 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 	public boolean scrolled(int amount) {
 		return false;
 	}
+
+
 }
