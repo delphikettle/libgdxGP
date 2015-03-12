@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.utils.Box2DBuild;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import ru.dk.gdxGP.GameWorld.WorldElements.Border;
 import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
@@ -70,6 +71,8 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	abstract public void afterRender();
 	public void proceed(float deltaTime){
 		this.levelScreen.proceed(deltaTime);
+		processAccelerometer();
+		interactAllWithAllFractions();
 	}
 
 	public void load(final LevelScreen screen){
@@ -161,11 +164,11 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		//	 System.out.println(((double)(time)));
 		 //}
 		 //world.step(time/60f, 1, 1);
-		 world.step(MathUtils.clamp(time,0.0f,1.0f)/60.0f, 1, 1);
-		 processAccelerometer();
-		 this.proceed(time);
+		 if(time>0){
+			 this.proceed(time);
+			 world.step(MathUtils.clamp(time,0.0f,1.0f)/60.0f, 10, 10);
+		 }
 	}
-
 	 final private float getNextStepTime(){
 
 		return (-currentGameTime+(currentGameTime=(this.timeFactor*1.0f*(-currentRealTime+(currentRealTime=System.currentTimeMillis()))+currentGameTime)));
@@ -254,7 +257,9 @@ public abstract class Level extends Thread implements Runnable,ContactListener
     public void postSolve (Contact contact, ContactImpulse impulse){
     }
 
-	private void processAccelerometer() {
+	//additional methods for management of the world and the particles
+
+	public void processAccelerometer() {
 
 		/* Get accelerometer values */
 		float y = Gdx.input.getAccelerometerY();
@@ -272,6 +277,26 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 			/* Store new accelerometer values */
 			prevAccelX = x;
 			prevAccelY = y;
+		}
+	}
+
+	public void interactionBetweenFractions(Fraction f1,Fraction f2){
+		float F= (float) (this.G*f1.getBody().getMass()*f2.getBody().getMass()/(Math.pow(f1.getBody().getPosition().x-f2.getBody().getPosition().x,2)+Math.pow(f1.getBody().getPosition().y-f2.getBody().getPosition().y,2)));
+		Vector2 buf=new Vector2(f2.getBody().getPosition().x-f1.getBody().getPosition().x,f2.getBody().getPosition().y-f1.getBody().getPosition().y);
+		buf.setLength(F);
+		if(F<0)buf.rotate(180);
+		f1.getBody().applyForceToCenter(buf, true);
+		f2.getBody().applyForceToCenter(buf.rotate(180),true);
+	}
+
+	public void interactAllWithAllFractions(){
+		for(int i=0;i<particles.size();i++){
+			Fraction f1=particles.get(i);
+			if(f1!=null){
+				for (int j = i+1; j < particles.size(); j++) {
+					interactionBetweenFractions(f1,particles.get(j));
+				}
+			}
 		}
 	}
 }

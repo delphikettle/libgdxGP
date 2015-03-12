@@ -12,6 +12,7 @@ public class TestLevel01 extends Level {
     public TestLevel01(int w, int h) {
         super(w, h);
         this.setTimeFactor(1f);
+        this.setG(100);
     }
 
     @Override
@@ -58,7 +59,7 @@ public class TestLevel01 extends Level {
                     (rnd.nextInt(this.getXMax() - this.getXMin()) + this.getXMin()),
                     (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()),
                     (rnd.nextInt(200) - 100)*0.1f, (rnd.nextInt(200) - 100)*0.1f,
-                    (rnd.nextInt(2500) + 4))).getBody());
+                    (rnd.nextInt(2500) + 4)*0.25f)).getBody());
 
             /*for (int j = 0; j < bodies.size(); j++) {
                 if(i==j)continue;

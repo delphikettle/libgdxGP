@@ -90,7 +90,8 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
         System.out.println("Division started");
         System.out.println("mass="+mass+";vx="+vx+";vy="+vy);
         System.out.println(this.body.getWorld().isLocked());
-        if(mass>this.body.getMass()||mass<=0)throw new IllegalArgumentException();
+        if(mass>=this.body.getMass()||mass<=0)//throw new IllegalArgumentException();
+            return null;
         MassData newMassData=new MassData();
         newMassData.mass=this.body.getMass()-mass;
         float r=this.body.getFixtureList().get(0).getShape().getRadius();
@@ -102,7 +103,7 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
         System.out.println("Fraction that was divided:"+this.toString());
         //creating new Fraction
         Fraction fNew =null;
-        //new Fraction(this.body.getWorld(),this.body.getPosition().x,this.body.getPosition().y,vx,vy,mass);
+        new Fraction(this.body.getWorld(),this.body.getPosition().x+vx*0.1f,this.body.getPosition().y+vy*0.1f,vx,vy,mass);
         //System.out.println("Division ended with new Fraction:"+((fNew!=null)?fNew.toString():""));
         return fNew;
     }

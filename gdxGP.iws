@@ -80,24 +80,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Level.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Level.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Level.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1871" max-vertical-offset="3859">
-              <caret line="163" column="46" selection-start-line="163" selection-start-column="46" selection-end-line="163" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.64760435" vertical-offset="737" max-vertical-offset="4335">
+              <caret line="74" column="38" selection-start-line="74" selection-start-column="38" selection-end-line="74" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#load#0;class#Level#0" expanded="false" />
+                <element signature="e#5316#5317#0" expanded="true" />
+                <element signature="e#5341#5342#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestLevel01.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TestLevel01.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Levels/TestLevel01.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2560606" vertical-offset="579" max-vertical-offset="1530">
-              <caret line="50" column="67" selection-start-line="50" selection-start-column="67" selection-end-line="50" selection-end-column="67" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="1547">
+              <caret line="54" column="73" selection-start-line="54" selection-start-column="73" selection-end-line="54" selection-end-column="73" />
               <folding />
             </state>
           </provider>
@@ -116,8 +118,8 @@
       <file leaf-file-name="Fraction.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/WorldElements/Fraction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="952" max-vertical-offset="2057">
-              <caret line="112" column="10" selection-start-line="112" selection-start-column="10" selection-end-line="112" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1258" max-vertical-offset="2074">
+              <caret line="105" column="107" selection-start-line="105" selection-start-column="107" selection-end-line="105" selection-end-column="107" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -137,55 +139,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SnapshotArray.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.5.3/5ae3e32b01bcaa3d97d819b39c04da78d094563b/gdx-1.5.3-sources.jar!/com/badlogic/gdx/utils/SnapshotArray.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="817" max-vertical-offset="2669">
-              <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Group.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.5.3/5ae3e32b01bcaa3d97d819b39c04da78d094563b/gdx-1.5.3-sources.jar!/com/badlogic/gdx/scenes/scene2d/Group.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="239" max-vertical-offset="6970">
-              <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Stage.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.5.3/5ae3e32b01bcaa3d97d819b39c04da78d094563b/gdx-1.5.3-sources.jar!/com/badlogic/gdx/scenes/scene2d/Stage.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2806" max-vertical-offset="12750">
-              <caret line="222" column="0" selection-start-line="222" selection-start-column="0" selection-end-line="222" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SpriteBatch.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.5.3/5ae3e32b01bcaa3d97d819b39c04da78d094563b/gdx-1.5.3-sources.jar!/com/badlogic/gdx/graphics/g2d/SpriteBatch.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1973" max-vertical-offset="17612">
-              <caret line="159" column="0" selection-start-line="159" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="GDXGameGP.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GDXGameGP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1976" max-vertical-offset="3978">
-              <caret line="258" column="0" selection-start-line="258" selection-start-column="0" selection-end-line="258" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2486" max-vertical-offset="3944">
+              <caret line="171" column="149" selection-start-line="171" selection-start-column="149" selection-end-line="171" selection-end-column="149" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5186#5187#0" expanded="true" />
-                <element signature="e#5205#5206#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -223,10 +183,10 @@
         <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/WorldElements/Border.java" />
         <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/FractionOperator.java" />
         <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/FractionDrawer.java" />
-        <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/WorldElements/Fraction.java" />
-        <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GDXGameGP.java" />
-        <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Level.java" />
         <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/Screens/LevelScreen.java" />
+        <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GDXGameGP.java" />
+        <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/WorldElements/Fraction.java" />
+        <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Level.java" />
         <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Levels/TestLevel01.java" />
       </list>
     </option>
@@ -301,7 +261,7 @@
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$USER_HOME$/Мои документы/Downloads/Libgdxtutorial-lesson2/Libgdxtutorial" />
     <property name="findjar.last.used.dir" value="$PROJECT_DIR$" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="039cee95437dd059" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="CB5126K2CF" />
     <property name="FullScreen" value="false" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
@@ -601,7 +561,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2064" height="1128" extended-state="0" />
+    <frame x="-8" y="-8" width="2064" height="1128" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
@@ -617,10 +577,10 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36208627" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998997" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3099298" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3099298" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14720559" sideWeight="0.8890532" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
+      <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3099298" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20508982" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -766,10 +726,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.79012346" vertical-offset="882" max-vertical-offset="1564">
           <caret line="109" column="16" selection-start-line="109" selection-start-column="16" selection-end-line="109" selection-end-column="16" />
-          <folding>
-            <element signature="e#3938#3939#0" expanded="false" />
-            <element signature="e#3971#3972#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -888,21 +844,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.5.3/de4531eb0502218090290021f045ef84e6df20cb/gdx-box2d-1.5.3-sources.jar!/com/badlogic/gdx/physics/box2d/Body.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="3769" max-vertical-offset="12546">
-          <caret line="262" column="19" selection-start-line="262" selection-start-column="19" selection-end-line="262" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.5.3/5ae3e32b01bcaa3d97d819b39c04da78d094563b/gdx-1.5.3-sources.jar!/com/badlogic/gdx/math/Vector2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.532236" vertical-offset="1474" max-vertical-offset="7344">
-          <caret line="37" column="11" selection-start-line="37" selection-start-column="11" selection-end-line="37" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_05/javafx-src.zip!/javafx/scene/control/SplitPane.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="3.8216736" vertical-offset="3912" max-vertical-offset="7531">
@@ -914,14 +855,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.36625513" vertical-offset="2681" max-vertical-offset="6834">
           <caret line="171" column="19" selection-start-line="171" selection-start-column="19" selection-end-line="171" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/WorldElements/Border.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="1071">
-          <caret line="37" column="32" selection-start-line="37" selection-start-column="32" selection-end-line="37" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -960,16 +893,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/WorldElements/Fraction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1462" max-vertical-offset="2057">
-          <caret line="112" column="10" selection-start-line="112" selection-start-column="10" selection-end-line="112" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.5.3/de4531eb0502218090290021f045ef84e6df20cb/gdx-box2d-1.5.3-sources.jar!/com/badlogic/gdx/physics/box2d/World.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33223686" vertical-offset="9896" max-vertical-offset="15997">
@@ -1005,29 +928,6 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="3405" max-vertical-offset="4981">
           <caret line="261" column="24" selection-start-line="261" selection-start-column="24" selection-end-line="261" selection-end-column="24" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GDXGameGP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1976" max-vertical-offset="3978">
-          <caret line="258" column="0" selection-start-line="258" selection-start-column="0" selection-end-line="258" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5186#5187#0" expanded="true" />
-            <element signature="e#5205#5206#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Level.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1871" max-vertical-offset="3859">
-          <caret line="163" column="46" selection-start-line="163" selection-start-column="46" selection-end-line="163" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#load#0;class#Level#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1073,11 +973,74 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GDXGameGP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2486" max-vertical-offset="3944">
+          <caret line="171" column="149" selection-start-line="171" selection-start-column="149" selection-end-line="171" selection-end-column="149" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/WorldElements/Fraction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1258" max-vertical-offset="2074">
+          <caret line="105" column="107" selection-start-line="105" selection-start-column="107" selection-end-line="105" selection-end-column="107" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.5.3/de4531eb0502218090290021f045ef84e6df20cb/gdx-box2d-1.5.3-sources.jar!/com/badlogic/gdx/physics/box2d/Body.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33223686" vertical-offset="4779" max-vertical-offset="12580">
+          <caret line="323" column="16" selection-start-line="323" selection-start-column="16" selection-end-line="323" selection-end-column="16" />
+          <folding>
+            <element signature="e#11812#11813#0" expanded="false" />
+            <element signature="e#11870#11871#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.5.3/5ae3e32b01bcaa3d97d819b39c04da78d094563b/gdx-1.5.3-sources.jar!/com/badlogic/gdx/math/Vector2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.05263158" vertical-offset="5000" max-vertical-offset="7378">
+          <caret line="346" column="19" selection-start-line="346" selection-start-column="19" selection-end-line="346" selection-end-column="19" />
+          <folding>
+            <element signature="e#9104#9105#0" expanded="true" />
+            <element signature="e#9165#9166#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/WorldElements/Border.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="1071">
+          <caret line="37" column="32" selection-start-line="37" selection-start-column="32" selection-end-line="37" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Levels/TestLevel01.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2560606" vertical-offset="579" max-vertical-offset="1530">
-          <caret line="50" column="67" selection-start-line="50" selection-start-column="67" selection-end-line="50" selection-end-column="67" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="1547">
+          <caret line="54" column="73" selection-start-line="54" selection-start-column="73" selection-end-line="54" selection-end-column="73" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Level.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.64760435" vertical-offset="737" max-vertical-offset="4335">
+          <caret line="74" column="38" selection-start-line="74" selection-start-column="38" selection-end-line="74" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#load#0;class#Level#0" expanded="false" />
+            <element signature="e#5316#5317#0" expanded="true" />
+            <element signature="e#5341#5342#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

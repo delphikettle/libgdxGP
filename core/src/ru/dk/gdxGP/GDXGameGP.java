@@ -169,7 +169,7 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 		if(screen instanceof LevelScreen){
 			Random rnd=new Random();
 			//((LevelScreen) screen).getLevel().addFraction(
-			((LevelScreen) screen).getLevel().getFraction(0).divide(rnd.nextInt(100)+9, rnd.nextInt(1000)-500, rnd.nextInt(1000)-500);
+			((LevelScreen) screen).getLevel().getFraction(0).divide(((LevelScreen) screen).getLevel().getFraction(0).getBody().getMass()*0.01f, 500, 500);
 			//);
 		}
 
