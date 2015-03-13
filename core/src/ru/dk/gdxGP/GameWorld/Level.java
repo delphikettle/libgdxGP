@@ -29,6 +29,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	private int xMin, xMax, yMin, yMax;
 
 	private float G=1;
+	private float k=10;
 	private float timeFactor=1f;
 	private static long currentRealTime;
 	private float currentGameTime;
@@ -194,6 +195,12 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 			}
 		}
 	}
+	public float getK() {
+		return k;
+	}
+	public void setK(float k) {
+		this.k = k;
+	}
 	final public float getG(){
 		return G;
 	}
@@ -280,9 +287,13 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		}
 	}
 
+	Vector2 buf=new Vector2();
+
+
 	public void interactionBetweenFractions(Fraction f1,Fraction f2){
-		float F= (float) (this.G*f1.getBody().getMass()*f2.getBody().getMass()/(Math.pow(f1.getBody().getPosition().x-f2.getBody().getPosition().x,2)+Math.pow(f1.getBody().getPosition().y-f2.getBody().getPosition().y,2)));
-		Vector2 buf=new Vector2(f2.getBody().getPosition().x-f1.getBody().getPosition().x,f2.getBody().getPosition().y-f1.getBody().getPosition().y);
+		float F= (float) ( ((-this.k*f1.getCharge()*f2.getCharge()+1*this.G)*f1.getBody().getMass()*f2.getBody().getMass())
+                        /(Math.pow(f1.getBody().getPosition().x - f2.getBody().getPosition().x,2)+Math.pow(f1.getBody().getPosition().y - f2.getBody().getPosition().y,2)));
+		buf.set(f2.getBody().getPosition().x-f1.getBody().getPosition().x,f2.getBody().getPosition().y-f1.getBody().getPosition().y);
 		buf.setLength(F);
 		if(F<0)buf.rotate(180);
 		f1.getBody().applyForceToCenter(buf, true);

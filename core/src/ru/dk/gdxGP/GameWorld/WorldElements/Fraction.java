@@ -20,7 +20,25 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
     private TextureRegion textureRegion;
     private FractionDrawer drawer=null;
     private FractionOperator operator=null;
-    private float strength;
+    private float strength=1;
+    private float charge=MathUtils.random(-10f,10f);
+
+    public float getCharge() {
+        return charge;
+    }
+
+    public void setCharge(float charge) {
+        this.charge = charge;
+    }
+
+    public float getStrength() {
+        return strength;
+    }
+
+    public void setStrength(float strength) {
+        this.strength = strength;
+    }
+
 
     public Fraction(World world,float x,float y,float vx, float vy,float mass){
         BodyDef bodyDef=new BodyDef();
