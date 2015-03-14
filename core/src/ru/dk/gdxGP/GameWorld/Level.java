@@ -71,7 +71,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	}
 	abstract public void afterRender();
 	public void proceed(float deltaTime){
-		this.levelScreen.proceed(deltaTime);
+		//this.levelScreen.proceed(deltaTime);
 		processAccelerometer();
 		interactAllWithAllFractions();
 	}
@@ -291,8 +291,8 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 
 
 	public void interactionBetweenFractions(Fraction f1,Fraction f2){
-		float F= (float) ( ((-this.k*f1.getCharge()*f2.getCharge()+1*this.G)*f1.getBody().getMass()*f2.getBody().getMass())
-                        /(Math.pow(f1.getBody().getPosition().x - f2.getBody().getPosition().x,2)+Math.pow(f1.getBody().getPosition().y - f2.getBody().getPosition().y,2)));
+		float F= (float) ( ((-this.k*f1.getCharge()*f2.getCharge()+this.G)*f1.getBody().getMass()*f2.getBody().getMass())
+                        /((f1.getBody().getPosition().x - f2.getBody().getPosition().x)*(f1.getBody().getPosition().x - f2.getBody().getPosition().x)+(f1.getBody().getPosition().y - f2.getBody().getPosition().y)*(f1.getBody().getPosition().y - f2.getBody().getPosition().y)));
 		buf.set(f2.getBody().getPosition().x-f1.getBody().getPosition().x,f2.getBody().getPosition().y-f1.getBody().getPosition().y);
 		buf.setLength(F);
 		if(F<0)buf.rotate(180);

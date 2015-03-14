@@ -16,12 +16,14 @@ import ru.dk.gdxGP.TextureKeeper;
 import java.util.Random;
 
 public class Fraction extends Actor implements FractionDrawer,FractionOperator {
+    public enum Condition{Liquid,Solid,Mixed}
+    private Condition condition;
     private Body body;
     private TextureRegion textureRegion;
     private FractionDrawer drawer=null;
     private FractionOperator operator=null;
     private float strength=1;
-    private float charge=MathUtils.random(-10f,10f);
+    private float charge=MathUtils.random(-1f,1f);
 
     public float getCharge() {
         return charge;
@@ -70,6 +72,7 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
         this.textureRegion= new TextureRegion((Texture) GDXGameGP.assetManager.get("images/circle.png"));
         this.setDrawer(this);
         this.setOperator(this);
+        condition=Condition.Solid;
     }
 
     public void setOperator(FractionOperator operator) {
