@@ -26,7 +26,7 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
     private float charge=MathUtils.random(-1f,1f);
     private Color color=new Color(MathUtils.random(0.1f,1),MathUtils.random(0.1f,1),MathUtils.random(0.1f,1),MathUtils.random(0.5f,0.75f));
     static{
-        textureRegionFractionSolid = new TextureRegion((Texture) GDXGameGP.assetManager.get("images/FractionSolid.png"));
+        textureRegionFractionSolid = new TextureRegion((Texture) GDXGameGP.assetManager.get("images/FractionSolid01.png"));
         textureRegionCharge = new TextureRegion((Texture) GDXGameGP.assetManager.get("images/charge.png"));
         textureRegionPlusCharge = new TextureRegion((Texture) GDXGameGP.assetManager.get("images/PlusCharge.png"));
         textureRegionNullCharge = new TextureRegion((Texture) GDXGameGP.assetManager.get("images/NullCharge.png"));
@@ -96,7 +96,7 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if(drawer!=null)drawer.drawFraction(this,batch);
+        if(drawer!=null)drawer.drawFraction(this,batch,batch.getColor());
     }
 
     @Override
@@ -108,7 +108,7 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
     }
 
     @Override
-    public void drawFraction(Fraction fraction, Batch batch) {
+    public void drawFraction(Fraction fraction, Batch batch,Color parentColor) {
         float r=fraction.body.getFixtureList().get(0).getShape().getRadius();
         //batch.draw(fraction.textureRegionFractionSolid, fraction.body.getPosition().x - 1.0f*r, fraction.body.getPosition().y - 1.0f*r ,r,r,r*2.0f, r*2.0f,1,1, MathUtils.radiansToDegrees* fraction.getBody().getAngle());
         switch (fraction.condition){
@@ -118,8 +118,9 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
                 if(fraction.getCharge()>0)batch.setColor(1,0,0,0.25f);
                 else batch.setColor(0,0,1,0.25f);
                 float r1=r*(1+Math.abs(fraction.charge*2f));
-                batch.draw(textureRegionCharge, fraction.body.getPosition().x - 1.0f * r1, fraction.body.getPosition().y - 1.0f * r1, r1, r1, r1 * 2.0f, r1 * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
+                if(!(fraction.charge<=0.1f&&fraction.charge>=-0.1f))batch.draw(textureRegionCharge, fraction.body.getPosition().x - 1.0f * r1, fraction.body.getPosition().y - 1.0f * r1, r1, r1, r1 * 2.0f, r1 * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
                 float r2=r*0.5f;
+                batch.setColor(parentColor);
                 if (fraction.charge>0.25f)
                     batch.draw(textureRegionPlusCharge, fraction.body.getPosition().x - 1.0f * r2, fraction.body.getPosition().y - 1.0f * r2, r2 * 2.0f, r2 * 2.0f);
                 if (fraction.charge<-0.25f)

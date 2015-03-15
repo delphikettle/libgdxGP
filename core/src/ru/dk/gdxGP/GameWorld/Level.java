@@ -160,14 +160,16 @@ public abstract class Level extends Thread implements Runnable,ContactListener
         b.end();
     }
     */
-	 private void Move(float time){
+	private float lastTime=2;
+	private void Move(float time){
 		 ///if(time!=0.0f) {
 		//	 System.out.println(((double)(time)));
 		 //}
 		 //world.step(time/60f, 1, 1);
 		 if(time>0){
-			 this.proceed(time);
-			 world.step(MathUtils.clamp(time,0.0f,1.0f)/60.0f, 10, 10);
+			 lastTime=MathUtils.clamp(time,lastTime/2.0f,lastTime*1.5f);
+			 this.proceed(lastTime);
+			 world.step(lastTime/60.0f, 10, 10);
 		 }
 	}
 	 final private float getNextStepTime(){
