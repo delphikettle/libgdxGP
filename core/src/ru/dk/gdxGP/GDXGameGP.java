@@ -76,6 +76,14 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 							GDXGameGP.assetManager.load("images/loadBall.png",Texture.class);
 							GDXGameGP.assetManager.load("data/images/soccerBall.png",Texture.class);
 							GDXGameGP.assetManager.load("data/images/molecule.png",Texture.class);
+							GDXGameGP.assetManager.load("images/charge.png",Texture.class);
+							GDXGameGP.assetManager.load("images/charge_.png",Texture.class);
+							GDXGameGP.assetManager.load("images/FractionLiquid.png",Texture.class);
+							GDXGameGP.assetManager.load("images/FractionSolid.png",Texture.class);
+							GDXGameGP.assetManager.load("images/FractionSolid01.png",Texture.class);
+							GDXGameGP.assetManager.load("images/MinusCharge.png",Texture.class);
+							GDXGameGP.assetManager.load("images/NullCharge.png",Texture.class);
+							GDXGameGP.assetManager.load("images/PlusCharge.png",Texture.class);
 						}
 
 						@Override

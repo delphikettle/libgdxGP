@@ -1,29 +1,37 @@
 package ru.dk.gdxGP.GameWorld.WorldElements;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import javafx.scene.control.SplitPane;
 import ru.dk.gdxGP.GDXGameGP;
 import ru.dk.gdxGP.GameWorld.FractionDrawer;
 import ru.dk.gdxGP.GameWorld.FractionOperator;
-import ru.dk.gdxGP.TextureKeeper;
-
-import java.util.Random;
 
 public class Fraction extends Actor implements FractionDrawer,FractionOperator {
     public enum Condition{Liquid,Solid,Mixed}
     private Condition condition;
     private Body body;
-    private TextureRegion textureRegion;
+    private static TextureRegion textureRegionFractionSolid;
+    private static TextureRegion textureRegionCharge;
+    private static TextureRegion textureRegionNullCharge;
+    private static TextureRegion textureRegionMinusCharge;
+    private static TextureRegion textureRegionPlusCharge;
     private FractionDrawer drawer=null;
     private FractionOperator operator=null;
     private float strength=1;
     private float charge=MathUtils.random(-1f,1f);
+    private Color color=new Color(MathUtils.random(0.1f,1),MathUtils.random(0.1f,1),MathUtils.random(0.1f,1),MathUtils.random(0.5f,0.75f));
+    static{
+        textureRegionFractionSolid = new TextureRegion((Texture) GDXGameGP.assetManager.get("images/FractionSolid.png"));
+        textureRegionCharge = new TextureRegion((Texture) GDXGameGP.assetManager.get("images/charge.png"));
+        textureRegionPlusCharge = new TextureRegion((Texture) GDXGameGP.assetManager.get("images/PlusCharge.png"));
+        textureRegionNullCharge = new TextureRegion((Texture) GDXGameGP.assetManager.get("images/NullCharge.png"));
+        textureRegionMinusCharge = new TextureRegion((Texture) GDXGameGP.assetManager.get("images/MinusCharge.png"));
+    }
 
     public float getCharge() {
         return charge;
@@ -69,7 +77,6 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
         fixtureDef.isSensor=false;
         body.createFixture(fixtureDef);
         body.setUserData(this);
-        this.textureRegion= new TextureRegion((Texture) GDXGameGP.assetManager.get("images/circle.png"));
         this.setDrawer(this);
         this.setOperator(this);
         condition=Condition.Solid;
@@ -103,8 +110,24 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
     @Override
     public void drawFraction(Fraction fraction, Batch batch) {
         float r=fraction.body.getFixtureList().get(0).getShape().getRadius();
-        batch.draw(fraction.textureRegion, fraction.body.getPosition().x - 1.0f*r, fraction.body.getPosition().y - 1.0f*r ,r,r,r*2.0f, r*2.0f,1,1, MathUtils.radiansToDegrees* fraction.getBody().getAngle());
-
+        //batch.draw(fraction.textureRegionFractionSolid, fraction.body.getPosition().x - 1.0f*r, fraction.body.getPosition().y - 1.0f*r ,r,r,r*2.0f, r*2.0f,1,1, MathUtils.radiansToDegrees* fraction.getBody().getAngle());
+        switch (fraction.condition){
+            case Solid:
+                batch.setColor(color);
+                batch.draw(textureRegionFractionSolid, fraction.body.getPosition().x - 1.0f * r, fraction.body.getPosition().y - 1.0f * r, r, r, r * 2.0f, r * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
+                if(fraction.getCharge()>0)batch.setColor(1,0,0,0.25f);
+                else batch.setColor(0,0,1,0.25f);
+                float r1=r*(1+Math.abs(fraction.charge*2f));
+                batch.draw(textureRegionCharge, fraction.body.getPosition().x - 1.0f * r1, fraction.body.getPosition().y - 1.0f * r1, r1, r1, r1 * 2.0f, r1 * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
+                float r2=r*0.5f;
+                if (fraction.charge>0.25f)
+                    batch.draw(textureRegionPlusCharge, fraction.body.getPosition().x - 1.0f * r2, fraction.body.getPosition().y - 1.0f * r2, r2 * 2.0f, r2 * 2.0f);
+                if (fraction.charge<-0.25f)
+                    batch.draw(textureRegionMinusCharge, fraction.body.getPosition().x - 1.0f * r2, fraction.body.getPosition().y - 1.0f * r2, r2 * 2.0f, r2 * 2.0f);
+                if (fraction.charge<=0.25f&&fraction.charge>=-0.25f)
+                    batch.draw(textureRegionNullCharge, fraction.body.getPosition().x - 1.0f * r2, fraction.body.getPosition().y - 1.0f * r2, r2 * 2.0f, r2 * 2.0f);
+                break;
+        }
     }
 
     synchronized public Fraction divide(float mass,float vx,float vy){

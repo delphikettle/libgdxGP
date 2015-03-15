@@ -1,6 +1,7 @@
 package ru.dk.gdxGP.Screens;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
@@ -16,7 +17,7 @@ public class LevelScreen implements Screen {
     private OrthographicCamera camera;
     private float zoom=1;
     private Stage particlesStage, bordersStage, othersStage;
-
+    private Color startColor;
     public void setInitialScale(float initialScale) {
         this.initialScale = initialScale;
     }
@@ -36,6 +37,7 @@ public class LevelScreen implements Screen {
         this.particlesStage.getViewport().setCamera(camera);
         this.bordersStage=new Stage(this.particlesStage.getViewport(),this.particlesStage.getBatch());
         this.othersStage =new Stage(this.particlesStage.getViewport(),this.particlesStage.getBatch());
+        this.startColor=this.particlesStage.getBatch().getColor();
     }
 
     public void addFractionActor(Fraction fraction){
@@ -101,9 +103,11 @@ public class LevelScreen implements Screen {
         this.camera.zoom=zoom;
         this.level.setCameraPosition();
         this.level.preRender();
+        this.particlesStage.getBatch().setColor(startColor);
         this.level.render(delta);
+        this.particlesStage.getBatch().setColor(startColor);
         this.level.afterRender();
-        box2DDebugRenderer.render(this.level.getWorld(), camera.combined);
+        //box2DDebugRenderer.render(this.level.getWorld(), camera.combined);
     }
     public boolean zoom(float initialDistance, float distance) {
 
