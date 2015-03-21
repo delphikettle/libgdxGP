@@ -2,5 +2,8 @@
 <resources>
 
     <string name="app_name">gdxGP</string>
+    <string name="helpButton">Help</string>
+    <string name="startButton">Start</string>
+    <string name="exitButton">Exit</string>
 
 </resources>
