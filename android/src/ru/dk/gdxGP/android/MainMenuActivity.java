@@ -1,21 +1,41 @@
 package ru.dk.gdxGP.android;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
-public class MainMenuActivity extends Activity {
+public class MainMenuActivity extends Activity implements View.OnClickListener{
+    Button startButton,helpButton,exitButton;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
+        startButton=(Button) findViewById(R.id.newGameButton);
+        helpButton=(Button) findViewById(R.id.helpButton);
+        exitButton=(Button) findViewById(R.id.exitButton);
+        startButton.setOnClickListener(this);
+        helpButton.setOnClickListener(this);
+        exitButton.setOnClickListener(this);
     }
 
-    public void menuButtonClick(View view) {
-        switch (view.getId()){
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.newGameButton:
+                Intent intent=new Intent(MainMenuActivity.this,LevelListActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.helpButton:
+                Toast.makeText(this,"Tap Start button",Toast.LENGTH_SHORT).show();
+                break;
             case R.id.exitButton:
                 System.exit(0);
                 break;
         }
+
     }
 }

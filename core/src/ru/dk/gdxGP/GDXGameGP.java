@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.input.RemoteSender;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Levels.TestLevel01;
 import ru.dk.gdxGP.Screens.LevelScreen;
@@ -28,7 +27,6 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 	public enum State{
 		logo,loading,MainMenu,SelectLevel,Game,Pause
 	}
-
 
 
 	@Override
@@ -61,7 +59,7 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 				assert (screen != null);
 				if(!((LogoScreen) screen).isActive()){
 					this.state=State.loading;
-					final Level level=new TestLevel01(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+					final Level level=new TestLevel01();
 					final LevelScreen levelScreen=new LevelScreen(level,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 					this.screen=new LoadingScreen((LogoScreen) screen, new LoadingScreen.LoaderForLoadingScreen() {
 						@Override

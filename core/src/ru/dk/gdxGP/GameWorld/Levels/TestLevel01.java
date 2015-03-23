@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class TestLevel01 extends Level {
-    public TestLevel01(int w, int h) {
-        super(w, h);
+    public TestLevel01() {
+        super();
         this.setTimeFactor(1f);
         this.setG(0.1f);
         this.setK(50);

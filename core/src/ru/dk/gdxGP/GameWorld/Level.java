@@ -1,6 +1,5 @@
 package ru.dk.gdxGP.GameWorld;
 
-//import android.util.*;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -38,15 +37,15 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 
 	private float loaded;
 
-	public Level(int w, int h) {
+	public Level() {
         this.world=new World(new Vector2(0.0f,0.0f),true);
         this.world.setContactListener(this);
 		particles = new ArrayList<Fraction>();
         borders=new ArrayList<Border>();
 		otherElements=new ArrayList<Actor>();
 		xMin = yMin =0;
-		xMax = w;
-		yMax = h;
+		xMax = Gdx.graphics.getWidth();
+		yMax = Gdx.graphics.getHeight();
 		this.isMove=true;
 		//this.setDaemon(true);
 	}

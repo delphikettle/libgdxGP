@@ -1,25 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-        android:layout_height="fill_parent"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_height="fill_parent"
         android:layout_width="fill_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android" android:background="@android:color/background_light">
+        xmlns:android="http://schemas.android.com/apk/res/android" android:background="#ffb3e5fc"
+        tools:context="ru.dk.gdxGP.android.MainMenuActivity">
 
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Help"
+                android:text="@string/helpButton"
                 android:id="@+id/helpButton" android:layout_centerVertical="true" android:layout_centerHorizontal="true"
-                style="@android:style/Theme.Material"/>
+                android:clickable="true" android:textStyle="normal|bold|italic" android:singleLine="false"
+                android:enabled="true" android:elegantTextHeight="true" android:textSize="64sp"
+                android:textColor="#ff424242" android:alpha="255"
+                android:focusableInTouchMode="false"
+                android:theme="@android:style/Theme.Holo.Light"/>
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Start"
+                android:text="@string/startButton"
                 android:id="@+id/newGameButton" android:layout_above="@+id/helpButton" android:layout_centerHorizontal="true"
-                style="@android:style/Theme.Material"/>
+                android:clickable="true" android:textStyle="normal|bold|italic" android:singleLine="false"
+                android:enabled="true" android:elegantTextHeight="true" android:textSize="64sp"
+                android:textColor="#ff424242" android:alpha="255"
+                android:focusableInTouchMode="false"
+                android:theme="@android:style/Theme.Holo.Light"/>
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Exit"
+                android:text="@string/exitButton"
                 android:id="@+id/exitButton" android:layout_below="@+id/helpButton" android:layout_centerHorizontal="true"
-                style="@android:style/Theme.Material"/>
+                android:clickable="true" android:textStyle="normal|bold|italic" android:singleLine="false"
+                android:enabled="true" android:elegantTextHeight="true" android:textSize="64sp"
+                android:textColor="#ff424242" android:alpha="255" android:focusableInTouchMode="false"
+                android:theme="@android:style/Theme.Holo.Light"/>
 </RelativeLayout>

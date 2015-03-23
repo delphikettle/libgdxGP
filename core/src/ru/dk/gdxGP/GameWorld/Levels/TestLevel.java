@@ -8,8 +8,8 @@ import java.util.*;
 
 
 public class TestLevel extends Level {
-    public TestLevel(int w, int h) {
-        super(w, h);
+    public TestLevel() {
+        super();
 		//this.setG(1f);
         this.setTimeFactor(1f);
         //this.setMaxDistance(1000);
