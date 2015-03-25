@@ -13,6 +13,7 @@ import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
 import ru.dk.gdxGP.Screens.LevelScreen;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 
 public abstract class Level extends Thread implements Runnable,ContactListener
@@ -24,6 +25,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	private LevelScreen levelScreen;
 	private float prevAccelX;
 	private float prevAccelY;
+	private LinkedList<ActionForNextStep> actions;
 
 	private int xMin, xMax, yMin, yMax;
 
@@ -43,6 +45,13 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		particles = new ArrayList<Fraction>();
         borders=new ArrayList<Border>();
 		otherElements=new ArrayList<Actor>();
+		actions=new LinkedList<ActionForNextStep>();
+		actions.add(new ActionForNextStep() {
+			@Override
+			public void doSomethingOnStep(Level level) {
+				System.out.println("Action System works fine!");
+			}
+		});
 		xMin = yMin =0;
 		xMax = Gdx.graphics.getWidth();
 		yMax = Gdx.graphics.getHeight();
@@ -73,6 +82,9 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		//this.levelScreen.proceed(deltaTime);
 		processAccelerometer();
 		interactAllWithAllFractions();
+		if(this.actions.size()>0){
+			this.actions.pop().doSomethingOnStep(this);
+		}
 	}
 
 	public void load(final LevelScreen screen){
@@ -159,17 +171,27 @@ public abstract class Level extends Thread implements Runnable,ContactListener
         b.end();
     }
     */
-	private float lastTime=2;
+	private float lostTime=0.0f;
 	private void Move(float time){
 		 ///if(time!=0.0f) {
 		//	 System.out.println(((double)(time)));
 		 //}
 		 //world.step(time/60f, 1, 1);
+		/*
 		 if(time>0){
 			 lastTime=MathUtils.clamp(time,lastTime/2.0f,lastTime*1.5f);
 			 this.proceed(lastTime);
 			 world.step(lastTime/60.0f, 10, 10);
-		 }
+		 }*/
+		float stepTime=time+lostTime;
+		int normalStepTime=(int)stepTime;
+		lostTime=stepTime-(float)normalStepTime;
+		this.proceed(time);
+		for (int i = 0; i < normalStepTime; i++) {
+			world.step(1 / 60f, 10, 10);
+		}
+		if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024))System.out.println(time);
+
 	}
 	 final private float getNextStepTime(){
 
@@ -190,11 +212,13 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 			if (isMove) {
 				if(this.getLoaded()>=1.0f) {
 					//if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024))System.out.println(getNextStepTime());
-					System.console();
 					this.Move(this.getNextStepTime());
 				}
 			}
 		}
+	}
+	public final void addAction(ActionForNextStep action){
+		this.actions.add(action);
 	}
 	public float getK() {
 		return k;
@@ -280,7 +304,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		if (prevAccelX != x || prevAccelY != y) {
 
 			/* Negative on the x axis but not in the y */
-			world.setGravity(new Vector2(1.1f*y, -1.1f*x));
+			world.setGravity(new Vector2(1.0f*y, -1.0f*x));
 
 			/* Store new accelerometer values */
 			prevAccelX = x;

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.input.RemoteSender;
 import com.badlogic.gdx.math.Vector2;
+import ru.dk.gdxGP.GameWorld.ActionForNextStep;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Levels.TestLevel01;
 import ru.dk.gdxGP.Screens.LevelScreen;
@@ -173,10 +174,16 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 	@Override
 	public boolean tap(float x, float y, int count, int button) {
 		if(screen instanceof LevelScreen){
-			Random rnd=new Random();
-			//((LevelScreen) screen).getLevel().addFraction(
-			((LevelScreen) screen).getLevel().getFraction(0).divide(((LevelScreen) screen).getLevel().getFraction(0).getBody().getMass()*0.01f, 500, 500);
-			//);
+			((LevelScreen) screen).getLevel().addAction(new ActionForNextStep() {
+				@Override
+				public void doSomethingOnStep(Level level) {
+					Random rnd=new Random();
+					level.addFraction(
+						level.getFraction(0).divide(((LevelScreen) screen).getLevel().getFraction(0).getBody().getMass()*0.05f, 500, 500)
+					);
+
+				}
+			});
 		}
 
 		return false;

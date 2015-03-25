@@ -137,20 +137,24 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
         System.out.println(this.body.getWorld().isLocked());
         if(mass>=this.body.getMass()||mass<=0)//throw new IllegalArgumentException();
             return null;
-        MassData newMassData=new MassData();
-        newMassData.mass=this.body.getMass()-mass;
-        float r=this.body.getFixtureList().get(0).getShape().getRadius();
-        newMassData.center.set(r,r);
-        this.body.getLinearVelocity().add(-vx*mass/newMassData.mass,-vy*mass/newMassData.mass);
-        this.body.setMassData(newMassData);
-        this.body.getFixtureList().get(0).getShape().setRadius((float) Math.sqrt(newMassData.mass / Math.PI / 1.0f));
+        float newMass=this.body.getMass()-mass;
+        float r = recountRadius(newMass);
+        this.body.applyLinearImpulse(-vx*mass,-vy*mass,r,r,true);
 
-        System.out.println("Fraction that was divided:"+this.toString());
+        System.out.println("Fraction that was divided:" + this.toString());
         //creating new Fraction
-        Fraction fNew =null;
-        new Fraction(this.body.getWorld(),this.body.getPosition().x+vx*0.1f,this.body.getPosition().y+vy*0.1f,vx,vy,mass);
-        //System.out.println("Division ended with new Fraction:"+((fNew!=null)?fNew.toString():""));
+        Fraction fNew = new Fraction(this.body.getWorld(),this.body.getPosition().x+vx*0.01f,this.body.getPosition().y+vy*0.01f,vx,vy,mass);
+        System.out.println("Division ended with new Fraction:"+((fNew!=null)?fNew.toString():""));
         return fNew;
+    }
+    public final float recountRadius(float newMass){
+        float newR = (float) Math.sqrt(newMass / Math.PI / this.body.getFixtureList().get(0).getDensity());
+        MassData newMassData = new MassData();
+        newMassData.mass=newMass;
+        newMassData.center.set(newR,newR);
+        this.body.setMassData(newMassData);
+        this.body.getFixtureList().get(0).getShape().setRadius(newR);
+        return newR;
     }
     @Override
     public void operateFraction(Fraction fraction, float deltaTime) {
