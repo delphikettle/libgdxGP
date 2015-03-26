@@ -174,16 +174,7 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 	@Override
 	public boolean tap(float x, float y, int count, int button) {
 		if(screen instanceof LevelScreen){
-			((LevelScreen) screen).getLevel().addAction(new ActionForNextStep() {
-				@Override
-				public void doSomethingOnStep(Level level) {
-					Random rnd=new Random();
-					level.addFraction(
-						level.getFraction(0).divide(((LevelScreen) screen).getLevel().getFraction(0).getBody().getMass()*0.05f, 500, 500)
-					);
-
-				}
-			});
+			((LevelScreen) screen).tap(x,y);
 		}
 
 		return false;

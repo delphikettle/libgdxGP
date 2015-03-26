@@ -1,7 +1,9 @@
 package ru.dk.gdxGP.GameWorld.Levels;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import ru.dk.gdxGP.GameWorld.ActionForNextStep;
 import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
 import ru.dk.gdxGP.GameWorld.Level;
 
@@ -13,7 +15,7 @@ public class TestLevel01 extends Level {
         super();
         this.setTimeFactor(0.1f);
         this.setG(0);
-        this.setK(0);
+        this.setK(10);
     }
 
     @Override
@@ -60,7 +62,7 @@ public class TestLevel01 extends Level {
                     (rnd.nextInt(this.getXMax() - this.getXMin()) + this.getXMin()),
                     (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()),
                     (rnd.nextInt(200) - 100)*0f, (rnd.nextInt(200) - 100)*0f,
-                    (rnd.nextInt(2500) + 4))).getBody());
+                    (rnd.nextInt(2500) + 400)*2.0f)).getBody());
 
             /*for (int j = 0; j < bodies.size(); j++) {
                 if(i==j)continue;
@@ -88,5 +90,25 @@ public class TestLevel01 extends Level {
     @Override
     public void setOtherElements() {
 
+    }
+
+    @Override
+    public void tap(final float x, final float y) {
+
+        this.addAction(new ActionForNextStep() {
+            @Override
+            public void doSomethingOnStep(Level level) {
+                Random rnd = new Random();
+                float vModule=1000;
+                Vector2 v=new Vector2(TestLevel01.this.getFraction(0).getBody().getPosition());
+                v.rotate(180);
+                v.add(x,y);
+                v.setLength(vModule);
+                level.addFraction(
+                        level.getFraction(0).divide(TestLevel01.this.getFraction(0).getBody().getMass() * 0.05f, v.x, v.y)
+                );
+
+            }
+        });
     }
 }

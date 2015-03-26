@@ -89,4 +89,9 @@ public class TestLevel extends Level {
         //this.addBorder(new Border(this.getWorld(),this.getXMin()-w/2,this.getYMin()-h/2,10,10,false));
         //this.addBorder(new Border(this.getWorld(), 0,0,100,100));
     }
+
+    @Override
+    public void tap(float x, float y) {
+
+    }
 }

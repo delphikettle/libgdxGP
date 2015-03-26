@@ -130,7 +130,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 
 		this.addBorder(new Border(this.getWorld(),0,0,shape,true));
     }
-
+	abstract public void tap(float x, float y);
 	final public LevelScreen getStage(){return this.levelScreen;}
 
     public World getWorld() {

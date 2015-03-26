@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -129,6 +130,11 @@ public class LevelScreen implements Screen {
         particlesStage.getViewport().setCamera(camera);
         bordersStage.getViewport().setCamera(camera);
         othersStage.getViewport().setCamera(camera);
+    }
+
+    public void tap(float screenX,float screenY){
+        Vector3 tapCoords=this.camera.unproject(new Vector3(screenX, screenY, 0));
+        this.level.tap(tapCoords.x,tapCoords.y);
     }
 
     public float getCameraZoom(){
