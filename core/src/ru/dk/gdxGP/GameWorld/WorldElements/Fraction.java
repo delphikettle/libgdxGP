@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import ru.dk.gdxGP.GDXGameGP;
@@ -23,8 +24,8 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
     private FractionDrawer drawer=null;
     private FractionOperator operator=null;
     private float strength=1;
-    private float charge=MathUtils.random(-1f,1f);
-    private Color color=new Color(MathUtils.random(0.1f,1),MathUtils.random(0.1f,1),MathUtils.random(0.1f,1),MathUtils.random(0.5f,0.75f));
+    private float charge;
+    private Color color;
     static{
         textureRegionFractionSolid = new TextureRegion((Texture) GDXGameGP.assetManager.get("images/FractionSolid01.png"));
         textureRegionCharge = new TextureRegion((Texture) GDXGameGP.assetManager.get("images/charge.png"));
@@ -33,24 +34,8 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
         textureRegionMinusCharge = new TextureRegion((Texture) GDXGameGP.assetManager.get("images/MinusCharge.png"));
     }
 
-    public float getCharge() {
-        return charge;
-    }
 
-    public void setCharge(float charge) {
-        this.charge = charge;
-    }
-
-    public float getStrength() {
-        return strength;
-    }
-
-    public void setStrength(float strength) {
-        this.strength = strength;
-    }
-
-
-    public Fraction(World world,float x,float y,float vx, float vy,float mass){
+    public Fraction(World world,float x,float y,float vx, float vy,float mass, float charge, float friction, float density, float restitution,Condition condition, Color color){
         BodyDef bodyDef=new BodyDef();
         bodyDef.active=true;
         bodyDef.bullet=false;
@@ -62,7 +47,7 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
         body=world.createBody(bodyDef);
 
         CircleShape circleShape=new CircleShape();
-        circleShape.setRadius((float) Math.sqrt(mass / Math.PI / 1.0f));
+        circleShape.setRadius((float) Math.sqrt(mass / Math.PI / density));
 
         MassData massData=new MassData();
         massData.mass=mass;
@@ -71,28 +56,60 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
 
         FixtureDef fixtureDef=new FixtureDef();
         fixtureDef.shape=circleShape;
-        fixtureDef.friction=1.0f;
-        fixtureDef.density=1.0f;
-        fixtureDef.restitution=1.0f;
+        fixtureDef.friction=friction;
+        fixtureDef.density=density;
+        fixtureDef.restitution=restitution;
         fixtureDef.isSensor=false;
         body.createFixture(fixtureDef);
         body.setUserData(this);
         this.setDrawer(this);
         this.setOperator(this);
-        condition=Condition.Solid;
+        this.condition=condition;
+        this.charge = charge;
+        this.color=color;
+    }
+
+    public float getDensity(){
+        return this.body.getFixtureList().get(0).getDensity();
+    }
+    public float getRestitution(){
+        return this.body.getFixtureList().get(0).getRestitution();
+    }
+    public float getFriction(){
+        return body.getFixtureList().get(0).getFriction();
+    }
+    public float getCharge() {
+        return charge;
+    }
+    public float getRadius(){
+        return this.body.getFixtureList().get(0).getShape().getRadius();
+    }
+    public Vector2 getMassCenter(){
+        return this.body.getWorldCenter();
+    }
+    public void setCharge(float charge) {
+        this.charge = charge;
+    }
+    public float getStrength() {
+        return strength;
+    }
+    public void setStrength(float strength) {
+        this.strength = strength;
+    }
+    public Body getBody() {
+        return body;
+    }
+    public Condition getCondition(){
+        return condition;
     }
 
     public void setOperator(FractionOperator operator) {
         this.operator = operator;
     }
-
     public void setDrawer(FractionDrawer drawer) {
         this.drawer = drawer;
     }
 
-    public Body getBody() {
-        return body;
-    }
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
@@ -139,11 +156,15 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
             return null;
         float newMass=this.body.getMass()-mass;
         float r = recountRadius(newMass);
-        this.body.applyLinearImpulse(-vx*mass,-vy*mass,r,r,true);
+        this.body.applyLinearImpulse(-vx*mass,-vy*mass,getMassCenter().x,getMassCenter().y,true);
 
         System.out.println("Fraction that was divided:" + this.toString());
         //creating new Fraction
-        Fraction fNew = new Fraction(this.body.getWorld(),this.body.getPosition().x+vx*0.01f,this.body.getPosition().y+vy*0.01f,vx,vy,mass);
+        Vector2 coords=new Vector2(vx,vy);
+        coords.setLength((float) (r+Math.sqrt(mass / Math.PI / getDensity())));
+        coords.add(this.body.getPosition().x,this.body.getPosition().y);
+        Fraction fNew = new Fraction(this.body.getWorld(),coords.x,coords.y,vx,vy,mass,
+                this.getCharge(),this.getFriction(),this.getDensity(),this.getRestitution(),getCondition(),getColor());
         System.out.println("Division ended with new Fraction:"+((fNew!=null)?fNew.toString():""));
         return fNew;
     }
@@ -151,9 +172,11 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
         float newR = (float) Math.sqrt(newMass / Math.PI / this.body.getFixtureList().get(0).getDensity());
         MassData newMassData = new MassData();
         newMassData.mass=newMass;
-        newMassData.center.set(newR,newR);
+        newMassData.center.set(newR, newR);
         this.body.setMassData(newMassData);
+        this.body.resetMassData();
         this.body.getFixtureList().get(0).getShape().setRadius(newR);
+        System.out.println(this.body.getAngle());
         return newR;
     }
     @Override

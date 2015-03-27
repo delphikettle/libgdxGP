@@ -1,6 +1,8 @@
 package ru.dk.gdxGP.GameWorld.Levels;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import ru.dk.gdxGP.GameWorld.ActionForNextStep;
@@ -15,7 +17,7 @@ public class TestLevel01 extends Level {
         super();
         this.setTimeFactor(0.1f);
         this.setG(0);
-        this.setK(10);
+        this.setK(0);
     }
 
     @Override
@@ -61,8 +63,9 @@ public class TestLevel01 extends Level {
             bodies.add(this.addFraction(new Fraction(this.getWorld(),
                     (rnd.nextInt(this.getXMax() - this.getXMin()) + this.getXMin()),
                     (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()),
-                    (rnd.nextInt(200) - 100)*0f, (rnd.nextInt(200) - 100)*0f,
-                    (rnd.nextInt(2500) + 400)*2.0f)).getBody());
+                    (rnd.nextInt(200) - 100) * 0f, (rnd.nextInt(200) - 100) * 0f,
+                    (rnd.nextInt(2500) + 400) * 2.0f, MathUtils.random(-1f, 1f), 1, 1, 1, Fraction.Condition.Solid,
+                    new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f)))).getBody());
 
             /*for (int j = 0; j < bodies.size(); j++) {
                 if(i==j)continue;
@@ -105,7 +108,7 @@ public class TestLevel01 extends Level {
                 v.add(x,y);
                 v.setLength(vModule);
                 level.addFraction(
-                        level.getFraction(0).divide(TestLevel01.this.getFraction(0).getBody().getMass() * 0.05f, v.x, v.y)
+                        level.getFraction(0).divide(TestLevel01.this.getFraction(0).getBody().getMass() * 0.125f, v.x, v.y)
                 );
 
             }

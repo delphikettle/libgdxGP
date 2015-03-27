@@ -138,6 +138,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
     }
 
     synchronized final public Fraction addFraction(Fraction f){
+		if(f==null)return null;
         particles.add(f);
         if(levelScreen!=null)
 			levelScreen.addFractionActor(f);
@@ -190,7 +191,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		for (int i = 0; i < normalStepTime; i++) {
 			world.step(1 / 60f, 10, 10);
 		}
-		if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024))System.out.println(time);
+		//if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024))System.out.println(time);
 
 	}
 	 final private float getNextStepTime(){
@@ -266,6 +267,15 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		return this.currentGameTime;
 	}
 
+	public void contactFractions(Fraction f1, Fraction f2){
+		if(f1.getCondition()== Fraction.Condition.Liquid&&f2.getCondition()== Fraction.Condition.Liquid){
+			//moving mass
+		}
+		if((f1.getCondition()==Fraction.Condition.Liquid&&f2.getCondition()!=Fraction.Condition.Liquid)||
+				(f2.getCondition()==Fraction.Condition.Liquid&&f1.getCondition()!=Fraction.Condition.Liquid)){
+			//jointing bodies
+		}
+	}
 
 	public void pauseLevel(){
 		this.isMove=false;
@@ -284,6 +294,10 @@ public abstract class Level extends Thread implements Runnable,ContactListener
     }
     @Override
     public void preSolve (Contact contact, Manifold oldManifold){
+		if(contact.getFixtureA().getBody().getUserData() instanceof Fraction && contact.getFixtureB().getBody().getUserData() instanceof Fraction){
+			Fraction f1= (Fraction) contact.getFixtureA().getBody().getUserData(), f2= (Fraction) contact.getFixtureB().getBody().getUserData();
+			contactFractions(f1,f2);
+		}
     }
     @Override
     public void postSolve (Contact contact, ContactImpulse impulse){
@@ -304,7 +318,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		if (prevAccelX != x || prevAccelY != y) {
 
 			/* Negative on the x axis but not in the y */
-			world.setGravity(new Vector2(1.0f*y, -1.0f*x));
+			world.setGravity(new Vector2(10.0f/this.timeFactor*y, -10.0f/this.timeFactor*x));
 
 			/* Store new accelerometer values */
 			prevAccelX = x;

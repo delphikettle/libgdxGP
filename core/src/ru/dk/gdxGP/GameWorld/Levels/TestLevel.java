@@ -1,5 +1,7 @@
 package ru.dk.gdxGP.GameWorld.Levels;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
@@ -46,7 +48,7 @@ public class TestLevel extends Level {
             this.addFraction(new Fraction(this.getWorld(),
                     (rnd.nextInt(this.getXMax()-this.getXMin())+this.getXMin()),
                     (rnd.nextInt(this.getYMax()-this.getYMin())+this.getYMin()),
-                    (rnd.nextInt(200)-100),(rnd.nextInt(200)-100),(rnd.nextInt(10000)+81)*0.25f));
+                    (rnd.nextInt(200)-100),(rnd.nextInt(200)-100),(rnd.nextInt(10000)+81)*0.25f,0,1,1,1, Fraction.Condition.Solid,new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f))));
         }
     }
 

@@ -101,11 +101,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Level.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Level.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Level.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.8142235" vertical-offset="2329" max-vertical-offset="4743">
-              <caret line="132" column="45" selection-start-line="132" selection-start-column="45" selection-end-line="132" selection-end-column="45" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3782" max-vertical-offset="4981">
+              <caret line="298" column="34" selection-start-line="298" selection-start-column="34" selection-end-line="298" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -114,7 +114,7 @@
       <file leaf-file-name="GDXGameGP.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GDXGameGP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.965517" vertical-offset="2407" max-vertical-offset="4012">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2407" max-vertical-offset="4012">
               <caret line="176" column="36" selection-start-line="176" selection-start-column="36" selection-end-line="176" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -128,7 +128,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="1105">
               <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
-              <folding />
+              <folding>
+                <element signature="n#!!doc" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -136,9 +138,46 @@
       <file leaf-file-name="GestureDetector.java" pinned="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.5.3/5ae3e32b01bcaa3d97d819b39c04da78d094563b/gdx-1.5.3-sources.jar!/com/badlogic/gdx/input/GestureDetector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3791" max-vertical-offset="6800">
+            <state vertical-scroll-proportion="0.0" vertical-offset="4114" max-vertical-offset="6817">
               <caret line="284" column="28" selection-start-line="284" selection-start-column="28" selection-end-line="284" selection-end-column="28" />
-              <folding />
+              <folding>
+                <element signature="n#!!doc" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#2194#2195#0" expanded="false" />
+                <element signature="e#2283#2284#0" expanded="false" />
+                <element signature="e#2494#2495#0" expanded="false" />
+                <element signature="e#2538#2539#0" expanded="false" />
+                <element signature="e#4790#4791#0" expanded="false" />
+                <element signature="e#4845#4846#0" expanded="false" />
+                <element signature="e#5849#5850#0" expanded="false" />
+                <element signature="e#5907#5908#0" expanded="false" />
+                <element signature="e#7948#7949#0" expanded="false" />
+                <element signature="e#7993#7994#0" expanded="false" />
+                <element signature="e#8321#8322#0" expanded="false" />
+                <element signature="e#8342#8343#0" expanded="false" />
+                <element signature="e#8724#8725#0" expanded="false" />
+                <element signature="e#8750#8751#0" expanded="false" />
+                <element signature="e#8809#8810#0" expanded="false" />
+                <element signature="e#8854#8855#0" expanded="false" />
+                <element signature="e#9176#9177#0" expanded="false" />
+                <element signature="e#9223#9224#0" expanded="false" />
+                <element signature="e#9277#9278#0" expanded="false" />
+                <element signature="e#9318#9319#0" expanded="false" />
+                <element signature="e#11946#11947#0" expanded="false" />
+                <element signature="e#11967#11968#0" expanded="false" />
+                <element signature="e#12045#12046#0" expanded="false" />
+                <element signature="e#12066#12067#0" expanded="false" />
+                <element signature="e#12127#12128#0" expanded="false" />
+                <element signature="e#12148#12149#0" expanded="false" />
+                <element signature="e#12233#12234#0" expanded="false" />
+                <element signature="e#12254#12255#0" expanded="false" />
+                <element signature="e#12337#12338#0" expanded="false" />
+                <element signature="e#12358#12359#0" expanded="false" />
+                <element signature="e#12442#12443#0" expanded="false" />
+                <element signature="e#12463#12464#0" expanded="false" />
+                <element signature="e#12540#12541#0" expanded="false" />
+                <element signature="e#12561#12562#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -153,11 +192,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestLevel.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TestLevel.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Levels/TestLevel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="1683">
-              <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.40203193" vertical-offset="471" max-vertical-offset="1683">
+              <caret line="50" column="251" selection-start-line="50" selection-start-column="251" selection-end-line="50" selection-end-column="251" />
               <folding />
             </state>
           </provider>
@@ -169,61 +208,12 @@
             <state vertical-scroll-proportion="0.0" vertical-offset="10179" max-vertical-offset="20026">
               <caret line="671" column="13" selection-start-line="671" selection-start-column="13" selection-end-line="671" selection-end-column="13" />
               <folding>
-                <element signature="e#0#39354#0" expanded="false" />
                 <element signature="docComment;field#last#0;class#LinkedList#0" expanded="false" />
                 <element signature="docComment;method#LinkedList#0;class#LinkedList#0" expanded="false" />
                 <element signature="method#LinkedList#0;class#LinkedList#0" expanded="false" />
                 <element signature="docComment;method#LinkedList#1;class#LinkedList#0" expanded="false" />
                 <element signature="method#LinkedList#1;class#LinkedList#0" expanded="false" />
                 <element signature="docComment;method#linkFirst#0;class#LinkedList#0" expanded="false" />
-                <element signature="e#8008#8009#0" expanded="false" />
-                <element signature="e#8036#8037#0" expanded="false" />
-                <element signature="e#8248#8249#0" expanded="false" />
-                <element signature="e#8275#8276#0" expanded="false" />
-                <element signature="e#8748#8749#0" expanded="false" />
-                <element signature="e#8787#8788#0" expanded="false" />
-                <element signature="e#8938#8939#0" expanded="false" />
-                <element signature="e#8965#8966#0" expanded="false" />
-                <element signature="e#11209#11210#0" expanded="false" />
-                <element signature="e#11247#11248#0" expanded="false" />
-                <element signature="e#15878#15879#0" expanded="false" />
-                <element signature="e#15927#15928#0" expanded="false" />
-                <element signature="e#16099#16100#0" expanded="false" />
-                <element signature="e#16149#16150#0" expanded="false" />
-                <element signature="e#16416#16417#0" expanded="false" />
-                <element signature="e#16470#16471#0" expanded="false" />
-                <element signature="e#19921#19922#0" expanded="false" />
-                <element signature="e#19954#19955#0" expanded="false" />
-                <element signature="e#20484#20485#0" expanded="false" />
-                <element signature="e#20520#20521#0" expanded="false" />
-                <element signature="e#20770#20771#0" expanded="false" />
-                <element signature="e#20799#20800#0" expanded="false" />
-                <element signature="e#23214#23215#0" expanded="false" />
-                <element signature="e#23241#23242#0" expanded="false" />
-                <element signature="e#23699#23700#0" expanded="false" />
-                <element signature="e#23735#23736#0" expanded="false" />
-                <element signature="e#24161#24162#0" expanded="false" />
-                <element signature="e#24193#24194#0" expanded="false" />
-                <element signature="e#26763#26764#0" expanded="false" />
-                <element signature="e#26810#26811#0" expanded="false" />
-                <element signature="e#27132#27133#0" expanded="false" />
-                <element signature="e#27176#27177#0" expanded="false" />
-                <element signature="e#27506#27507#0" expanded="false" />
-                <element signature="e#27546#27547#0" expanded="false" />
-                <element signature="e#27584#27585#0" expanded="false" />
-                <element signature="e#27628#27629#0" expanded="false" />
-                <element signature="e#29449#29450#0" expanded="false" />
-                <element signature="e#29496#29497#0" expanded="false" />
-                <element signature="e#29735#29736#0" expanded="false" />
-                <element signature="e#29783#29784#0" expanded="false" />
-                <element signature="e#29809#29810#0" expanded="false" />
-                <element signature="e#29854#29855#0" expanded="false" />
-                <element signature="e#29885#29886#0" expanded="false" />
-                <element signature="e#29921#29922#0" expanded="false" />
-                <element signature="e#36049#36050#0" expanded="false" />
-                <element signature="e#36105#36106#0" expanded="false" />
-                <element signature="e#39250#39251#0" expanded="false" />
-                <element signature="e#39343#39344#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -232,9 +222,32 @@
       <file leaf-file-name="Fraction.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/WorldElements/Fraction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1759" max-vertical-offset="2618">
-              <caret line="145" column="125" selection-start-line="145" selection-start-column="125" selection-end-line="145" selection-end-column="125" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2210" max-vertical-offset="3162">
+              <caret line="166" column="117" selection-start-line="166" selection-start-column="117" selection-end-line="166" selection-end-column="117" />
+              <folding>
+                <element signature="e#3081#3082#0" expanded="true" />
+                <element signature="e#3150#3151#0" expanded="true" />
+                <element signature="e#3185#3186#0" expanded="true" />
+                <element signature="e#3258#3259#0" expanded="true" />
+                <element signature="e#3290#3291#0" expanded="true" />
+                <element signature="e#3355#3356#0" expanded="true" />
+                <element signature="e#3386#3387#0" expanded="true" />
+                <element signature="e#3415#3416#0" expanded="true" />
+                <element signature="e#3445#3446#0" expanded="true" />
+                <element signature="e#3524#3525#0" expanded="true" />
+                <element signature="e#3560#3561#0" expanded="true" />
+                <element signature="e#3609#3610#0" expanded="true" />
+                <element signature="e#3651#3652#0" expanded="true" />
+                <element signature="e#3687#3688#0" expanded="true" />
+                <element signature="e#3720#3721#0" expanded="true" />
+                <element signature="e#3751#3752#0" expanded="true" />
+                <element signature="e#3797#3798#0" expanded="true" />
+                <element signature="e#3837#3838#0" expanded="true" />
+                <element signature="e#3865#3866#0" expanded="true" />
+                <element signature="e#3892#3893#0" expanded="true" />
+                <element signature="e#3929#3930#0" expanded="true" />
+                <element signature="e#3961#3962#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -242,12 +255,9 @@
       <file leaf-file-name="TestLevel01.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Levels/TestLevel01.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1202" max-vertical-offset="1904">
-              <caret line="101" column="32" selection-start-line="101" selection-start-column="32" selection-end-line="101" selection-end-column="32" />
-              <folding>
-                <element signature="e#3026#3604#0" expanded="true" />
-                <element signature="e#3603#3604#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="1870">
+              <caret line="67" column="20" selection-start-line="67" selection-start-column="20" selection-end-line="67" selection-end-column="141" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -301,12 +311,12 @@
         <option value="$PROJECT_DIR$/android/res/layout/level_list_item.xml" />
         <option value="$PROJECT_DIR$/android/src/ru/dk/gdxGP/android/LevelListActivity.java" />
         <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/ActionForNextStep.java" />
-        <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/WorldElements/Fraction.java" />
-        <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Level.java" />
         <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/Screens/LevelScreen.java" />
         <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GDXGameGP.java" />
-        <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Levels/TestLevel.java" />
+        <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Level.java" />
+        <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/WorldElements/Fraction.java" />
         <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Levels/TestLevel01.java" />
+        <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Levels/TestLevel.java" />
       </list>
     </option>
   </component>
@@ -351,7 +361,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -363,6 +372,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -654,7 +664,6 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26696607" sideWeight="0.8890532" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3099298" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32698095" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.098802395" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -666,6 +675,7 @@
       <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32698095" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -870,23 +880,23 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/android/res/layout/main_menu.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.76" vertical-offset="111" max-vertical-offset="714">
           <caret line="15" column="38" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="38" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/res/layout/level_list.xml">
-      <provider editor-type-id="android-designer">
+      <provider selected="true" editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/res/layout/level_list.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="187">
           <caret line="3" column="73" selection-start-line="3" selection-start-column="73" selection-end-line="3" selection-end-column="73" />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../../Android/SDK/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-21/data/res/values/ids.xml">
@@ -897,23 +907,23 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../../Android/SDK/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-21/data/res/layout/simple_selectable_list_item.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="544">
           <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../Android/SDK/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-21/data/res/layout/simple_list_item_2.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../Android/SDK/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-21/data/res/layout/simple_list_item_2.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.5" vertical-offset="136" max-vertical-offset="748">
           <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="28" selection-end-column="72" />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/android/res/values/styles.xml">
@@ -931,23 +941,23 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/android/res/layout/level_list_item.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="187">
           <caret line="5" column="42" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../Android/SDK/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-21/data/res/layout/simple_list_item_1.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../Android/SDK/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-21/data/res/layout/simple_list_item_1.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="425" max-vertical-offset="527">
           <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../../Android/SDK/adt-bundle-windows-x86_64-20140321/sdk/sources/android-21/android/app/Activity.java">
@@ -958,13 +968,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../../Android/SDK/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-21/data/res/layout/list_content_simple.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="510">
           <caret line="22" column="37" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../../Android/SDK/adt-bundle-windows-x86_64-20140321/sdk/sources/android-21/android/app/ListActivity.java">
@@ -990,13 +1000,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/android/res/layout-v21/main_menu.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="714">
           <caret line="10" column="49" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="49" />
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/android/src/ru/dk/gdxGP/android/MainMenuActivity.java">
@@ -1019,61 +1029,12 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="10179" max-vertical-offset="20026">
           <caret line="671" column="13" selection-start-line="671" selection-start-column="13" selection-end-line="671" selection-end-column="13" />
           <folding>
-            <element signature="e#0#39354#0" expanded="false" />
             <element signature="docComment;field#last#0;class#LinkedList#0" expanded="false" />
             <element signature="docComment;method#LinkedList#0;class#LinkedList#0" expanded="false" />
             <element signature="method#LinkedList#0;class#LinkedList#0" expanded="false" />
             <element signature="docComment;method#LinkedList#1;class#LinkedList#0" expanded="false" />
             <element signature="method#LinkedList#1;class#LinkedList#0" expanded="false" />
             <element signature="docComment;method#linkFirst#0;class#LinkedList#0" expanded="false" />
-            <element signature="e#8008#8009#0" expanded="false" />
-            <element signature="e#8036#8037#0" expanded="false" />
-            <element signature="e#8248#8249#0" expanded="false" />
-            <element signature="e#8275#8276#0" expanded="false" />
-            <element signature="e#8748#8749#0" expanded="false" />
-            <element signature="e#8787#8788#0" expanded="false" />
-            <element signature="e#8938#8939#0" expanded="false" />
-            <element signature="e#8965#8966#0" expanded="false" />
-            <element signature="e#11209#11210#0" expanded="false" />
-            <element signature="e#11247#11248#0" expanded="false" />
-            <element signature="e#15878#15879#0" expanded="false" />
-            <element signature="e#15927#15928#0" expanded="false" />
-            <element signature="e#16099#16100#0" expanded="false" />
-            <element signature="e#16149#16150#0" expanded="false" />
-            <element signature="e#16416#16417#0" expanded="false" />
-            <element signature="e#16470#16471#0" expanded="false" />
-            <element signature="e#19921#19922#0" expanded="false" />
-            <element signature="e#19954#19955#0" expanded="false" />
-            <element signature="e#20484#20485#0" expanded="false" />
-            <element signature="e#20520#20521#0" expanded="false" />
-            <element signature="e#20770#20771#0" expanded="false" />
-            <element signature="e#20799#20800#0" expanded="false" />
-            <element signature="e#23214#23215#0" expanded="false" />
-            <element signature="e#23241#23242#0" expanded="false" />
-            <element signature="e#23699#23700#0" expanded="false" />
-            <element signature="e#23735#23736#0" expanded="false" />
-            <element signature="e#24161#24162#0" expanded="false" />
-            <element signature="e#24193#24194#0" expanded="false" />
-            <element signature="e#26763#26764#0" expanded="false" />
-            <element signature="e#26810#26811#0" expanded="false" />
-            <element signature="e#27132#27133#0" expanded="false" />
-            <element signature="e#27176#27177#0" expanded="false" />
-            <element signature="e#27506#27507#0" expanded="false" />
-            <element signature="e#27546#27547#0" expanded="false" />
-            <element signature="e#27584#27585#0" expanded="false" />
-            <element signature="e#27628#27629#0" expanded="false" />
-            <element signature="e#29449#29450#0" expanded="false" />
-            <element signature="e#29496#29497#0" expanded="false" />
-            <element signature="e#29735#29736#0" expanded="false" />
-            <element signature="e#29783#29784#0" expanded="false" />
-            <element signature="e#29809#29810#0" expanded="false" />
-            <element signature="e#29854#29855#0" expanded="false" />
-            <element signature="e#29885#29886#0" expanded="false" />
-            <element signature="e#29921#29922#0" expanded="false" />
-            <element signature="e#36049#36050#0" expanded="false" />
-            <element signature="e#36105#36106#0" expanded="false" />
-            <element signature="e#39250#39251#0" expanded="false" />
-            <element signature="e#39343#39344#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1090,8 +1051,8 @@
         <state vertical-scroll-proportion="0.33333334" vertical-offset="259" max-vertical-offset="12206">
           <caret line="60" column="27" selection-start-line="60" selection-start-column="27" selection-end-line="60" selection-end-column="27" />
           <folding>
-            <element signature="e#11221#11222#0" expanded="true" />
-            <element signature="e#11288#11289#0" expanded="true" />
+            <element signature="e#11221#11222#0" expanded="false" />
+            <element signature="e#11288#11289#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1114,7 +1075,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.28070176" vertical-offset="0" max-vertical-offset="969">
           <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1122,7 +1082,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1105">
           <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
-          <folding />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1130,7 +1092,44 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3774" max-vertical-offset="6800">
           <caret line="284" column="28" selection-start-line="284" selection-start-column="28" selection-end-line="284" selection-end-column="28" />
-          <folding />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#2194#2195#0" expanded="false" />
+            <element signature="e#2283#2284#0" expanded="false" />
+            <element signature="e#2494#2495#0" expanded="false" />
+            <element signature="e#2538#2539#0" expanded="false" />
+            <element signature="e#4790#4791#0" expanded="false" />
+            <element signature="e#4845#4846#0" expanded="false" />
+            <element signature="e#5849#5850#0" expanded="false" />
+            <element signature="e#5907#5908#0" expanded="false" />
+            <element signature="e#7948#7949#0" expanded="false" />
+            <element signature="e#7993#7994#0" expanded="false" />
+            <element signature="e#8321#8322#0" expanded="false" />
+            <element signature="e#8342#8343#0" expanded="false" />
+            <element signature="e#8724#8725#0" expanded="false" />
+            <element signature="e#8750#8751#0" expanded="false" />
+            <element signature="e#8809#8810#0" expanded="false" />
+            <element signature="e#8854#8855#0" expanded="false" />
+            <element signature="e#9176#9177#0" expanded="false" />
+            <element signature="e#9223#9224#0" expanded="false" />
+            <element signature="e#9277#9278#0" expanded="false" />
+            <element signature="e#9318#9319#0" expanded="false" />
+            <element signature="e#11946#11947#0" expanded="false" />
+            <element signature="e#11967#11968#0" expanded="false" />
+            <element signature="e#12045#12046#0" expanded="false" />
+            <element signature="e#12066#12067#0" expanded="false" />
+            <element signature="e#12127#12128#0" expanded="false" />
+            <element signature="e#12148#12149#0" expanded="false" />
+            <element signature="e#12233#12234#0" expanded="false" />
+            <element signature="e#12254#12255#0" expanded="false" />
+            <element signature="e#12337#12338#0" expanded="false" />
+            <element signature="e#12358#12359#0" expanded="false" />
+            <element signature="e#12442#12443#0" expanded="false" />
+            <element signature="e#12463#12464#0" expanded="false" />
+            <element signature="e#12540#12541#0" expanded="false" />
+            <element signature="e#12561#12562#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1142,25 +1141,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Levels/TestLevel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="1683">
-          <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/WorldElements/Fraction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1759" max-vertical-offset="2618">
-          <caret line="145" column="125" selection-start-line="145" selection-start-column="125" selection-end-line="145" selection-end-column="125" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GDXGameGP.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.965517" vertical-offset="2407" max-vertical-offset="4012">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2407" max-vertical-offset="4012">
           <caret line="176" column="36" selection-start-line="176" selection-start-column="36" selection-end-line="176" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1168,21 +1151,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Levels/TestLevel01.java">
+    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Level.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1202" max-vertical-offset="1904">
-          <caret line="101" column="32" selection-start-line="101" selection-start-column="32" selection-end-line="101" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3782" max-vertical-offset="4981">
+          <caret line="298" column="34" selection-start-line="298" selection-start-column="34" selection-end-line="298" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/WorldElements/Fraction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2210" max-vertical-offset="3162">
+          <caret line="166" column="117" selection-start-line="166" selection-start-column="117" selection-end-line="166" selection-end-column="117" />
           <folding>
-            <element signature="e#3026#3604#0" expanded="true" />
-            <element signature="e#3603#3604#0" expanded="true" />
+            <element signature="e#3081#3082#0" expanded="true" />
+            <element signature="e#3150#3151#0" expanded="true" />
+            <element signature="e#3185#3186#0" expanded="true" />
+            <element signature="e#3258#3259#0" expanded="true" />
+            <element signature="e#3290#3291#0" expanded="true" />
+            <element signature="e#3355#3356#0" expanded="true" />
+            <element signature="e#3386#3387#0" expanded="true" />
+            <element signature="e#3415#3416#0" expanded="true" />
+            <element signature="e#3445#3446#0" expanded="true" />
+            <element signature="e#3524#3525#0" expanded="true" />
+            <element signature="e#3560#3561#0" expanded="true" />
+            <element signature="e#3609#3610#0" expanded="true" />
+            <element signature="e#3651#3652#0" expanded="true" />
+            <element signature="e#3687#3688#0" expanded="true" />
+            <element signature="e#3720#3721#0" expanded="true" />
+            <element signature="e#3751#3752#0" expanded="true" />
+            <element signature="e#3797#3798#0" expanded="true" />
+            <element signature="e#3837#3838#0" expanded="true" />
+            <element signature="e#3865#3866#0" expanded="true" />
+            <element signature="e#3892#3893#0" expanded="true" />
+            <element signature="e#3929#3930#0" expanded="true" />
+            <element signature="e#3961#3962#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Level.java">
+    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Levels/TestLevel01.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.8142235" vertical-offset="2329" max-vertical-offset="4743">
-          <caret line="132" column="45" selection-start-line="132" selection-start-column="45" selection-end-line="132" selection-end-column="45" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="1870">
+          <caret line="67" column="20" selection-start-line="67" selection-start-column="20" selection-end-line="67" selection-end-column="141" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Levels/TestLevel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40203193" vertical-offset="471" max-vertical-offset="1683">
+          <caret line="50" column="251" selection-start-line="50" selection-start-column="251" selection-end-line="50" selection-end-column="251" />
           <folding />
         </state>
       </provider>
