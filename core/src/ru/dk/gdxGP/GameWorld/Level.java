@@ -46,12 +46,6 @@ public abstract class Level extends Thread implements Runnable,ContactListener
         borders=new ArrayList<Border>();
 		otherElements=new ArrayList<Actor>();
 		actions=new LinkedList<ActionForNextStep>();
-		actions.add(new ActionForNextStep() {
-			@Override
-			public void doSomethingOnStep(Level level) {
-				System.out.println("Action System works fine!");
-			}
-		});
 		xMin = yMin =0;
 		xMax = Gdx.graphics.getWidth();
 		yMax = Gdx.graphics.getHeight();
@@ -144,6 +138,13 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 			levelScreen.addFractionActor(f);
         return f;
     }
+	synchronized final public void removeFraction(Fraction fraction){
+		particles.remove(fraction);
+		fraction.getBody().setActive(false);
+		this.world.destroyBody(fraction.getBody());
+		if(levelScreen!=null)
+			levelScreen.removeFractionActor(fraction);
+	}
 	synchronized final public Border addBorder(Border border){
 		borders.add(border);
 		if(levelScreen!=null)
@@ -273,6 +274,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		}
 		if(f1.getCondition()== Fraction.Condition.Liquid&&f2.getCondition()== Fraction.Condition.Liquid){
 			//moving mass
+			flowMass(f1,f2);
 		}
 		if((f1.getCondition()==Fraction.Condition.Liquid&&f2.getCondition()!=Fraction.Condition.Liquid)||
 				(f2.getCondition()==Fraction.Condition.Liquid&&f1.getCondition()!=Fraction.Condition.Liquid)){
@@ -301,6 +303,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 			Fraction f1= (Fraction) contact.getFixtureA().getBody().getUserData(), f2= (Fraction) contact.getFixtureB().getBody().getUserData();
 			contactFractions(f1,f2,contact);
 		}
+
     }
     @Override
     public void postSolve (Contact contact, ContactImpulse impulse){
@@ -345,8 +348,14 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		float deltaCharge=(((q1*m1+q2*m2)/(m1+m2)+255*q2)/256-q2)
 				/((f1.getBody().getPosition().x - f2.getBody().getPosition().x)*(f1.getBody().getPosition().x - f2.getBody().getPosition().x)
 				+(f1.getBody().getPosition().y - f2.getBody().getPosition().y)*(f1.getBody().getPosition().y - f2.getBody().getPosition().y));
-		if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024))System.out.println(deltaCharge);
-		f1.moveParameters(f2,0,deltaCharge,new Vector2(0,0));
+		//if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024))System.out.println(deltaCharge);
+		/*
+		try {
+			f1.moveParameters(f2,0,deltaCharge,0,new Vector2(0,0));
+		} catch (Fraction.NullMassException e) {
+			this.removeFraction(e.getFraction());
+		}
+		*/
 	}
 
 	public void interactAllWithAllFractions(){
@@ -366,6 +375,27 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 			from=f2;
 			to=f1;
 		}
+		if(from.getMass()==to.getMass())return;
+		float d= (float) Math.sqrt(((from.getBody().getPosition().x - to.getBody().getPosition().x)*(from.getBody().getPosition().x - to.getBody().getPosition().x)
+				+(from.getBody().getPosition().y - to.getBody().getPosition().y)*(from.getBody().getPosition().y - to.getBody().getPosition().y)));
+		if(d>from.getRadius()+to.getRadius()-1)return;
+		float a=to.getMass(),b=from.getMass();
+		float sqrt=(float)(Math.PI*(2*a*d*d+2*b*d*d-Math.PI*Math.pow(d,4)));
+		if(sqrt<=0)return;
+		final float mass=(float)(Math.sqrt(sqrt)-a+b)/2;
+		if(mass<=0)return;
+		final Fraction finalFrom = from;
+		final Fraction finalTo = to;
+		this.addAction(new ActionForNextStep() {
+			@Override
+			public void doSomethingOnStep(Level level) {
+				try {
+					finalFrom.moveParameters(finalTo, mass, 0, 0, new Vector2(0, 0));
+				} catch (Fraction.NullMassException e) {
+					Level.this.removeFraction(e.getFraction());
+				}
+			}
+		});
 
 	}
 }

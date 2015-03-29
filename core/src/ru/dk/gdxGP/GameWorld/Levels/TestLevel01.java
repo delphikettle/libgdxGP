@@ -17,7 +17,7 @@ public class TestLevel01 extends Level {
         super();
         this.setTimeFactor(0.1f);
         this.setG(0);
-        this.setK(100);
+        this.setK(0);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class TestLevel01 extends Level {
                     (rnd.nextInt(this.getXMax() - this.getXMin()) + this.getXMin()),
                     (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()),
                     (rnd.nextInt(200) - 100) * 0f, (rnd.nextInt(200) - 100) * 0f,
-                    (rnd.nextInt(2500) + 400) * 2.0f, MathUtils.random(-1f, 1f), 1, 1, 1, Fraction.Condition.Solid,
+                    (rnd.nextInt(2500) + 400) * 2.0f, (float)(Math.pow(-1,i)*MathUtils.random(0f, 1f)), 1, 1, 1, Fraction.Condition.Liquid,
                     new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f)))).getBody());
             if(MathUtils.random.nextBoolean())((Fraction)bodies.get(i).getUserData()).setCondition(Fraction.Condition.Liquid);
             /*for (int j = 0; j < bodies.size(); j++) {

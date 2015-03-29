@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import ru.dk.gdxGP.GameWorld.WorldElements.Border;
@@ -44,6 +45,9 @@ public class LevelScreen implements Screen {
     public void addFractionActor(Fraction fraction){
         particlesStage.addActor(fraction);
     }
+    public void removeFractionActor(Fraction fraction){
+        particlesStage.getActors().removeValue(fraction,true);
+    }
     public void addBorderActor(Border border){
         bordersStage.addActor(border);
     }
@@ -55,6 +59,9 @@ public class LevelScreen implements Screen {
         try{
             this.particlesStage.draw();
         }catch (NullPointerException e){
+            this.particlesStage.getBatch().end();
+            System.out.println("Exception "+e.toString()+" in drawFractions");
+        }catch (java.lang.IndexOutOfBoundsException e){
             this.particlesStage.getBatch().end();
             System.out.println("Exception "+e.toString()+" in drawFractions");
         }

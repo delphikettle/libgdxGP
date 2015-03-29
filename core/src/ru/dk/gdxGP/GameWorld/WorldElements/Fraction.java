@@ -92,6 +92,9 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
     public float getRadius(){
         return this.body.getFixtureList().get(0).getShape().getRadius();
     }
+    public Vector2 getVelocity(){
+        return this.body.getLinearVelocity();
+    }
     public Vector2 getMassCenter(){
         return this.body.getWorldCenter();
     }
@@ -197,19 +200,25 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
         System.out.println("Division ended with new Fraction:"+((fNew!=null)?fNew.toString():""));
         return fNew;
     }
-    public void moveParameters(Fraction to,float mass, float charge,Vector2 velocity){
+    public void moveParameters(Fraction to,float mass, float charge,float density,Vector2 velocity)throws NullMassException{
         if(mass==0){
-            if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024)){
-                System.out.println("Before moving"+this.getCharge()+":"+to.getCharge());
-                to.charge+=charge;
-                this.charge-=charge*to.getMass()/this.getMass();
-                System.out.println("After moving"+this.getCharge()+":"+to.getCharge());
-            }else{
-                to.charge+=charge;
-                this.charge-=charge*to.getMass()/this.getMass();
-            }
+            to.charge+=charge;
+            this.charge-=charge*to.getMass()/this.getMass();
+            this.body.applyLinearImpulse(-velocity.x*to.getMass(),-velocity.y*to.getMass(),getMassCenter().x,getMassCenter().y,true);
+            to.body.applyLinearImpulse(velocity.x,velocity.y,to.getMassCenter().x,to.getMassCenter().y,true);
+            this.body.getFixtureList().get(0).setDensity(this.getDensity()-density*to.getMass()/this.getMass());
+            to.body.getFixtureList().get(0).setDensity(to.getDensity()+density);
+            this.recountRadius(this.getMass());
+            to.recountRadius(to.getMass());
         }else{
-
+            if(this.getMass()-mass<=0)throw new NullMassException(this);
+            if(to.getMass()+mass<=0)throw new NullMassException(to);
+            to.charge=(to.getCharge()*to.getMass()+this.getCharge()*mass)/(to.getMass()+mass);
+            to.body.applyLinearImpulse(this.getVelocity().x*mass,this.getVelocity().y*mass,to.getMassCenter().x,to.getMassCenter().y,true);
+            to.body.getFixtureList().get(0).setDensity((to.getDensity()*to.getMass()+mass*this.getDensity())/(to.getMass()+mass));
+            this.recountRadius(this.getMass()-mass);
+            to.recountRadius(to.getMass()+mass);
+            this.moveParameters(to,0,charge,density,velocity);
         }
     }
 
@@ -218,10 +227,12 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
         MassData newMassData = new MassData();
         newMassData.mass=newMass;
         newMassData.center.set(newR, newR);
+        System.out.println("mass before "+this.getMass());
+        this.body.resetMassData();
         this.body.setMassData(newMassData);
         this.body.resetMassData();
+        System.out.println("mass after "+this.getMass());
         this.body.getFixtureList().get(0).getShape().setRadius(newR);
-        System.out.println(this.body.getAngle());
         return newR;
     }
     @Override
@@ -235,5 +246,16 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
     public String toString() {
         String s="Fraction:mass="+this.getBody().getMass()+";vx="+this.getBody().getLinearVelocity().x+";vy="+this.getBody().getLinearVelocity().y;
         return s;
+    }
+
+    public class NullMassException extends Exception{
+        public Fraction getFraction() {
+            return fraction;
+        }
+
+        private Fraction fraction;
+        NullMassException(Fraction fraction){
+            this.fraction=fraction;
+        }
     }
 }
