@@ -72,6 +72,7 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
         this.condition=condition;
         this.charge = charge;
         this.color=color;
+        this.body.resetMassData();
     }
 
     public float getMass(){
@@ -227,11 +228,12 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
         MassData newMassData = new MassData();
         newMassData.mass=newMass;
         newMassData.center.set(newR, newR);
-        System.out.println("mass before "+this.getMass());
         this.body.resetMassData();
+        System.out.println("mass before " + this.getMass() + " with density" + this.getDensity() + " to mass " + newMass);
         this.body.setMassData(newMassData);
+        System.out.println("mass after setting " + this.getMass() + " with density" + this.getDensity());
         this.body.resetMassData();
-        System.out.println("mass after "+this.getMass());
+        System.out.println("mass after resetting " + this.getMass() +" with density"+this.getDensity() );
         this.body.getFixtureList().get(0).getShape().setRadius(newR);
         return newR;
     }

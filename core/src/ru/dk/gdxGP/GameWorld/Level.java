@@ -270,11 +270,11 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 
 	public void contactFractions(Fraction f1, Fraction f2,Contact contact){
 		if(f1.getCondition()!= Fraction.Condition.Solid||f2.getCondition()!= Fraction.Condition.Solid){
-			contact.setEnabled(false);
+			//contact.setEnabled(false);
 		}
 		if(f1.getCondition()== Fraction.Condition.Liquid&&f2.getCondition()== Fraction.Condition.Liquid){
 			//moving mass
-			flowMass(f1,f2);
+			//flowMass(f1,f2);
 		}
 		if((f1.getCondition()==Fraction.Condition.Liquid&&f2.getCondition()!=Fraction.Condition.Liquid)||
 				(f2.getCondition()==Fraction.Condition.Liquid&&f1.getCondition()!=Fraction.Condition.Liquid)){
@@ -390,7 +390,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 			@Override
 			public void doSomethingOnStep(Level level) {
 				try {
-					finalFrom.moveParameters(finalTo, mass, 0, 0, new Vector2(0, 0));
+					finalFrom.moveParameters(finalTo, 0, 0, 0, new Vector2(0, 0));
 				} catch (Fraction.NullMassException e) {
 					Level.this.removeFraction(e.getFraction());
 				}
