@@ -16,7 +16,7 @@ public class LoadingScreen extends Stage implements Screen {
         public void startLoad();
         public boolean isLoaded();
         public float getProgress();
-        public boolean ifProgressMustBeShown = false;
+        public boolean ifProgressMustBeShown();
     }
 
     private LogoScreen logoScreen;
@@ -70,11 +70,6 @@ public class LoadingScreen extends Stage implements Screen {
     public void render(float delta) {
         if(logoScreen!=null)
             logoScreen.render(delta);
-        if (loader.ifProgressMustBeShown){
-            rotation=-360*loader.getProgress();
-        }else{
-            rotation+=-1f;
-        }
 
         spriteBatch.begin();
         spriteBatch.draw(texture,
@@ -82,8 +77,8 @@ public class LoadingScreen extends Stage implements Screen {
                 width/2,height/2,
                 width,height,1,1,rotation);
         spriteBatch.end();
-        if (loader.ifProgressMustBeShown){
-            rotation=(-360*loader.getProgress()+25*rotation)/26;
+        if (loader.ifProgressMustBeShown()){
+            rotation=(-360*loader.getProgress()+5*rotation)/6;
         }else{
             rotation+=-1f;
         }

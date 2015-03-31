@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import com.badlogic.gdx.graphics.Texture;
+import ru.dk.gdxGP.GDXGameGP;
 
 public class MainMenuActivity extends Activity implements View.OnClickListener{
     Button startButton,helpButton,exitButton;
@@ -13,6 +15,8 @@ public class MainMenuActivity extends Activity implements View.OnClickListener{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
+        GDXGameGP.assetManager.load("images/logo.png", Texture.class);
+        GDXGameGP.assetManager.load("images/loadBall.png", Texture.class);
         startButton=(Button) findViewById(R.id.newGameButton);
         helpButton=(Button) findViewById(R.id.helpButton);
         exitButton=(Button) findViewById(R.id.exitButton);

@@ -3,6 +3,7 @@ package ru.dk.gdxGP.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -36,7 +37,7 @@ public class LogoScreen extends Stage implements Screen {
     }
     @Override
     public void show() {
-        texture= TextureKeeper.getTexture('l');
+        texture= new TextureRegion(new Texture("images/logo.png"));
         width=height= 0x0.FAP0f *((Gdx.graphics.getHeight()>Gdx.graphics.getWidth())?Gdx.graphics.getWidth():Gdx.graphics.getHeight());
         spriteBatch=new SpriteBatch();
         this.render(Gdx.graphics.getDeltaTime());

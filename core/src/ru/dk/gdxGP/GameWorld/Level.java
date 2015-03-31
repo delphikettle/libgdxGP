@@ -3,11 +3,10 @@ package ru.dk.gdxGP.GameWorld;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.physics.box2d.utils.Box2DBuild;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import ru.dk.gdxGP.GDXGameGP;
 import ru.dk.gdxGP.GameWorld.WorldElements.Border;
 import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
 import ru.dk.gdxGP.Screens.LevelScreen;
@@ -26,19 +25,14 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	private float prevAccelX;
 	private float prevAccelY;
 	private LinkedList<ActionForNextStep> actions;
-
 	private int xMin, xMax, yMin, yMax;
-
 	private float G=1;
-	private float k=10;
+	private float k=1;
 	private float timeFactor=1f;
 	private static long currentRealTime;
 	private float currentGameTime;
-
 	private boolean isMove=false, isEnd=false;
-
 	private float loaded;
-
 	public Level() {
         this.world=new World(new Vector2(0.0f,0.0f),true);
         this.world.setContactListener(this);
@@ -81,10 +75,19 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		}
 	}
 
-	public void load(final LevelScreen screen){
+	public final void load(final LevelScreen screen){
+		loadAssets();
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				while(getAssetsLoaded()<1){
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				setLoaded(0.0f / 5);
 				setSizes();
 				setLoaded(1.0f / 5);
 				setLevelScreen(screen);
@@ -101,6 +104,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 
 
 	private void setLoaded(float loaded) {
+		System.out.println(loaded);
 		this.loaded = loaded;
 	}
 
@@ -108,7 +112,35 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		this.levelScreen=screen;
 		//здесь нужно добавить частицы, границы и прочее к стейджам скрина
 	}
-    abstract public void setSizes();
+	public void loadAssets(String[] assetsPaths){
+		for (int i = 0; i < assetsPaths.length; i++) {
+			GDXGameGP.assetManager.load(assetsPaths[i],Texture.class);
+		}
+	}
+
+	public float getLoaded() {
+		GDXGameGP.assetManager.update();
+		return 0.6f*loaded+0.4f*GDXGameGP.assetManager.getProgress();
+	}
+	public static String[] standardAssetsPaths = new String[]{
+			"images/PlusCharge.png",
+			"images/NullCharge.png",
+			"images/MinusCharge.png",
+			"images/FractionSolid01.png",
+			"images/FractionSolid.png",
+			"images/FractionLiquid.png",
+			"images/charge.png",
+			"border01.png"
+	};
+	abstract public void loadAssets();
+	public float getAssetsLoaded(){
+		System.out.println("assetsLoaded="+GDXGameGP.assetManager.getProgress());
+		return GDXGameGP.assetManager.getProgress();
+	}
+	public boolean areAssetsLoaded(){
+		return GDXGameGP.assetManager.update();
+	}
+	abstract public void setSizes();
 	abstract public void setParticles();
     abstract public void setOtherElements();
     public void createWalls(){
@@ -199,10 +231,6 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 
 		return (-currentGameTime+(currentGameTime=(this.timeFactor*1.0f*(-currentRealTime+(currentRealTime=System.currentTimeMillis()))+currentGameTime)));
 		
-	}
-
-	public float getLoaded() {
-		return loaded;
 	}
 
 	@Override

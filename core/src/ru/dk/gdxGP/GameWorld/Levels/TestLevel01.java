@@ -1,6 +1,5 @@
 package ru.dk.gdxGP.GameWorld.Levels;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -16,8 +15,8 @@ public class TestLevel01 extends Level {
     public TestLevel01() {
         super();
         this.setTimeFactor(0.1f);
-        this.setG(0);
-        this.setK(5);
+        this.setG(-1);
+        this.setK(1);
     }
 
     @Override
@@ -36,6 +35,11 @@ public class TestLevel01 extends Level {
     @Override
     public void afterRender() {
 
+    }
+
+    @Override
+    public void loadAssets() {
+        this.loadAssets(standardAssetsPaths);
     }
 
     @Override

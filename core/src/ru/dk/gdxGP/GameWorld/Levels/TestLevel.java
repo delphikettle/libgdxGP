@@ -33,6 +33,11 @@ public class TestLevel extends Level {
     }
 
     @Override
+    public void loadAssets() {
+
+    }
+
+    @Override
     public void setSizes() {
         this.setXMin(-0*this.getXMax());
         this.setYMin(-0*this.getYMax());

@@ -24,12 +24,16 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 	State state=State.logo;
 	Screen screen;
 	static public final AssetManager assetManager=new AssetManager();
+	private String levelName;
 
 	public enum State{
 		logo,loading,MainMenu,SelectLevel,Game,Pause
 	}
 
 
+	public GDXGameGP(String levelName){
+		this.levelName=levelName;
+	}
 	@Override
 	public void create() {
 		this.screen=new LogoScreen(1);
@@ -63,38 +67,7 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 					final Level level=new TestLevel01();
 					final LevelScreen levelScreen=new LevelScreen(level,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 					this.screen=new LoadingScreen((LogoScreen) screen, new LoadingScreen.LoaderForLoadingScreen() {
-						@Override
-						public void startLoad() {
-							GDXGameGP.assetManager.load("badlogic.jpg",Texture.class);
-							GDXGameGP.assetManager.load("border01.png",Texture.class);
-							GDXGameGP.assetManager.load("circle01.png",Texture.class);
-							GDXGameGP.assetManager.load("images/circle.png",Texture.class);
-							GDXGameGP.assetManager.load("images/logo.png",Texture.class);
-							GDXGameGP.assetManager.load("data/images/c.png",Texture.class);
-							GDXGameGP.assetManager.load("data/images/l.png",Texture.class);
-							GDXGameGP.assetManager.load("images/loadBall.png",Texture.class);
-							GDXGameGP.assetManager.load("data/images/soccerBall.png",Texture.class);
-							GDXGameGP.assetManager.load("data/images/molecule.png",Texture.class);
-							GDXGameGP.assetManager.load("images/charge.png",Texture.class);
-							GDXGameGP.assetManager.load("images/charge_.png",Texture.class);
-							GDXGameGP.assetManager.load("images/FractionLiquid.png",Texture.class);
-							GDXGameGP.assetManager.load("images/FractionSolid.png",Texture.class);
-							GDXGameGP.assetManager.load("images/FractionSolid01.png",Texture.class);
-							GDXGameGP.assetManager.load("images/MinusCharge.png",Texture.class);
-							GDXGameGP.assetManager.load("images/NullCharge.png",Texture.class);
-							GDXGameGP.assetManager.load("images/PlusCharge.png",Texture.class);
-						}
 
-						@Override
-						public boolean isLoaded() {
-							return GDXGameGP.assetManager.update();
-						}
-
-						@Override
-						public float getProgress() {
-							return GDXGameGP.assetManager.getProgress();
-						}
-					},new LoadingScreen((LogoScreen) screen, new LoadingScreen.LoaderForLoadingScreen() {
 						@Override
 						public void startLoad() {
 							level.load(levelScreen);
@@ -110,7 +83,12 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 						public float getProgress() {
 							return level.getLoaded();
 						}
-					}, levelScreen ));
+
+						@Override
+						public boolean ifProgressMustBeShown() {
+							return true;
+						}
+					}, levelScreen );
 					this.screen.show();
 				}
 				break;
