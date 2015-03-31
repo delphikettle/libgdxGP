@@ -9,6 +9,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.input.RemoteSender;
 import com.badlogic.gdx.math.Vector2;
 import ru.dk.gdxGP.GameWorld.ActionForNextStep;
+import ru.dk.gdxGP.GameWorld.GameLevels;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Levels.TestLevel01;
 import ru.dk.gdxGP.Screens.LevelScreen;
@@ -64,7 +65,7 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 				assert (screen != null);
 				if(!((LogoScreen) screen).isActive()){
 					this.state=State.loading;
-					final Level level=new TestLevel01();
+					final Level level= GameLevels.instantiateLevel(GameLevels.LEVELS,levelName);
 					final LevelScreen levelScreen=new LevelScreen(level,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 					this.screen=new LoadingScreen((LogoScreen) screen, new LoadingScreen.LoaderForLoadingScreen() {
 
