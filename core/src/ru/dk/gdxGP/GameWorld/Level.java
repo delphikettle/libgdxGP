@@ -217,6 +217,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 			 this.proceed(lastTime);
 			 world.step(lastTime/60.0f, 10, 10);
 		 }*/
+
 		float stepTime=time+lostTime;
 		int normalStepTime=(int)stepTime;
 		lostTime=stepTime-(float)normalStepTime;
@@ -226,6 +227,8 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		}
 		//if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024))System.out.println(time);
 
+		//this.proceed(time);
+		//this.world.step(1/100f,10,10);
 	}
 	 final private float getNextStepTime(){
 

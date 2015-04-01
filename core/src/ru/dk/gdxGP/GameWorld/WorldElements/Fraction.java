@@ -48,7 +48,7 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
         bodyDef.linearVelocity.set(vx,vy);
         bodyDef.position.set(x,y);
         bodyDef.type= BodyDef.BodyType.DynamicBody;
-        bodyDef.allowSleep=false;
+        bodyDef.allowSleep=true;
         body=world.createBody(bodyDef);
 
         CircleShape circleShape=new CircleShape();

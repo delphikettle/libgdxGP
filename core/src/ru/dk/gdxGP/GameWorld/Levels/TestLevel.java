@@ -34,7 +34,7 @@ public class TestLevel extends Level {
 
     @Override
     public void loadAssets() {
-
+        this.loadAssets(standardAssetsPaths);
     }
 
     @Override

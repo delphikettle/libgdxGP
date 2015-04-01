@@ -110,7 +110,7 @@ public class TestLevel01 extends Level {
                 Vector2 v=new Vector2(TestLevel01.this.getFraction(0).getBody().getPosition());
                 v.rotate(180);
                 v.add(x,y);
-                v.setLength(vModule);
+                v.setLength(vModule*TestLevel01.this.getTimeFactor());
                 level.addFraction(
                         level.getFraction(0).divide(TestLevel01.this.getFraction(0).getBody().getMass() * 0.125f, v.x, v.y)
                 );
