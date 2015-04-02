@@ -112,7 +112,8 @@ public class LevelScreen implements Screen {
     public void show() {
         this.box2DDebugRenderer = new Box2DDebugRenderer(true,true,false,true,true,true);
         //this.camera=new OrthographicCamera(level.getWidth(),level.getWidth()*camera.viewportHeight/camera.viewportWidth);
-        this.camera=new OrthographicCamera(20f,20f*camera.viewportHeight/camera.viewportWidth);
+        //this.camera=new OrthographicCamera(20f,20f*camera.viewportHeight/camera.viewportWidth);
+        this.camera=new OrthographicCamera(level.getWidth(),level.getWidth()*camera.viewportHeight/camera.viewportWidth);
         //this.particlesStage=new Stage();
         this.particlesStage.getViewport().setCamera(camera);
         //this.bordersStage=new Stage();

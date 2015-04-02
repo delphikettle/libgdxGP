@@ -226,7 +226,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	private float lostTime=0.0f;
 	private void Move(float time){
 		this.proceed(time);
-		world.step(1/16f,8,8);
+		world.step(1/16f,10,10);
 		 ///if(time!=0.0f) {
 		//	 System.out.println(((double)(time)));
 		 //}
@@ -269,10 +269,13 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 					//this.Move(this.getNextStepTime());
 					try {
 						if(!this.actions.isEmpty()){
+							System.out.println("!!! "+this.actions.size());
                             this.actions.pop().doSomethingOnStep(this);
                         }
-					} catch (NoSuchElementException e) {
+					} catch (Exception e) {
 						e.printStackTrace();
+						this.actions.poll().doSomethingOnStep(this);
+						System.out.println("!!! "+this.actions.size());
 					}
 				}
 			}

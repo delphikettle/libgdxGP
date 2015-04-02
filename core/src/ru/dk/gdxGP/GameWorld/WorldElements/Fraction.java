@@ -20,7 +20,7 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
     }
 
     private Condition condition;
-    private Body body;
+    private final Body body;
     private static TextureRegion textureRegionFractionSolid;
     private static TextureRegion textureRegionCharge;
     private static TextureRegion textureRegionNullCharge;
@@ -138,6 +138,7 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
 
     @Override
     public void drawFraction(Fraction fraction, Batch batch,Color parentColor) {
+        if(fraction.body.getFixtureList().size==0)return;
         float r=fraction.body.getFixtureList().get(0).getShape().getRadius();
         //batch.draw(fraction.textureRegionFractionSolid, fraction.body.getPosition().x - 1.0f*r, fraction.body.getPosition().y - 1.0f*r ,r,r,r*2.0f, r*2.0f,1,1, MathUtils.radiansToDegrees* fraction.getBody().getAngle());
         switch (fraction.condition){
@@ -228,13 +229,23 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
         MassData newMassData = new MassData();
         newMassData.mass=newMass;
         newMassData.center.set(newR, newR);
-        this.body.resetMassData();
         System.out.println("mass before " + this.getMass() + " with density" + this.getDensity() + " to mass " + newMass);
+
+        Fixture oldFixture=this.body.getFixtureList().get(0);
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.density=oldFixture.getDensity();
+        fixtureDef.friction=oldFixture.getFriction();
+        fixtureDef.shape=oldFixture.getShape();
+        fixtureDef.shape.setRadius(newR);
+        fixtureDef.restitution=oldFixture.getRestitution();
+        fixtureDef.isSensor=oldFixture.isSensor();
+        synchronized (this.body) {
+            this.body.createFixture(fixtureDef);
+            this.body.destroyFixture(oldFixture);
+        }
         this.body.setMassData(newMassData);
+        //this.body.getFixtureList().get(0).getShape().setRadius(newR);
         System.out.println("mass after setting " + this.getMass() + " with density" + this.getDensity());
-        this.body.resetMassData();
-        System.out.println("mass after resetting " + this.getMass() +" with density"+this.getDensity() );
-        this.body.getFixtureList().get(0).getShape().setRadius(newR);
         return newR;
     }
     @Override
