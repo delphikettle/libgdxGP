@@ -57,10 +57,10 @@ public class Border extends Actor {
             chainShape.getVertex(2,vector2);
             xMax=vector2.x;
             yMax=vector2.y;
-            batch.draw(textureRegion, xMin-5, yMin-5, xMax - xMin+10, 10);
-            batch.draw(textureRegion,xMin-5,yMin-5,10,yMax-yMin+10);
-            batch.draw(textureRegion,xMin-5,yMax-5,xMax-xMin+10,10);
-            batch.draw(textureRegion,xMax-5,yMin-5,10,yMax-yMin+10);
+            batch.draw(textureRegion, xMin-1, yMin-1, xMax - xMin+2, 2);
+            batch.draw(textureRegion,xMin-1,yMin-1,2,yMax-yMin+2);
+            batch.draw(textureRegion,xMin-1,yMax-1,xMax-xMin+2,2);
+            batch.draw(textureRegion,xMax-1,yMin-1,2,yMax-yMin+2);
         }
     }
 }

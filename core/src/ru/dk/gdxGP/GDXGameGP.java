@@ -66,7 +66,7 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 				if(!((LogoScreen) screen).isActive()){
 					this.state=State.loading;
 					final Level level= GameLevels.instantiateLevel(GameLevels.LEVELS,levelName);
-					final LevelScreen levelScreen=new LevelScreen(level,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+					final LevelScreen levelScreen=new LevelScreen(level,0.1f*Gdx.graphics.getWidth(),0.1f*Gdx.graphics.getHeight());
 					this.screen=new LoadingScreen((LogoScreen) screen, new LoadingScreen.LoaderForLoadingScreen() {
 
 						@Override

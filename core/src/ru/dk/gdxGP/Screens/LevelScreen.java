@@ -1,8 +1,11 @@
 package ru.dk.gdxGP.Screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
@@ -10,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import ru.dk.gdxGP.GameWorld.WorldElements.Border;
 import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
 import ru.dk.gdxGP.GameWorld.Level;
@@ -33,12 +37,14 @@ public class LevelScreen implements Screen {
     private Level level;
     public LevelScreen(Level level,float w, float h){
         this.level=level;
-        this.box2DDebugRenderer = new Box2DDebugRenderer();
-        this.camera=new OrthographicCamera(w,h);
+        this.box2DDebugRenderer = new Box2DDebugRenderer(true,true,false,true,true,true);
+        this.camera=new OrthographicCamera(level.getWidth(),level.getWidth()*h/w);
         this.particlesStage=new Stage();
         this.particlesStage.getViewport().setCamera(camera);
-        this.bordersStage=new Stage(this.particlesStage.getViewport(),this.particlesStage.getBatch());
-        this.othersStage =new Stage(this.particlesStage.getViewport(),this.particlesStage.getBatch());
+        this.bordersStage=new Stage();
+        this.bordersStage.getViewport().setCamera(camera);
+        this.othersStage =new Stage();
+        this.othersStage.getViewport().setCamera(camera);
         this.startColor=this.particlesStage.getBatch().getColor();
     }
 
@@ -103,7 +109,15 @@ public class LevelScreen implements Screen {
     }
     @Override
     public void show() {
-
+        this.box2DDebugRenderer = new Box2DDebugRenderer(true,true,false,true,true,true);
+        this.camera=new OrthographicCamera(level.getWidth(),level.getWidth()*camera.viewportHeight/camera.viewportWidth);
+        //this.particlesStage=new Stage();
+        this.particlesStage.getViewport().setCamera(camera);
+        //this.bordersStage=new Stage();
+        this.bordersStage.getViewport().setCamera(camera);
+        //this.othersStage =new Stage();
+        this.othersStage.getViewport().setCamera(camera);
+        this.startColor=this.particlesStage.getBatch().getColor();
     }
 
     @Override
@@ -115,7 +129,7 @@ public class LevelScreen implements Screen {
         this.level.render(delta);
         this.particlesStage.getBatch().setColor(startColor);
         this.level.afterRender();
-        //box2DDebugRenderer.render(this.level.getWorld(), camera.combined);
+        box2DDebugRenderer.render(this.level.getWorld(), camera.combined);
     }
     public boolean zoom(float initialDistance, float distance) {
 
@@ -124,7 +138,7 @@ public class LevelScreen implements Screen {
         return true;
     }
     public void drag(float dx,float dy){
-        this.camera.position.add(dx*getCameraZoom(),dy*getCameraZoom(),0);
+        this.camera.position.add(dx*camera.viewportWidth/ Gdx.graphics.getWidth(),dy*camera.viewportHeight/Gdx.graphics.getHeight(),0);
     }
 
     public Batch getBatch(){
@@ -132,16 +146,19 @@ public class LevelScreen implements Screen {
     }
     @Override
     public void resize(int width, int height) {
-        this.camera=new OrthographicCamera(width, height);
+        /*
+        this.camera=new OrthographicCamera(0.1f*width,0.1f* height);
         this.camera.zoom=zoom;
         particlesStage.getViewport().setCamera(camera);
         bordersStage.getViewport().setCamera(camera);
         othersStage.getViewport().setCamera(camera);
+        */
     }
 
     public void tap(float screenX,float screenY){
         Vector3 tapCoords=this.camera.unproject(new Vector3(screenX, screenY, 0));
         this.level.tap(tapCoords.x,tapCoords.y);
+        System.out.println(camera.viewportWidth+" "+camera.viewportHeight);
     }
 
     public float getCameraZoom(){

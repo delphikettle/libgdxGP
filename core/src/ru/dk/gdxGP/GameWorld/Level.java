@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Timer;
 import ru.dk.gdxGP.GDXGameGP;
 import ru.dk.gdxGP.GameWorld.WorldElements.Border;
 import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
@@ -13,6 +14,7 @@ import ru.dk.gdxGP.Screens.LevelScreen;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 
 public abstract class Level extends Thread implements Runnable,ContactListener
@@ -24,7 +26,8 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	private LevelScreen levelScreen;
 	private float prevAccelX;
 	private float prevAccelY;
-	private LinkedList<ActionForNextStep> actions;
+	private final LinkedList<ActionForNextStep> actions;
+	private Timer stepTimer;
 	private int xMin, xMax, yMin, yMax;
 	private float G=1;
 	private float k=1;
@@ -45,6 +48,19 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		yMax = Gdx.graphics.getHeight();
 		this.isMove=true;
 		//this.setDaemon(true);
+		this.stepTimer=new Timer();
+		this.stepTimer.scheduleTask(new Timer.Task() {
+			@Override
+			public void run() {
+				Level.this.addAction(new ActionForNextStep() {
+					@Override
+					public void doSomethingOnStep(Level level) {
+						Level.this.Move(16);
+					}
+				});
+			}
+		}, 0,32/1000f);
+		this.stepTimer.start();
 	}
 
 	abstract public void setCameraPosition();
@@ -70,9 +86,11 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		//this.levelScreen.proceed(deltaTime);
 		processAccelerometer();
 		interactAllWithAllFractions();
+		/*
 		if(this.actions.size()>0){
 			this.actions.pop().doSomethingOnStep(this);
 		}
+		*/
 	}
 
 	public final void load(final LevelScreen screen){
@@ -207,6 +225,8 @@ public abstract class Level extends Thread implements Runnable,ContactListener
     */
 	private float lostTime=0.0f;
 	private void Move(float time){
+		this.proceed(time);
+		world.step(time/60f,10,10);
 		 ///if(time!=0.0f) {
 		//	 System.out.println(((double)(time)));
 		 //}
@@ -217,7 +237,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 			 this.proceed(lastTime);
 			 world.step(lastTime/60.0f, 10, 10);
 		 }*/
-
+		/*
 		float stepTime=time+lostTime;
 		int normalStepTime=(int)stepTime;
 		lostTime=stepTime-(float)normalStepTime;
@@ -225,6 +245,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		for (int i = 0; i < normalStepTime; i++) {
 			world.step(1 / 60f, 10, 10);
 		}
+		*/
 		//if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024))System.out.println(time);
 
 		//this.proceed(time);
@@ -245,13 +266,22 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 			if (isMove) {
 				if(this.getLoaded()>=1.0f) {
 					//if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024))System.out.println(getNextStepTime());
-					this.Move(this.getNextStepTime());
+					//this.Move(this.getNextStepTime());
+					try {
+						if(!this.actions.isEmpty()){
+                            this.actions.pop().doSomethingOnStep(this);
+                        }
+					} catch (NoSuchElementException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}
 	}
-	public final void addAction(ActionForNextStep action){
-		this.actions.add(action);
+	public synchronized final void addAction(ActionForNextStep action){
+		synchronized (this.actions) {
+			this.actions.add(action);
+		}
 	}
 	public float getK() {
 		return k;
@@ -270,6 +300,12 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	}
 	final public float setTimeFactor(float newTimeFactor){
 		return newTimeFactor > 0 ? (this.timeFactor = newTimeFactor) : this.timeFactor;
+	}
+	public int getWidth(){
+		return getXMax()-getXMin();
+	}
+	public int getHeight(){
+		return getYMax()-getYMin();
 	}
 	final public int getXMin(){
 		return this.xMin;
@@ -316,10 +352,13 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	public void pauseLevel(){
 		this.isMove=false;
 		currentRealTime=System.currentTimeMillis();
+		this.stepTimer.stop();
+
 	}
 	public void resumeLevel(){
 		currentRealTime=System.currentTimeMillis();
 		this.isMove=true;
+		this.stepTimer.start();
 	}
     @Override
     public void endContact(Contact contact) {
@@ -355,7 +394,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		if (prevAccelX != x || prevAccelY != y) {
 
 			/* Negative on the x axis but not in the y */
-			world.setGravity(new Vector2(10.0f/this.timeFactor*y, -10.0f/this.timeFactor*x));
+			world.setGravity(new Vector2(y, -x));
 
 			/* Store new accelerometer values */
 			prevAccelX = x;
@@ -363,12 +402,14 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		}
 	}
 
-	Vector2 buf=new Vector2();
+	private Vector2 buf=new Vector2(),d=new Vector2();
 
 
 	public void interactionBetweenFractions(Fraction f1,Fraction f2){
-		float F=  ( ((-this.k*f1.getCharge()*f2.getCharge()+this.G)*f1.getBody().getMass()*f2.getBody().getMass())
-                        /((f1.getBody().getPosition().x - f2.getBody().getPosition().x)*(f1.getBody().getPosition().x - f2.getBody().getPosition().x)+(f1.getBody().getPosition().y - f2.getBody().getPosition().y)*(f1.getBody().getPosition().y - f2.getBody().getPosition().y)));
+		d.set(f2.getBody().getPosition());
+		d.add(-f1.getBody().getPosition().x,-f1.getBody().getPosition().y);
+		float F=  ( ((-this.k*f1.getCharge()*f2.getCharge()+this.G)*f1.getBody().getMass()*f2.getBody().getMass())/(d.len()*d.len()));
+                        ///((f1.getBody().getPosition().x - f2.getBody().getPosition().x)*(f1.getBody().getPosition().x - f2.getBody().getPosition().x)+(f1.getBody().getPosition().y - f2.getBody().getPosition().y)*(f1.getBody().getPosition().y - f2.getBody().getPosition().y)));
 		buf.set(f2.getBody().getPosition().x-f1.getBody().getPosition().x,f2.getBody().getPosition().y-f1.getBody().getPosition().y);
 		buf.setLength(F);
 		if(F<0)buf.rotate(180);

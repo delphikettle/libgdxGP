@@ -14,9 +14,9 @@ import java.util.Random;
 public class TestLevel01 extends Level {
     public TestLevel01() {
         super();
-        this.setTimeFactor(0.1f);
-        this.setG(-1);
-        this.setK(1);
+        this.setTimeFactor(1f);
+        this.setG(0);
+        this.setK(1f);
     }
 
     @Override
@@ -46,8 +46,8 @@ public class TestLevel01 extends Level {
     public void setSizes() {
         setYMin(0);
         setXMin(0);
-        //setXMax(800);
-        //setYMax(800);
+        setXMax((int) (getXMax()*0.1f));
+        setYMax((int) (getYMax()*0.1f));
     }
 
 
@@ -68,7 +68,7 @@ public class TestLevel01 extends Level {
                     (rnd.nextInt(this.getXMax() - this.getXMin()) + this.getXMin()),
                     (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()),
                     (rnd.nextInt(200) - 100) * 0f, (rnd.nextInt(200) - 100) * 0f,
-                    (rnd.nextInt(2500) + 400) * 2.0f, (float)(Math.pow(-1,i)*MathUtils.random(0f, 1f)), 1, 1, 1, Fraction.Condition.Liquid,
+                    (rnd.nextInt(2500) + 400) * 0.04f, (float)(Math.pow(-1,i)*MathUtils.random(0f, 1f)), 1, 1, 1, Fraction.Condition.Liquid,
                     new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f)))).getBody());
             if(MathUtils.random.nextBoolean())((Fraction)bodies.get(i).getUserData()).setCondition(Fraction.Condition.Liquid);
             /*for (int j = 0; j < bodies.size(); j++) {
@@ -106,16 +106,17 @@ public class TestLevel01 extends Level {
             @Override
             public void doSomethingOnStep(Level level) {
                 Random rnd = new Random();
-                float vModule=1000;
+                float vModule=10;
                 Vector2 v=new Vector2(TestLevel01.this.getFraction(0).getBody().getPosition());
                 v.rotate(180);
                 v.add(x,y);
-                v.setLength(vModule*TestLevel01.this.getTimeFactor());
+                v.setLength(vModule);
                 level.addFraction(
                         level.getFraction(0).divide(TestLevel01.this.getFraction(0).getBody().getMass() * 0.125f, v.x, v.y)
                 );
 
             }
         });
+        System.out.println("tap "+x+" "+y);
     }
 }
