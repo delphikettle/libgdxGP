@@ -226,7 +226,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	private float lostTime=0.0f;
 	private void Move(float time){
 		this.proceed(time);
-		world.step(time/60f,10,10);
+		world.step(1/16f,8,8);
 		 ///if(time!=0.0f) {
 		//	 System.out.println(((double)(time)));
 		 //}

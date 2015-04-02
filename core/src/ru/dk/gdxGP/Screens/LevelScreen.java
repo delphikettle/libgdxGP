@@ -38,7 +38,8 @@ public class LevelScreen implements Screen {
     public LevelScreen(Level level,float w, float h){
         this.level=level;
         this.box2DDebugRenderer = new Box2DDebugRenderer(true,true,false,true,true,true);
-        this.camera=new OrthographicCamera(level.getWidth(),level.getWidth()*h/w);
+        //this.camera=new OrthographicCamera(level.getWidth(),level.getWidth()*h/w);
+        this.camera=new OrthographicCamera(1f,1f*h/w);
         this.particlesStage=new Stage();
         this.particlesStage.getViewport().setCamera(camera);
         this.bordersStage=new Stage();
@@ -110,7 +111,8 @@ public class LevelScreen implements Screen {
     @Override
     public void show() {
         this.box2DDebugRenderer = new Box2DDebugRenderer(true,true,false,true,true,true);
-        this.camera=new OrthographicCamera(level.getWidth(),level.getWidth()*camera.viewportHeight/camera.viewportWidth);
+        //this.camera=new OrthographicCamera(level.getWidth(),level.getWidth()*camera.viewportHeight/camera.viewportWidth);
+        this.camera=new OrthographicCamera(20f,20f*camera.viewportHeight/camera.viewportWidth);
         //this.particlesStage=new Stage();
         this.particlesStage.getViewport().setCamera(camera);
         //this.bordersStage=new Stage();
@@ -134,11 +136,11 @@ public class LevelScreen implements Screen {
     public boolean zoom(float initialDistance, float distance) {
 
         //Clamp range and set zoom
-        this.zoom = MathUtils.clamp(initialScale * initialDistance / distance, 0.1f, 10.0f);
+        this.zoom = MathUtils.clamp(initialScale * initialDistance / distance, 0.001f, 1000.0f);
         return true;
     }
     public void drag(float dx,float dy){
-        this.camera.position.add(dx*camera.viewportWidth/ Gdx.graphics.getWidth(),dy*camera.viewportHeight/Gdx.graphics.getHeight(),0);
+        this.camera.position.add(dx*camera.viewportWidth/ Gdx.graphics.getWidth()*zoom,dy*camera.viewportHeight/Gdx.graphics.getHeight()*zoom,0);
     }
 
     public Batch getBatch(){
@@ -158,7 +160,8 @@ public class LevelScreen implements Screen {
     public void tap(float screenX,float screenY){
         Vector3 tapCoords=this.camera.unproject(new Vector3(screenX, screenY, 0));
         this.level.tap(tapCoords.x,tapCoords.y);
-        System.out.println(camera.viewportWidth+" "+camera.viewportHeight);
+        System.out.println("camera   "+camera.viewportWidth+" "+camera.viewportHeight+" with zoom "+camera.zoom);
+        System.out.println("viewport "+this.particlesStage.getViewport().getScreenWidth()+" "+this.particlesStage.getViewport().getScreenHeight());
     }
 
     public float getCameraZoom(){

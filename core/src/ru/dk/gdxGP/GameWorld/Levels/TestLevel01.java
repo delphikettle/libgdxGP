@@ -106,7 +106,7 @@ public class TestLevel01 extends Level {
             @Override
             public void doSomethingOnStep(Level level) {
                 Random rnd = new Random();
-                float vModule=10;
+                float vModule=16;
                 Vector2 v=new Vector2(TestLevel01.this.getFraction(0).getBody().getPosition());
                 v.rotate(180);
                 v.add(x,y);
@@ -117,6 +117,6 @@ public class TestLevel01 extends Level {
 
             }
         });
-        System.out.println("tap "+x+" "+y);
+        //System.out.println("tap "+x+" "+y);
     }
 }
