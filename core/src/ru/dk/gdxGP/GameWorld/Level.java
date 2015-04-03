@@ -269,7 +269,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 					//this.Move(this.getNextStepTime());
 					try {
 						if(!this.actions.isEmpty()){
-							System.out.println("!!! "+this.actions.size());
+							//System.out.println("!!! "+this.actions.size());
                             this.actions.pop().doSomethingOnStep(this);
                         }
 					} catch (Exception e) {

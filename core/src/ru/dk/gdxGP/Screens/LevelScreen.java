@@ -161,8 +161,8 @@ public class LevelScreen implements Screen {
     public void tap(float screenX,float screenY){
         Vector3 tapCoords=this.camera.unproject(new Vector3(screenX, screenY, 0));
         this.level.tap(tapCoords.x,tapCoords.y);
-        System.out.println("camera   "+camera.viewportWidth+" "+camera.viewportHeight+" with zoom "+camera.zoom);
-        System.out.println("viewport "+this.particlesStage.getViewport().getScreenWidth()+" "+this.particlesStage.getViewport().getScreenHeight());
+        //System.out.println("camera   "+camera.viewportWidth+" "+camera.viewportHeight+" with zoom "+camera.zoom);
+        //System.out.println("viewport "+this.particlesStage.getViewport().getScreenWidth()+" "+this.particlesStage.getViewport().getScreenHeight());
     }
 
     public float getCameraZoom(){

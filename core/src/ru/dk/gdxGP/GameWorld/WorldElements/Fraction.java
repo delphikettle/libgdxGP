@@ -230,7 +230,7 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
         newMassData.mass=newMass;
         newMassData.center.set(newR, newR);
         System.out.println("mass before " + this.getMass() + " with density" + this.getDensity() + " to mass " + newMass);
-
+        this.body.setMassData(newMassData);
         Fixture oldFixture=this.body.getFixtureList().get(0);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.density=oldFixture.getDensity();
@@ -243,7 +243,6 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
             this.body.createFixture(fixtureDef);
             this.body.destroyFixture(oldFixture);
         }
-        this.body.setMassData(newMassData);
         //this.body.getFixtureList().get(0).getShape().setRadius(newR);
         System.out.println("mass after setting " + this.getMass() + " with density" + this.getDensity());
         return newR;
