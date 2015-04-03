@@ -110,7 +110,7 @@ public class LevelScreen implements Screen {
     }
     @Override
     public void show() {
-        this.box2DDebugRenderer = new Box2DDebugRenderer(true,true,false,true,true,true);
+        this.box2DDebugRenderer = new Box2DDebugRenderer(true,true,false,true,false,true);
         //this.camera=new OrthographicCamera(level.getWidth(),level.getWidth()*camera.viewportHeight/camera.viewportWidth);
         //this.camera=new OrthographicCamera(20f,20f*camera.viewportHeight/camera.viewportWidth);
         this.camera=new OrthographicCamera(level.getWidth(),level.getWidth()*camera.viewportHeight/camera.viewportWidth);

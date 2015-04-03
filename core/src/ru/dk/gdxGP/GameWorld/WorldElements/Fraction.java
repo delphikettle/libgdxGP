@@ -148,15 +148,15 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
                 if (fraction.getCharge() > 0) batch.setColor(1, 0, 0, 0.25f);
                 else batch.setColor(0, 0, 1, 0.25f);
                 float r1 = r * (1 + Math.abs(fraction.charge * 2f));
-                if (!(fraction.charge <= 0.1f && fraction.charge >= -0.1f))
+                //if (!(fraction.charge <= 0.1f && fraction.charge >= -0.1f))
                     batch.draw(textureRegionCharge, fraction.body.getPosition().x - 1.0f * r1, fraction.body.getPosition().y - 1.0f * r1, r1, r1, r1 * 2.0f, r1 * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
                 float r2 = r * 0.5f;
                 batch.setColor(parentColor);
-                if (fraction.charge > 0.25f)
+                if (fraction.charge > 0.125f)
                     batch.draw(textureRegionPlusCharge, fraction.body.getPosition().x - 1.0f * r2, fraction.body.getPosition().y - 1.0f * r2, r2 * 2.0f, r2 * 2.0f);
-                if (fraction.charge < -0.25f)
+                if (fraction.charge < -0.125f)
                     batch.draw(textureRegionMinusCharge, fraction.body.getPosition().x - 1.0f * r2, fraction.body.getPosition().y - 1.0f * r2, r2 * 2.0f, r2 * 2.0f);
-                if (fraction.charge <= 0.25f && fraction.charge >= -0.25f)
+                if (fraction.charge <= 0.125f && fraction.charge >= -0.125f)
                     batch.draw(textureRegionNullCharge, fraction.body.getPosition().x - 1.0f * r2, fraction.body.getPosition().y - 1.0f * r2, r2 * 2.0f, r2 * 2.0f);
                 break;
             }

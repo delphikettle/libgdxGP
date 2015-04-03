@@ -46,8 +46,8 @@ public class TestLevel01 extends Level {
     public void setSizes() {
         setYMin(0);
         setXMin(0);
-        setXMax((int) (getXMax()*0.1f));
-        setYMax((int) (getYMax()*0.1f));
+        setXMax((int) (getXMax()*0.01f));
+        setYMax((int) (getYMax()*0.01f));
     }
 
 
@@ -60,15 +60,21 @@ public class TestLevel01 extends Level {
                 (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()),
                 (rnd.nextInt(200) - 100), (rnd.nextInt(200) - 100),
                 (rnd.nextInt(10000) + 81) * 0.00025f)).getBody());*/
+        this.addFraction(new Fraction(this.getWorld(),
+                (rnd.nextInt(this.getXMax() - this.getXMin()) + this.getXMin()),
+                (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()),
+                (rnd.nextInt(200) - 100) * 0f, (rnd.nextInt(200) - 100) * 0f,
+                (rnd.nextInt(2500) + 400) * 0.01f, (float)(MathUtils.random(-1f, 1f)), 1, 1, 1, Fraction.Condition.Liquid,
+                new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f))));
         for (int i = 0;
-             i < 5/*Gdx.graphics.getHeight()*Gdx.graphics.getWidth()/(50000)*/;
+             i < 25/*Gdx.graphics.getHeight()*Gdx.graphics.getWidth()/(50000)*/;
              i++) {
 
             bodies.add(this.addFraction(new Fraction(this.getWorld(),
                     (rnd.nextInt(this.getXMax() - this.getXMin()) + this.getXMin()),
                     (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()),
                     (rnd.nextInt(200) - 100) * 0f, (rnd.nextInt(200) - 100) * 0f,
-                    (rnd.nextInt(2500) + 400) * 0.04f, (float)(Math.pow(-1,i)*MathUtils.random(0f, 1f)), 1, 1, 1, Fraction.Condition.Liquid,
+                    (rnd.nextInt(2500) + 400) * 0.0001f, (float)(Math.pow(-1,i)*MathUtils.random(0f, 1f)), 1, 1, 1, Fraction.Condition.Liquid,
                     new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f)))).getBody());
             if(MathUtils.random.nextBoolean())((Fraction)bodies.get(i).getUserData()).setCondition(Fraction.Condition.Liquid);
             /*for (int j = 0; j < bodies.size(); j++) {
@@ -106,7 +112,7 @@ public class TestLevel01 extends Level {
             @Override
             public void doSomethingOnStep(Level level) {
                 Random rnd = new Random();
-                float vModule=16;
+                float vModule=1;
                 Vector2 v=new Vector2(TestLevel01.this.getFraction(0).getBody().getPosition());
                 v.rotate(180);
                 v.add(x,y);

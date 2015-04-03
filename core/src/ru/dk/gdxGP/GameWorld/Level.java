@@ -362,6 +362,17 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		currentRealTime=System.currentTimeMillis();
 		this.isMove=true;
 		this.stepTimer.start();
+		this.stepTimer.scheduleTask(new Timer.Task() {
+			@Override
+			public void run() {
+				Level.this.addAction(new ActionForNextStep() {
+					@Override
+					public void doSomethingOnStep(Level level) {
+						Level.this.Move(16);
+					}
+				});
+			}
+		}, 0,32/1000f);
 	}
     @Override
     public void endContact(Contact contact) {
@@ -465,7 +476,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 			@Override
 			public void doSomethingOnStep(Level level) {
 				try {
-					finalFrom.moveParameters(finalTo, 0, 0, 0, new Vector2(0, 0));
+					finalFrom.moveParameters(finalTo, mass, 0, 0, new Vector2(0, 0));
 				} catch (Fraction.NullMassException e) {
 					Level.this.removeFraction(e.getFraction());
 				}
