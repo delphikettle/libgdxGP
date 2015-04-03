@@ -372,7 +372,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 					}
 				});
 			}
-		}, 0,32/1000f);
+		}, 0, 32 / 1000f);
 	}
     @Override
     public void endContact(Contact contact) {
@@ -435,13 +435,13 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 				/((f1.getBody().getPosition().x - f2.getBody().getPosition().x)*(f1.getBody().getPosition().x - f2.getBody().getPosition().x)
 				+(f1.getBody().getPosition().y - f2.getBody().getPosition().y)*(f1.getBody().getPosition().y - f2.getBody().getPosition().y));
 		//if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024))System.out.println(deltaCharge);
-		/*
+
 		try {
 			f1.moveParameters(f2,0,deltaCharge,0,new Vector2(0,0));
 		} catch (Fraction.NullMassException e) {
+			System.out.println("NullException "+e.toString());
 			this.removeFraction(e.getFraction());
 		}
-		*/
 	}
 
 	public void interactAllWithAllFractions(){

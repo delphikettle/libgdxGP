@@ -208,10 +208,12 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
             this.charge-=charge*to.getMass()/this.getMass();
             this.body.applyLinearImpulse(-velocity.x*to.getMass(),-velocity.y*to.getMass(),getMassCenter().x,getMassCenter().y,true);
             to.body.applyLinearImpulse(velocity.x,velocity.y,to.getMassCenter().x,to.getMassCenter().y,true);
-            this.body.getFixtureList().get(0).setDensity(this.getDensity()-density*to.getMass()/this.getMass());
-            to.body.getFixtureList().get(0).setDensity(to.getDensity()+density);
-            this.recountRadius(this.getMass());
-            to.recountRadius(to.getMass());
+            if(density!=0){
+                this.body.getFixtureList().get(0).setDensity(this.getDensity()-density*to.getMass()/this.getMass());
+                to.body.getFixtureList().get(0).setDensity(to.getDensity()+density);
+                this.recountRadius(this.getMass());
+                to.recountRadius(to.getMass());
+            }
         }else{
             if(this.getMass()-mass<=0)throw new NullMassException(this);
             if(to.getMass()+mass<=0)throw new NullMassException(to);

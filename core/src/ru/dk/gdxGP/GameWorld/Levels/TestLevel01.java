@@ -64,7 +64,7 @@ public class TestLevel01 extends Level {
                 (rnd.nextInt(this.getXMax() - this.getXMin()) + this.getXMin()),
                 (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()),
                 (rnd.nextInt(200) - 100) * 0f, (rnd.nextInt(200) - 100) * 0f,
-                (rnd.nextInt(2500) + 400) * 0.01f, (float)(MathUtils.random(-1f, 1f)), 1, 1, 1, Fraction.Condition.Liquid,
+                (rnd.nextInt(2500) + 400) * 0.005f, (float)(MathUtils.random(-1f, 1f)), 1, 1, 1, Fraction.Condition.Liquid,
                 new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f))));
         for (int i = 0;
              i < 25/*Gdx.graphics.getHeight()*Gdx.graphics.getWidth()/(50000)*/;
