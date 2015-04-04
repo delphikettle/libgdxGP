@@ -1,21 +1,28 @@
 package ru.dk.gdxGP.GameWorld;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 /**
  * Created by Андрей on 11.01.2015.
  */
 public abstract class Task extends Throwable {
-    boolean isEnded=false;
-
+    private boolean isAchieved =false,once;
+    private String taskText;
     public Task(){
-        isEnded=false;
+        this(true,"");
     }
-    public final boolean isEnded(){
-        if(!isEnded)isEnded=check();
-        return isEnded;
+    protected Task(boolean once, String taskText){
+        this.once = once;
+        this.taskText = taskText;
+    }
+    public final boolean isAchieved(){
+        //if(!isAchieved) isAchieved =check();
+        if(once){
+            if (!isAchieved){
+                isAchieved=check();
+            }
+        }else{
+            isAchieved=check();
+        }
+        return isAchieved;
     }
     public abstract boolean check();
-
 }

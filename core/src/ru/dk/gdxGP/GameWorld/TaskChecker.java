@@ -16,7 +16,6 @@ public class TaskChecker extends Timer {
         this.task=task;
         this.period=period;
         this.schedule(new TimerTask() {
-
             @Override
             public void run() {
 

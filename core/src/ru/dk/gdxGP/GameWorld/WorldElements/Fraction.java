@@ -99,6 +99,11 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
     public Vector2 getMassCenter(){
         return this.body.getWorldCenter();
     }
+    @Override
+    public Color getColor() {
+        return color;
+    }
+
     public void setCharge(float charge) {
         this.charge = charge;
     }
@@ -147,7 +152,7 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
                 batch.draw(textureRegionFractionSolid, fraction.body.getPosition().x - 1.0f * r, fraction.body.getPosition().y - 1.0f * r, r, r, r * 2.0f, r * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
                 if (fraction.getCharge() > 0) batch.setColor(1, 0, 0, 0.25f);
                 else batch.setColor(0, 0, 1, 0.25f);
-                float r1 = r * (1 + Math.abs(fraction.charge * 2f));
+                float r1 = (float) (r * (1 + Math.abs(Math.sqrt(fraction.charge) * 2f)));
                 //if (!(fraction.charge <= 0.1f && fraction.charge >= -0.1f))
                     batch.draw(textureRegionCharge, fraction.body.getPosition().x - 1.0f * r1, fraction.body.getPosition().y - 1.0f * r1, r1, r1, r1 * 2.0f, r1 * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
                 float r2 = r * 0.5f;
@@ -195,10 +200,10 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
         System.out.println("Fraction that was divided:" + this.toString());
         //creating new Fraction
         Vector2 coords=new Vector2(vx,vy);
-        coords.setLength((float) (r+Math.sqrt(mass / Math.PI / getDensity())));
-        coords.add(this.body.getPosition().x,this.body.getPosition().y);
+        coords.setLength((float) (r + Math.sqrt(mass / Math.PI / getDensity())));
+        coords.add(this.body.getPosition().x, this.body.getPosition().y);
         Fraction fNew = new Fraction(this.body.getWorld(),coords.x,coords.y,vx,vy,mass,
-                this.getCharge(),this.getFriction(),this.getDensity(),this.getRestitution(),getCondition(),getColor());
+                this.getCharge(),this.getFriction(),this.getDensity(),this.getRestitution(),this.getCondition(),this.getColor());
         System.out.println("Division ended with new Fraction:"+((fNew!=null)?fNew.toString():""));
         return fNew;
     }

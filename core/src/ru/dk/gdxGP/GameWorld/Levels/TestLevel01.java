@@ -15,8 +15,8 @@ public class TestLevel01 extends Level {
     public TestLevel01() {
         super();
         this.setTimeFactor(1f);
-        this.setG(0);
-        this.setK(10f);
+        this.setG(10);
+        this.setK(100f);
     }
 
     @Override
@@ -64,17 +64,17 @@ public class TestLevel01 extends Level {
                 (rnd.nextInt(this.getXMax() - this.getXMin()) + this.getXMin()),
                 (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()),
                 (rnd.nextInt(200) - 100) * 0f, (rnd.nextInt(200) - 100) * 0f,
-                (rnd.nextInt(2500) + 400) * 0.005f, (float)(MathUtils.random(-1f, 1f)), 1, 1, 1, Fraction.Condition.Liquid,
+                (rnd.nextInt(2500) + 400) * 0.0005f, (float)(MathUtils.random(-0.1f, 0.1f)), 1, 1, 1, Fraction.Condition.Liquid,
                 new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f))));
         for (int i = 0;
-             i < 25/*Gdx.graphics.getHeight()*Gdx.graphics.getWidth()/(50000)*/;
+             i < 50/*Gdx.graphics.getHeight()*Gdx.graphics.getWidth()/(50000)*/;
              i++) {
 
             bodies.add(this.addFraction(new Fraction(this.getWorld(),
                     (rnd.nextInt(this.getXMax() - this.getXMin()) + this.getXMin()),
                     (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()),
                     (rnd.nextInt(200) - 100) * 0f, (rnd.nextInt(200) - 100) * 0f,
-                    (rnd.nextInt(2500) + 400) * 0.0001f, (float)(Math.pow(-1,i)*MathUtils.random(0f, 1f)), 1, 1, 1, Fraction.Condition.Liquid,
+                    (rnd.nextInt(2500) + 400) * 0.00001f, (float)(Math.pow(-1,i)*MathUtils.random(0f, 2f)), 1, 1, 1, Fraction.Condition.Liquid,
                     new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f)))).getBody());
             if(MathUtils.random.nextBoolean())((Fraction)bodies.get(i).getUserData()).setCondition(Fraction.Condition.Liquid);
             /*for (int j = 0; j < bodies.size(); j++) {
@@ -112,7 +112,7 @@ public class TestLevel01 extends Level {
             @Override
             public void doSomethingOnStep(Level level) {
                 Random rnd = new Random();
-                float vModule=1;
+                float vModule=10;
                 Vector2 v=new Vector2(TestLevel01.this.getFraction(0).getBody().getPosition());
                 v.rotate(180);
                 v.add(x,y);

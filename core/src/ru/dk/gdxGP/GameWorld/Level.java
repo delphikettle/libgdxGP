@@ -36,6 +36,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	private float currentGameTime;
 	private boolean isMove=false, isEnd=false;
 	private float loaded;
+	private TaskChecker currentTaskChecker;
 	public Level() {
         this.world=new World(new Vector2(0.0f,0.0f),true);
         this.world.setContactListener(this);
@@ -226,7 +227,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	private float lostTime=0.0f;
 	private void Move(float time){
 		this.proceed(time);
-		world.step(1/16f,10,10);
+		world.step(1/60f,10,10);
 		 ///if(time!=0.0f) {
 		//	 System.out.println(((double)(time)));
 		 //}
@@ -431,17 +432,21 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		f2.getBody().applyForceToCenter(buf.rotate(180),true);
 
 		float q1=f1.getCharge(),q2=f2.getCharge(),m1=f1.getMass(),m2=f2.getMass();
-		float deltaCharge=(((q1*m1+q2*m2)/(m1+m2)+255*q2)/256-q2)
-				/((f1.getBody().getPosition().x - f2.getBody().getPosition().x)*(f1.getBody().getPosition().x - f2.getBody().getPosition().x)
-				+(f1.getBody().getPosition().y - f2.getBody().getPosition().y)*(f1.getBody().getPosition().y - f2.getBody().getPosition().y));
+		float deltaCharge=(((q1*m1+q2*m2)/(m1+m2)+255*q2)/256-q2)/(d.len()*d.len());
+				//((f1.getBody().getPosition().x - f2.getBody().getPosition().x)*(f1.getBody().getPosition().x - f2.getBody().getPosition().x)
+				//+(f1.getBody().getPosition().y - f2.getBody().getPosition().y)*(f1.getBody().getPosition().y - f2.getBody().getPosition().y));
 		//if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024))System.out.println(deltaCharge);
 
-		try {
-			f1.moveParameters(f2,0,deltaCharge,0,new Vector2(0,0));
-		} catch (Fraction.NullMassException e) {
-			System.out.println("NullException "+e.toString());
-			this.removeFraction(e.getFraction());
-		}
+
+		if(!Float.isNaN(deltaCharge)&&!Float.isInfinite(deltaCharge))
+			try {
+				//System.out.println("moving parameters with deltaCharge"+deltaCharge);
+				f1.moveParameters(f2,0,deltaCharge,0,new Vector2(0,0));
+			} catch (Fraction.NullMassException e) {
+				System.out.println("NullException "+e.toString());
+				this.removeFraction(e.getFraction());
+			}
+
 	}
 
 	public void interactAllWithAllFractions(){
