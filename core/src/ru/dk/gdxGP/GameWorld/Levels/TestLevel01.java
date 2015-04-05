@@ -15,8 +15,8 @@ public class TestLevel01 extends Level {
     public TestLevel01() {
         super();
         this.setTimeFactor(1f);
-        this.setG(10);
-        this.setK(100f);
+        this.setG(0);
+        this.setK(1f);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class TestLevel01 extends Level {
                 (rnd.nextInt(this.getXMax() - this.getXMin()) + this.getXMin()),
                 (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()),
                 (rnd.nextInt(200) - 100) * 0f, (rnd.nextInt(200) - 100) * 0f,
-                (rnd.nextInt(2500) + 400) * 0.0005f, (float)(MathUtils.random(-0.1f, 0.1f)), 1, 1, 1, Fraction.Condition.Liquid,
+                (rnd.nextInt(2500) + 400) * 0.0005f, (float)(MathUtils.random(-1f, 1f)), 1, 1, 1, Fraction.Condition.Liquid,
                 new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f))));
         for (int i = 0;
              i < 50/*Gdx.graphics.getHeight()*Gdx.graphics.getWidth()/(50000)*/;
@@ -74,7 +74,7 @@ public class TestLevel01 extends Level {
                     (rnd.nextInt(this.getXMax() - this.getXMin()) + this.getXMin()),
                     (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()),
                     (rnd.nextInt(200) - 100) * 0f, (rnd.nextInt(200) - 100) * 0f,
-                    (rnd.nextInt(2500) + 400) * 0.00001f, (float)(Math.pow(-1,i)*MathUtils.random(0f, 2f)), 1, 1, 1, Fraction.Condition.Liquid,
+                    (rnd.nextInt(2500) + 400) * 0.00001f, (float)(Math.pow(-1,i)*MathUtils.random(0f, 5f)), 1, 1, 1, Fraction.Condition.Liquid,
                     new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f)))).getBody());
             //if(MathUtils.random.nextBoolean())((Fraction)bodies.get(i).getUserData()).setCondition(Fraction.Condition.Solid);
             /*for (int j = 0; j < bodies.size(); j++) {
@@ -118,7 +118,7 @@ public class TestLevel01 extends Level {
                 v.add(x,y);
                 v.setLength(vModule);
                 level.addFraction(
-                        level.getFraction(0).divide(TestLevel01.this.getFraction(0).getBody().getMass() * 0.125f, v.x, v.y)
+                        level.getFraction(0).divide(TestLevel01.this.getFraction(0).getMass() * 0.125f, v.x, v.y)
                 );
 
             }

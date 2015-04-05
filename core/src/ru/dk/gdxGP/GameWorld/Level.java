@@ -437,7 +437,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		f2.getBody().applyForceToCenter(buf.rotate(180),true);
 
 		float q1=f1.getCharge(),q2=f2.getCharge(),m1=f1.getMass(),m2=f2.getMass();
-		float deltaCharge=(((q1*m1+q2*m2)/(m1+m2)+255*q2)/256-q2)/(d.len()*d.len());
+		float deltaCharge=(((q1*m1+q2*m2)/(m1+m2)+1024*q2)/1025-q2)/(d.len()*d.len());
 				//((f1.getBody().getPosition().x - f2.getBody().getPosition().x)*(f1.getBody().getPosition().x - f2.getBody().getPosition().x)
 				//+(f1.getBody().getPosition().y - f2.getBody().getPosition().y)*(f1.getBody().getPosition().y - f2.getBody().getPosition().y));
 		//if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024))System.out.println(deltaCharge);
@@ -466,6 +466,8 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	}
 
 	public void flowMass(Fraction f1, Fraction f2){
+		d.set(f2.getBody().getPosition());
+		d.add(-f1.getBody().getPosition().x,-f1.getBody().getPosition().y);
 		Fraction from=f1,to=f2;
 		if(f1.getMass()>f2.getMass()){
 			from=f2;
@@ -473,8 +475,9 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		}
 		System.out.println("Flowing started");
 		if(from.getMass()==to.getMass())return;
-		float d= (float) Math.sqrt(((from.getBody().getPosition().x - to.getBody().getPosition().x)*(from.getBody().getPosition().x - to.getBody().getPosition().x)
-				+(from.getBody().getPosition().y - to.getBody().getPosition().y)*(from.getBody().getPosition().y - to.getBody().getPosition().y)));
+		float d=this.d.len();
+				/*(float) Math.sqrt(((from.getBody().getPosition().x - to.getBody().getPosition().x)*(from.getBody().getPosition().x - to.getBody().getPosition().x)
+				+(from.getBody().getPosition().y - to.getBody().getPosition().y)*(from.getBody().getPosition().y - to.getBody().getPosition().y)));*/
 		System.out.println("Flowing: d = "+d+"; r1="+from.getRadius()+"; r2="+to.getRadius());
 		if(d>from.getRadius()+to.getRadius())return;
 		float a=to.getMass(),b=from.getMass();
