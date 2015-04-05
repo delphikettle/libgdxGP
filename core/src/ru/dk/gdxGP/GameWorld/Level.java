@@ -37,6 +37,13 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	private boolean isMove=false, isEnd=false;
 	private float loaded;
 	private TaskChecker currentTaskChecker;
+	private final static ActionForNextStep moveAction = new ActionForNextStep() {
+		@Override
+		public void doSomethingOnStep(Level level) {
+			level.Move(16);
+		}
+	};
+
 	public Level() {
         this.world=new World(new Vector2(0.0f,0.0f),true);
         this.world.setContactListener(this);
@@ -53,12 +60,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		this.stepTimer.scheduleTask(new Timer.Task() {
 			@Override
 			public void run() {
-				Level.this.addAction(new ActionForNextStep() {
-					@Override
-					public void doSomethingOnStep(Level level) {
-						Level.this.Move(16);
-					}
-				});
+				Level.this.addAction(moveAction);
 			}
 		}, 0,32/1000f);
 		this.stepTimer.start();
@@ -282,8 +284,15 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 			}
 		}
 	}
+	private synchronized boolean isMoveActionPresent(){
+		for (int i=0; i< actions.size(); i++){
+			if(actions.get(i)==moveAction)return true;
+		}
+		return false;
+	}
 	public synchronized final void addAction(ActionForNextStep action){
 		synchronized (this.actions) {
+			if(action==moveAction&&isMoveActionPresent())return;
 			this.actions.add(action);
 		}
 	}
@@ -341,7 +350,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 
 	public void contactFractions(Fraction f1, Fraction f2,Contact contact){
 		if(f1.getCondition()!= Fraction.Condition.Solid||f2.getCondition()!= Fraction.Condition.Solid){
-			contact.setEnabled(false);
+			//contact.setEnabled(false);
 		}
 		if(f1.getCondition()== Fraction.Condition.Liquid&&f2.getCondition()== Fraction.Condition.Liquid){
 			//moving mass
@@ -367,12 +376,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		this.stepTimer.scheduleTask(new Timer.Task() {
 			@Override
 			public void run() {
-				Level.this.addAction(new ActionForNextStep() {
-					@Override
-					public void doSomethingOnStep(Level level) {
-						Level.this.Move(16);
-					}
-				});
+				Level.this.addAction(moveAction);
 			}
 		}, 0, 32 / 1000f);
 	}
@@ -382,6 +386,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
     }
     @Override
     public void beginContact(Contact contact) {
+		System.out.println("actions size "+actions.size());
     }
     @Override
     public void preSolve (Contact contact, Manifold oldManifold){
