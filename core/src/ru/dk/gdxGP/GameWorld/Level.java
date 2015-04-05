@@ -386,7 +386,6 @@ public abstract class Level extends Thread implements Runnable,ContactListener
     }
     @Override
     public void beginContact(Contact contact) {
-		System.out.println("actions size "+actions.size());
     }
     @Override
     public void preSolve (Contact contact, Manifold oldManifold){

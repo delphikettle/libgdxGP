@@ -67,7 +67,7 @@ public class TestLevel01 extends Level {
                 (rnd.nextInt(2500) + 400) * 0.0005f, (float)(MathUtils.random(-0.1f, 0.1f)), 1, 1, 1, Fraction.Condition.Liquid,
                 new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f))));
         for (int i = 0;
-             i < 10/*Gdx.graphics.getHeight()*Gdx.graphics.getWidth()/(50000)*/;
+             i < 50/*Gdx.graphics.getHeight()*Gdx.graphics.getWidth()/(50000)*/;
              i++) {
 
             bodies.add(this.addFraction(new Fraction(this.getWorld(),
