@@ -341,11 +341,12 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 
 	public void contactFractions(Fraction f1, Fraction f2,Contact contact){
 		if(f1.getCondition()!= Fraction.Condition.Solid||f2.getCondition()!= Fraction.Condition.Solid){
-			//contact.setEnabled(false);
+			contact.setEnabled(false);
 		}
 		if(f1.getCondition()== Fraction.Condition.Liquid&&f2.getCondition()== Fraction.Condition.Liquid){
 			//moving mass
-			//flowMass(f1,f2);
+			flowMass(f1,f2);
+			System.out.println("flowing mass:");
 		}
 		if((f1.getCondition()==Fraction.Condition.Liquid&&f2.getCondition()!=Fraction.Condition.Liquid)||
 				(f2.getCondition()==Fraction.Condition.Liquid&&f1.getCondition()!=Fraction.Condition.Liquid)){
@@ -466,17 +467,22 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 			from=f2;
 			to=f1;
 		}
+		System.out.println("Flowing started");
 		if(from.getMass()==to.getMass())return;
 		float d= (float) Math.sqrt(((from.getBody().getPosition().x - to.getBody().getPosition().x)*(from.getBody().getPosition().x - to.getBody().getPosition().x)
 				+(from.getBody().getPosition().y - to.getBody().getPosition().y)*(from.getBody().getPosition().y - to.getBody().getPosition().y)));
-		if(d>from.getRadius()+to.getRadius()-1)return;
+		System.out.println("Flowing: d = "+d+"; r1="+from.getRadius()+"; r2="+to.getRadius());
+		if(d>from.getRadius()+to.getRadius())return;
 		float a=to.getMass(),b=from.getMass();
 		float sqrt=(float)(Math.PI*(2*a*d*d+2*b*d*d-Math.PI*Math.pow(d,4)));
+		System.out.println("Flowing: sqrt = "+sqrt);
 		if(sqrt<=0)return;
 		final float mass=(float)(Math.sqrt(sqrt)-a+b)/2;
+		System.out.println("Flowing: mass = "+mass);
 		if(mass<=0)return;
 		final Fraction finalFrom = from;
 		final Fraction finalTo = to;
+
 		this.addAction(new ActionForNextStep() {
 			@Override
 			public void doSomethingOnStep(Level level) {
