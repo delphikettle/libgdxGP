@@ -231,15 +231,15 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
         }
     }
 
-    private static final FixtureDef blankfixturedef;
+    private static final FixtureDef blankFixtureDef;
     static {
-        blankfixturedef = new FixtureDef();
-        blankfixturedef.density=1;
-        blankfixturedef.isSensor=true;
-        blankfixturedef.friction=1;
-        blankfixturedef.restitution=1;
-        blankfixturedef.shape=new CircleShape();
-        blankfixturedef.shape.setRadius(0.00001f);
+        blankFixtureDef = new FixtureDef();
+        blankFixtureDef.density=1;
+        blankFixtureDef.isSensor=true;
+        blankFixtureDef.friction=1;
+        blankFixtureDef.restitution=1;
+        blankFixtureDef.shape=new CircleShape();
+        blankFixtureDef.shape.setRadius(0.00001f);
     }
     public final float recountRadius(float newMass){
         float newR = (float) Math.sqrt(newMass / Math.PI / this.body.getFixtureList().get(0).getDensity());
@@ -263,7 +263,7 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
         }*/
         synchronized (this.body){
             this.body.getFixtureList().get(0).getShape().setRadius(newR);
-            this.body.destroyFixture(this.body.createFixture(blankfixturedef));
+            this.body.destroyFixture(this.body.createFixture(blankFixtureDef));
         }
         System.out.println("mass after setting " + this.getMass() + " with density" + this.getDensity());
         return newR;
