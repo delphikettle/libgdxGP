@@ -9,7 +9,6 @@ import ru.dk.gdxGP.GameWorld.Task;
  */
 public class TaskOnCoordinate extends Task{
     TaskOnCoordinate(Fraction c,Vector2 vector2){
-
         super();
     }
 
