@@ -15,8 +15,8 @@ public class TestLevel01 extends Level {
     public TestLevel01() {
         super();
         this.setTimeFactor(1f);
-        this.setG(0);
-        this.setK(1f);
+        this.setG(10);
+        this.setK(10);
     }
 
     @Override

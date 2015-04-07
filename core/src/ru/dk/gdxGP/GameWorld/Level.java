@@ -14,6 +14,7 @@ import ru.dk.gdxGP.Screens.LevelScreen;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 
@@ -26,7 +27,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	private LevelScreen levelScreen;
 	private float prevAccelX;
 	private float prevAccelY;
-	private final LinkedList<ActionForNextStep> actions;
+	private final List<ActionForNextStep> actions;
 	private Timer stepTimer;
 	private int xMin, xMax, yMin, yMax;
 	private float G=1;
@@ -50,7 +51,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		particles = new ArrayList<Fraction>();
         borders=new ArrayList<Border>();
 		otherElements=new ArrayList<Actor>();
-		actions=new LinkedList<ActionForNextStep>();
+		actions=new LinkedList<>();
 		xMin = yMin =0;
 		xMax = Gdx.graphics.getWidth();
 		yMax = Gdx.graphics.getHeight();
@@ -192,6 +193,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
         return f;
     }
 	synchronized final public void removeFraction(Fraction fraction){
+		System.out.println("removing fraction");
 		particles.remove(fraction);
 		fraction.getBody().setActive(false);
 		this.world.destroyBody(fraction.getBody());
@@ -266,33 +268,44 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		currentRealTime=System.currentTimeMillis();
 		currentGameTime=0;
 		while (!isEnd) {
+			Gdx.app.log("run", "!!! running "+isMove);
 			if (isMove) {
 				if(this.getLoaded()>=1.0f) {
 					//if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024))System.out.println(getNextStepTime());
 					//this.Move(this.getNextStepTime());
-					try {
+					//try {
 						if(!this.actions.isEmpty()){
-							//System.out.println("!!! "+this.actions.size());
-                            this.actions.pop().doSomethingOnStep(this);
-                        }
-					} catch (Exception e) {
-						e.printStackTrace();
-						this.actions.poll().doSomethingOnStep(this);
-						System.out.println("!!! "+this.actions.size());
-					}
+							//System.err.println("!!! "+this.actions.size());
+							Gdx.app.log("run", "!!! "+this.actions.size());
+                            //this.actions.pop().doSomethingOnStep(this);
+							this.actions.remove(0).doSomethingOnStep(this);
+						}
+					Gdx.app.log("run", "!!! running3 "+isMove);
+					//} catch (Exception e) {
+						//e.printStackTrace();
+						//System.out.println("!!! "+this.actions.size());
+					//}
 				}
+				Gdx.app.log("run", "!!! running2 "+isMove);
 			}
+			Gdx.app.log("run", "!!! running1 "+isMove);
 		}
+		Gdx.app.log("run", "!!! ended");
 	}
 	private synchronized boolean isMoveActionPresent(){
-		for (int i=0; i< actions.size(); i++){
-			if(actions.get(i)==moveAction)return true;
+		synchronized (this.actions) {
+			return this.actions.contains(moveAction);
 		}
-		return false;
 	}
 	public synchronized final void addAction(ActionForNextStep action){
 		synchronized (this.actions) {
-			if(action==moveAction&&isMoveActionPresent())return;
+			if(action==moveAction&&isMoveActionPresent()) {
+				//System.err.println();
+				//Gdx.app.log("addAction","action was not added");
+				return;
+			}
+			//System.out.println("action added");
+			//Gdx.app.log("addAction","action was added "+(action==moveAction));
 			this.actions.add(action);
 		}
 	}
@@ -355,7 +368,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		if(f1.getCondition()== Fraction.Condition.Liquid&&f2.getCondition()== Fraction.Condition.Liquid){
 			//moving mass
 			flowMass(f1,f2);
-			System.out.println("flowing mass:");
+			//System.out.println("flowing mass:");
 		}
 		if((f1.getCondition()==Fraction.Condition.Liquid&&f2.getCondition()!=Fraction.Condition.Liquid)||
 				(f2.getCondition()==Fraction.Condition.Liquid&&f1.getCondition()!=Fraction.Condition.Liquid)){
@@ -473,19 +486,19 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 			from=f2;
 			to=f1;
 		}
-		System.out.println("Flowing started");
+		//System.out.println("Flowing started");
 		if(from.getMass()==to.getMass())return;
 		float d=this.d.len();
 				/*(float) Math.sqrt(((from.getBody().getPosition().x - to.getBody().getPosition().x)*(from.getBody().getPosition().x - to.getBody().getPosition().x)
 				+(from.getBody().getPosition().y - to.getBody().getPosition().y)*(from.getBody().getPosition().y - to.getBody().getPosition().y)));*/
-		System.out.println("Flowing: d = "+d+"; r1="+from.getRadius()+"; r2="+to.getRadius());
+		//System.out.println("Flowing: d = "+d+"; r1="+from.getRadius()+"; r2="+to.getRadius());
 		if(d>from.getRadius()+to.getRadius())return;
 		float a=to.getMass(),b=from.getMass();
 		float sqrt=(float)(Math.PI*(2*a*d*d+2*b*d*d-Math.PI*Math.pow(d,4)));
-		System.out.println("Flowing: sqrt = "+sqrt);
+		//System.out.println("Flowing: sqrt = "+sqrt);
 		if(sqrt<=0)return;
 		final float mass=(float)(Math.sqrt(sqrt)-a+b)/2;
-		System.out.println("Flowing: mass = "+mass);
+		//System.out.println("Flowing: mass = "+mass);
 		if(mass<=0)return;
 		final Fraction finalFrom = from;
 		final Fraction finalTo = to;
