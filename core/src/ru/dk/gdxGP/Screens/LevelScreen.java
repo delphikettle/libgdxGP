@@ -65,10 +65,7 @@ public class LevelScreen implements Screen {
     {
         try{
             this.particlesStage.draw();
-        }catch (NullPointerException e){
-            this.particlesStage.getBatch().end();
-            System.out.println("Exception "+e.toString()+" in drawFractions");
-        }catch (java.lang.IndexOutOfBoundsException e){
+        }catch (NullPointerException | IndexOutOfBoundsException e){
             this.particlesStage.getBatch().end();
             System.out.println("Exception "+e.toString()+" in drawFractions");
         }
