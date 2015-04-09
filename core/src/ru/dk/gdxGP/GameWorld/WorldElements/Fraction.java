@@ -213,26 +213,28 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
         return fNew;
     }
     public void moveParameters(Fraction to,float mass, float charge,float density,Vector2 velocity)throws NullMassException{
-        if(mass==0){
-            to.charge+=charge;
-            this.charge-=charge*to.getMass()/this.getMass();
-            this.body.applyLinearImpulse(-velocity.x*to.getMass(),-velocity.y*to.getMass(),getMassCenter().x,getMassCenter().y,true);
-            to.body.applyLinearImpulse(velocity.x,velocity.y,to.getMassCenter().x,to.getMassCenter().y,true);
-            if(density!=0){
-                this.body.getFixtureList().get(0).setDensity(this.getDensity()-density*to.getMass()/this.getMass());
-                to.body.getFixtureList().get(0).setDensity(to.getDensity()+density);
-                this.recountRadius(this.getMass());
-                to.recountRadius(to.getMass());
+        synchronized (this.body) {
+            if(mass==0){
+                to.charge+=charge;
+                this.charge-=charge*to.getMass()/this.getMass();
+                this.body.applyLinearImpulse(-velocity.x*to.getMass(),-velocity.y*to.getMass(),getMassCenter().x,getMassCenter().y,true);
+                to.body.applyLinearImpulse(velocity.x,velocity.y,to.getMassCenter().x,to.getMassCenter().y,true);
+                if(density!=0){
+                    this.body.getFixtureList().get(0).setDensity(this.getDensity()-density*to.getMass()/this.getMass());
+                    to.body.getFixtureList().get(0).setDensity(to.getDensity()+density);
+                    this.recountRadius(this.getMass());
+                    to.recountRadius(to.getMass());
+                }
+            }else{
+                if(this.getMass()-mass<=0)throw new NullMassException(this);
+                if(to.getMass()+mass<=0)throw new NullMassException(to);
+                to.charge=(to.getCharge()*to.getMass()+this.getCharge()*mass)/(to.getMass()+mass);
+                to.body.applyLinearImpulse(this.getVelocity().x*mass,this.getVelocity().y*mass,to.getMassCenter().x,to.getMassCenter().y,true);
+                to.body.getFixtureList().get(0).setDensity((to.getDensity()*to.getMass()+mass*this.getDensity())/(to.getMass()+mass));
+                this.recountRadius(this.getMass()-mass);
+                to.recountRadius(to.getMass()+mass);
+                this.moveParameters(to,0,charge,density,velocity);
             }
-        }else{
-            if(this.getMass()-mass<=0)throw new NullMassException(this);
-            if(to.getMass()+mass<=0)throw new NullMassException(to);
-            to.charge=(to.getCharge()*to.getMass()+this.getCharge()*mass)/(to.getMass()+mass);
-            to.body.applyLinearImpulse(this.getVelocity().x*mass,this.getVelocity().y*mass,to.getMassCenter().x,to.getMassCenter().y,true);
-            to.body.getFixtureList().get(0).setDensity((to.getDensity()*to.getMass()+mass*this.getDensity())/(to.getMass()+mass));
-            this.recountRadius(this.getMass()-mass);
-            to.recountRadius(to.getMass()+mass);
-            this.moveParameters(to,0,charge,density,velocity);
         }
     }
 

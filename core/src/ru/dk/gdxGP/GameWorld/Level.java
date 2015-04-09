@@ -12,10 +12,7 @@ import ru.dk.gdxGP.GameWorld.WorldElements.Border;
 import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
 import ru.dk.gdxGP.Screens.LevelScreen;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 
 public abstract class Level extends Thread implements Runnable,ContactListener
@@ -51,7 +48,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		particles = new ArrayList<Fraction>();
         borders=new ArrayList<Border>();
 		otherElements=new ArrayList<Actor>();
-		actions=new LinkedList<>();
+		actions=Collections.synchronizedList(new ArrayList<ActionForNextStep>());
 		xMin = yMin =0;
 		xMax = Gdx.graphics.getWidth();
 		yMax = Gdx.graphics.getHeight();
@@ -265,8 +262,6 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	@Override
 	final public void run() {
 		super.run();
-		currentRealTime=System.currentTimeMillis();
-		currentGameTime=0;
 		while (!isEnd) {
 			Gdx.app.log("run", "!!! running "+isMove);
 			if (isMove) {
@@ -278,7 +273,11 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 							//System.err.println("!!! "+this.actions.size());
 							Gdx.app.log("run", "!!! "+this.actions.size());
                             //this.actions.pop().doSomethingOnStep(this);
-							this.actions.remove(0).doSomethingOnStep(this);
+							try {
+								this.actions.remove(0).doSomethingOnStep(this);
+							} catch (Throwable e) {
+								e.printStackTrace();
+							}
 						}
 					Gdx.app.log("run", "!!! running3 "+isMove);
 					//} catch (Exception e) {
@@ -299,13 +298,14 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	}
 	public synchronized final void addAction(ActionForNextStep action){
 		synchronized (this.actions) {
+
 			if(action==moveAction&&isMoveActionPresent()) {
 				//System.err.println();
-				//Gdx.app.log("addAction","action was not added");
+				Gdx.app.log("addAction","action was not added");
 				return;
 			}
 			//System.out.println("action added");
-			//Gdx.app.log("addAction","action was added "+(action==moveAction));
+			Gdx.app.log("addAction","action was added "+(action==moveAction));
 			this.actions.add(action);
 		}
 	}
@@ -486,19 +486,13 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 			from=f2;
 			to=f1;
 		}
-		//System.out.println("Flowing started");
 		if(from.getMass()==to.getMass())return;
 		float d=this.d.len();
-				/*(float) Math.sqrt(((from.getBody().getPosition().x - to.getBody().getPosition().x)*(from.getBody().getPosition().x - to.getBody().getPosition().x)
-				+(from.getBody().getPosition().y - to.getBody().getPosition().y)*(from.getBody().getPosition().y - to.getBody().getPosition().y)));*/
-		//System.out.println("Flowing: d = "+d+"; r1="+from.getRadius()+"; r2="+to.getRadius());
 		if(d>from.getRadius()+to.getRadius())return;
 		float a=to.getMass(),b=from.getMass();
 		float sqrt=(float)(Math.PI*(2*a*d*d+2*b*d*d-Math.PI*Math.pow(d,4)));
-		//System.out.println("Flowing: sqrt = "+sqrt);
 		if(sqrt<=0)return;
 		final float mass=(float)(Math.sqrt(sqrt)-a+b)/2;
-		//System.out.println("Flowing: mass = "+mass);
 		if(mass<=0)return;
 		final Fraction finalFrom = from;
 		final Fraction finalTo = to;
