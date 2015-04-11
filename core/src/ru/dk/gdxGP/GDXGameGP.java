@@ -223,7 +223,7 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		if(screen instanceof LevelScreen){
+		if(screen instanceof LevelScreen) {
 			((LevelScreen) screen).drag(-Gdx.input.getDeltaX(pointer), Gdx.input.getDeltaY(pointer));
 		}
 		return false;
@@ -236,8 +236,13 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 
 	@Override
 	public boolean scrolled(int amount) {
+		if(screen instanceof LevelScreen) {
+			((LevelScreen) screen).setInitialScale(((LevelScreen) screen).getCameraZoom());
+			((LevelScreen) screen).zoom(((LevelScreen) screen).getZoom(), (float) (((LevelScreen) screen).getZoom() * Math.pow(1.1f, -amount)));
+		}
 		return false;
 	}
+
 
 
 }

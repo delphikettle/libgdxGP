@@ -21,6 +21,11 @@ import ru.dk.gdxGP.GameWorld.Level;
 public class LevelScreen implements Screen {
     private Box2DDebugRenderer box2DDebugRenderer;
     private OrthographicCamera camera;
+
+    public float getZoom() {
+        return zoom;
+    }
+
     private float zoom=1;
     private Stage particlesStage, bordersStage, othersStage;
     private Color startColor;

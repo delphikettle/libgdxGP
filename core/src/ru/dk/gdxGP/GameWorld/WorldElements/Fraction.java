@@ -269,10 +269,9 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
             this.body.destroyFixture(oldFixture);
         }*/
         synchronized (this.body){
-            while(this.body.getFixtureList().size==0) {}
+            //while(this.body.getFixtureList().size==0) {}
             this.body.getFixtureList().get(0).getShape().setRadius(newR);
             this.body.destroyFixture(this.body.createFixture(blankFixtureDef));
-
         }
         //System.out.println("mass after setting " + this.getMass() + " with density" + this.getDensity());
         return newR;

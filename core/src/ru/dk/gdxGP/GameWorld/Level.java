@@ -2,6 +2,7 @@ package ru.dk.gdxGP.GameWorld;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.physics.box2d.*;
@@ -29,6 +30,8 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	private int xMin, xMax, yMin, yMax;
 	private float G=1;
 	private float k=1;
+
+	private float chargingK=1;
 	private float timeFactor=1f;
 	private static long currentRealTime;
 	private float currentGameTime;
@@ -225,10 +228,9 @@ public abstract class Level extends Thread implements Runnable,ContactListener
         b.end();
     }
     */
-	private float lostTime=0.0f;
 	private void Move(float time){
 		this.proceed(time);
-		world.step(1/60f,10,10);
+		world.step(1/100f,16,16);
 		 ///if(time!=0.0f) {
 		//	 System.out.println(((double)(time)));
 		 //}
@@ -266,24 +268,11 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 			Gdx.app.log("run", "!!! running "+isMove);
 			if (isMove) {
 				if(this.getLoaded()>=1.0f) {
-					//if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024))System.out.println(getNextStepTime());
-					//this.Move(this.getNextStepTime());
-					//try {
 						if(!this.actions.isEmpty()){
-							//System.err.println("!!! "+this.actions.size());
 							Gdx.app.log("run", "!!! "+this.actions.size());
-                            //this.actions.pop().doSomethingOnStep(this);
-							try {
-								this.actions.remove(0).doSomethingOnStep(this);
-							} catch (Throwable e) {
-								e.printStackTrace();
-							}
+							this.actions.remove(0).doSomethingOnStep(this);
 						}
 					Gdx.app.log("run", "!!! running3 "+isMove);
-					//} catch (Exception e) {
-						//e.printStackTrace();
-						//System.out.println("!!! "+this.actions.size());
-					//}
 				}
 				Gdx.app.log("run", "!!! running2 "+isMove);
 			}
@@ -301,13 +290,19 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 
 			if(action==moveAction&&isMoveActionPresent()) {
 				//System.err.println();
-				Gdx.app.log("addAction","action was not added");
+				//Gdx.app.log("addAction","action was not added");
 				return;
 			}
 			//System.out.println("action added");
-			Gdx.app.log("addAction","action was added "+(action==moveAction));
+			//Gdx.app.log("addAction","action was added "+(action==moveAction));
 			this.actions.add(action);
 		}
+	}
+	public float getChargingK() {
+		return chargingK;
+	}
+	public void setChargingK(float chargingK) {
+		this.chargingK = chargingK;
 	}
 	public float getK() {
 		return k;
@@ -404,7 +399,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
     public void preSolve (Contact contact, Manifold oldManifold){
 		if(contact.getFixtureA().getBody().getUserData() instanceof Fraction && contact.getFixtureB().getBody().getUserData() instanceof Fraction){
 			Fraction f1= (Fraction) contact.getFixtureA().getBody().getUserData(), f2= (Fraction) contact.getFixtureB().getBody().getUserData();
-			contactFractions(f1,f2,contact);
+			//contactFractions(f1,f2,contact);
 		}
 
     }
@@ -450,11 +445,10 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		f2.getBody().applyForceToCenter(buf.rotate(180),true);
 
 		float q1=f1.getCharge(),q2=f2.getCharge(),m1=f1.getMass(),m2=f2.getMass();
-		float deltaCharge=(((q1*m1+q2*m2)/(m1+m2)+1024*q2)/1025-q2)/(d.len()*d.len());
+		float deltaCharge=this.chargingK*(((q1*m1+q2*m2)/(m1+m2)+1024*q2)/1025-q2)/(d.len()*d.len());
 				//((f1.getBody().getPosition().x - f2.getBody().getPosition().x)*(f1.getBody().getPosition().x - f2.getBody().getPosition().x)
 				//+(f1.getBody().getPosition().y - f2.getBody().getPosition().y)*(f1.getBody().getPosition().y - f2.getBody().getPosition().y));
 		//if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024))System.out.println(deltaCharge);
-
 
 		if(!Float.isNaN(deltaCharge)&&!Float.isInfinite(deltaCharge))
 			try {
@@ -508,5 +502,17 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 			}
 		});
 
+	}
+
+	//methods for generating
+
+	public Fraction generateRandomFraction(FractionDef fractionDef){
+		Random rnd=new Random();
+		return new Fraction(this.getWorld(),
+				MathUtils.random(fractionDef.minX, fractionDef.maxX),
+				MathUtils.random(fractionDef.minY, fractionDef.maxY),
+				MathUtils.random(fractionDef.minVX,fractionDef.maxVX),MathUtils.random(fractionDef.minVY,fractionDef.maxVY) ,
+				MathUtils.random(fractionDef.minMass,fractionDef.masMass), (MathUtils.random(fractionDef.minCharge, fractionDef.maxCharge)), 1, 1, 1, Fraction.Condition.Liquid,
+				new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f)));
 	}
 }

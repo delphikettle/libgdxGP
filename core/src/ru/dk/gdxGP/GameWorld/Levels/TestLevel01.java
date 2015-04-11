@@ -17,6 +17,7 @@ public class TestLevel01 extends Level {
         this.setTimeFactor(1f);
         this.setG(10);
         this.setK(10);
+        this.setChargingK(0.1f);
     }
 
     @Override
@@ -61,8 +62,8 @@ public class TestLevel01 extends Level {
                 (rnd.nextInt(200) - 100), (rnd.nextInt(200) - 100),
                 (rnd.nextInt(10000) + 81) * 0.00025f)).getBody());*/
         this.addFraction(new Fraction(this.getWorld(),
-                (rnd.nextInt(this.getXMax() - this.getXMin()) + this.getXMin()),
-                (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()),
+                (MathUtils.random(this.getXMin()+this.getWidth()*0.1f, this.getXMax()-this.getWidth()*0.1f)),
+                (MathUtils.random(this.getYMin()+this.getHeight()*0.1f, this.getYMax()-this.getHeight()*0.1f)),
                 (rnd.nextInt(200) - 100) * 0f, (rnd.nextInt(200) - 100) * 0f,
                 (rnd.nextInt(2500) + 400) * 0.0005f, (float)(MathUtils.random(-1f, 1f)), 1, 1, 1, Fraction.Condition.Liquid,
                 new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f))));
@@ -71,8 +72,8 @@ public class TestLevel01 extends Level {
              i++) {
 
             bodies.add(this.addFraction(new Fraction(this.getWorld(),
-                    (rnd.nextInt(this.getXMax() - this.getXMin()) + this.getXMin()),
-                    (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()),
+                    (MathUtils.random(this.getXMin()+this.getWidth()*0.1f, this.getXMax()-this.getWidth()*0.1f)),
+                    (MathUtils.random(this.getYMin()+this.getHeight()*0.1f, this.getYMax()-this.getHeight()*0.1f)),
                     (rnd.nextInt(200) - 100) * 0f, (rnd.nextInt(200) - 100) * 0f,
                     (rnd.nextInt(2500) + 400) * 0.00001f, (float)(Math.pow(-1,i)*MathUtils.random(0f, 5f)), 1, 1, 1, Fraction.Condition.Liquid,
                     new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f)))).getBody());
