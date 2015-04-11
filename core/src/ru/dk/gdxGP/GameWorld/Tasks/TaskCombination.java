@@ -1,6 +1,5 @@
 package ru.dk.gdxGP.GameWorld.Tasks;
 
-import org.jetbrains.annotations.NotNull;
 import ru.dk.gdxGP.GameWorld.Task;
 
 import java.util.ArrayList;
@@ -13,12 +12,12 @@ public class TaskCombination extends Task {
     public static final byte TC_AND=0,TC_OR=1,TC_NOT=2,TC_XOR=3;
     ArrayList<Task> tasks;
     byte flag;
-    public TaskCombination(@NotNull Task[] tasks,byte flag,boolean once){
+    public TaskCombination( Task[] tasks,byte flag,boolean once){
         super();
         this.tasks=new ArrayList<Task>(Arrays.<Task>asList(tasks));
         this.flag=flag;
     }
-    public TaskCombination addTask(@NotNull Task task){
+    public TaskCombination addTask( Task task){
         tasks.add(task);
         return this;
     }

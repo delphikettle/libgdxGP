@@ -230,7 +230,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
     */
 	private void Move(float time){
 		this.proceed(time);
-		world.step(1/100f,16,16);
+		world.step(1/100f,100,100);
 		 ///if(time!=0.0f) {
 		//	 System.out.println(((double)(time)));
 		 //}
@@ -399,7 +399,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
     public void preSolve (Contact contact, Manifold oldManifold){
 		if(contact.getFixtureA().getBody().getUserData() instanceof Fraction && contact.getFixtureB().getBody().getUserData() instanceof Fraction){
 			Fraction f1= (Fraction) contact.getFixtureA().getBody().getUserData(), f2= (Fraction) contact.getFixtureB().getBody().getUserData();
-			//contactFractions(f1,f2,contact);
+			contactFractions(f1,f2,contact);
 		}
 
     }
@@ -422,7 +422,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		if (prevAccelX != x || prevAccelY != y) {
 
 			/* Negative on the x axis but not in the y */
-			world.setGravity(new Vector2(y, -x));
+			world.setGravity(new Vector2(10*y, -10*x));
 
 			/* Store new accelerometer values */
 			prevAccelX = x;
@@ -473,6 +473,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	}
 
 	public void flowMass(Fraction f1, Fraction f2){
+		/*
 		d.set(f2.getBody().getPosition());
 		d.add(-f1.getBody().getPosition().x,-f1.getBody().getPosition().y);
 		Fraction from=f1,to=f2;
@@ -501,7 +502,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 				}
 			}
 		});
-
+		*/
 	}
 
 	//methods for generating

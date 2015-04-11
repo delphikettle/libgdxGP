@@ -193,23 +193,16 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
     }
 
     synchronized public Fraction divide(float mass,float vx,float vy){
-        //System.out.println("Division started");
-        //System.out.println("mass="+mass+";vx="+vx+";vy="+vy);
-        //System.out.println(this.body.getWorld().isLocked());
         if(mass>=this.body.getMass()||mass<=0)//throw new IllegalArgumentException();
             return null;
         float newMass=this.body.getMass()-mass;
         float r = recountRadius(newMass);
         this.body.applyLinearImpulse(-vx*mass,-vy*mass,getMassCenter().x,getMassCenter().y,true);
-
-        //System.out.println("Fraction that was divided:" + this.toString());
-        //creating new Fraction
         Vector2 coords=new Vector2(vx,vy);
         coords.setLength((float) (r + Math.sqrt(mass / Math.PI / getDensity())));
         coords.add(this.body.getPosition().x, this.body.getPosition().y);
         Fraction fNew = new Fraction(this.body.getWorld(),coords.x,coords.y,vx,vy,mass,
                 this.getCharge(),this.getFriction(),this.getDensity(),this.getRestitution(),this.getCondition(),this.getColor());
-        //System.out.println("Division ended with new Fraction:"+((fNew!=null)?fNew.toString():""));
         return fNew;
     }
     public void moveParameters(Fraction to,float mass, float charge,float density,Vector2 velocity)throws NullMassException{
