@@ -145,8 +145,6 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
     public void act(float delta) {
         super.act(delta);
         if(operator!=null)operator.operateFraction(this, delta);
-        //this.getBody().getLinearVelocity().set(this.getBody().getLinearVelocity().x*1.1f,this.getBody().getLinearVelocity().y*1.1f);
-        //this.getBody().applyForce(this.getBody().getLinearVelocity().x*0.1f,this.getBody().getLinearVelocity().y*0.1f,this.body.getFixtureList().get(0).getShape().getRadius(),this.body.getFixtureList().get(0).getShape().getRadius(),true);
     }
 
     @Override
@@ -249,21 +247,7 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
         MassData newMassData = new MassData();
         newMassData.mass=newMass;
         newMassData.center.set(newR, newR);
-        //System.out.println("mass before " + this.getMass() + " with density" + this.getDensity() + " to mass " + newMass);
         this.body.setMassData(newMassData);
-        /*
-        Fixture oldFixture=this.body.getFixtureList().get(0);
-        FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.density=oldFixture.getDensity();
-        fixtureDef.friction=oldFixture.getFriction();
-        fixtureDef.shape=oldFixture.getShape();
-        fixtureDef.shape.setRadius(newR);
-        fixtureDef.restitution=oldFixture.getRestitution();
-        fixtureDef.isSensor=oldFixture.isSensor();
-        synchronized (this.body) {
-            this.body.createFixture(fixtureDef);
-            this.body.destroyFixture(oldFixture);
-        }*/
         synchronized (this.body){
             //while(this.body.getFixtureList().size==0) {}
             this.body.getFixtureList().get(0).getShape().setRadius(newR);
