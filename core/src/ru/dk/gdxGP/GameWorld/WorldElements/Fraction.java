@@ -104,6 +104,9 @@ public class Fraction extends Actor implements FractionDrawer,FractionOperator {
     public Vector2 getMassCenter(){
         return this.body.getWorldCenter();
     }
+    public Vector2 getPosition(){
+        return this.body.getPosition();
+    }
     @Override
     public Color getColor() {
         return color;

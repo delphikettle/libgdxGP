@@ -472,7 +472,24 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		}
 	}
 
-	public void flowMass(Fraction f1, Fraction f2){
+	public void flowMass(final Fraction f1, final Fraction f2){
+		this.addAction(new ActionForNextStep() {
+			@Override
+			public void doSomethingOnStep(Level level) {
+				Fraction from=f1,to=f2;
+				if(f1.getMass()>f2.getMass()){
+					from=f2;
+					to=f1;
+				}
+				float deltaMass=MathUtils.clamp(from.getMass()*to.getMass()*Level.this.G*0.001f,0.00000001f,1f);
+				try {
+					from.moveParameters(to,deltaMass,0,0,new Vector2(0,0));
+				} catch (Fraction.NullMassException e) {
+					Level.this.removeFraction(e.getFraction());
+				}
+
+			}
+		});
 		/*
 		d.set(f2.getBody().getPosition());
 		d.add(-f1.getBody().getPosition().x,-f1.getBody().getPosition().y);
