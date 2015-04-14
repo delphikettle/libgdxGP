@@ -5,13 +5,15 @@ package ru.dk.gdxGP.GameWorld;
  */
 public abstract class Task extends Throwable {
     private boolean isAchieved =false,once;
-    private String taskText;
+    private String title="";
+
+    private String taskText="";
     public Task(){
         this(true,"");
     }
-    protected Task(boolean once, String taskText){
+    protected Task(boolean once, String title){
         this.once = once;
-        this.taskText = taskText;
+        this.title = title;
     }
     public final boolean isAchieved(){
         //if(!isAchieved) isAchieved =check();
@@ -24,5 +26,30 @@ public abstract class Task extends Throwable {
         }
         return isAchieved;
     }
+
     public abstract boolean check();
+
+    public String getTaskText() {
+        return taskText;
+    }
+
+    public void setTaskText(String taskText) {
+        this.taskText = taskText;
+    }
+
+    public boolean isOnce() {
+        return once;
+    }
+
+    public void setOnce(boolean once) {
+        this.once = once;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

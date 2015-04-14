@@ -1,5 +1,9 @@
 package ru.dk.gdxGP.GameWorld.Templates;
-public static class ActionForNextStepSet{
+
+import ru.dk.gdxGP.GameWorld.ActionForNextStep;
+import ru.dk.gdxGP.GameWorld.Level;
+
+public final class ActionForNextStepSet{
 	public static final ActionForNextStep moveAction = new ActionForNextStep() {
 		@Override
 		public void doSomethingOnStep(Level level) {

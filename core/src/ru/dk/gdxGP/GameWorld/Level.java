@@ -37,7 +37,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	private float currentGameTime;
 	private boolean isMove=false, isEnd=false;
 	private float loaded;
-	private TaskChecker currentTaskChecker;
+	private MissionChecker currentMissionChecker;
 	private final static ActionForNextStep moveAction = new ActionForNextStep() {
 		@Override
 		public void doSomethingOnStep(Level level) {
@@ -228,7 +228,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
         b.end();
     }
     */
-	private void Move(float time){
+	public void Move(float time){
 		this.proceed(time);
 		world.step(1/100f,100,100);
 		 ///if(time!=0.0f) {
@@ -265,20 +265,20 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	final public void run() {
 		super.run();
 		while (!isEnd) {
-			Gdx.app.log("run", "!!! running "+isMove);
+			//Gdx.app.log("run", "!!! running "+isMove);
 			if (isMove) {
 				if(this.getLoaded()>=1.0f) {
 						if(!this.actions.isEmpty()){
-							Gdx.app.log("run", "!!! "+this.actions.size());
+							//Gdx.app.log("run", "!!! "+this.actions.size());
 							this.actions.remove(0).doSomethingOnStep(this);
 						}
-					Gdx.app.log("run", "!!! running3 "+isMove);
+					//Gdx.app.log("run", "!!! running3 "+isMove);
 				}
-				Gdx.app.log("run", "!!! running2 "+isMove);
+				//Gdx.app.log("run", "!!! running2 "+isMove);
 			}
-			Gdx.app.log("run", "!!! running1 "+isMove);
+			//Gdx.app.log("run", "!!! running1 "+isMove);
 		}
-		Gdx.app.log("run", "!!! ended");
+		//Gdx.app.log("run", "!!! ended");
 	}
 	private synchronized boolean isMoveActionPresent(){
 		synchronized (this.actions) {
@@ -481,7 +481,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 					from=f2;
 					to=f1;
 				}
-				float deltaMass=MathUtils.clamp(from.getMass()*to.getMass()*Level.this.G*0.001f,0.00000001f,1f);
+				float deltaMass=MathUtils.clamp(from.getMass()*to.getMass()*Level.this.G*0.01f,0.000001f,1f);
 				try {
 					from.moveParameters(to,deltaMass,0,0,new Vector2(0,0));
 				} catch (Fraction.NullMassException e) {
