@@ -10,14 +10,14 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class LoadingScreen extends Stage implements Screen {
 
-    private LogoScreen logoScreen;
+    private final LogoScreen logoScreen;
     private boolean active;
-    private Screen nextScreen;
-    private LoaderForLoadingScreen loader;
+    private final Screen nextScreen;
+    private final LoaderForLoadingScreen loader;
     private TextureRegion texture;
     private float rotation;
     private float width, height;
-    private SpriteBatch spriteBatch;
+    private final SpriteBatch spriteBatch;
     public LoadingScreen(LogoScreen logoScreen, LoaderForLoadingScreen loader, Screen nextScreen) {
         this.logoScreen = logoScreen;
         this.loader = loader;

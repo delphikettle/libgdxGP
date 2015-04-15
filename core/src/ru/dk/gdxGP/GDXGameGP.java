@@ -15,11 +15,11 @@ import ru.dk.gdxGP.Screens.LogoScreen;
 
 public class GDXGameGP extends Game implements GestureDetector.GestureListener, InputProcessor, ApplicationListener {
     static public final AssetManager assetManager = new AssetManager();
-    SpriteBatch batch;
+    private SpriteBatch batch;
     Texture img;
     Level lvl;
-    State state = State.logo;
-    Screen screen;
+    private State state = State.logo;
+    private Screen screen;
     private String levelName;
 
     public GDXGameGP(String levelName) {
@@ -56,7 +56,7 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
                 assert (screen != null);
                 if (!((LogoScreen) screen).isActive()) {
                     this.state = State.loading;
-                    final Level level = GameLevels.instantiateLevel(GameLevels.LEVELS, levelName);
+                    final Level level = GameLevels.instantiateLevel(levelName);
                     final LevelScreen levelScreen = new LevelScreen(level, 0.1f * Gdx.graphics.getWidth(), 0.1f * Gdx.graphics.getHeight());
                     this.screen = new LoadingScreen((LogoScreen) screen, new LoadingScreen.LoaderForLoadingScreen() {
 
@@ -171,10 +171,7 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 
     @Override
     public boolean zoom(float initialDistance, float distance) {
-        if (screen instanceof LevelScreen) {
-            return ((LevelScreen) screen).zoom(initialDistance, distance);
-        }
-        return false;
+        return screen instanceof LevelScreen && ((LevelScreen) screen).zoom(initialDistance, distance);
     }
 
     @Override

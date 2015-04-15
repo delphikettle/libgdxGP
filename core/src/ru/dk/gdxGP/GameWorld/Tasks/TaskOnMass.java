@@ -11,9 +11,9 @@ import java.util.Collections;
  * Created by DK on 15.04.2015.
  */
 public class TaskOnMass extends Task {
-    private ArrayList<Fraction> fractions = new ArrayList<Fraction>();
+    private final ArrayList<Fraction> fractions = new ArrayList<Fraction>();
     private float inaccuracy = 0.0f;
-    private float mass;
+    private final float mass;
 
     public TaskOnMass(Fraction[] fractions, float mass, float inaccuracy) {
         super();

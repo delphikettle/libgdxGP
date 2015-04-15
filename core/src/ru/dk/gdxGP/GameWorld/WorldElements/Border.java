@@ -12,9 +12,9 @@ import ru.dk.gdxGP.GDXGameGP;
  * Created by DK on 21.02.15.
  */
 public class Border extends Actor {
-    Body body;
+    private Body body;
     private boolean contour;
-    private TextureRegion textureRegion;
+    private final TextureRegion textureRegion;
 
     public Border(World world, int x, int y, Shape shape, boolean contour) {
         BodyDef bodyDef = new BodyDef();

@@ -27,7 +27,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
             level.Move(16);
         }
     };
-    public static String[] standardAssetsPaths = new String[]{
+    protected static final String[] standardAssetsPaths = new String[]{
             "images/PlusCharge.png",
             "images/NullCharge.png",
             "images/MinusCharge.png",
@@ -48,7 +48,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     private LevelScreen levelScreen;
     private float prevAccelX;
     private float prevAccelY;
-    private Timer stepTimer;
+    private final Timer stepTimer;
     private int xMin, xMax, yMin, yMax;
     private float G = 1;
     private float k = 1;
@@ -58,7 +58,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     private float loaded;
     private Vector2 buf = new Vector2(), d = new Vector2();
 
-    public Level() {
+    protected Level() {
         this.world = new World(new Vector2(0.0f, 0.0f), true);
         this.world.setContactListener(this);
         particles = new ArrayList<Fraction>();
@@ -198,9 +198,9 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         //здесь нужно добавить частицы, границы и прочее к стейджам скрина
     }
 
-    public void loadAssets(String[] assetsPaths) {
-        for (int i = 0; i < assetsPaths.length; i++) {
-            GDXGameGP.assetManager.load(assetsPaths[i], Texture.class);
+    protected void loadAssets(String[] assetsPaths) {
+        for (String assetsPath : assetsPaths) {
+            GDXGameGP.assetManager.load(assetsPath, Texture.class);
         }
     }
 
@@ -214,7 +214,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         this.loaded = loaded;
     }
 
-    abstract public void loadAssets();
+    public abstract void loadAssets();
 
     public float getAssetsLoaded() {
         System.out.println("assetsLoaded=" + GDXGameGP.assetManager.getProgress());
@@ -225,15 +225,15 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         return GDXGameGP.assetManager.update();
     }
 
-    abstract public void setSizes();
+    abstract protected void setSizes();
 
-    abstract public void setParticles();
+    protected abstract void setParticles();
 
     abstract public void setOtherElements();
 
-    abstract public Mission createMission();
+    protected abstract Mission createMission();
 
-    public void setParameters() {
+    protected void setParameters() {
     }
 
     public void createWalls() {
@@ -291,7 +291,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         return actor;
     }
 
-    final public Fraction getFraction(int index) {
+    public final Fraction getFraction(int index) {
         return this.particles.get(index);
     }
 
@@ -335,7 +335,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         }
     }
 
-    public synchronized final void addAction(ActionForNextStep action) {
+    protected synchronized final void addAction(ActionForNextStep action) {
         synchronized (this.actions) {
 
             if (action == moveAction && isMoveActionPresent()) {
@@ -353,7 +353,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         return chargingK;
     }
 
-    public void setChargingK(float chargingK) {
+    protected void setChargingK(float chargingK) {
         this.chargingK = chargingK;
     }
 
@@ -361,7 +361,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         return k;
     }
 
-    public void setK(float k) {
+    protected void setK(float k) {
         this.k = k;
     }
 
@@ -369,7 +369,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         return G;
     }
 
-    final public float setG(float newG) {
+    protected final float setG(float newG) {
         return this.G = newG;
     }
 
@@ -381,35 +381,35 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         return getYMax() - getYMin();
     }
 
-    final public int getXMin() {
+    protected final int getXMin() {
         return this.xMin;
     }
 
-    final public int getYMin() {
+    protected final int getYMin() {
         return this.yMin;
     }
 
-    final public int getXMax() {
+    protected final int getXMax() {
         return this.xMax;
     }
 
-    final public int getYMax() {
+    protected final int getYMax() {
         return this.yMax;
     }
 
-    final public int setXMin(int newXMin) {
+    protected final int setXMin(int newXMin) {
         return this.xMin = newXMin;
     }
 
-    final public int setYMin(int newYMin) {
+    protected final int setYMin(int newYMin) {
         return this.yMin = newYMin;
     }
 
-    final public int setXMax(int newXMax) {
+    protected final int setXMax(int newXMax) {
         return this.xMax = newXMax;
     }
 
-    final public int setYMax(int newYMax) {
+    protected final int setYMax(int newYMax) {
         return this.yMax = newYMax;
     }
 
@@ -417,7 +417,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         return this.currentMissionChecker.getMission();
     }
 
-    public void contactFractions(Fraction f1, Fraction f2, Contact contact) {
+    void contactFractions(Fraction f1, Fraction f2, Contact contact) {
         if (f1.getCondition() != Fraction.Condition.Solid || f2.getCondition() != Fraction.Condition.Solid) {
             //contact.setEnabled(false);
         }
@@ -473,7 +473,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     public void postSolve(Contact contact, ContactImpulse impulse) {
     }
 
-    public void processAccelerometer() {
+    void processAccelerometer() {
 
 		/* Get accelerometer values */
         float y = Gdx.input.getAccelerometerY();
@@ -494,7 +494,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         }
     }
 
-    public void interactionBetweenFractions(Fraction f1, Fraction f2) {
+    void interactionBetweenFractions(Fraction f1, Fraction f2) {
         d.set(f2.getBody().getPosition());
         d.add(-f1.getBody().getPosition().x, -f1.getBody().getPosition().y);
         float F = (((-this.k * f1.getCharge() * f2.getCharge() + this.G) * f1.getBody().getMass() * f2.getBody().getMass()) / (d.len() * d.len()));
@@ -522,7 +522,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
 
     }
 
-    public void interactAllWithAllFractions() {
+    void interactAllWithAllFractions() {
         for (int i = 0; i < particles.size(); i++) {
             Fraction f1 = particles.get(i);
             if (f1 != null) {
@@ -533,7 +533,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         }
     }
 
-    public void flowMass(final Fraction f1, final Fraction f2) {
+    void flowMass(final Fraction f1, final Fraction f2) {
         this.addAction(new ActionForNextStep() {
             @Override
             public void doSomethingOnStep(Level level) {
@@ -556,7 +556,6 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     //methods for generating
 
     public Fraction generateRandomFraction(FractionDef fractionDef) {
-        Random rnd = new Random();
         return new Fraction(this.getWorld(),
                 MathUtils.random(fractionDef.minX, fractionDef.maxX),
                 MathUtils.random(fractionDef.minY, fractionDef.maxY),

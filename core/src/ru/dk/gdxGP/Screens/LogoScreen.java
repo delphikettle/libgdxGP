@@ -15,12 +15,11 @@ public class LogoScreen extends Stage implements Screen {
     private TextureRegion texture;
     private float width, height;
     private SpriteBatch spriteBatch;
-    private float time;
+    private final float time;
     private float rotation;
     private boolean active;
     public LogoScreen(float time) {
         this.time = time;
-        ;
     }
 
     @Override

@@ -8,7 +8,7 @@ public abstract class Task {
     private String title = "";
     private String taskText = "";
 
-    public Task() {
+    protected Task() {
         this(true, "");
     }
 
@@ -30,7 +30,7 @@ public abstract class Task {
         return isAchieved;
     }
 
-    public abstract boolean check();
+    protected abstract boolean check();
 
     public String getTaskText() {
         return taskText;

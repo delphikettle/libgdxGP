@@ -23,11 +23,11 @@ public class Fraction extends Actor implements FractionDrawer, FractionOperator 
         blankFixtureDef.shape = new CircleShape();
         blankFixtureDef.shape.setRadius(0.00001f);
     }
-    private static TextureRegion textureRegionFractionSolid;
-    private static TextureRegion textureRegionCharge;
-    private static TextureRegion textureRegionNullCharge;
-    private static TextureRegion textureRegionMinusCharge;
-    private static TextureRegion textureRegionPlusCharge;
+    private static final TextureRegion textureRegionFractionSolid;
+    private static final TextureRegion textureRegionCharge;
+    private static final TextureRegion textureRegionNullCharge;
+    private static final TextureRegion textureRegionMinusCharge;
+    private static final TextureRegion textureRegionPlusCharge;
     private final Body body;
     private Condition condition;
     private FractionDrawer drawer = null;
@@ -222,9 +222,8 @@ public class Fraction extends Actor implements FractionDrawer, FractionOperator 
         Vector2 coords = new Vector2(vx, vy);
         coords.setLength((float) (r + Math.sqrt(mass / Math.PI / getDensity())));
         coords.add(this.body.getPosition().x, this.body.getPosition().y);
-        Fraction fNew = new Fraction(this.body.getWorld(), coords.x, coords.y, vx, vy, mass,
+        return new Fraction(this.body.getWorld(), coords.x, coords.y, vx, vy, mass,
                 this.getCharge(), this.getFriction(), this.getDensity(), this.getRestitution(), this.getCondition(), this.getColor());
-        return fNew;
     }
 
     public void moveParameters(Fraction to, float mass, float charge, float density, Vector2 velocity) throws NullMassException {
@@ -277,14 +276,13 @@ public class Fraction extends Actor implements FractionDrawer, FractionOperator 
 
     @Override
     public String toString() {
-        String s = "Fraction:mass=" + this.getBody().getMass() + ";vx=" + this.getBody().getLinearVelocity().x + ";vy=" + this.getBody().getLinearVelocity().y;
-        return s;
+        return "Fraction:mass=" + this.getBody().getMass() + ";vx=" + this.getBody().getLinearVelocity().x + ";vy=" + this.getBody().getLinearVelocity().y;
     }
 
     public enum Condition {Liquid, Solid, Mixed}
 
     public class NullMassException extends Exception {
-        private Fraction fraction;
+        private final Fraction fraction;
 
         NullMassException(Fraction fraction) {
             this.fraction = fraction;

@@ -10,7 +10,9 @@ import com.badlogic.gdx.graphics.Texture;
 import ru.dk.gdxGP.GDXGameGP;
 
 public class MainMenuActivity extends Activity implements View.OnClickListener {
-    Button startButton, helpButton, exitButton;
+    private Button startButton;
+    private Button helpButton;
+    private Button exitButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

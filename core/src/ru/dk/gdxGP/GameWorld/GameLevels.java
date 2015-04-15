@@ -22,11 +22,10 @@ public class GameLevels {
             )
     );
 
-    public static List<String> getNames(List<Class<? extends Level>> levels,
-                                        boolean sorted) {
-        List<String> names = new ArrayList<String>(levels.size());
+    public static List<String> getNames(boolean sorted) {
+        List<String> names = new ArrayList<String>(GameLevels.LEVELS.size());
 
-        for (Class<? extends Level> level : levels) {
+        for (Class<? extends Level> level : GameLevels.LEVELS) {
             names.add(level.getSimpleName());
         }
 
@@ -37,10 +36,9 @@ public class GameLevels {
         return names;
     }
 
-    public static Level instantiateLevel(List<Class<? extends Level>> levels,
-                                         String levelName) {
+    public static Level instantiateLevel(String levelName) {
         try {
-            return forName(levels, levelName).newInstance();
+            return forName(GameLevels.LEVELS, levelName).newInstance();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {

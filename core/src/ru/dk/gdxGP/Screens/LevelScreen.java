@@ -18,10 +18,12 @@ public class LevelScreen implements Screen {
     private Box2DDebugRenderer box2DDebugRenderer;
     private OrthographicCamera camera;
     private float zoom = 1;
-    private Stage particlesStage, bordersStage, othersStage;
+    private final Stage particlesStage;
+    private final Stage bordersStage;
+    private final Stage othersStage;
     private Color startColor;
     private float initialScale = 1;
-    private Level level;
+    private final Level level;
 
     public LevelScreen(Level level, float w, float h) {
         this.level = level;
