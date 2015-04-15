@@ -13,7 +13,15 @@ import java.util.TimerTask;
 
 public class LogoScreen extends Stage implements Screen {
     private TextureRegion texture;
-    private float width,height;
+    private float width, height;
+    private SpriteBatch spriteBatch;
+    private float time;
+    private float rotation;
+    private boolean active;
+    public LogoScreen(float time) {
+        this.time = time;
+        ;
+    }
 
     @Override
     public float getWidth() {
@@ -25,30 +33,20 @@ public class LogoScreen extends Stage implements Screen {
         return height;
     }
 
-    private SpriteBatch spriteBatch;
-    private float time;
-    private float rotation;
-
-    private boolean active;
-
-    public LogoScreen(float time){
-        this.time=time;;
-    }
     @Override
     public void show() {
-        texture= new TextureRegion(new Texture("images/logo.png"));
-        width=height= 0x0.FAP0f *((Gdx.graphics.getHeight()>Gdx.graphics.getWidth())?Gdx.graphics.getWidth():Gdx.graphics.getHeight());
-        spriteBatch=new SpriteBatch();
+        texture = new TextureRegion(new Texture("images/logo.png"));
+        width = height = 0x0.FAP0f * ((Gdx.graphics.getHeight() > Gdx.graphics.getWidth()) ? Gdx.graphics.getWidth() : Gdx.graphics.getHeight());
+        spriteBatch = new SpriteBatch();
         this.render(Gdx.graphics.getDeltaTime());
         this.setActive(true);
         Timer timer2 = new Timer();
         TimerTask task = new TimerTask() {
-            public void run()
-            {
+            public void run() {
                 setActive(false);
             }
         };
-        timer2.schedule( task, (long) (time*1000));
+        timer2.schedule(task, (long) (time * 1000));
     }
 
 
@@ -61,28 +59,28 @@ public class LogoScreen extends Stage implements Screen {
     }
 
     @Override
-    public void render(float delta){
-        if(active)this.width=this.height=this.height* 0.99f;
+    public void render(float delta) {
+        if (active) this.width = this.height = this.height * 0.99f;
         spriteBatch.begin();
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         spriteBatch.draw(texture,
-                (Gdx.graphics.getWidth()-width)/2,(Gdx.graphics.getHeight()-height)/2,
-                width/2,height/2,
-                width,height,1,1,rotation);
+                (Gdx.graphics.getWidth() - width) / 2, (Gdx.graphics.getHeight() - height) / 2,
+                width / 2, height / 2,
+                width, height, 1, 1, rotation);
         spriteBatch.end();
     }
 
-    public  void rotate(float rotation){
-        this.rotation+=rotation;
-    }
-
-    private void setActive(boolean active) {
-        this.active=active;
+    public void rotate(float rotation) {
+        this.rotation += rotation;
     }
 
     public boolean isActive() {
         return active;
+    }
+
+    private void setActive(boolean active) {
+        this.active = active;
     }
 
     @Override

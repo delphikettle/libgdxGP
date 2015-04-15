@@ -21,8 +21,9 @@ public class GameLevels {
                     UnnamedLevel.class
             )
     );
+
     public static List<String> getNames(List<Class<? extends Level>> levels,
-                                          boolean sorted) {
+                                        boolean sorted) {
         List<String> names = new ArrayList<String>(levels.size());
 
         for (Class<? extends Level> level : levels) {
@@ -35,6 +36,7 @@ public class GameLevels {
 
         return names;
     }
+
     public static Level instantiateLevel(List<Class<? extends Level>> levels,
                                          String levelName) {
         try {

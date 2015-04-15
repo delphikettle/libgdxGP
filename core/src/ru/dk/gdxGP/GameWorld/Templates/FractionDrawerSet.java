@@ -1,4 +1,5 @@
 package ru.dk.gdxGP.GameWorld.Templates;
-public final class FractionDrawerSet{
-	
+
+public final class FractionDrawerSet {
+
 }

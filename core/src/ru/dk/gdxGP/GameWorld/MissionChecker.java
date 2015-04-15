@@ -11,11 +11,11 @@ public class MissionChecker extends Timer {
 
     private final ru.dk.gdxGP.GameWorld.Mission mission;
     private long period;
-    private boolean finished=false;
-    private final Timer.Task timerTask=new Timer.Task() {
+    private boolean finished = false;
+    private final Timer.Task timerTask = new Timer.Task() {
         @Override
         public void run() {
-            if(MissionChecker.this.mission!=null) {
+            if (MissionChecker.this.mission != null) {
                 if (MissionChecker.this.mission.isAchieved()) {
                     MissionChecker.this.stop();
                     MissionChecker.this.finished = true;
@@ -23,24 +23,30 @@ public class MissionChecker extends Timer {
             }
         }
     };
-    public MissionChecker(ru.dk.gdxGP.GameWorld.Mission mission, long period){
+
+    public MissionChecker(ru.dk.gdxGP.GameWorld.Mission mission, long period) {
         this.mission = mission;
-        this.period=period;
+        this.period = period;
         scheduleTask();
     }
-    private void scheduleTask(){
-        this.schedule(timerTask, 0, this.period/1000.0f);
+
+    private void scheduleTask() {
+        this.schedule(timerTask, 0, this.period / 1000.0f);
     }
+
     public boolean isFinished() {
         return finished;
     }
-    public void pause(){
+
+    public void pause() {
         this.stop();
     }
-    public void resume(){
+
+    public void resume() {
         this.start();
         scheduleTask();
     }
+
     public Mission getMission() {
         return mission;
     }

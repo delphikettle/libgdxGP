@@ -9,27 +9,30 @@ import java.util.LinkedList;
  * Created by DK on 14.04.2015.
  */
 public class Mission extends Task {
+    private final LinkedList<Task> taskList = new LinkedList<Task>();
     private Task currentTask;
-    private MissionDrawer missionDrawer= MissionDrawerSet.standardDrawer;
-    private final LinkedList<Task> taskList=new LinkedList<Task>();
-    public Mission(String title){
-        super(true,title);
+    private MissionDrawer missionDrawer = MissionDrawerSet.standardDrawer;
+
+    public Mission(String title) {
+        super(true, title);
     }
-    public void addTask(Task task){
+
+    public void addTask(Task task) {
         this.taskList.add(task);
     }
+
     @Override
     public boolean check() {
-        if(currentTask==null) {
+        if (currentTask == null) {
             if (taskList.size() > 0)
                 this.currentTask = taskList.pop();
         }
-        if(currentTask!=null){
-            if(currentTask.isAchieved())
-                currentTask=null;
+        if (currentTask != null) {
+            if (currentTask.isAchieved())
+                currentTask = null;
         }
 
-        return (this.taskList.size()==0&&currentTask==null);
+        return (this.taskList.size() == 0 && currentTask == null);
     }
 
     public void setMissionDrawer(MissionDrawer missionDrawer) {
@@ -38,13 +41,13 @@ public class Mission extends Task {
 
     @Override
     public String getTaskText() {
-        if(currentTask!=null)
+        if (currentTask != null)
             return currentTask.getTaskText();
         else
             return "";
     }
 
-    public void render(Batch batch){
+    public void render(Batch batch) {
         this.missionDrawer.drawMission(this, batch);
     }
 }

@@ -1,7 +1,6 @@
 package ru.dk.gdxGP.android;
 
 import android.app.Activity;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +15,7 @@ import java.util.List;
 public class LevelListActivity extends Activity {
     private ListView lv;
     private ArrayAdapter<String> adapter;
+
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         /*
@@ -27,13 +27,13 @@ public class LevelListActivity extends Activity {
         setListAdapter(adapter);
         */
         setContentView(R.layout.level_list);
-        lv = (ListView)findViewById(R.id.levelList);
-        if(lv==null) {
+        lv = (ListView) findViewById(R.id.levelList);
+        if (lv == null) {
             System.err.println("Null lv");
             return;
         }
         final List<String> levelNames = GameLevels.getNames(GameLevels.LEVELS, true);
-        adapter = new ArrayAdapter<String>(this,	R.layout.level_list_item, levelNames);
+        adapter = new ArrayAdapter<String>(this, R.layout.level_list_item, levelNames);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -41,8 +41,8 @@ public class LevelListActivity extends Activity {
                                     long id) {
                 Toast.makeText(getApplicationContext(), ((TextView) itemClicked).getText(),
                         Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(LevelListActivity.this,AndroidLauncher.class);
-                intent.putExtra("LEVEL_NAME",((TextView) itemClicked).getText());
+                Intent intent = new Intent(LevelListActivity.this, AndroidLauncher.class);
+                intent.putExtra("LEVEL_NAME", ((TextView) itemClicked).getText());
                 startActivity(intent);
             }
         });

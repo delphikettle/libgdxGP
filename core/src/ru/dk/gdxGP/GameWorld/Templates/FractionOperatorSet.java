@@ -1,4 +1,5 @@
 package ru.dk.gdxGP.GameWorld.Templates;
-public final class FractionOperatorSet{
+
+public final class FractionOperatorSet {
 
 }
