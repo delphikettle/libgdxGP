@@ -1,5 +1,8 @@
 package ru.dk.gdxGP.GameWorld;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+import ru.dk.gdxGP.GameWorld.Templates.MissionDrawerSet;
+
 import java.util.LinkedList;
 
 /**
@@ -7,6 +10,7 @@ import java.util.LinkedList;
  */
 public class Mission extends Task {
     private Task currentTask;
+    private MissionDrawer missionDrawer= MissionDrawerSet.standardDrawer;
     private final LinkedList<Task> taskList=new LinkedList<Task>();
     public Mission(String title){
         super(true,title);
@@ -25,6 +29,22 @@ public class Mission extends Task {
                 currentTask=null;
         }
 
-        return (this.taskList.size()==0&&taskList==null);
+        return (this.taskList.size()==0&&currentTask==null);
+    }
+
+    public void setMissionDrawer(MissionDrawer missionDrawer) {
+        this.missionDrawer = missionDrawer;
+    }
+
+    @Override
+    public String getTaskText() {
+        if(currentTask!=null)
+            return currentTask.getTaskText();
+        else
+            return "";
+    }
+
+    public void render(Batch batch){
+        this.missionDrawer.drawMission(this, batch);
     }
 }

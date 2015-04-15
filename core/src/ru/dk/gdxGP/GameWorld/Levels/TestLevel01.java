@@ -4,7 +4,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import jdk.nashorn.internal.runtime.linker.NashornBeansLinker;
 import ru.dk.gdxGP.GameWorld.ActionForNextStep;
+import ru.dk.gdxGP.GameWorld.Mission;
+import ru.dk.gdxGP.GameWorld.Task;
+import ru.dk.gdxGP.GameWorld.Tasks.TaskCombination;
+import ru.dk.gdxGP.GameWorld.Tasks.TaskOnCoordinate;
+import ru.dk.gdxGP.GameWorld.Tasks.TaskOnMass;
 import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
 import ru.dk.gdxGP.GameWorld.Level;
 
@@ -14,12 +20,14 @@ import java.util.Random;
 public class TestLevel01 extends Level {
     public TestLevel01() {
         super();
-        this.setTimeFactor(1f);
-        this.setG(10);
-        this.setK(10);
-        this.setChargingK(0.1f);
     }
 
+    @Override
+    public void setParameters() {
+        this.setG(0f);
+        this.setK(10f);
+        this.setChargingK(0.0001f);
+    }
     @Override
     public void setCameraPosition() {
 		/*this.getStage().getCamera().position.set(
@@ -27,22 +35,18 @@ public class TestLevel01 extends Level {
 				(this.getParticles().get(0).getY()+this.getStage().getCamera().position.y*255)/256,
 				0);*/
     }
-
     @Override
     public void preRender() {
 
     }
-
     @Override
     public void afterRender() {
 
     }
-
     @Override
     public void loadAssets() {
         this.loadAssets(standardAssetsPaths);
     }
-
     @Override
     public void setSizes() {
         setYMin(0);
@@ -50,25 +54,20 @@ public class TestLevel01 extends Level {
         setXMax((int) (getXMax()*0.01f));
         setYMax((int) (getYMax()*0.01f));
     }
-
-
+    private Random rnd=new Random();
+    private Fraction mainFraction;
     @Override
     public void setParticles() {
         ArrayList<Body> bodies=new ArrayList<Body>();
-        Random rnd=new Random();/*
-        bodies.add(this.addFraction(new Fraction(this.getWorld(),
-                (rnd.nextInt(this.getXMax() - this.getXMin()) + this.getXMin()),
-                (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()),
-                (rnd.nextInt(200) - 100), (rnd.nextInt(200) - 100),
-                (rnd.nextInt(10000) + 81) * 0.00025f)).getBody());*/
-        this.addFraction(new Fraction(this.getWorld(),
+        mainFraction=new Fraction(this.getWorld(),
                 (MathUtils.random(this.getXMin()+this.getWidth()*0.1f, this.getXMax()-this.getWidth()*0.1f)),
                 (MathUtils.random(this.getYMin()+this.getHeight()*0.1f, this.getYMax()-this.getHeight()*0.1f)),
                 (rnd.nextInt(200) - 100) * 0f, (rnd.nextInt(200) - 100) * 0f,
                 (rnd.nextInt(2500) + 400) * 0.0005f, (float)(MathUtils.random(-1f, 1f)), 1, 1, 1, Fraction.Condition.Liquid,
-                new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f))));
+                new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f)));
+        this.addFraction(mainFraction);
         for (int i = 0;
-             i < 50/*Gdx.graphics.getHeight()*Gdx.graphics.getWidth()/(50000)*/;
+             i < 5/*Gdx.graphics.getHeight()*Gdx.graphics.getWidth()/(50000)*/;
              i++) {
 
             bodies.add(this.addFraction(new Fraction(this.getWorld(),
@@ -77,49 +76,39 @@ public class TestLevel01 extends Level {
                     (rnd.nextInt(200) - 100) * 0f, (rnd.nextInt(200) - 100) * 0f,
                     (rnd.nextInt(2500) + 400) * 0.00001f, (float)(MathUtils.random(-5f, 5f)), 1, 1, 1, Fraction.Condition.Liquid,
                     new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f)))).getBody());
-            //if(MathUtils.random.nextBoolean())((Fraction)bodies.get(i).getUserData()).setCondition(Fraction.Condition.Solid);
-            /*for (int j = 0; j < bodies.size(); j++) {
-                if(i==j)continue;
-                DistanceJointDef jointDef= new DistanceJointDef();
-                jointDef.bodyA=bodies.get(i);
-                jointDef.bodyB=bodies.get(j);
-                jointDef.collideConnected=true;
-                jointDef.dampingRatio=0.1f;
-                jointDef.frequencyHz=0.005f;
-                jointDef.length=
-                        (bodies.get(i).getFixtureList().get(0).getShape().getRadius()+bodies.get(j).getFixtureList().get(0).getShape().getRadius())*0f;
-                Joint joint1=
-                        this.getWorld().createJoint(jointDef);
-            }*/
         }
     }
-
-    /*
-    @Override
-    public void renderBorders() {
-        super.drawBorders(this.getStage().getBatch());
-    }
-    */
-
     @Override
     public void setOtherElements() {
 
     }
-
+    @Override
+    public Mission createMission() {
+        Mission mission=new Mission("");
+        Task task01=new TaskOnCoordinate(mainFraction, new Vector2(0,0), 1);
+        task01.setOnce(true);
+        Task task02=new TaskOnMass(mainFraction,0.5f,0.1f);
+        task02.setOnce(true);
+        Task taskComb=new TaskCombination(new Task[]{task01,task02}, TaskCombination.TC_AND,true);
+        taskComb.setTaskText("Make your particle be approximately in coordinates 0,0 with mass 0.5");
+        mission.addTask(taskComb);
+        return mission;
+    }
     @Override
     public void tap(final float x, final float y) {
-
         this.addAction(new ActionForNextStep() {
             @Override
             public void doSomethingOnStep(Level level) {
+                System.out.println(level.getFraction(0).getMass());
                 Random rnd = new Random();
                 float vModule=10;
                 Vector2 v=new Vector2(TestLevel01.this.getFraction(0).getBody().getPosition());
                 v.rotate(180);
                 v.add(x,y);
                 v.setLength(vModule);
+                Fraction newFraction=level.getFraction(0).divide(TestLevel01.this.getFraction(0).getMass() * 0.125f, v.x, v.y);
                 level.addFraction(
-                        level.getFraction(0).divide(TestLevel01.this.getFraction(0).getMass() * 0.125f, v.x, v.y)
+                        newFraction
                 );
 
             }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import ru.dk.gdxGP.GameWorld.Mission;
 import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
 import ru.dk.gdxGP.GameWorld.Level;
 import java.util.*;
@@ -13,7 +14,6 @@ public class TestLevel extends Level {
     public TestLevel() {
         super();
 		//this.setG(1f);
-        this.setTimeFactor(1f);
         //this.setMaxDistance(1000);
     }
 
@@ -95,6 +95,11 @@ public class TestLevel extends Level {
 
         //this.addBorder(new Border(this.getWorld(),this.getXMin()-w/2,this.getYMin()-h/2,10,10,false));
         //this.addBorder(new Border(this.getWorld(), 0,0,100,100));
+    }
+
+    @Override
+    public Mission createMission() {
+        return null;
     }
 
     @Override

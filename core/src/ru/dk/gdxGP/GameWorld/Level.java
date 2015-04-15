@@ -30,14 +30,10 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	private int xMin, xMax, yMin, yMax;
 	private float G=1;
 	private float k=1;
-
 	private float chargingK=1;
-	private float timeFactor=1f;
-	private static long currentRealTime;
-	private float currentGameTime;
+	private MissionChecker currentMissionChecker=new MissionChecker(new Mission(""), 1000);
 	private boolean isMove=false, isEnd=false;
 	private float loaded;
-	private MissionChecker currentMissionChecker;
 	private final static ActionForNextStep moveAction = new ActionForNextStep() {
 		@Override
 		public void doSomethingOnStep(Level level) {
@@ -109,17 +105,66 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 						e.printStackTrace();
 					}
 				}
-				setLoaded(0.0f / 5);
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				setLoaded(0.0f / 7);
 				setSizes();
-				setLoaded(1.0f / 5);
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				setLoaded(1.0f / 7);
 				setLevelScreen(screen);
-				setLoaded(2.0f / 5);
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				setLoaded(2.0f / 7);
 				createWalls();
-				setLoaded(3.0f / 5);
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				setLoaded(3.0f / 7);
 				setParticles();
-				setLoaded(4.0f / 5);
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				setLoaded(4.0f / 7);
 				setOtherElements();
-				setLoaded(5.0f / 5);
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				setLoaded(5.0f / 7);
+				setParameters();
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				setLoaded(6.0f / 7);
+				Level.this.addAction(new ActionForNextStep() {
+					@Override
+					public void doSomethingOnStep(Level level) {
+						Level.this.currentMissionChecker=new MissionChecker(Level.this.createMission(),1000);
+					}
+				});
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				setLoaded(7.0f / 7);
 			}
 		}).start();
 	}
@@ -165,6 +210,8 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	abstract public void setSizes();
 	abstract public void setParticles();
     abstract public void setOtherElements();
+	abstract public Mission createMission();
+	public void setParameters(){}
     public void createWalls(){
         ChainShape shape=new ChainShape();
         shape.createChain(new float[]{
@@ -230,35 +277,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
     */
 	public void Move(float time){
 		this.proceed(time);
-		world.step(1/100f,100,100);
-		 ///if(time!=0.0f) {
-		//	 System.out.println(((double)(time)));
-		 //}
-		 //world.step(time/60f, 1, 1);
-		/*
-		 if(time>0){
-			 lastTime=MathUtils.clamp(time,lastTime/2.0f,lastTime*1.5f);
-			 this.proceed(lastTime);
-			 world.step(lastTime/60.0f, 10, 10);
-		 }*/
-		/*
-		float stepTime=time+lostTime;
-		int normalStepTime=(int)stepTime;
-		lostTime=stepTime-(float)normalStepTime;
-		this.proceed(time);
-		for (int i = 0; i < normalStepTime; i++) {
-			world.step(1 / 60f, 10, 10);
-		}
-		*/
-		//if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024))System.out.println(time);
-
-		//this.proceed(time);
-		//this.world.step(1/100f,10,10);
-	}
-	 final private float getNextStepTime(){
-
-		return (-currentGameTime+(currentGameTime=(this.timeFactor*1.0f*(-currentRealTime+(currentRealTime=System.currentTimeMillis()))+currentGameTime)));
-		
+		world.step(1/100f,10,10);
 	}
 
 	@Override
@@ -267,13 +286,12 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 		while (!isEnd) {
 			//Gdx.app.log("run", "!!! running "+isMove);
 			if (isMove) {
-				if(this.getLoaded()>=1.0f) {
-						if(!this.actions.isEmpty()){
-							//Gdx.app.log("run", "!!! "+this.actions.size());
-							this.actions.remove(0).doSomethingOnStep(this);
-						}
-					//Gdx.app.log("run", "!!! running3 "+isMove);
+				if (!this.actions.isEmpty()) {
+					//Gdx.app.log("run", "!!! "+this.actions.size());
+					this.actions.remove(0).doSomethingOnStep(this);
 				}
+				//Gdx.app.log("run", "!!! running3 "+isMove);
+
 				//Gdx.app.log("run", "!!! running2 "+isMove);
 			}
 			//Gdx.app.log("run", "!!! running1 "+isMove);
@@ -316,12 +334,6 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	final public float setG(float newG){
 		return this.G=newG;
 	}
-	final public float getTimeFactor(){
-		return this.timeFactor;
-	}
-	final public float setTimeFactor(float newTimeFactor){
-		return newTimeFactor > 0 ? (this.timeFactor = newTimeFactor) : this.timeFactor;
-	}
 	public int getWidth(){
 		return getXMax()-getXMin();
 	}
@@ -352,10 +364,9 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 	final public int setYMax(int newYMax){
 		return this.yMax=newYMax;
 	}
-	final public float getCurrentGameTime(){
-		return this.currentGameTime;
+	final public Mission getMission(){
+		return this.currentMissionChecker.getMission();
 	}
-
 	public void contactFractions(Fraction f1, Fraction f2,Contact contact){
 		if(f1.getCondition()!= Fraction.Condition.Solid||f2.getCondition()!= Fraction.Condition.Solid){
 			//contact.setEnabled(false);
@@ -373,12 +384,10 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 
 	public void pauseLevel(){
 		this.isMove=false;
-		currentRealTime=System.currentTimeMillis();
 		this.stepTimer.stop();
 
 	}
 	public void resumeLevel(){
-		currentRealTime=System.currentTimeMillis();
 		this.isMove=true;
 		this.stepTimer.start();
 		this.stepTimer.scheduleTask(new Timer.Task() {
@@ -460,7 +469,6 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 			}
 
 	}
-
 	public void interactAllWithAllFractions(){
 		for(int i=0;i<particles.size();i++){
 			Fraction f1=particles.get(i);
@@ -471,7 +479,6 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 			}
 		}
 	}
-
 	public void flowMass(final Fraction f1, final Fraction f2){
 		this.addAction(new ActionForNextStep() {
 			@Override
@@ -481,7 +488,7 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 					from=f2;
 					to=f1;
 				}
-				float deltaMass=MathUtils.clamp(from.getMass()*to.getMass()*Level.this.G*0.01f,0.000001f,1f);
+				float deltaMass=MathUtils.clamp(from.getMass()*to.getMass()*Level.this.G*0.001f,0.000001f,1f);
 				try {
 					from.moveParameters(to,deltaMass,0,0,new Vector2(0,0));
 				} catch (Fraction.NullMassException e) {
@@ -490,36 +497,6 @@ public abstract class Level extends Thread implements Runnable,ContactListener
 
 			}
 		});
-		/*
-		d.set(f2.getBody().getPosition());
-		d.add(-f1.getBody().getPosition().x,-f1.getBody().getPosition().y);
-		Fraction from=f1,to=f2;
-		if(f1.getMass()>f2.getMass()){
-			from=f2;
-			to=f1;
-		}
-		if(from.getMass()==to.getMass())return;
-		float d=this.d.len();
-		if(d>from.getRadius()+to.getRadius())return;
-		float a=to.getMass(),b=from.getMass();
-		float sqrt=(float)(Math.PI*(2*a*d*d+2*b*d*d-Math.PI*Math.pow(d,4)));
-		if(sqrt<=0)return;
-		final float mass=(float)(Math.sqrt(sqrt)-a+b)/2;
-		if(mass<=0)return;
-		final Fraction finalFrom = from;
-		final Fraction finalTo = to;
-
-		this.addAction(new ActionForNextStep() {
-			@Override
-			public void doSomethingOnStep(Level level) {
-				try {
-					finalFrom.moveParameters(finalTo, mass, 0, 0, new Vector2(0, 0));
-				} catch (Fraction.NullMassException e) {
-					Level.this.removeFraction(e.getFraction());
-				}
-			}
-		});
-		*/
 	}
 
 	//methods for generating

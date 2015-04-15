@@ -30,9 +30,10 @@ public class TaskOnCoordinate extends Task{
     public boolean check() {
         for (int i = 0; i < fractions.size(); i++) {
             Fraction fraction=fractions.get(0);
-            if(!(MathUtils.isEqual(fraction.getPosition().x, coordinate.x, inaccuracy) || MathUtils.isEqual(fraction.getPosition().y, coordinate.y, inaccuracy)))
+            if(!(MathUtils.isEqual(fraction.getPosition().x, coordinate.x, inaccuracy) && MathUtils.isEqual(fraction.getPosition().y, coordinate.y, inaccuracy)))
                 return false;
         }
         return true;
     }
+
 }

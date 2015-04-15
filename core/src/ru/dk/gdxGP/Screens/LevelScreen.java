@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -137,6 +138,9 @@ public class LevelScreen implements Screen {
         this.level.render(delta);
         this.particlesStage.getBatch().setColor(startColor);
         this.level.afterRender();
+        getBatch().begin();
+        this.level.getMission().render(getBatch());
+        getBatch().end();
         //box2DDebugRenderer.render(this.level.getWorld(), camera.combined);
     }
     public boolean zoom(float initialDistance, float distance) {
