@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import ru.dk.gdxGP.GDXGameGP;
 import ru.dk.gdxGP.GameWorld.FractionDrawer;
 import ru.dk.gdxGP.GameWorld.FractionOperator;
+import ru.dk.gdxGP.GameWorld.Level;
 
 public class Fraction extends Actor implements FractionDrawer, FractionOperator {
     private static final FixtureDef blankFixtureDef;
@@ -29,6 +30,7 @@ public class Fraction extends Actor implements FractionDrawer, FractionOperator 
     private static final TextureRegion textureRegionMinusCharge;
     private static final TextureRegion textureRegionPlusCharge;
     private final Body body;
+    private final Level level;
     private Condition condition;
     private FractionDrawer drawer = null;
     private FractionOperator operator = null;
@@ -45,7 +47,9 @@ public class Fraction extends Actor implements FractionDrawer, FractionOperator 
     }
     private float density = 1;
 
-    public Fraction(World world, float x, float y, float vx, float vy, float mass, float charge, float friction, float density, float restitution, Condition condition, Color color) {
+    public Fraction(Level level,World world, float x, float y, float vx, float vy, float mass, float charge, float friction, float density, float restitution, Condition condition, Color color) {
+        this.level=level;
+
         BodyDef bodyDef = new BodyDef();
         bodyDef.active = true;
         bodyDef.bullet = true;
@@ -222,7 +226,7 @@ public class Fraction extends Actor implements FractionDrawer, FractionOperator 
         Vector2 coords = new Vector2(vx, vy);
         coords.setLength((float) (r + Math.sqrt(mass / Math.PI / getDensity())));
         coords.add(this.body.getPosition().x, this.body.getPosition().y);
-        return new Fraction(this.body.getWorld(), coords.x, coords.y, vx, vy, mass,
+        return new Fraction(this.level,this.body.getWorld(), coords.x, coords.y, vx, vy, mass,
                 this.getCharge(), this.getFriction(), this.getDensity(), this.getRestitution(), this.getCondition(), this.getColor());
     }
 

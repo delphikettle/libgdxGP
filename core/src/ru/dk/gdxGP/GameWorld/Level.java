@@ -130,49 +130,49 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
                     }
                 }
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(MathUtils.random(0,100));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 setLoaded(0.0f / 7);
                 setSizes();
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(MathUtils.random(0,100));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 setLoaded(1.0f / 7);
                 setLevelScreen(screen);
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(MathUtils.random(0,100));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 setLoaded(2.0f / 7);
                 createWalls();
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(MathUtils.random(0,100));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 setLoaded(3.0f / 7);
                 setParticles();
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(MathUtils.random(0,100));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 setLoaded(4.0f / 7);
                 setOtherElements();
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(MathUtils.random(0,100));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 setLoaded(5.0f / 7);
                 setParameters();
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(MathUtils.random(0,100));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -184,7 +184,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
                     }
                 });
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(MathUtils.random(0,100));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -556,7 +556,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     //methods for generating
 
     public Fraction generateRandomFraction(FractionDef fractionDef) {
-        return new Fraction(this.getWorld(),
+        return new Fraction(this,this.getWorld(),
                 MathUtils.random(fractionDef.minX, fractionDef.maxX),
                 MathUtils.random(fractionDef.minY, fractionDef.maxY),
                 MathUtils.random(fractionDef.minVX, fractionDef.maxVX), MathUtils.random(fractionDef.minVY, fractionDef.maxVY),

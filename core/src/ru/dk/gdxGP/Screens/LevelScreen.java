@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -24,6 +25,7 @@ public class LevelScreen implements Screen {
     private Color startColor;
     private float initialScale = 1;
     private final Level level;
+    private Batch missionBatch=new SpriteBatch();
 
     public LevelScreen(Level level, float w, float h) {
         this.level = level;
@@ -140,9 +142,9 @@ public class LevelScreen implements Screen {
         this.level.render(delta);
         this.particlesStage.getBatch().setColor(startColor);
         this.level.afterRender();
-        getBatch().begin();
-        this.level.getMission().render(getBatch());
-        getBatch().end();
+        missionBatch.begin();
+        this.level.getMission().render(missionBatch);
+        missionBatch.end();
         //box2DDebugRenderer.render(this.level.getWorld(), camera.combined);
     }
 

@@ -4,10 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import ru.dk.gdxGP.GameWorld.ActionForNextStep;
-import ru.dk.gdxGP.GameWorld.Level;
-import ru.dk.gdxGP.GameWorld.Mission;
-import ru.dk.gdxGP.GameWorld.Task;
+import ru.dk.gdxGP.GameWorld.*;
 import ru.dk.gdxGP.GameWorld.Tasks.TaskCombination;
 import ru.dk.gdxGP.GameWorld.Tasks.TaskOnCoordinate;
 import ru.dk.gdxGP.GameWorld.Tasks.TaskOnMass;
@@ -65,7 +62,7 @@ public class TestLevel01 extends Level {
     @Override
     public void setParticles() {
         ArrayList<Body> bodies = new ArrayList<Body>();
-        mainFraction = new Fraction(this.getWorld(),
+        mainFraction = new Fraction(this,this.getWorld(),
                 (MathUtils.random(this.getXMin() + this.getWidth() * 0.1f, this.getXMax() - this.getWidth() * 0.1f)),
                 (MathUtils.random(this.getYMin() + this.getHeight() * 0.1f, this.getYMax() - this.getHeight() * 0.1f)),
                 (rnd.nextInt(200) - 100) * 0f, (rnd.nextInt(200) - 100) * 0f,
@@ -76,7 +73,7 @@ public class TestLevel01 extends Level {
              i < 5/*Gdx.graphics.getHeight()*Gdx.graphics.getWidth()/(50000)*/;
              i++) {
 
-            bodies.add(this.addFraction(new Fraction(this.getWorld(),
+            bodies.add(this.addFraction(new Fraction(this,this.getWorld(),
                     (MathUtils.random(this.getXMin() + this.getWidth() * 0.1f, this.getXMax() - this.getWidth() * 0.1f)),
                     (MathUtils.random(this.getYMin() + this.getHeight() * 0.1f, this.getYMax() - this.getHeight() * 0.1f)),
                     (rnd.nextInt(200) - 100) * 0f, (rnd.nextInt(200) - 100) * 0f,
@@ -92,14 +89,19 @@ public class TestLevel01 extends Level {
 
     @Override
     public Mission createMission() {
-        Mission mission = new Mission("");
+        final Mission mission = new Mission("");
         Task task01 = new TaskOnCoordinate(mainFraction, new Vector2(0, 0), 1);
         task01.setOnce(true);
-        Task task02 = new TaskOnMass(mainFraction, 0.5f, 0.1f);
+        Task task02 = new TaskOnMass(mainFraction, 0.5f, 1f);
         task02.setOnce(true);
-        Task taskComb = new TaskCombination(new Task[]{task01, task02}, TaskCombination.TC_AND, true);
+        final TaskCombination taskComb = new TaskCombination(new Task[]{task01, task02}, TaskCombination.TC_AND, true);
         taskComb.setTaskText("Make your particle be approximately in coordinates 0,0 with mass 0.5");
+
         mission.addTask(taskComb);
+
+        Task task03=new TaskOnCoordinate(mainFraction,new Vector2(getWidth(),getHeight()), 1);
+        task03.setTaskText("you've completed it");
+        mission.addTask(task03);
         return mission;
     }
 

@@ -8,6 +8,8 @@ public abstract class Task {
     private String title = "";
     private String taskText = "";
 
+    private ActionAfterAchievedTask actionAfterAchievedTask;
+
     protected Task() {
         this(true, "");
     }
@@ -17,16 +19,25 @@ public abstract class Task {
         this.title = title;
     }
 
+    public ActionAfterAchievedTask getActionAfterAchievedTask() {
+        return actionAfterAchievedTask;
+    }
+
+    public void setActionAfterAchievedTask(ActionAfterAchievedTask actionAfterAchievedTask) {
+        this.actionAfterAchievedTask = actionAfterAchievedTask;
+    }
+
     public final boolean isAchieved() {
         //if(!isAchieved) isAchieved =check();
         if (once) {
             if (!isAchieved) {
                 isAchieved = check();
+                if (isAchieved&&this.actionAfterAchievedTask!=null)
+                    this.actionAfterAchievedTask.actionAfterAchievedTask(this);
             }
         } else {
             isAchieved = check();
         }
-        if (isAchieved) System.out.println("Achieved");
         return isAchieved;
     }
 
