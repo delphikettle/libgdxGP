@@ -3,13 +3,11 @@ package ru.dk.gdxGP.GameWorld;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Timer;
-import ru.dk.gdxGP.GDXGameGP;
 import ru.dk.gdxGP.GameWorld.Templates.LevelProceederSet;
 import ru.dk.gdxGP.GameWorld.WorldElements.Border;
 import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
@@ -18,7 +16,6 @@ import ru.dk.gdxGP.Screens.LevelScreen;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 
 public abstract class Level extends Thread implements Runnable, ContactListener {
@@ -135,12 +132,6 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     }
 
     abstract public void afterRender();
-
-    public void proceed(float deltaTime) {
-        this.levelScreen.proceed(deltaTime);
-        processAccelerometer();
-        interactAllWithAllFractions();
-    }
     public void proceedParticles(float delta){
         this.levelScreen.proceed(delta);
     }
@@ -456,11 +447,11 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     }
     //additional methods for management of the world and the particles
 
-    public void processAccelerometer() {
+    public void processAccelerometer(float factor) {
         float y = Gdx.input.getAccelerometerY();
         float x = Gdx.input.getAccelerometerX();
         if (prevAccelX != x || prevAccelY != y) {
-            world.setGravity(new Vector2(10 * y, -10 * x));
+            world.setGravity(new Vector2(factor * y, -factor * x));
             prevAccelX = x;
             prevAccelY = y;
         }
@@ -543,7 +534,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
                 MathUtils.random(fractionDef.minX, fractionDef.maxX),
                 MathUtils.random(fractionDef.minY, fractionDef.maxY),
                 MathUtils.random(fractionDef.minVX, fractionDef.maxVX), MathUtils.random(fractionDef.minVY, fractionDef.maxVY),
-                MathUtils.random(fractionDef.minMass, fractionDef.masMass), (MathUtils.random(fractionDef.minCharge, fractionDef.maxCharge)), 1, 1, 1, Fraction.Condition.Liquid,
+                MathUtils.random(fractionDef.minMass, fractionDef.maxMass), (MathUtils.random(fractionDef.minCharge, fractionDef.maxCharge)), 1, 1, 1, Fraction.Condition.Liquid,
                 new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f)));
     }
 }

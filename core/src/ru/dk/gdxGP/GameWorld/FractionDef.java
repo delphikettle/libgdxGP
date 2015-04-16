@@ -7,7 +7,7 @@ public class FractionDef {
     public float minX, maxX, minY, maxY;
     public float minCharge = -1f, maxCharge = 1f;
     public float minVX = 0, maxVX = 0, minVY = 0, maxVY = 0;
-    public float minMass = 0.000001f, masMass = 100f;
+    public float minMass = 0.000001f, maxMass = 100f;
 
     public FractionDef(float minX, float maxX, float minY, float maxY) {
         this.minX = minX;

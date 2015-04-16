@@ -149,7 +149,8 @@ public class LevelScreen implements Screen {
         this.particlesStage.getBatch().setColor(startColor);
         this.level.afterRender();
         missionBatch.begin();
-        this.level.getMission().render(missionBatch);
+        if(this.level.getMission()!=null)
+            this.level.getMission().render(missionBatch);
         missionBatch.end();
         //box2DDebugRenderer.render(this.level.getWorld(), camera.combined);
     }

@@ -18,6 +18,6 @@ public class DesktopLauncher {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.width = 1024;
         config.height = 846;
-        new LwjglApplication(new GDXGameGP("TestLevel01"), config);
+        new LwjglApplication(new GDXGameGP("TutorialLevel"), config);
     }
 }

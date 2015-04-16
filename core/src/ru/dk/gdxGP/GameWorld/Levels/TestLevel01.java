@@ -33,7 +33,7 @@ public class TestLevel01 extends Level {
             @Override
             public void proceed(Level level, float delta) {
                 level.proceedParticles(delta);
-                level.processAccelerometer();
+                level.processAccelerometer(10);
                 level.interactAllWithAllFractions();
             }
         });
