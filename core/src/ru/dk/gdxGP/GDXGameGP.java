@@ -16,22 +16,20 @@ import ru.dk.gdxGP.Screens.LogoScreen;
 
 public class GDXGameGP extends Game implements GestureDetector.GestureListener, InputProcessor, ApplicationListener {
     static public final AssetManager assetManager = new AssetManager();
-    private SpriteBatch batch;
     private State state = State.logo;
     private Screen screen;
     private String levelName;
+    public final InputMultiplexer inputMultiplexer;
 
     public GDXGameGP(String levelName) {
         this.levelName = levelName;
+        inputMultiplexer = new InputMultiplexer();
     }
 
     @Override
     public void create() {
-        //new AtlasLoader();
-        this.screen = new LogoScreen(1);
-        screen.show();
-        batch = new SpriteBatch();
-        InputMultiplexer inputMultiplexer = new InputMultiplexer();
+        this.setScreen(new LogoScreen(1));
+        this.screen=getScreen();
         inputMultiplexer.addProcessor(this);
         inputMultiplexer.addProcessor(new GestureDetector(this));
         Gdx.input.setInputProcessor(inputMultiplexer);
@@ -39,6 +37,7 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 
     @Override
     public void render() {
+        super.render();
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         if (screen != null) screen.render(Gdx.graphics.getDeltaTime());

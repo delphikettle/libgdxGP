@@ -409,7 +409,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     public void pauseLevel() {
         this.isMove = false;
         this.stepTimer.stop();
-
+        this.currentMissionChecker.pause();
     }
 
     public void resumeLevel() {
@@ -421,6 +421,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
                 Level.this.addAction(moveAction);
             }
         }, 0, 32 / 1000f);
+        this.currentMissionChecker.resume();
     }
 
     @Override

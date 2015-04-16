@@ -1,6 +1,7 @@
 package ru.dk.gdxGP.GameWorld;
 
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Timer;
 
 
@@ -15,6 +16,7 @@ public class MissionChecker extends Timer {
     private final Timer.Task timerTask = new Timer.Task() {
         @Override
         public void run() {
+            System.out.println("missionChecker running"+ MathUtils.random(1,10));
             if (MissionChecker.this.mission != null) {
                 if (MissionChecker.this.mission.isAchieved()) {
                     MissionChecker.this.stop();

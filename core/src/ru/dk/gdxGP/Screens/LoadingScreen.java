@@ -54,7 +54,7 @@ public class LoadingScreen extends Stage implements Screen {
         } else {
             width = height = 0x0.FAP0f * ((Gdx.graphics.getHeight() > Gdx.graphics.getWidth()) ? Gdx.graphics.getWidth() : Gdx.graphics.getHeight());
         }
-        texture = new TextureRegion(new Texture("images/loadBall.png"));
+        texture = AtlasLoader.getRegion("loadBall");
     }
 
     @Override
