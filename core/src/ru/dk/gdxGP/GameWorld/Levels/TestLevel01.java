@@ -8,6 +8,7 @@ import ru.dk.gdxGP.GameWorld.*;
 import ru.dk.gdxGP.GameWorld.Tasks.TaskCombination;
 import ru.dk.gdxGP.GameWorld.Tasks.TaskOnCoordinate;
 import ru.dk.gdxGP.GameWorld.Tasks.TaskOnMass;
+import ru.dk.gdxGP.GameWorld.Templates.FractionDrawerSet;
 import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
 
 import java.util.ArrayList;
@@ -76,6 +77,7 @@ public class TestLevel01 extends Level {
                 (rnd.nextInt(200) - 100) * 0f, (rnd.nextInt(200) - 100) * 0f,
                 (rnd.nextInt(2500) + 400) * 0.0005f, MathUtils.random(-1f, 1f), 1, 1, 1, Fraction.Condition.Liquid,
                 new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f)));
+        mainFraction.setDrawer(FractionDrawerSet.mainDrawer);
         this.addFraction(mainFraction);
         for (int i = 0;
              i < 5/*Gdx.graphics.getHeight()*Gdx.graphics.getWidth()/(50000)*/;
@@ -119,7 +121,7 @@ public class TestLevel01 extends Level {
             @Override
             public void doSomethingOnStep(Level level) {
                 System.out.println(level.getFraction(0).getMass());
-                float vModule = 10;
+                float vModule = 25;
                 Vector2 v = new Vector2(TestLevel01.this.getFraction(0).getBody().getPosition());
                 v.rotate(180);
                 v.add(x, y);

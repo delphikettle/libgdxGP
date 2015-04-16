@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import ru.dk.gdxGP.AtlasLoader;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -34,7 +35,7 @@ public class LogoScreen extends Stage implements Screen {
 
     @Override
     public void show() {
-        texture = new TextureRegion(new Texture("images/logo.png"));
+        texture = AtlasLoader.getRegion("logo");
         width = height = 0x0.FAP0f * ((Gdx.graphics.getHeight() > Gdx.graphics.getWidth()) ? Gdx.graphics.getWidth() : Gdx.graphics.getHeight());
         spriteBatch = new SpriteBatch();
         this.render(Gdx.graphics.getDeltaTime());

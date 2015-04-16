@@ -1,5 +1,6 @@
 package ru.dk.gdxGP.GameWorld.Templates;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -22,7 +23,7 @@ public final class MissionDrawerSet {
 
         @Override
         public void drawMission(Mission mission, Batch batch) {
-            bitmapFont.draw(batch, mission.getTaskText(), 100,100);
+            bitmapFont.draw(batch, mission.getTaskText(), Gdx.graphics.getWidth()*0.05f,Gdx.graphics.getHeight()*0.1f);
         }
     };
 }

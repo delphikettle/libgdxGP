@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import ru.dk.gdxGP.AtlasLoader;
 
 
 public class LoadingScreen extends Stage implements Screen {
@@ -23,7 +24,7 @@ public class LoadingScreen extends Stage implements Screen {
         this.loader = loader;
         this.nextScreen = nextScreen;
         this.spriteBatch = new SpriteBatch();
-        texture = new TextureRegion(new Texture("images/loadBall.png"));
+        texture = AtlasLoader.getRegion("loadBall");
     }
 
     @Override

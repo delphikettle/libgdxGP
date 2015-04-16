@@ -5,6 +5,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import ru.dk.gdxGP.GameWorld.GameLevels;
@@ -16,8 +17,6 @@ import ru.dk.gdxGP.Screens.LogoScreen;
 public class GDXGameGP extends Game implements GestureDetector.GestureListener, InputProcessor, ApplicationListener {
     static public final AssetManager assetManager = new AssetManager();
     private SpriteBatch batch;
-    Texture img;
-    Level lvl;
     private State state = State.logo;
     private Screen screen;
     private String levelName;
@@ -28,9 +27,9 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 
     @Override
     public void create() {
+        new AtlasLoader();
         this.screen = new LogoScreen(1);
         screen.show();
-
         batch = new SpriteBatch();
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(this);
