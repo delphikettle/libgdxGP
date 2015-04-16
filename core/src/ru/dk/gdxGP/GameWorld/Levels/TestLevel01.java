@@ -25,7 +25,15 @@ public class TestLevel01 extends Level {
     public void setParameters() {
         this.setG(10f);
         this.setK(10f);
-        this.setChargingK(0.0001f);
+        this.setChargingK(0.1f);
+        this.setLevelProceeder(new LevelProceeder() {
+            @Override
+            public void proceed(Level level, float delta) {
+                level.proceedParticles(delta);
+                level.processAccelerometer();
+                level.interactAllWithAllFractions();
+            }
+        });
     }
 
     @Override

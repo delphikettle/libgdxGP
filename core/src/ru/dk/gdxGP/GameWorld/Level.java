@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Timer;
 import ru.dk.gdxGP.GDXGameGP;
+import ru.dk.gdxGP.GameWorld.Templates.LevelProceederSet;
 import ru.dk.gdxGP.GameWorld.WorldElements.Border;
 import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
 import ru.dk.gdxGP.Screens.LevelScreen;
@@ -42,9 +43,6 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     private final ArrayList<Border> borders;
     private final ArrayList<Actor> otherElements;
     private final List<ActionForNextStep> actions;
-    public long maxOp = 0;
-    public String maxOpName = "";
-    long time = System.nanoTime(), elTime;
     private LevelScreen levelScreen;
     private float prevAccelX;
     private float prevAccelY;
@@ -56,6 +54,16 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     private MissionChecker currentMissionChecker = new MissionChecker(new Mission(""), 1000);
     private boolean isMove = false, isEnd = false;
     private float loaded;
+
+    public LevelProceeder getLevelProceeder() {
+        return levelProceeder;
+    }
+
+    public void setLevelProceeder(LevelProceeder levelProceeder) {
+        this.levelProceeder = levelProceeder;
+    }
+
+    private LevelProceeder levelProceeder= LevelProceederSet.noneProceed;
     private Vector2 buf = new Vector2(), d = new Vector2();
 
     protected Level() {
@@ -109,6 +117,9 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         this.levelScreen.proceed(deltaTime);
         processAccelerometer();
         interactAllWithAllFractions();
+    }
+    public void proceedParticles(float delta){
+        this.levelScreen.proceed(delta);
     }
 
     public final void load(final LevelScreen screen) {
@@ -289,7 +300,9 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     }
 
     public void Move(float time) {
-        this.proceed(time);
+        if(this.levelProceeder!=null){
+            levelProceeder.proceed(this, time);
+        }
         world.step(1 / 100f, 10, 10);
     }
 
@@ -428,13 +441,13 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
 
     }
 
-    //additional methods for management of the world and the particles
 
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
     }
+    //additional methods for management of the world and the particles
 
-    void processAccelerometer() {
+    public void processAccelerometer() {
         float y = Gdx.input.getAccelerometerY();
         float x = Gdx.input.getAccelerometerX();
         if (prevAccelX != x || prevAccelY != y) {
@@ -444,7 +457,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         }
     }
 
-    void interactionBetweenFractions(Fraction f1, Fraction f2) {
+    public void interactionBetweenFractions(Fraction f1, Fraction f2) {
         d.set(f2.getBody().getPosition());
         d.add(-f1.getBody().getPosition().x, -f1.getBody().getPosition().y);
         float F = (((-this.k * f1.getCharge() * f2.getCharge() + this.G) * f1.getBody().getMass() * f2.getBody().getMass()) / (d.len() * d.len()));
@@ -467,7 +480,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
 
     }
 
-    void interactAllWithAllFractions() {
+    public void interactAllWithAllFractions() {
         for (int i = 0; i < particles.size(); i++) {
             Fraction f1 = particles.get(i);
             if (f1 != null) {
@@ -478,7 +491,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         }
     }
 
-    void flowMass(final Fraction f1, final Fraction f2) {
+    public void flowMass(final Fraction f1, final Fraction f2) {
         this.addAction(new ActionForNextStep() {
             @Override
             public void doSomethingOnStep(Level level) {
