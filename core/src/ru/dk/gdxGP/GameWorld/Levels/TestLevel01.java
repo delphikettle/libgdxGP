@@ -23,7 +23,7 @@ public class TestLevel01 extends Level {
 
     @Override
     public void setParameters() {
-        this.setG(0f);
+        this.setG(10f);
         this.setK(10f);
         this.setChargingK(0.0001f);
     }

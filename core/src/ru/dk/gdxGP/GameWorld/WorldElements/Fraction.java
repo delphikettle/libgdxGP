@@ -12,8 +12,10 @@ import ru.dk.gdxGP.GDXGameGP;
 import ru.dk.gdxGP.GameWorld.FractionDrawer;
 import ru.dk.gdxGP.GameWorld.FractionOperator;
 import ru.dk.gdxGP.GameWorld.Level;
+import ru.dk.gdxGP.GameWorld.Templates.FractionDrawerSet;
+import ru.dk.gdxGP.GameWorld.Templates.FractionOperatorSet;
 
-public class Fraction extends Actor implements FractionDrawer, FractionOperator {
+public class Fraction extends Actor {
     private static final FixtureDef blankFixtureDef;
     static {
         blankFixtureDef = new FixtureDef();
@@ -34,7 +36,6 @@ public class Fraction extends Actor implements FractionDrawer, FractionOperator 
     private Condition condition;
     private FractionDrawer drawer = null;
     private FractionOperator operator = null;
-    //private float strength=1;
     private float charge;
     private Color color;
 
@@ -76,8 +77,8 @@ public class Fraction extends Actor implements FractionDrawer, FractionOperator 
         fixtureDef.isSensor = false;
         body.createFixture(fixtureDef);
         body.setUserData(this);
-        this.setDrawer(this);
-        this.setOperator(this);
+        this.setDrawer(FractionDrawerSet.solidDrawer);
+        this.setOperator(FractionOperatorSet.nullDrawer);
         this.condition = condition;
         this.charge = charge;
         this.color = color;
@@ -132,13 +133,6 @@ public class Fraction extends Actor implements FractionDrawer, FractionOperator 
     public Color getColor() {
         return color;
     }
-
-    /*public float getStrength() {
-        return strength;
-    }
-    public void setStrength(float strength) {
-        this.strength = strength;
-    }*/
     public Body getBody() {
         return body;
     }
@@ -169,52 +163,6 @@ public class Fraction extends Actor implements FractionDrawer, FractionOperator 
     public void act(float delta) {
         super.act(delta);
         if (operator != null) operator.operateFraction(this, delta);
-    }
-
-    @Override
-    public void drawFraction(Fraction fraction, Batch batch, Color parentColor) {
-        if (fraction.body.getFixtureList().size == 0) return;
-        float r = fraction.body.getFixtureList().get(0).getShape().getRadius();
-        //batch.draw(fraction.textureRegionFractionSolid, fraction.body.getPosition().x - 1.0f*r, fraction.body.getPosition().y - 1.0f*r ,r,r,r*2.0f, r*2.0f,1,1, MathUtils.radiansToDegrees* fraction.getBody().getAngle());
-        switch (fraction.condition) {
-            case Solid: {
-                batch.setColor(color);
-                batch.draw(textureRegionFractionSolid, fraction.body.getPosition().x - 1.0f * r, fraction.body.getPosition().y - 1.0f * r, r, r, r * 2.0f, r * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
-                if (fraction.getCharge() > 0) batch.setColor(1, 0, 0, 0.25f);
-                else batch.setColor(0, 0, 1, 0.25f);
-                float r1 = (float) (r * (1 + Math.abs(Math.sqrt(fraction.charge) * 2f)));
-                //if (!(fraction.charge <= 0.1f && fraction.charge >= -0.1f))
-                batch.draw(textureRegionCharge, fraction.body.getPosition().x - 1.0f * r1, fraction.body.getPosition().y - 1.0f * r1, r1, r1, r1 * 2.0f, r1 * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
-                float r2 = r * 0.5f;
-                batch.setColor(parentColor);
-                if (fraction.charge > 0.125f)
-                    batch.draw(textureRegionPlusCharge, fraction.body.getPosition().x - 1.0f * r2, fraction.body.getPosition().y - 1.0f * r2, r2, r2, r2 * 2.0f, r2 * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
-                if (fraction.charge < -0.125f)
-                    batch.draw(textureRegionMinusCharge, fraction.body.getPosition().x - 1.0f * r2, fraction.body.getPosition().y - 1.0f * r2, r2, r2, r2 * 2.0f, r2 * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
-                if (fraction.charge <= 0.125f && fraction.charge >= -0.125f)
-                    batch.draw(textureRegionNullCharge, fraction.body.getPosition().x - 1.0f * r2, fraction.body.getPosition().y - 1.0f * r2, r2, r2, r2 * 2.0f, r2 * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
-                break;
-            }
-            case Liquid: {
-                batch.setColor(color);
-                batch.draw(textureRegionFractionSolid, fraction.body.getPosition().x - 1.0f * r, fraction.body.getPosition().y - 1.0f * r, r, r, r * 2.0f, r * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
-                if (fraction.getCharge() > 0) batch.setColor(1, 0, 0, 0.25f);
-                else batch.setColor(0, 0, 1, 0.25f);
-                float r1 = r * (1 + Math.abs(fraction.charge * 2f));
-                if (!(fraction.charge <= 0.1f && fraction.charge >= -0.1f))
-                    batch.draw(textureRegionCharge, fraction.body.getPosition().x - 1.0f * r1, fraction.body.getPosition().y - 1.0f * r1, r1, r1, r1 * 2.0f, r1 * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
-                float r2 = r * 0.5f;
-                batch.setColor(parentColor);
-                if (fraction.charge > 0.125f)
-                    batch.draw(textureRegionPlusCharge, fraction.body.getPosition().x - 1.0f * r2, fraction.body.getPosition().y - 1.0f * r2, r2, r2, r2 * 2.0f, r2 * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
-                if (fraction.charge < -0.125f)
-                    batch.draw(textureRegionMinusCharge, fraction.body.getPosition().x - 1.0f * r2, fraction.body.getPosition().y - 1.0f * r2, r2, r2, r2 * 2.0f, r2 * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
-                if (fraction.charge <= 0.125f && fraction.charge >= -0.125f)
-                    batch.draw(textureRegionNullCharge, fraction.body.getPosition().x - 1.0f * r2, fraction.body.getPosition().y - 1.0f * r2, r2, r2, r2 * 2.0f, r2 * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
-                break;
-            }
-
-        }
     }
 
     synchronized public Fraction divide(float mass, float vx, float vy) {
@@ -267,15 +215,7 @@ public class Fraction extends Actor implements FractionDrawer, FractionOperator 
             this.body.getFixtureList().get(0).getShape().setRadius(newR);
             this.body.destroyFixture(this.body.createFixture(blankFixtureDef));
         }
-        //System.out.println("mass after setting " + this.getMass() + " with density" + this.getDensity());
         return newR;
-    }
-
-    @Override
-    public void operateFraction(Fraction fraction, float deltaTime) {
-        //fraction.setX(fraction.getBody().getPosition().x);
-        //fraction.setY(fraction.getBody().getPosition().y);
-        //if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024))System.out.println(this.toString());
     }
 
     @Override

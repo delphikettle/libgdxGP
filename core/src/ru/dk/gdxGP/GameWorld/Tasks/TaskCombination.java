@@ -42,7 +42,6 @@ public class TaskCombination extends Task {
                     break;
                 case TC_NOT:
                     return !task.isAchieved();
-                //break;
                 default:
                     throw new IllegalArgumentException("flag cannot be " + flag);
             }

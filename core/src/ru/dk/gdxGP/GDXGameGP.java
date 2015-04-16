@@ -36,14 +36,6 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
         inputMultiplexer.addProcessor(this);
         inputMultiplexer.addProcessor(new GestureDetector(this));
         Gdx.input.setInputProcessor(inputMultiplexer);
-        /*
-		img = new Texture("badlogic.jpg");
-		Gdx.input.setInputProcessor(this);
-		Gdx.input.setInputProcessor(new GestureDetector(this));
-		lvl = new TestLevel01(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		lvl.start();
-		Stage stage=new Stage();
-		*/
     }
 
     @Override
@@ -92,25 +84,9 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
                     }
 
                 break;
-            case MainMenu:
-                break;
-            case SelectLevel:
-                break;
             case Game:
                 break;
         }
-        //временно, потом удалить!!!
-
-		/*
-		if(state!=State.logo&&state!=State.loading) {
-			Gdx.gl.glClearColor(1, 1, 1, 1);
-			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-			batch.begin();
-
-			this.screen.render(Gdx.graphics.getDeltaTime());
-			batch.end();
-		}
-		*/
     }
 
     @Override

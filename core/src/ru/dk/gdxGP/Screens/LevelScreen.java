@@ -30,7 +30,6 @@ public class LevelScreen implements Screen {
     public LevelScreen(Level level, float w, float h) {
         this.level = level;
         this.box2DDebugRenderer = new Box2DDebugRenderer(true, true, false, true, true, true);
-        //this.camera=new OrthographicCamera(level.getWidth(),level.getWidth()*h/w);
         this.camera = new OrthographicCamera(1f, 1f * h / w);
         this.particlesStage = new Stage();
         this.particlesStage.getViewport().setCamera(camera);
@@ -121,14 +120,9 @@ public class LevelScreen implements Screen {
     @Override
     public void show() {
         this.box2DDebugRenderer = new Box2DDebugRenderer(true, true, false, true, false, true);
-        //this.camera=new OrthographicCamera(level.getWidth(),level.getWidth()*camera.viewportHeight/camera.viewportWidth);
-        //this.camera=new OrthographicCamera(20f,20f*camera.viewportHeight/camera.viewportWidth);
         this.camera = new OrthographicCamera(level.getWidth(), level.getWidth() * camera.viewportHeight / camera.viewportWidth);
-        //this.particlesStage=new Stage();
         this.particlesStage.getViewport().setCamera(camera);
-        //this.bordersStage=new Stage();
         this.bordersStage.getViewport().setCamera(camera);
-        //this.othersStage =new Stage();
         this.othersStage.getViewport().setCamera(camera);
         this.startColor = this.particlesStage.getBatch().getColor();
     }
@@ -149,8 +143,6 @@ public class LevelScreen implements Screen {
     }
 
     public boolean zoom(float initialDistance, float distance) {
-
-        //Clamp range and set zoom
         this.zoom = MathUtils.clamp(initialScale * initialDistance / distance, 0.001f, 1000.0f);
         return true;
     }
@@ -165,20 +157,11 @@ public class LevelScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        /*
-        this.camera=new OrthographicCamera(0.1f*width,0.1f* height);
-        this.camera.zoom=zoom;
-        particlesStage.getViewport().setCamera(camera);
-        bordersStage.getViewport().setCamera(camera);
-        othersStage.getViewport().setCamera(camera);
-        */
     }
 
     public void tap(float screenX, float screenY) {
         Vector3 tapCoords = this.camera.unproject(new Vector3(screenX, screenY, 0));
         this.level.tap(tapCoords.x, tapCoords.y);
-        //System.out.println("camera   "+camera.viewportWidth+" "+camera.viewportHeight+" with zoom "+camera.zoom);
-        //System.out.println("viewport "+this.particlesStage.getViewport().getScreenWidth()+" "+this.particlesStage.getViewport().getScreenHeight());
     }
 
     public float getCameraZoom() {

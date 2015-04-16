@@ -69,7 +69,6 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         xMax = Gdx.graphics.getWidth();
         yMax = Gdx.graphics.getHeight();
         this.isMove = true;
-        //this.setDaemon(true);
         this.stepTimer = new Timer();
         this.stepTimer.scheduleTask(new Timer.Task() {
             @Override
@@ -107,14 +106,9 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     abstract public void afterRender();
 
     public void proceed(float deltaTime) {
-        //this.levelScreen.proceed(deltaTime);
+        this.levelScreen.proceed(deltaTime);
         processAccelerometer();
         interactAllWithAllFractions();
-        /*
-		if(this.actions.size()>0){
-			this.actions.pop().doSomethingOnStep(this);
-		}
-		*/
     }
 
     public final void load(final LevelScreen screen) {
@@ -180,7 +174,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
                 Level.this.addAction(new ActionForNextStep() {
                     @Override
                     public void doSomethingOnStep(Level level) {
-                        Level.this.currentMissionChecker = new MissionChecker(Level.this.createMission(), 1000);
+                        Level.this.currentMissionChecker = new MissionChecker(Level.this.createMission(), 100);
                     }
                 });
                 try {
@@ -195,7 +189,6 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
 
     public void setLevelScreen(LevelScreen screen) {
         this.levelScreen = screen;
-        //здесь нужно добавить частицы, границы и прочее к стейджам скрина
     }
 
     protected void loadAssets(String[] assetsPaths) {
@@ -295,16 +288,6 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         return this.particles.get(index);
     }
 
-    /*
-    public synchronized void drawBorders(Batch b){
-        b.begin();
-        b.draw(borderTexture, this.getXMin()-5, getYMin()-5, getXMax() - getXMin()+10, 10);
-        b.draw(borderTexture,this.getXMin()-5,getYMin()-5,10,getYMax()-getYMin()+10);
-        b.draw(borderTexture,this.getXMin()-5,getYMax()-5,getXMax()-getXMin()+10,10);
-        b.draw(borderTexture,this.getXMax()-5,getYMin()-5,10,getYMax()-getYMin()+10);
-        b.end();
-    }
-    */
     public void Move(float time) {
         this.proceed(time);
         world.step(1 / 100f, 10, 10);
@@ -314,19 +297,12 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     final public void run() {
         super.run();
         while (!isEnd) {
-            //Gdx.app.log("run", "!!! running "+isMove);
             if (isMove) {
                 if (!this.actions.isEmpty()) {
-                    //Gdx.app.log("run", "!!! "+this.actions.size());
                     this.actions.remove(0).doSomethingOnStep(this);
                 }
-                //Gdx.app.log("run", "!!! running3 "+isMove);
-
-                //Gdx.app.log("run", "!!! running2 "+isMove);
             }
-            //Gdx.app.log("run", "!!! running1 "+isMove);
         }
-        //Gdx.app.log("run", "!!! ended");
     }
 
     private synchronized boolean isMoveActionPresent() {
@@ -339,12 +315,8 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         synchronized (this.actions) {
 
             if (action == moveAction && isMoveActionPresent()) {
-                //System.err.println();
-                //Gdx.app.log("addAction","action was not added");
                 return;
             }
-            //System.out.println("action added");
-            //Gdx.app.log("addAction","action was added "+(action==moveAction));
             this.actions.add(action);
         }
     }
@@ -418,18 +390,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     }
 
     void contactFractions(Fraction f1, Fraction f2, Contact contact) {
-        if (f1.getCondition() != Fraction.Condition.Solid || f2.getCondition() != Fraction.Condition.Solid) {
-            //contact.setEnabled(false);
-        }
-        if (f1.getCondition() == Fraction.Condition.Liquid && f2.getCondition() == Fraction.Condition.Liquid) {
-            //moving mass
-            flowMass(f1, f2);
-            //System.out.println("flowing mass:");
-        }
-        if ((f1.getCondition() == Fraction.Condition.Liquid && f2.getCondition() != Fraction.Condition.Liquid) ||
-                (f2.getCondition() == Fraction.Condition.Liquid && f1.getCondition() != Fraction.Condition.Liquid)) {
-            //jointing bodies
-        }
+        flowMass(f1, f2);
     }
 
     public void pauseLevel() {
@@ -474,21 +435,10 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     }
 
     void processAccelerometer() {
-
-		/* Get accelerometer values */
         float y = Gdx.input.getAccelerometerY();
         float x = Gdx.input.getAccelerometerX();
-
-		/*
-		 * If accelerometer values have changed since previous processing,
-		 * change world gravity.
-		 */
         if (prevAccelX != x || prevAccelY != y) {
-
-			/* Negative on the x axis but not in the y */
             world.setGravity(new Vector2(10 * y, -10 * x));
-
-			/* Store new accelerometer values */
             prevAccelX = x;
             prevAccelY = y;
         }
@@ -498,7 +448,6 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         d.set(f2.getBody().getPosition());
         d.add(-f1.getBody().getPosition().x, -f1.getBody().getPosition().y);
         float F = (((-this.k * f1.getCharge() * f2.getCharge() + this.G) * f1.getBody().getMass() * f2.getBody().getMass()) / (d.len() * d.len()));
-        ///((f1.getBody().getPosition().x - f2.getBody().getPosition().x)*(f1.getBody().getPosition().x - f2.getBody().getPosition().x)+(f1.getBody().getPosition().y - f2.getBody().getPosition().y)*(f1.getBody().getPosition().y - f2.getBody().getPosition().y)));
         buf.set(f2.getBody().getPosition().x - f1.getBody().getPosition().x, f2.getBody().getPosition().y - f1.getBody().getPosition().y);
         buf.setLength(F);
         if (F < 0) buf.rotate(180);
@@ -507,13 +456,9 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
 
         float q1 = f1.getCharge(), q2 = f2.getCharge(), m1 = f1.getMass(), m2 = f2.getMass();
         float deltaCharge = this.chargingK * (((q1 * m1 + q2 * m2) / (m1 + m2) + 1024 * q2) / 1025 - q2) / (d.len() * d.len());
-        //((f1.getBody().getPosition().x - f2.getBody().getPosition().x)*(f1.getBody().getPosition().x - f2.getBody().getPosition().x)
-        //+(f1.getBody().getPosition().y - f2.getBody().getPosition().y)*(f1.getBody().getPosition().y - f2.getBody().getPosition().y));
-        //if(MathUtils.random.nextInt(1024)==MathUtils.random.nextInt(1024))System.out.println(deltaCharge);
 
         if (!Float.isNaN(deltaCharge) && !Float.isInfinite(deltaCharge))
             try {
-                //System.out.println("moving parameters with deltaCharge"+deltaCharge);
                 f1.moveParameters(f2, 0, deltaCharge, 0, new Vector2(0, 0));
             } catch (Fraction.NullMassException e) {
                 System.out.println("NullException " + e.toString());
