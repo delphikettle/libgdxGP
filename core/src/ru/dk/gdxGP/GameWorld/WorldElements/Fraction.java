@@ -124,6 +124,15 @@ public class Fraction extends Actor {
     }
 
     @Override
+    public float getX() {
+        return this.getPosition().x;
+    }
+    @Override
+    public float getY() {
+        return this.getPosition().y;
+    }
+
+    @Override
     public Color getColor() {
         return color;
     }

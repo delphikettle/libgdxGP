@@ -39,10 +39,11 @@ public class TestLevel01 extends Level {
 
     @Override
     public void setCameraPosition() {
-        /*this.getStage().getCamera().position.set(
-				(this.getParticles().get(0).getX()+this.getStage().getCamera().position.x*255)/256,
-				(this.getParticles().get(0).getY()+this.getStage().getCamera().position.y*255)/256,
-				0);*/
+        this.getStage().getCamera().position.set(
+				(mainFraction.getX()+this.getStage().getCamera().position.x*25)/26,
+				(mainFraction.getY()+this.getStage().getCamera().position.y*25)/26,
+				0);
+        this.getStage().setCameraZoom((this.getStage().getZoom()*25+mainFraction.getRadius())/26);
     }
 
     @Override

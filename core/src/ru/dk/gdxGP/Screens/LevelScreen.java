@@ -19,7 +19,17 @@ import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
 
 public class LevelScreen implements Screen {
     private Box2DDebugRenderer box2DDebugRenderer;
+
+    public OrthographicCamera getCamera() {
+        return camera;
+    }
+
     private OrthographicCamera camera;
+
+    public void setCameraZoom(float zoom) {
+        this.zoom = zoom;
+    }
+
     private float zoom = 1;
     private final Stage particlesStage;
     private final Stage bordersStage;
