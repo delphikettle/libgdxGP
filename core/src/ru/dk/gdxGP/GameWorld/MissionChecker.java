@@ -16,7 +16,6 @@ public class MissionChecker extends Timer {
     private final Timer.Task timerTask = new Timer.Task() {
         @Override
         public void run() {
-            System.out.println("missionChecker running"+ MathUtils.random(1,10));
             if (MissionChecker.this.mission != null) {
                 if (MissionChecker.this.mission.isAchieved()) {
                     MissionChecker.this.stop();
@@ -41,11 +40,10 @@ public class MissionChecker extends Timer {
     }
 
     public void pause() {
-        this.stop();
+        timerTask.cancel();
     }
 
     public void resume() {
-        this.start();
         scheduleTask();
     }
 

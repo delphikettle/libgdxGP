@@ -40,7 +40,7 @@ public class TutorialLevel extends Level {
         TutorialLevel.this.setCameraPositionChanger(new CameraPositionChanger() {
             @Override
             public void changeCameraPosition(Level level, Camera camera, LevelScreen screen) {
-                camera.position.set((25*camera.position.x+mainFraction.getX())/26,(25*camera.position.y+mainFraction.getY())/26,0);
+                TutorialLevel.this.moveCamera(mainFraction.getX(),mainFraction.getY(),25);
                 screen.setCameraZoom((screen.getZoom() * 25 + 1) / 26);
             }
         });
@@ -65,7 +65,7 @@ public class TutorialLevel extends Level {
     protected Mission createMission() {
         Mission mission=new Mission("Tutorial");
         task01=new TaskOnAction();
-        task01.setTaskText("Hello! This is you! Your fraction mostly green! Tap on the screen!");
+        task01.setTaskText("Hello! This is you! Your fraction green circled! Tap on the screen!");
         this.setLevelTapper(new LevelTapper() {
             @Override
             public void tapLevel(Level level, float x, float y) {
@@ -92,7 +92,7 @@ public class TutorialLevel extends Level {
                 TutorialLevel.this.setCameraPositionChanger(new CameraPositionChanger() {
                     @Override
                     public void changeCameraPosition(Level level, Camera camera, LevelScreen screen) {
-                        camera.position.set((255 * camera.position.x + mainFraction.getX()) / 256, (255 * camera.position.y + mainFraction.getY()) / 256, 0);
+                        TutorialLevel.this.moveCamera(mainFraction.getX(),mainFraction.getY(),255);
                         screen.setCameraZoom((screen.getZoom() * 25 + 1) / 26);
                     }
                 });

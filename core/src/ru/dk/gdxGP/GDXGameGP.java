@@ -15,97 +15,81 @@ import ru.dk.gdxGP.Screens.LoadingScreen;
 import ru.dk.gdxGP.Screens.LogoScreen;
 
 public class GDXGameGP extends Game implements GestureDetector.GestureListener, InputProcessor, ApplicationListener {
-    static public final AssetManager assetManager = new AssetManager();
-    private State state = State.logo;
-    private Screen screen;
     private String levelName;
     public final InputMultiplexer inputMultiplexer;
+    public static GDXGameGP currentGame;
 
     public GDXGameGP(String levelName) {
         this.levelName = levelName;
         inputMultiplexer = new InputMultiplexer();
+        currentGame=this;
     }
 
     @Override
     public void create() {
         this.setScreen(new LogoScreen(1));
-        this.screen=getScreen();
         inputMultiplexer.addProcessor(this);
         inputMultiplexer.addProcessor(new GestureDetector(this));
-        Gdx.input.setInputProcessor(inputMultiplexer);
     }
 
     @Override
     public void render() {
-        super.render();
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        if (screen != null) screen.render(Gdx.graphics.getDeltaTime());
-        switch (state) {
-            case logo:
-                assert (screen != null);
-                if (!((LogoScreen) screen).isActive()) {
-                    this.state = State.loading;
-                    final Level level = GameLevels.instantiateLevel(levelName);
-                    final LevelScreen levelScreen = new LevelScreen(level, 0.1f * Gdx.graphics.getWidth(), 0.1f * Gdx.graphics.getHeight());
-                    this.screen = new LoadingScreen((LogoScreen) screen, new LoadingScreen.LoaderForLoadingScreen() {
+        super.render();
+        if((getScreen() instanceof LogoScreen) && !((LogoScreen) getScreen()).isActive())
+            startGame();
+    }
+    public void startGame(){
+        System.out.println("starting game");
+        final Level level = GameLevels.instantiateLevel(levelName);
+        final LevelScreen levelScreen = new LevelScreen(level, 0.1f * Gdx.graphics.getWidth(), 0.1f * Gdx.graphics.getHeight());
+        this.setScreen(new LoadingScreen((LogoScreen) screen, new LoadingScreen.LoaderForLoadingScreen() {
 
-                        @Override
-                        public void startLoad() {
-                            level.load(levelScreen);
-                        }
+            @Override
+            public void startLoad() {
+                level.load(levelScreen);
+            }
 
-                        @Override
-                        public boolean isLoaded() {
-                            if (level.getLoaded() >= 1.0f) level.start();
-                            return level.getLoaded() >= 1.0f;
-                        }
+            @Override
+            public boolean isLoaded() {
+                if (level.getLoaded() >= 1.0f) level.start();
+                return level.getLoaded() >= 1.0f;
+            }
 
-                        @Override
-                        public float getProgress() {
-                            return level.getLoaded();
-                        }
+            @Override
+            public float getProgress() {
+                return level.getLoaded();
+            }
 
-                        @Override
-                        public boolean ifProgressMustBeShown() {
-                            return true;
-                        }
-                    }, levelScreen);
-                    this.screen.show();
-                }
-                break;
-            case loading:
-                if (this.screen instanceof LoadingScreen)
-                    if (!((LoadingScreen) this.screen).isActive()) {
-                        this.screen = ((LoadingScreen) screen).getNextScreen();
-                        this.screen.show();
-                    }
+            @Override
+            public boolean ifProgressMustBeShown() {
+                return true;
+            }
+        }, levelScreen));
+        Gdx.input.setInputProcessor(inputMultiplexer);
 
-                break;
-            case Game:
-                break;
-        }
     }
 
     @Override
     public void resize(int width, int height) {
         if (Gdx.app.getType() != Application.ApplicationType.Android)
-            screen.resize(width, height);
+            getScreen().resize(width, height);
     }
 
     @Override
     public void pause() {
-        screen.pause();
+        getScreen().pause();
     }
 
     @Override
     public void resume() {
-        screen.resume();
+        getScreen().resume();
     }
 
     @Override
     public void dispose() {
-        screen.dispose();
+        getScreen().dispose();
         super.dispose();
     }
 
@@ -116,8 +100,8 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 
     @Override
     public boolean tap(float x, float y, int count, int button) {
-        if (screen instanceof LevelScreen) {
-            ((LevelScreen) screen).tap(x, y);
+        if (getScreen() instanceof LevelScreen) {
+            ((LevelScreen)getScreen()).tap(x, y);
         }
 
         return false;
@@ -145,7 +129,7 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 
     @Override
     public boolean zoom(float initialDistance, float distance) {
-        return screen instanceof LevelScreen && ((LevelScreen) screen).zoom(initialDistance, distance);
+        return getScreen() instanceof LevelScreen && ((LevelScreen) getScreen()).zoom(initialDistance, distance);
     }
 
     @Override
@@ -170,8 +154,8 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if (screen instanceof LevelScreen) {
-            ((LevelScreen) screen).setInitialScale(((LevelScreen) screen).getCameraZoom());
+        if (getScreen() instanceof LevelScreen) {
+                ((LevelScreen) getScreen()).setInitialScale(((LevelScreen) getScreen()).getCameraZoom());
         }
         return false;
     }
@@ -183,8 +167,8 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        if (screen instanceof LevelScreen) {
-            ((LevelScreen) screen).drag(-Gdx.input.getDeltaX(pointer), Gdx.input.getDeltaY(pointer));
+        if (getScreen() instanceof LevelScreen) {
+            ((LevelScreen) getScreen()).drag(-Gdx.input.getDeltaX(pointer), Gdx.input.getDeltaY(pointer));
         }
         return false;
     }
@@ -196,15 +180,11 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 
     @Override
     public boolean scrolled(int amount) {
-        if (screen instanceof LevelScreen) {
-            ((LevelScreen) screen).setInitialScale(((LevelScreen) screen).getCameraZoom());
-            ((LevelScreen) screen).zoom(((LevelScreen) screen).getZoom(), (float) (((LevelScreen) screen).getZoom() * Math.pow(1.1f, -amount)));
+        if (getScreen() instanceof LevelScreen) {
+                    ((LevelScreen) getScreen()).setInitialScale(((LevelScreen) getScreen()).getCameraZoom());
+            ((LevelScreen) getScreen()).zoom(((LevelScreen) getScreen()).getZoom(), (float) (((LevelScreen) getScreen()).getZoom() * Math.pow(1.1f, -amount)));
         }
         return false;
-    }
-
-    public enum State {
-        logo, loading, MainMenu, SelectLevel, Game, Pause
     }
 
 

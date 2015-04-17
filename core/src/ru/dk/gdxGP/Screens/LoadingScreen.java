@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import ru.dk.gdxGP.AtlasLoader;
+import ru.dk.gdxGP.GDXGameGP;
 
 
 public class LoadingScreen extends Stage implements Screen {
@@ -73,7 +74,10 @@ public class LoadingScreen extends Stage implements Screen {
         } else {
             rotation += -1f;
         }
-        if (loader.isLoaded()) this.setActive(false);
+        if (loader.isLoaded()) {
+            this.setActive(false);
+            GDXGameGP.currentGame.setScreen(nextScreen);
+        }
         //System.out.println("LoadingScreen drawn");
     }
 

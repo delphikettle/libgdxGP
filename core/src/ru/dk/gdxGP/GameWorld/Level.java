@@ -527,6 +527,9 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
              }
          });
      }
+    public void moveCamera(float xTo,float yTo,float delay){
+        this.getStage().getCamera().position.set((delay*this.getStage().getCamera().position.x+xTo)/(delay+1),(delay*this.getStage().getCamera().position.y+yTo)/(delay+1),0);
+    }
 
     //methods for generating
 
