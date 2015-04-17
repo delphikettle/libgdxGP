@@ -53,23 +53,30 @@ FractionSolid01
   index: -1
 MinusCharge
   rotate: false
-  xy: 768, 448
+  xy: 768, 348
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 NullCharge
   rotate: false
-  xy: 768, 384
+  xy: 868, 448
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 PlusCharge
   rotate: false
-  xy: 832, 448
+  xy: 768, 284
   size: 64, 64
   orig: 64, 64
+  offset: 0, 0
+  index: -1
+border01
+  rotate: false
+  xy: 768, 412
+  size: 100, 100
+  orig: 100, 100
   offset: 0, 0
   index: -1
 charge

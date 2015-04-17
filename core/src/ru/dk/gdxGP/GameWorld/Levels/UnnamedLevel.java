@@ -20,11 +20,6 @@ public class UnnamedLevel extends Level {
     }
 
     @Override
-    public void loadAssets() {
-
-    }
-
-    @Override
     public void setSizes() {
 
     }

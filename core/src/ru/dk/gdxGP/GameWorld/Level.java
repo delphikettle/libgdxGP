@@ -123,17 +123,18 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     }
 
     public final void load(final LevelScreen screen) {
-        loadAssets();
+        //loadAssets();
         new Thread(new Runnable() {
             @Override
             public void run() {
+                /*
                 while (getAssetsLoaded() < 1) {
                     try {
                         Thread.sleep(10);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                }
+                }*/
                 try {
                     Thread.sleep(MathUtils.random(0,100));
                 } catch (InterruptedException e) {
@@ -202,31 +203,13 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         this.levelScreen = screen;
     }
 
-    protected void loadAssets(String[] assetsPaths) {
-        for (String assetsPath : assetsPaths) {
-            GDXGameGP.assetManager.load(assetsPath, Texture.class);
-        }
-    }
-
     public float getLoaded() {
-        GDXGameGP.assetManager.update();
-        return 0.6f * loaded + 0.4f * GDXGameGP.assetManager.getProgress();
+        return loaded;
     }
 
     private void setLoaded(float loaded) {
         System.out.println(loaded);
         this.loaded = loaded;
-    }
-
-    public abstract void loadAssets();
-
-    public float getAssetsLoaded() {
-        System.out.println("assetsLoaded=" + GDXGameGP.assetManager.getProgress());
-        return GDXGameGP.assetManager.getProgress();
-    }
-
-    public boolean areAssetsLoaded() {
-        return GDXGameGP.assetManager.update();
     }
 
     abstract protected void setSizes();

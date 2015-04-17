@@ -18,8 +18,7 @@ public final class FractionDrawerSet {
     private static final TextureRegion textureRegionPlusCharge;
 
     static{
-        textureRegionFractionSolid = // TextureRegion((Texture) GDXGameGP.assetManager.get("images/FractionSolid01.png"));
-        AtlasLoader.getRegion("FractionSolid01");
+        textureRegionFractionSolid = AtlasLoader.getRegion("FractionSolid01");
         textureRegionCharge = AtlasLoader.getRegion("charge");
         textureRegionPlusCharge = AtlasLoader.getRegion("PlusCharge");
         textureRegionNullCharge = AtlasLoader.getRegion("NullCharge");
@@ -59,7 +58,7 @@ static final public FractionDrawer solidDrawer=new FractionDrawer() {
             //if (!(fraction.charge <= 0.1f && fraction.charge >= -0.1f))
             batch.draw(textureRegionCharge, fraction.getPosition().x - 1.0f * r1, fraction.getPosition().y - 1.0f * r1, r1, r1, r1 * 2.0f, r1 * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
             float r2 = r * 0.5f;
-            batch.setColor(1,0,0,1f);
+            batch.setColor(0,1,0,1f);
             if (fraction.getCharge() > 0.125f)
                 batch.draw(textureRegionPlusCharge, fraction.getPosition().x - 1.0f * r2, fraction.getPosition().y - 1.0f * r2, r2, r2, r2 * 2.0f, r2 * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
             if (fraction.getCharge() < -0.125f)

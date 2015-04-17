@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import ru.dk.gdxGP.AtlasLoader;
 import ru.dk.gdxGP.GDXGameGP;
 
 /**
@@ -37,7 +38,7 @@ public class Border extends Actor {
         fixtureDef.isSensor = false;
         body.createFixture(fixtureDef);
         body.setUserData(this);
-        this.textureRegion = new TextureRegion(GDXGameGP.assetManager.get("border01.png", Texture.class));
+        this.textureRegion = AtlasLoader.getRegion("border01");
     }
 
     public Body getBody() {

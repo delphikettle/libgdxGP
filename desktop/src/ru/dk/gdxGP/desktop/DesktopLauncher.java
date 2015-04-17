@@ -13,8 +13,8 @@ public class DesktopLauncher {
         settings.maxHeight=settings.maxWidth=1024;
         settings.paddingX=settings.paddingY=0;
         TexturePacker.process(settings, "./images","./atlas","textureAtlas");
-        GDXGameGP.assetManager.load("images/logo.png", Texture.class);
-        GDXGameGP.assetManager.load("images/loadBall.png", Texture.class);
+        //GDXGameGP.assetManager.load("images/logo.png", Texture.class);
+        //GDXGameGP.assetManager.load("images/loadBall.png", Texture.class);
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.width = 1024;
         config.height = 846;

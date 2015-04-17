@@ -26,11 +26,13 @@ public class Fraction extends Actor {
         blankFixtureDef.shape = new CircleShape();
         blankFixtureDef.shape.setRadius(0.00001f);
     }
+    /*
     private static final TextureRegion textureRegionFractionSolid;
     private static final TextureRegion textureRegionCharge;
     private static final TextureRegion textureRegionNullCharge;
     private static final TextureRegion textureRegionMinusCharge;
     private static final TextureRegion textureRegionPlusCharge;
+    */
     private final Body body;
     private final Level level;
     private Condition condition;
@@ -38,14 +40,6 @@ public class Fraction extends Actor {
     private FractionOperator operator = null;
     private float charge;
     private Color color;
-
-    static {
-        textureRegionFractionSolid = new TextureRegion((Texture) GDXGameGP.assetManager.get("images/FractionSolid01.png"));
-        textureRegionCharge = new TextureRegion((Texture) GDXGameGP.assetManager.get("images/charge.png"));
-        textureRegionPlusCharge = new TextureRegion((Texture) GDXGameGP.assetManager.get("images/PlusCharge.png"));
-        textureRegionNullCharge = new TextureRegion((Texture) GDXGameGP.assetManager.get("images/NullCharge.png"));
-        textureRegionMinusCharge = new TextureRegion((Texture) GDXGameGP.assetManager.get("images/MinusCharge.png"));
-    }
     private float density = 1;
 
     public Fraction(Level level,World world, float x, float y, float vx, float vy, float mass, float charge, float friction, float density, float restitution, Condition condition, Color color) {

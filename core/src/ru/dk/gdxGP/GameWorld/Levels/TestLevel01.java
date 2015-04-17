@@ -24,7 +24,7 @@ public class TestLevel01 extends Level {
 
     @Override
     public void setParameters() {
-        this.setG(10f);
+        this.setG(100f);
         this.setK(10f);
         this.setChargingK(0.1f);
         this.setLevelProceeder(new LevelProceeder() {
@@ -53,11 +53,6 @@ public class TestLevel01 extends Level {
     @Override
     public void afterRender() {
 
-    }
-
-    @Override
-    public void loadAssets() {
-        this.loadAssets(standardAssetsPaths);
     }
 
     @Override
