@@ -55,6 +55,26 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     private boolean isMove = false, isEnd = false;
     private float loaded;
 
+    public LevelTapper getLevelTapper() {
+        return levelTapper;
+    }
+
+    public void setLevelTapper(LevelTapper levelTapper) {
+        this.levelTapper = levelTapper;
+    }
+
+    private LevelTapper levelTapper;
+
+    public CameraPositionChanger getCameraPositionChanger() {
+        return cameraPositionChanger;
+    }
+
+    public void setCameraPositionChanger(CameraPositionChanger cameraPositionChanger) {
+        this.cameraPositionChanger = cameraPositionChanger;
+    }
+
+    private CameraPositionChanger cameraPositionChanger;
+
     public LevelProceeder getLevelProceeder() {
         return levelProceeder;
     }
@@ -87,7 +107,10 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         this.stepTimer.start();
     }
 
-    abstract public void setCameraPosition();
+    public final void setCameraPosition(){
+        if(this.cameraPositionChanger!=null)
+            this.cameraPositionChanger.changeCameraPosition(this,this.getStage().getCamera(),this.getStage());
+    }
 
     abstract public void preRender();
 
@@ -237,7 +260,10 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         this.addBorder(new Border(this.getWorld(), 0, 0, shape, true));
     }
 
-    abstract public void tap(float x, float y);
+    public final void tap(float x, float y){
+        if(this.levelTapper!=null)
+            this.levelTapper.tapLevel(this, x, y);
+    }
 
     final public LevelScreen getStage() {
         return this.levelScreen;
@@ -493,6 +519,22 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
             }
         });
     }
+     public void divideOnTap(final Fraction fraction, final float speed, final float piece, final float x, final float y){
+         this.addAction(new ActionForNextStep() {
+             @Override
+             public void doSomethingOnStep(Level level) {
+                 Vector2 v = new Vector2(fraction.getPosition());
+                 v.rotate(180);
+                 v.add(x, y);
+                 v.setLength(speed);
+                 Fraction newFraction = fraction.divide(Level.this.getFraction(0).getMass() * piece, v.x, v.y);
+                 level.addFraction(
+                         newFraction
+                 );
+
+             }
+         });
+     }
 
     //methods for generating
 

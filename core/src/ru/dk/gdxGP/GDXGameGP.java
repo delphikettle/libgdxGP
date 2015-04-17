@@ -27,7 +27,7 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
 
     @Override
     public void create() {
-        new AtlasLoader();
+        //new AtlasLoader();
         this.screen = new LogoScreen(1);
         screen.show();
         batch = new SpriteBatch();

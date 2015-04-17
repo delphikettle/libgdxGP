@@ -19,11 +19,6 @@ public class TestLevel extends Level {
     }
 
     @Override
-    public void setCameraPosition() {
-
-    }
-
-    @Override
     public void preRender() {
 
     }
@@ -98,8 +93,4 @@ public class TestLevel extends Level {
         return null;
     }
 
-    @Override
-    public void tap(float x, float y) {
-
-    }
 }

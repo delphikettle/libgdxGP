@@ -1,5 +1,6 @@
 package ru.dk.gdxGP.GameWorld.Levels;
 
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -10,6 +11,7 @@ import ru.dk.gdxGP.GameWorld.Tasks.TaskOnCoordinate;
 import ru.dk.gdxGP.GameWorld.Tasks.TaskOnMass;
 import ru.dk.gdxGP.GameWorld.Templates.FractionDrawerSet;
 import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
+import ru.dk.gdxGP.Screens.LevelScreen;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -17,7 +19,7 @@ import java.util.Random;
 public class TestLevel01 extends Level {
     private final Random rnd = new Random();
     private Fraction mainFraction;
-
+    private float initialScale=1;
     public TestLevel01() {
         super();
     }
@@ -35,15 +37,23 @@ public class TestLevel01 extends Level {
                 level.interactAllWithAllFractions();
             }
         });
-    }
+        this.setCameraPositionChanger(new CameraPositionChanger() {
+            @Override
+            public void changeCameraPosition(Level level,Camera camera,LevelScreen screen) {
+                camera.position.set(
+                        (mainFraction.getX()+camera.position.x*255)/256,
+                        (mainFraction.getY()+camera.position.y*255)/256,
+                        0);
+                screen.setCameraZoom((screen.getZoom() * 25 + initialScale) / 26);
 
-    @Override
-    public void setCameraPosition() {
-        this.getStage().getCamera().position.set(
-				(mainFraction.getX()+this.getStage().getCamera().position.x*25)/26,
-				(mainFraction.getY()+this.getStage().getCamera().position.y*25)/26,
-				0);
-        this.getStage().setCameraZoom((this.getStage().getZoom()*25+mainFraction.getRadius())/26);
+            }
+        });
+        this.setLevelTapper(new LevelTapper() {
+            @Override
+            public void tapLevel(Level level, float x, float y) {
+                TestLevel01.super.divideOnTap(mainFraction,25,0.125f,x, y);
+            }
+        });
     }
 
     @Override
@@ -109,26 +119,5 @@ public class TestLevel01 extends Level {
         task03.setTaskText("you've completed it");
         mission.addTask(task03);
         return mission;
-    }
-
-    @Override
-    public void tap(final float x, final float y) {
-        this.addAction(new ActionForNextStep() {
-            @Override
-            public void doSomethingOnStep(Level level) {
-                System.out.println(level.getFraction(0).getMass());
-                float vModule = 25;
-                Vector2 v = new Vector2(TestLevel01.this.getFraction(0).getBody().getPosition());
-                v.rotate(180);
-                v.add(x, y);
-                v.setLength(vModule);
-                Fraction newFraction = level.getFraction(0).divide(TestLevel01.this.getFraction(0).getMass() * 0.125f, v.x, v.y);
-                level.addFraction(
-                        newFraction
-                );
-
-            }
-        });
-        //System.out.println("tap "+x+" "+y);
     }
 }

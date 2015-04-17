@@ -4,10 +4,6 @@ import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Mission;
 
 public class UnnamedLevel extends Level {
-    @Override
-    public void setCameraPosition() {
-
-    }
 
     @Override
     public void preRender() {
@@ -39,8 +35,4 @@ public class UnnamedLevel extends Level {
         return null;
     }
 
-    @Override
-    public void tap(float x, float y) {
-
-    }
 }
