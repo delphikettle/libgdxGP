@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Timer;
+import ru.dk.gdxGP.GameWorld.InterfacesForActions.*;
 import ru.dk.gdxGP.GameWorld.Templates.LevelProceederSet;
 import ru.dk.gdxGP.GameWorld.WorldElements.Border;
 import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
@@ -51,6 +52,26 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     private MissionChecker currentMissionChecker = new MissionChecker(new Mission(""), 1000);
     private boolean isMove = false, isEnd = false;
     private float loaded;
+
+    public AfterRenderer getAfterRenderer() {
+        return afterRenderer;
+    }
+
+    public void setAfterRenderer(AfterRenderer afterRenderer) {
+        this.afterRenderer = afterRenderer;
+    }
+
+    private AfterRenderer afterRenderer;
+
+    public PreRenderer getPreRenderer() {
+        return preRenderer;
+    }
+
+    public void setPreRenderer(PreRenderer preRenderer) {
+        this.preRenderer = preRenderer;
+    }
+
+    private PreRenderer preRenderer;
 
     public LevelTapper getLevelTapper() {
         return levelTapper;
@@ -109,9 +130,12 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
             this.cameraPositionChanger.changeCameraPosition(this,this.getStage().getCamera(),this.getStage());
     }
 
-    abstract public void preRender();
+    public final void preRender(){
+        if(this.preRenderer!=null)
+            this.preRenderer.preRender(this);
+    }
 
-    public void render(float delta) {
+    public final void render(float delta) {
         if (this.levelScreen != null) {
             renderBorders();
             renderOthers();
@@ -131,7 +155,11 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         levelScreen.drawFractions();
     }
 
-    abstract public void afterRender();
+    public final void afterRender(){
+        if(this.afterRenderer!=null){
+            this.afterRenderer.afterRender(this);
+        }
+    }
     public void proceedParticles(float delta){
         this.levelScreen.proceed(delta);
     }
@@ -539,6 +567,9 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
                 MathUtils.random(fractionDef.minY, fractionDef.maxY),
                 MathUtils.random(fractionDef.minVX, fractionDef.maxVX), MathUtils.random(fractionDef.minVY, fractionDef.maxVY),
                 MathUtils.random(fractionDef.minMass, fractionDef.maxMass), (MathUtils.random(fractionDef.minCharge, fractionDef.maxCharge)), 1, 1, 1, Fraction.Condition.Liquid,
-                new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f)));
+                new Color(MathUtils.random(fractionDef.rMin, fractionDef.rMax),
+                        MathUtils.random(fractionDef.gMin, fractionDef.gMax),
+                        MathUtils.random(fractionDef.bMin, fractionDef.bMax),
+                        MathUtils.random(fractionDef.aMin, fractionDef.aMax)));
     }
 }

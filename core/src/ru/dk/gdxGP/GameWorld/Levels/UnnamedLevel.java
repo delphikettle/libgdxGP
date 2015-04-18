@@ -5,15 +5,6 @@ import ru.dk.gdxGP.GameWorld.Mission;
 
 public class UnnamedLevel extends Level {
 
-    @Override
-    public void preRender() {
-
-    }
-
-    @Override
-    public void afterRender() {
-
-    }
 
     @Override
     public void setSizes() {

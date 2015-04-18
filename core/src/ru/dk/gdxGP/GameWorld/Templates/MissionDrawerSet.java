@@ -4,9 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.math.MathUtils;
 import ru.dk.gdxGP.GameWorld.Mission;
-import ru.dk.gdxGP.GameWorld.MissionDrawer;
+import ru.dk.gdxGP.GameWorld.InterfacesForActions.MissionDrawer;
 
 /**
  * Created by DK on 15.04.2015.

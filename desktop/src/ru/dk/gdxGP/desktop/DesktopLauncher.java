@@ -5,6 +5,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.tools.texturepacker.TexturePacker;
 import ru.dk.gdxGP.GDXGameGP;
+import ru.dk.gdxGP.GameWorld.Levels.TestLevel01;
 
 public class DesktopLauncher {
     public static void main(String[] arg) {
@@ -18,6 +19,6 @@ public class DesktopLauncher {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.width = 1024;
         config.height = 846;
-        new LwjglApplication(new GDXGameGP("TutorialLevel"), config);
+        new LwjglApplication(new GDXGameGP("TestLevel01"), config);
     }
 }

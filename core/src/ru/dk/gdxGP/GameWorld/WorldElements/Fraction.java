@@ -1,16 +1,12 @@
 package ru.dk.gdxGP.GameWorld.WorldElements;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import ru.dk.gdxGP.GDXGameGP;
-import ru.dk.gdxGP.GameWorld.FractionDrawer;
-import ru.dk.gdxGP.GameWorld.FractionOperator;
+import ru.dk.gdxGP.GameWorld.InterfacesForActions.FractionDrawer;
+import ru.dk.gdxGP.GameWorld.InterfacesForActions.FractionOperator;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Templates.FractionDrawerSet;
 import ru.dk.gdxGP.GameWorld.Templates.FractionOperatorSet;

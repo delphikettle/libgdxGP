@@ -6,10 +6,16 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import ru.dk.gdxGP.GameWorld.*;
+import ru.dk.gdxGP.GameWorld.InterfacesForActions.CameraPositionChanger;
+import ru.dk.gdxGP.GameWorld.InterfacesForActions.LevelProceeder;
+import ru.dk.gdxGP.GameWorld.InterfacesForActions.LevelTapper;
+import ru.dk.gdxGP.GameWorld.InterfacesForActions.PreRenderer;
 import ru.dk.gdxGP.GameWorld.Tasks.TaskCombination;
 import ru.dk.gdxGP.GameWorld.Tasks.TaskOnCoordinate;
 import ru.dk.gdxGP.GameWorld.Tasks.TaskOnMass;
 import ru.dk.gdxGP.GameWorld.Templates.FractionDrawerSet;
+import ru.dk.gdxGP.GameWorld.Templates.PreRendererSet;
+import ru.dk.gdxGP.GameWorld.Templates.PreRenderers.FadePreRenderer;
 import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
 import ru.dk.gdxGP.Screens.LevelScreen;
 
@@ -54,16 +60,7 @@ public class TestLevel01 extends Level {
                 TestLevel01.super.divideOnTap(mainFraction,25,0.125f,x, y);
             }
         });
-    }
-
-    @Override
-    public void preRender() {
-
-    }
-
-    @Override
-    public void afterRender() {
-
+        this.setPreRenderer(new FadePreRenderer(new Color(1f,1f,0.75f,0),new Color(1,1,0.5f,1f),60));
     }
 
     @Override
@@ -94,7 +91,7 @@ public class TestLevel01 extends Level {
                     (MathUtils.random(this.getYMin() + this.getHeight() * 0.1f, this.getYMax() - this.getHeight() * 0.1f)),
                     (rnd.nextInt(200) - 100) * 0f, (rnd.nextInt(200) - 100) * 0f,
                     (rnd.nextInt(2500) + 400) * 0.00001f, MathUtils.random(-5f, 5f), 1, 1, 1, Fraction.Condition.Liquid,
-                    new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f)))).getBody());
+                    new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.75f, 1f)))).getBody());
         }
     }
 

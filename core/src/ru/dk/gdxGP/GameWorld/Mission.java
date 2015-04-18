@@ -1,6 +1,7 @@
 package ru.dk.gdxGP.GameWorld;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import ru.dk.gdxGP.GameWorld.InterfacesForActions.MissionDrawer;
 import ru.dk.gdxGP.GameWorld.Templates.MissionDrawerSet;
 
 import java.util.LinkedList;

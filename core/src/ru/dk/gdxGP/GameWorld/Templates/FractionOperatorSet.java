@@ -1,6 +1,6 @@
 package ru.dk.gdxGP.GameWorld.Templates;
 
-import ru.dk.gdxGP.GameWorld.FractionOperator;
+import ru.dk.gdxGP.GameWorld.InterfacesForActions.FractionOperator;
 import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
 
 public final class FractionOperatorSet {

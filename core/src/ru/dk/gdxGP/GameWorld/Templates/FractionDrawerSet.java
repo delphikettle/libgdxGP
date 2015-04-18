@@ -1,13 +1,11 @@
 package ru.dk.gdxGP.GameWorld.Templates;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import ru.dk.gdxGP.AtlasLoader;
-import ru.dk.gdxGP.GDXGameGP;
-import ru.dk.gdxGP.GameWorld.FractionDrawer;
+import ru.dk.gdxGP.GameWorld.InterfacesForActions.FractionDrawer;
 import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
 
 public final class FractionDrawerSet {

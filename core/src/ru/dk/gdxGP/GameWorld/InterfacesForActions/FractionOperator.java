@@ -1,4 +1,4 @@
-package ru.dk.gdxGP.GameWorld;
+package ru.dk.gdxGP.GameWorld.InterfacesForActions;
 
 
 import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;

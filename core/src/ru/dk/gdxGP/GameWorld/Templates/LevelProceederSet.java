@@ -1,7 +1,7 @@
 package ru.dk.gdxGP.GameWorld.Templates;
 
 import ru.dk.gdxGP.GameWorld.Level;
-import ru.dk.gdxGP.GameWorld.LevelProceeder;
+import ru.dk.gdxGP.GameWorld.InterfacesForActions.LevelProceeder;
 
 /**
  * Created by DK on 16.04.2015.

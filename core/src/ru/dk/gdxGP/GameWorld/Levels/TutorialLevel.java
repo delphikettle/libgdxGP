@@ -3,6 +3,10 @@ package ru.dk.gdxGP.GameWorld.Levels;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector2;
 import ru.dk.gdxGP.GameWorld.*;
+import ru.dk.gdxGP.GameWorld.InterfacesForActions.ActionAfterAchievedTask;
+import ru.dk.gdxGP.GameWorld.InterfacesForActions.CameraPositionChanger;
+import ru.dk.gdxGP.GameWorld.InterfacesForActions.LevelProceeder;
+import ru.dk.gdxGP.GameWorld.InterfacesForActions.LevelTapper;
 import ru.dk.gdxGP.GameWorld.Tasks.NullTask;
 import ru.dk.gdxGP.GameWorld.Tasks.TaskOnAction;
 import ru.dk.gdxGP.GameWorld.Tasks.TimeTask;
@@ -19,15 +23,7 @@ public class TutorialLevel extends Level {
     private TaskOnAction task01,task04,task03;
     private TimeTask task02;
     private NullTask task05;
-    @Override
-    public void preRender() {
 
-    }
-
-    @Override
-    public void afterRender() {
-
-    }
 
     @Override
     protected void setSizes() {

@@ -19,16 +19,6 @@ public class TestLevel extends Level {
     }
 
     @Override
-    public void preRender() {
-
-    }
-
-    @Override
-    public void afterRender() {
-
-    }
-
-    @Override
     public void setSizes() {
         this.setXMin(-0 * this.getXMax());
         this.setYMin(-0 * this.getYMax());
