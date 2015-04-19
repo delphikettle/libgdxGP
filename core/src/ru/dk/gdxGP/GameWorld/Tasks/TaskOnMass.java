@@ -12,8 +12,8 @@ import java.util.Collections;
  */
 public class TaskOnMass extends Task {
     private final ArrayList<Fraction> fractions = new ArrayList<Fraction>();
-    private float inaccuracy = 0.0f;
     private final float mass;
+    private float inaccuracy = 0.0f;
 
     public TaskOnMass(Fraction[] fractions, float mass, float inaccuracy) {
         super();

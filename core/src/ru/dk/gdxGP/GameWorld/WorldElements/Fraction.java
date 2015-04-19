@@ -13,6 +13,7 @@ import ru.dk.gdxGP.GameWorld.Templates.FractionOperatorSet;
 
 public class Fraction extends Actor {
     private static final FixtureDef blankFixtureDef;
+
     static {
         blankFixtureDef = new FixtureDef();
         blankFixtureDef.density = 1;
@@ -22,6 +23,7 @@ public class Fraction extends Actor {
         blankFixtureDef.shape = new CircleShape();
         blankFixtureDef.shape.setRadius(0.00001f);
     }
+
     /*
     private static final TextureRegion textureRegionFractionSolid;
     private static final TextureRegion textureRegionCharge;
@@ -38,8 +40,8 @@ public class Fraction extends Actor {
     private Color color;
     private float density = 1;
 
-    public Fraction(Level level,World world, float x, float y, float vx, float vy, float mass, float charge, float friction, float density, float restitution, Condition condition, Color color) {
-        this.level=level;
+    public Fraction(Level level, World world, float x, float y, float vx, float vy, float mass, float charge, float friction, float density, float restitution, Condition condition, Color color) {
+        this.level = level;
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.active = true;
@@ -123,6 +125,7 @@ public class Fraction extends Actor {
     public float getX() {
         return this.getPosition().x;
     }
+
     @Override
     public float getY() {
         return this.getPosition().y;
@@ -132,6 +135,7 @@ public class Fraction extends Actor {
     public Color getColor() {
         return color;
     }
+
     public Body getBody() {
         return body;
     }
@@ -173,7 +177,7 @@ public class Fraction extends Actor {
         Vector2 coords = new Vector2(vx, vy);
         coords.setLength((float) (r + Math.sqrt(mass / Math.PI / getDensity())));
         coords.add(this.body.getPosition().x, this.body.getPosition().y);
-        return new Fraction(this.level,this.body.getWorld(), coords.x, coords.y, vx, vy, mass,
+        return new Fraction(this.level, this.body.getWorld(), coords.x, coords.y, vx, vy, mass,
                 this.getCharge(), this.getFriction(), this.getDensity(), this.getRestitution(), this.getCondition(), this.getColor());
     }
 

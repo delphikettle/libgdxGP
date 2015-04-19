@@ -35,7 +35,7 @@ public abstract class Task {
         if (once) {
             if (!isAchieved) {
                 isAchieved = check();
-                if (isAchieved&&this.actionAfterAchievedTask!=null)
+                if (isAchieved && this.actionAfterAchievedTask != null)
                     this.actionAfterAchievedTask.actionAfterAchievedTask(this);
             }
         } else {
@@ -73,10 +73,14 @@ public abstract class Task {
     public String getTitle() {
         return title;
     }
-    public void pause(){}
-    public void resume(){}
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void pause() {
+    }
+
+    public void resume() {
     }
 }

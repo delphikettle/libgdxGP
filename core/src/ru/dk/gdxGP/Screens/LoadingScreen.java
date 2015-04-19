@@ -2,7 +2,6 @@ package ru.dk.gdxGP.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -13,13 +12,14 @@ import ru.dk.gdxGP.GDXGameGP;
 public class LoadingScreen extends Stage implements Screen {
 
     private final LogoScreen logoScreen;
-    private boolean active;
     private final Screen nextScreen;
     private final LoaderForLoadingScreen loader;
+    private final SpriteBatch spriteBatch;
+    private boolean active;
     private TextureRegion texture;
     private float rotation;
     private float width, height;
-    private final SpriteBatch spriteBatch;
+
     public LoadingScreen(LogoScreen logoScreen, LoaderForLoadingScreen loader, Screen nextScreen) {
         this.logoScreen = logoScreen;
         this.loader = loader;

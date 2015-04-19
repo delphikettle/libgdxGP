@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import com.badlogic.gdx.graphics.Texture;
-import ru.dk.gdxGP.GDXGameGP;
 
 public class MainMenuActivity extends Activity implements View.OnClickListener {
     private Button startButton;

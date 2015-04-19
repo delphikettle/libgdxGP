@@ -3,23 +3,22 @@ package ru.dk.gdxGP.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import ru.dk.gdxGP.AtlasLoader;
-import ru.dk.gdxGP.GDXGameGP;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class LogoScreen extends Stage implements Screen {
+    private final float time;
     private TextureRegion texture;
     private float width, height;
     private SpriteBatch spriteBatch;
-    private final float time;
     private float rotation;
     private boolean active;
+
     public LogoScreen(float time) {
         this.time = time;
     }

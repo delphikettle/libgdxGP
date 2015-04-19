@@ -1,11 +1,7 @@
 package ru.dk.gdxGP;
 
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import ru.dk.gdxGP.GameWorld.GameLevels;
@@ -15,14 +11,14 @@ import ru.dk.gdxGP.Screens.LoadingScreen;
 import ru.dk.gdxGP.Screens.LogoScreen;
 
 public class GDXGameGP extends Game implements GestureDetector.GestureListener, InputProcessor, ApplicationListener {
-    private String levelName;
-    public final InputMultiplexer inputMultiplexer;
     public static GDXGameGP currentGame;
+    public final InputMultiplexer inputMultiplexer;
+    private String levelName;
 
     public GDXGameGP(String levelName) {
         this.levelName = levelName;
         inputMultiplexer = new InputMultiplexer();
-        currentGame=this;
+        currentGame = this;
     }
 
     @Override
@@ -37,10 +33,11 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         super.render();
-        if((getScreen() instanceof LogoScreen) && !((LogoScreen) getScreen()).isActive())
+        if ((getScreen() instanceof LogoScreen) && !((LogoScreen) getScreen()).isActive())
             startGame();
     }
-    public void startGame(){
+
+    public void startGame() {
         System.out.println("starting game");
         final Level level = GameLevels.instantiateLevel(levelName);
         final LevelScreen levelScreen = new LevelScreen(level, 0.1f * Gdx.graphics.getWidth(), 0.1f * Gdx.graphics.getHeight());
@@ -101,7 +98,7 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
     @Override
     public boolean tap(float x, float y, int count, int button) {
         if (getScreen() instanceof LevelScreen) {
-            ((LevelScreen)getScreen()).tap(x, y);
+            ((LevelScreen) getScreen()).tap(x, y);
         }
 
         return false;
@@ -155,7 +152,7 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         if (getScreen() instanceof LevelScreen) {
-                ((LevelScreen) getScreen()).setInitialScale(((LevelScreen) getScreen()).getCameraZoom());
+            ((LevelScreen) getScreen()).setInitialScale(((LevelScreen) getScreen()).getCameraZoom());
         }
         return false;
     }
@@ -181,7 +178,7 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
     @Override
     public boolean scrolled(int amount) {
         if (getScreen() instanceof LevelScreen) {
-                    ((LevelScreen) getScreen()).setInitialScale(((LevelScreen) getScreen()).getCameraZoom());
+            ((LevelScreen) getScreen()).setInitialScale(((LevelScreen) getScreen()).getCameraZoom());
             ((LevelScreen) getScreen()).zoom(((LevelScreen) getScreen()).getZoom(), (float) (((LevelScreen) getScreen()).getZoom() * Math.pow(1.1f, -amount)));
         }
         return false;

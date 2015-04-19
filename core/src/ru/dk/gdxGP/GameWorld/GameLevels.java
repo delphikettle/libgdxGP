@@ -1,6 +1,8 @@
 package ru.dk.gdxGP.GameWorld;
 
-import ru.dk.gdxGP.GameWorld.Levels.*;
+import ru.dk.gdxGP.GameWorld.Levels.ForcesTutorialLevel;
+import ru.dk.gdxGP.GameWorld.Levels.InteractionTutorialLevel;
+import ru.dk.gdxGP.GameWorld.Levels.TutorialLevel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +16,7 @@ public class GameLevels {
     @SuppressWarnings("unchecked")
     public static final List<Class<? extends Level>> LEVELS = new ArrayList<Class<? extends Level>>(
             Arrays.asList(
-                   //TestLevel.class,
+                    //TestLevel.class,
                     //TestLevel01.class,
                     //UnnamedLevel.class,
                     TutorialLevel.class,

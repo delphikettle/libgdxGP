@@ -17,8 +17,6 @@ import ru.dk.gdxGP.GameWorld.Templates.PreRenderers.FadePreRenderer;
 import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
 import ru.dk.gdxGP.Screens.LevelScreen;
 
-import java.util.TimerTask;
-
 /**
  * Created by DK on 19.04.2015.
  */
@@ -29,6 +27,7 @@ public class InteractionTutorialLevel extends Level {
     private TimeTask task04;
     private TaskOnAction task05;
     private Fraction mainFraction;
+
     @Override
     protected void setSizes() {
         this.setXMin(-5);
@@ -36,12 +35,13 @@ public class InteractionTutorialLevel extends Level {
         this.setXMax(5);
         this.setYMax(5);
     }
+
     @Override
     protected void setParameters() {
         InteractionTutorialLevel.this.setCameraPositionChanger(new CameraPositionChanger() {
             @Override
             public void changeCameraPosition(Level level, Camera camera, LevelScreen screen) {
-                InteractionTutorialLevel.this.moveCamera(mainFraction.getX(),mainFraction.getY(),25);
+                InteractionTutorialLevel.this.moveCamera(mainFraction.getX(), mainFraction.getY(), 25);
                 screen.setCameraZoom((screen.getZoom() * 25 + 0.5f) / 26);
             }
         });
@@ -49,15 +49,15 @@ public class InteractionTutorialLevel extends Level {
         this.setK(0);
         this.setChargingK(2.5f);
         this.setMassFlowingK(0);
-        this.setPreRenderer(new FadePreRenderer(new Color(1, 1, 1, 1), new Color(0.9f,0.9f,1f,1),600 ));
+        this.setPreRenderer(new FadePreRenderer(new Color(1, 1, 1, 1), new Color(0.9f, 0.9f, 1f, 1), 600));
     }
 
     @Override
     protected void setParticles() {
-        FractionDef fractionDef=new FractionDef(0,0,0,0);
-        fractionDef.minMass=fractionDef.maxMass=1f;
-        fractionDef.minCharge=fractionDef.maxCharge=5f;
-        mainFraction=super.generateRandomFraction(fractionDef);
+        FractionDef fractionDef = new FractionDef(0, 0, 0, 0);
+        fractionDef.minMass = fractionDef.maxMass = 1f;
+        fractionDef.minCharge = fractionDef.maxCharge = 5f;
+        mainFraction = super.generateRandomFraction(fractionDef);
         mainFraction.setDrawer(FractionDrawerSet.mainDrawer);
         this.addFraction(mainFraction);
     }
@@ -69,8 +69,8 @@ public class InteractionTutorialLevel extends Level {
 
     @Override
     protected Mission createMission() {
-        Mission mission=new Mission("");
-        task01=new TimeTask(5000);
+        Mission mission = new Mission("");
+        task01 = new TimeTask(5000);
         task01.setMainTaskText("This fraction has very positive charge.");
         task01.setSecondaryTaskText("");
         task01.start();
@@ -80,7 +80,7 @@ public class InteractionTutorialLevel extends Level {
                 InteractionTutorialLevel.this.setCameraPositionChanger(new CameraPositionChanger() {
                     @Override
                     public void changeCameraPosition(Level level, Camera camera, LevelScreen screen) {
-                        InteractionTutorialLevel.this.moveCamera(0,0,25);
+                        InteractionTutorialLevel.this.moveCamera(0, 0, 25);
                         screen.setCameraZoom((screen.getZoom() * 25 + 1.75f) / 26);
                     }
                 });
@@ -90,16 +90,16 @@ public class InteractionTutorialLevel extends Level {
                         level.interactAllWithAllFractions();
                     }
                 });
-                FractionDef fractionDef=new FractionDef(0.75f*getXMin(),0.75f*getXMax(), 0.75f*getYMin(),0.75f*getYMax());
-                fractionDef.minCharge=-2f;
-                fractionDef.maxCharge=-1f;
-                fractionDef.minMass=fractionDef.maxMass=0.05f;
+                FractionDef fractionDef = new FractionDef(0.75f * getXMin(), 0.75f * getXMax(), 0.75f * getYMin(), 0.75f * getYMax());
+                fractionDef.minCharge = -2f;
+                fractionDef.maxCharge = -1f;
+                fractionDef.minMass = fractionDef.maxMass = 0.05f;
                 InteractionTutorialLevel.this.addRandomFractions(fractionDef, 25);
 
                 task02.start();
             }
         });
-        task02=new TimeTask(15000);
+        task02 = new TimeTask(15000);
         task02.setMainTaskText("And it can share its charge to other fractions");
         task02.setSecondaryTaskText("As you can see, nearest fractions became more positive than furthest");
         task02.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
@@ -110,7 +110,7 @@ public class InteractionTutorialLevel extends Level {
                 InteractionTutorialLevel.this.setChargingK(1f);
             }
         });
-        task03=new TimeTask(7500);
+        task03 = new TimeTask(7500);
         task03.setMainTaskText("And if I turn on Coulomb's law, fractions will move");
         task03.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
@@ -128,7 +128,7 @@ public class InteractionTutorialLevel extends Level {
                 task04.start();
             }
         });
-        task04=new TimeTask(15000);
+        task04 = new TimeTask(15000);
         task04.setMainTaskText("When fractions collide big fraction take some mass from small fractions");
         task04.setSecondaryTaskText("And some of them even were absorbed by big fraction");
         task04.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
@@ -149,10 +149,9 @@ public class InteractionTutorialLevel extends Level {
                 });
             }
         });
-        task05=new TaskOnAction();
+        task05 = new TaskOnAction();
         task05.setMainTaskText("Now you know practically all about interactions between fractions in this game");
         task05.setSecondaryTaskText("You've finished all tutorials in this game. Now it's time to try out real level.");
-
 
 
         mission.addTask(task01);

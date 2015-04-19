@@ -17,7 +17,7 @@ public class Mission extends Task {
 
     public Mission(String title) {
         super(true, title);
-        if(title.equals("Null"))this.addTask(new NullTask());
+        if (title.equals("Null")) this.addTask(new NullTask());
     }
 
     public void addTask(Task task) {
@@ -49,6 +49,7 @@ public class Mission extends Task {
         else
             return "";
     }
+
     @Override
     public String getSecondaryTaskText() {
         if (currentTask != null)
@@ -60,7 +61,7 @@ public class Mission extends Task {
     @Override
     public void pause() {
         super.pause();
-        if(this.currentTask!=null){
+        if (this.currentTask != null) {
             this.currentTask.pause();
         }
     }
@@ -68,7 +69,7 @@ public class Mission extends Task {
     @Override
     public void resume() {
         super.resume();
-        if(this.currentTask!=null){
+        if (this.currentTask != null) {
             this.currentTask.resume();
         }
     }

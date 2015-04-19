@@ -1,21 +1,19 @@
 package ru.dk.gdxGP.GameWorld.WorldElements;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import ru.dk.gdxGP.AtlasLoader;
-import ru.dk.gdxGP.GDXGameGP;
 
 /**
  * Created by DK on 21.02.15.
  */
 public class Border extends Actor {
+    private final TextureRegion textureRegion;
     private Body body;
     private boolean contour;
-    private final TextureRegion textureRegion;
 
     public Border(World world, int x, int y, Shape shape, boolean contour) {
         BodyDef bodyDef = new BodyDef();

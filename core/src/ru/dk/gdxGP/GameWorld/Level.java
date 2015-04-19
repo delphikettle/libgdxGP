@@ -20,12 +20,6 @@ import java.util.List;
 
 
 public abstract class Level extends Thread implements Runnable, ContactListener {
-    private final static ActionForNextStep moveAction = new ActionForNextStep() {
-        @Override
-        public void doSomethingOnStep(Level level) {
-            level.Move(16);
-        }
-    };
     protected static final String[] standardAssetsPaths = new String[]{
             "images/PlusCharge.png",
             "images/NullCharge.png",
@@ -36,15 +30,21 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
             "images/charge.png",
             "border01.png"
     };
+    private final static ActionForNextStep moveAction = new ActionForNextStep() {
+        @Override
+        public void doSomethingOnStep(Level level) {
+            level.Move(16);
+        }
+    };
     private final World world;
     private final ArrayList<Fraction> particles;
     private final ArrayList<Border> borders;
     private final ArrayList<Actor> otherElements;
     private final List<ActionForNextStep> actions;
+    private final Timer stepTimer;
     private LevelScreen levelScreen;
     private float prevAccelX;
     private float prevAccelY;
-    private final Timer stepTimer;
     private float xMin;
     private float xMax;
     private float yMin;
@@ -52,61 +52,15 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     private float G = 1;
     private float k = 1;
     private float chargingK = 1;
-
-    private float massFlowingK=1;
+    private float massFlowingK = 1;
     private MissionChecker currentMissionChecker = new MissionChecker(new Mission("Null"), 1000);
     private boolean isMove = false, isEnd = false;
     private float loaded;
-
-    public AfterRenderer getAfterRenderer() {
-        return afterRenderer;
-    }
-
-    public void setAfterRenderer(AfterRenderer afterRenderer) {
-        this.afterRenderer = afterRenderer;
-    }
-
     private AfterRenderer afterRenderer;
-
-    public PreRenderer getPreRenderer() {
-        return preRenderer;
-    }
-
-    public void setPreRenderer(PreRenderer preRenderer) {
-        this.preRenderer = preRenderer;
-    }
-
     private PreRenderer preRenderer;
-
-    public LevelTapper getLevelTapper() {
-        return levelTapper;
-    }
-
-    public void setLevelTapper(LevelTapper levelTapper) {
-        this.levelTapper = levelTapper;
-    }
-
     private LevelTapper levelTapper;
-
-    public CameraPositionChanger getCameraPositionChanger() {
-        return cameraPositionChanger;
-    }
-
-    public void setCameraPositionChanger(CameraPositionChanger cameraPositionChanger) {
-        this.cameraPositionChanger = cameraPositionChanger;
-    }
-
     private CameraPositionChanger cameraPositionChanger;
-
-    public LevelProceeder getLevelProceeder() {
-        return levelProceeder;
-    }
-
-    public void setLevelProceeder(LevelProceeder levelProceeder) {
-        this.levelProceeder = levelProceeder;
-    }
-
-    private LevelProceeder levelProceeder= LevelProceederSet.noneProceed;
+    private LevelProceeder levelProceeder = LevelProceederSet.noneProceed;
     private Vector2 buf = new Vector2(), d = new Vector2();
 
     protected Level() {
@@ -130,13 +84,53 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         this.stepTimer.start();
     }
 
-    public final void setCameraPosition(){
-        if(this.cameraPositionChanger!=null)
-            this.cameraPositionChanger.changeCameraPosition(this,this.getStage().getCamera(),this.getStage());
+    public AfterRenderer getAfterRenderer() {
+        return afterRenderer;
     }
 
-    public final void preRender(){
-        if(this.preRenderer!=null)
+    public void setAfterRenderer(AfterRenderer afterRenderer) {
+        this.afterRenderer = afterRenderer;
+    }
+
+    public PreRenderer getPreRenderer() {
+        return preRenderer;
+    }
+
+    public void setPreRenderer(PreRenderer preRenderer) {
+        this.preRenderer = preRenderer;
+    }
+
+    public LevelTapper getLevelTapper() {
+        return levelTapper;
+    }
+
+    public void setLevelTapper(LevelTapper levelTapper) {
+        this.levelTapper = levelTapper;
+    }
+
+    public CameraPositionChanger getCameraPositionChanger() {
+        return cameraPositionChanger;
+    }
+
+    public void setCameraPositionChanger(CameraPositionChanger cameraPositionChanger) {
+        this.cameraPositionChanger = cameraPositionChanger;
+    }
+
+    public LevelProceeder getLevelProceeder() {
+        return levelProceeder;
+    }
+
+    public void setLevelProceeder(LevelProceeder levelProceeder) {
+        this.levelProceeder = levelProceeder;
+    }
+
+    public final void setCameraPosition() {
+        if (this.cameraPositionChanger != null)
+            this.cameraPositionChanger.changeCameraPosition(this, this.getStage().getCamera(), this.getStage());
+    }
+
+    public final void preRender() {
+        if (this.preRenderer != null)
             this.preRenderer.preRender(this);
     }
 
@@ -160,12 +154,13 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         levelScreen.drawFractions();
     }
 
-    public final void afterRender(){
-        if(this.afterRenderer!=null){
+    public final void afterRender() {
+        if (this.afterRenderer != null) {
             this.afterRenderer.afterRender(this);
         }
     }
-    public void proceedParticles(float delta){
+
+    public void proceedParticles(float delta) {
         this.levelScreen.proceed(delta);
     }
 
@@ -183,49 +178,49 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
                     }
                 }*/
                 try {
-                    Thread.sleep(MathUtils.random(0,100));
+                    Thread.sleep(MathUtils.random(0, 100));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 setLoaded(0.0f / 7);
                 setSizes();
                 try {
-                    Thread.sleep(MathUtils.random(0,100));
+                    Thread.sleep(MathUtils.random(0, 100));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 setLoaded(1.0f / 7);
                 setLevelScreen(screen);
                 try {
-                    Thread.sleep(MathUtils.random(0,100));
+                    Thread.sleep(MathUtils.random(0, 100));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 setLoaded(2.0f / 7);
                 createWalls();
                 try {
-                    Thread.sleep(MathUtils.random(0,100));
+                    Thread.sleep(MathUtils.random(0, 100));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 setLoaded(3.0f / 7);
                 setParticles();
                 try {
-                    Thread.sleep(MathUtils.random(0,100));
+                    Thread.sleep(MathUtils.random(0, 100));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 setLoaded(4.0f / 7);
                 setOtherElements();
                 try {
-                    Thread.sleep(MathUtils.random(0,100));
+                    Thread.sleep(MathUtils.random(0, 100));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 setLoaded(5.0f / 7);
                 setParameters();
                 try {
-                    Thread.sleep(MathUtils.random(0,100));
+                    Thread.sleep(MathUtils.random(0, 100));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -237,7 +232,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
                     }
                 });
                 try {
-                    Thread.sleep(MathUtils.random(0,100));
+                    Thread.sleep(MathUtils.random(0, 100));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -284,8 +279,8 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         this.addBorder(new Border(this.getWorld(), 0, 0, shape, true));
     }
 
-    public final void tap(float x, float y){
-        if(this.levelTapper!=null)
+    public final void tap(float x, float y) {
+        if (this.levelTapper != null)
             this.levelTapper.tapLevel(this, x, y);
     }
 
@@ -333,7 +328,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     }
 
     public void Move(float time) {
-        if(this.levelProceeder!=null){
+        if (this.levelProceeder != null) {
             levelProceeder.proceed(this, time);
         }
         world.step(1 / 100f, 10, 10);
@@ -347,7 +342,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
                 if (!this.actions.isEmpty()) {
                     this.actions.remove(0).doSomethingOnStep(this);
                 }
-                if(currentMissionChecker.isFinished()) {
+                if (currentMissionChecker.isFinished()) {
                     System.out.println(currentMissionChecker.isFinished());
                     System.exit(0);
                 }
@@ -556,28 +551,30 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
             }
         });
     }
-     public void divideOnTap(final Fraction fraction, final float speed, final float piece, final float x, final float y){
-         this.addAction(new ActionForNextStep() {
-             @Override
-             public void doSomethingOnStep(Level level) {
-                 Vector2 v = new Vector2(fraction.getPosition());
-                 v.rotate(180);
-                 v.add(x, y);
-                 v.setLength(speed);
-                 Fraction newFraction = fraction.divide(Level.this.getFraction(0).getMass() * piece, v.x, v.y);
-                 level.addFraction(
-                         newFraction
-                 );
 
-             }
-         });
-     }
-    public void moveCamera(float xTo,float yTo,float delay){
-        this.getStage().getCamera().position.set((delay*this.getStage().getCamera().position.x+xTo)/(delay+1),(delay*this.getStage().getCamera().position.y+yTo)/(delay+1),0);
+    public void divideOnTap(final Fraction fraction, final float speed, final float piece, final float x, final float y) {
+        this.addAction(new ActionForNextStep() {
+            @Override
+            public void doSomethingOnStep(Level level) {
+                Vector2 v = new Vector2(fraction.getPosition());
+                v.rotate(180);
+                v.add(x, y);
+                v.setLength(speed);
+                Fraction newFraction = fraction.divide(Level.this.getFraction(0).getMass() * piece, v.x, v.y);
+                level.addFraction(
+                        newFraction
+                );
+
+            }
+        });
+    }
+
+    public void moveCamera(float xTo, float yTo, float delay) {
+        this.getStage().getCamera().position.set((delay * this.getStage().getCamera().position.x + xTo) / (delay + 1), (delay * this.getStage().getCamera().position.y + yTo) / (delay + 1), 0);
     }
 
     //methods for generating
-    public void addRandomFractions(final FractionDef fractionDef, final int count){
+    public void addRandomFractions(final FractionDef fractionDef, final int count) {
         this.addAction(new ActionForNextStep() {
             @Override
             public void doSomethingOnStep(Level level) {
@@ -589,7 +586,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     }
 
     public Fraction generateRandomFraction(FractionDef fractionDef) {
-        return new Fraction(this,this.getWorld(),
+        return new Fraction(this, this.getWorld(),
                 MathUtils.random(fractionDef.minX, fractionDef.maxX),
                 MathUtils.random(fractionDef.minY, fractionDef.maxY),
                 MathUtils.random(fractionDef.minVX, fractionDef.maxVX), MathUtils.random(fractionDef.minVY, fractionDef.maxVY),

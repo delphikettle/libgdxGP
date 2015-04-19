@@ -6,6 +6,12 @@ import ru.dk.gdxGP.GameWorld.Task;
  * Created by STUDENT_7 on 16.04.2015.
  */
 public class TaskOnAction extends Task {
+    private boolean completed = false;
+
+    public TaskOnAction() {
+        super();
+    }
+
     public boolean isCompleted() {
         return completed;
     }
@@ -14,10 +20,6 @@ public class TaskOnAction extends Task {
         this.completed = completed;
     }
 
-    private boolean completed=false;
-    public TaskOnAction(){
-        super();
-    }
     @Override
     protected boolean check() {
         return completed;

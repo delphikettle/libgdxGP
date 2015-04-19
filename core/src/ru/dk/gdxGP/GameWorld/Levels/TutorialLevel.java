@@ -3,11 +3,14 @@ package ru.dk.gdxGP.GameWorld.Levels;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
-import ru.dk.gdxGP.GameWorld.*;
+import ru.dk.gdxGP.GameWorld.FractionDef;
 import ru.dk.gdxGP.GameWorld.InterfacesForActions.ActionAfterAchievedTask;
 import ru.dk.gdxGP.GameWorld.InterfacesForActions.CameraPositionChanger;
 import ru.dk.gdxGP.GameWorld.InterfacesForActions.LevelProceeder;
 import ru.dk.gdxGP.GameWorld.InterfacesForActions.LevelTapper;
+import ru.dk.gdxGP.GameWorld.Level;
+import ru.dk.gdxGP.GameWorld.Mission;
+import ru.dk.gdxGP.GameWorld.Task;
 import ru.dk.gdxGP.GameWorld.Tasks.NullTask;
 import ru.dk.gdxGP.GameWorld.Tasks.TaskOnAction;
 import ru.dk.gdxGP.GameWorld.Tasks.TimeTask;
@@ -22,7 +25,7 @@ import ru.dk.gdxGP.Screens.LevelScreen;
  */
 public class TutorialLevel extends Level {
     private Fraction mainFraction;
-    private TaskOnAction task01,task04,task03;
+    private TaskOnAction task01, task04, task03;
     private TimeTask task02;
     private NullTask task05;
 
@@ -38,7 +41,7 @@ public class TutorialLevel extends Level {
         TutorialLevel.this.setCameraPositionChanger(new CameraPositionChanger() {
             @Override
             public void changeCameraPosition(Level level, Camera camera, LevelScreen screen) {
-                TutorialLevel.this.moveCamera(mainFraction.getX(),mainFraction.getY(),25);
+                TutorialLevel.this.moveCamera(mainFraction.getX(), mainFraction.getY(), 25);
                 screen.setCameraZoom((screen.getZoom() * 25 + 1) / 26);
             }
         });
@@ -47,10 +50,10 @@ public class TutorialLevel extends Level {
 
     @Override
     protected void setParticles() {
-        FractionDef fractionDef=new FractionDef(5,5,5,5);
-        fractionDef.minMass=fractionDef.maxMass=0.5f;
-        fractionDef.minCharge=fractionDef.maxCharge=0;
-        mainFraction=super.generateRandomFraction(fractionDef);
+        FractionDef fractionDef = new FractionDef(5, 5, 5, 5);
+        fractionDef.minMass = fractionDef.maxMass = 0.5f;
+        fractionDef.minCharge = fractionDef.maxCharge = 0;
+        mainFraction = super.generateRandomFraction(fractionDef);
         mainFraction.setDrawer(FractionDrawerSet.mainDrawer);
         this.addFraction(mainFraction);
     }
@@ -62,8 +65,8 @@ public class TutorialLevel extends Level {
 
     @Override
     protected Mission createMission() {
-        Mission mission=new Mission("Tutorial");
-        task01=new TaskOnAction();
+        Mission mission = new Mission("Tutorial");
+        task01 = new TaskOnAction();
         task01.setMainTaskText("Hello! This is you! Your fraction green circled! Tap on the screen!");
         this.setLevelTapper(new LevelTapper() {
             @Override
@@ -71,7 +74,7 @@ public class TutorialLevel extends Level {
                 TutorialLevel.this.task01.setCompleted(true);
             }
         });
-        task02=new TimeTask(5000);
+        task02 = new TimeTask(5000);
         task02.setMainTaskText("After 5 sec I'll turn on Gravitation");
         task01.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
@@ -91,7 +94,7 @@ public class TutorialLevel extends Level {
                 TutorialLevel.this.setCameraPositionChanger(new CameraPositionChanger() {
                     @Override
                     public void changeCameraPosition(Level level, Camera camera, LevelScreen screen) {
-                        TutorialLevel.this.moveCamera(mainFraction.getX(),mainFraction.getY(),255);
+                        TutorialLevel.this.moveCamera(mainFraction.getX(), mainFraction.getY(), 255);
                         screen.setCameraZoom((screen.getZoom() * 25 + 1) / 26);
                     }
                 });
@@ -103,17 +106,18 @@ public class TutorialLevel extends Level {
                 });
             }
         });
-        task03=new TaskOnAction();
+        task03 = new TaskOnAction();
         task03.setMainTaskText("You can rotate your device to move your fraction. Tap to stop it!");
         task03.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
                 TutorialLevel.this.setLevelProceeder(LevelProceederSet.noneProceed);
-                TutorialLevel.this.getWorld().setGravity(new Vector2(0,0));
-                mainFraction.getBody().setLinearVelocity(0,0);
+                TutorialLevel.this.getWorld().setGravity(new Vector2(0, 0));
+                mainFraction.getBody().setLinearVelocity(0, 0);
                 mainFraction.getBody().setAngularVelocity(0);
                 TutorialLevel.this.setLevelTapper(new LevelTapper() {
                     private int times = 0;
+
                     @Override
                     public void tapLevel(Level level, float x, float y) {
                         level.divideOnTap(mainFraction, 10, 0.1f, x, y);
@@ -123,7 +127,7 @@ public class TutorialLevel extends Level {
                 });
             }
         });
-        task04=new TaskOnAction();
+        task04 = new TaskOnAction();
         task04.setMainTaskText("Also you can control your particle via tapping your screen. Tap 5 times!");
         task04.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
@@ -136,7 +140,7 @@ public class TutorialLevel extends Level {
                 });
             }
         });
-        task05=new NullTask();
+        task05 = new NullTask();
         task05.setMainTaskText("You've finished first tutorial. Enjoy this level or try out another level!");
         mission.addTask(task01);
         mission.addTask(task02);

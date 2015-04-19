@@ -6,8 +6,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -18,26 +16,16 @@ import ru.dk.gdxGP.GameWorld.WorldElements.Border;
 import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
 
 public class LevelScreen implements Screen {
-    private Box2DDebugRenderer box2DDebugRenderer;
-
-    public OrthographicCamera getCamera() {
-        return camera;
-    }
-
-    private OrthographicCamera camera;
-
-    public void setCameraZoom(float zoom) {
-        this.zoom = zoom;
-    }
-
-    private float zoom = 1;
     private final Stage particlesStage;
     private final Stage bordersStage;
     private final Stage othersStage;
+    private final Level level;
+    private Box2DDebugRenderer box2DDebugRenderer;
+    private OrthographicCamera camera;
+    private float zoom = 1;
     private Color startColor;
     private float initialScale = 1;
-    private final Level level;
-    private Batch missionBatch=new SpriteBatch();
+    private Batch missionBatch = new SpriteBatch();
 
     public LevelScreen(Level level, float w, float h) {
         this.level = level;
@@ -50,6 +38,10 @@ public class LevelScreen implements Screen {
         this.othersStage = new Stage();
         this.othersStage.getViewport().setCamera(camera);
         this.startColor = this.particlesStage.getBatch().getColor();
+    }
+
+    public OrthographicCamera getCamera() {
+        return camera;
     }
 
     public float getZoom() {
@@ -149,7 +141,7 @@ public class LevelScreen implements Screen {
         this.particlesStage.getBatch().setColor(startColor);
         this.level.afterRender();
         missionBatch.begin();
-        if(this.level.getMission()!=null)
+        if (this.level.getMission() != null)
             this.level.getMission().render(missionBatch);
         missionBatch.end();
         //box2DDebugRenderer.render(this.level.getWorld(), camera.combined);
@@ -179,6 +171,10 @@ public class LevelScreen implements Screen {
 
     public float getCameraZoom() {
         return this.camera.zoom;
+    }
+
+    public void setCameraZoom(float zoom) {
+        this.zoom = zoom;
     }
 
     @Override

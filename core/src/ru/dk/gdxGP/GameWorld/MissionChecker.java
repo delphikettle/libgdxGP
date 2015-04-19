@@ -1,7 +1,6 @@
 package ru.dk.gdxGP.GameWorld;
 
 
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Timer;
 
 
