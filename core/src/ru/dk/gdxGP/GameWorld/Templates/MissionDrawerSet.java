@@ -12,17 +12,21 @@ import ru.dk.gdxGP.GameWorld.InterfacesForActions.MissionDrawer;
  */
 public final class MissionDrawerSet {
     public static final MissionDrawer standardDrawer = new MissionDrawer() {
-        private BitmapFont bitmapFont;
+        private BitmapFont englishBitmapFont,russianBitmapFont;
 
         {
-            bitmapFont = new BitmapFont();
-            bitmapFont.setColor(Color.BLACK);
-            bitmapFont.setScale(2);
+            englishBitmapFont = new BitmapFont();
+            englishBitmapFont.setColor(Color.BLACK);
+            englishBitmapFont.setScale(3);
+            russianBitmapFont=new BitmapFont();
+            russianBitmapFont.setColor(0.9f,0.9f,0.9f,1);
+            russianBitmapFont.setScale(2f);
         }
 
         @Override
         public void drawMission(Mission mission, Batch batch) {
-            bitmapFont.draw(batch, mission.getTaskText(), Gdx.graphics.getWidth()*0.05f,Gdx.graphics.getHeight()*0.1f);
+            englishBitmapFont.draw(batch, mission.getMainTaskText(), Gdx.graphics.getWidth() * 0.05f, Gdx.graphics.getHeight() * 0.1f);
+            russianBitmapFont.draw(batch, mission.getSecondaryTaskText(), Gdx.graphics.getWidth() * 0.05f, Gdx.graphics.getHeight() * 0.05f);
         }
     };
 }

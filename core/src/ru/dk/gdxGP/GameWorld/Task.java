@@ -8,7 +8,8 @@ import ru.dk.gdxGP.GameWorld.InterfacesForActions.ActionAfterAchievedTask;
 public abstract class Task {
     private boolean isAchieved = false, once;
     private String title = "";
-    private String taskText = "";
+    private String mainTaskText = "";
+    private String secondaryTaskText = "";
 
     private ActionAfterAchievedTask actionAfterAchievedTask;
 
@@ -45,12 +46,20 @@ public abstract class Task {
 
     protected abstract boolean check();
 
-    public String getTaskText() {
-        return taskText;
+    public String getMainTaskText() {
+        return mainTaskText;
     }
 
-    public void setTaskText(String taskText) {
-        this.taskText = taskText;
+    public void setMainTaskText(String mainTaskText) {
+        this.mainTaskText = mainTaskText;
+    }
+
+    public String getSecondaryTaskText() {
+        return secondaryTaskText;
+    }
+
+    public void setSecondaryTaskText(String secondaryTaskText) {
+        this.secondaryTaskText = secondaryTaskText;
     }
 
     public boolean isOnce() {
@@ -64,6 +73,8 @@ public abstract class Task {
     public String getTitle() {
         return title;
     }
+    public void pause(){}
+    public void resume(){}
 
     public void setTitle(String title) {
         this.title = title;

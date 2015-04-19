@@ -41,7 +41,7 @@ public class ForcesTutorialLevel extends Level {
         this.setK(0);
         this.setChargingK(0);
         this.setMassFlowingK(0);
-        this.setPreRenderer(new FadePreRenderer(new Color(1,1,1,1),new Color(0.9f,0.9f,0.9f,1),600 ));
+        this.setPreRenderer(new FadePreRenderer(new Color(1,1,1,1),new Color(0.9f,1f,0.9f,1),600 ));
     }
     @Override
     protected void setParticles() {
@@ -66,9 +66,10 @@ public class ForcesTutorialLevel extends Level {
     @Override
     protected Mission createMission() {
         Mission mission=new Mission("");
-        task01=new TimeTask(3000);
+        task01=new TimeTask(7000);
         task01.start();
-        task01.setTaskText("In this world there are many other fractions, which has its own characteristics.");
+        task01.setMainTaskText("In this world there are many other fractions, which has its own characteristics.");
+        task01.setSecondaryTaskText("E.g. mass, electric charge, color etc.");
         task01.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
@@ -88,8 +89,8 @@ public class ForcesTutorialLevel extends Level {
                 task02.start();
             }
         });
-        task02=new TimeTask(3000);
-        task02.setTaskText("For example, this one has twice lower mass than your fraction");
+        task02=new TimeTask(7000);
+        task02.setMainTaskText("For example, this one has twice lower mass than your fraction");
         task02.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
@@ -97,14 +98,14 @@ public class ForcesTutorialLevel extends Level {
                 ForcesTutorialLevel.this.setCameraPositionChanger(new CameraPositionChanger() {
                     @Override
                     public void changeCameraPosition(Level level, Camera camera, LevelScreen screen) {
-                        ForcesTutorialLevel.this.moveCamera((secondParticle.getX() + mainFraction.getX()) / 2f, (secondParticle.getY() + mainFraction.getY()) / 2f, 255);
-                        screen.setCameraZoom((screen.getZoom() * 25 + 1) / 26);
+                        ForcesTutorialLevel.this.moveCamera(0*(secondParticle.getX() + mainFraction.getX()) / 2f, 0*(secondParticle.getY() + mainFraction.getY()) / 2f, 25);
+                        screen.setCameraZoom((screen.getZoom() * 25 + 2) / 26);
                     }
                 });
             }
         });
-        task03=new TimeTask(3000);
-        task03.setTaskText("In some levels there is Newton's law of universal gravitation");
+        task03=new TimeTask(7000);
+        task03.setMainTaskText("In some levels there is Newton's law of universal gravitation");
         task03.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
@@ -124,8 +125,8 @@ public class ForcesTutorialLevel extends Level {
                 task04.start();
             }
         });
-        task04=new TimeTask(10000);
-        task04.setTaskText("And every fraction can be influenced by this law");
+        task04=new TimeTask(15000);
+        task04.setMainTaskText("And every fraction can be influenced by this law");
         task04.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
@@ -135,8 +136,8 @@ public class ForcesTutorialLevel extends Level {
                 task05.start();
             }
         });
-        task05=new TimeTask(5000);
-        task05.setTaskText("But what happens if I make both fractions positive?");
+        task05=new TimeTask(10000);
+        task05.setMainTaskText("But what happens if I make both fractions positive?");
         task05.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
@@ -144,16 +145,16 @@ public class ForcesTutorialLevel extends Level {
                 task06.start();
             }
         });
-        task06=new TimeTask(5000);
-        task06.setTaskText("And what if one became negative?");
+        task06=new TimeTask(10000);
+        task06.setMainTaskText("And what if one became negative?");
         task06.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
                 task07.start();
             }
         });
-        task07=new TimeTask(5000);
-        task07.setTaskText("Yes, they both forced by Coulomb's law");
+        task07=new TimeTask(10000);
+        task07.setMainTaskText("Yes, they both forced by Coulomb's law");
         task07.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
@@ -166,7 +167,7 @@ public class ForcesTutorialLevel extends Level {
             }
         });
         task08=new TaskOnAction();
-        task08.setTaskText("You've finished ForcesTutorialLevel. Tap to exit.");
+        task08.setMainTaskText("You've finished ForcesTutorialLevel. Tap to exit.");
 
         mission.addTask(task01);
         mission.addTask(task02);

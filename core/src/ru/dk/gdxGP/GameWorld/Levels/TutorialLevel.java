@@ -64,7 +64,7 @@ public class TutorialLevel extends Level {
     protected Mission createMission() {
         Mission mission=new Mission("Tutorial");
         task01=new TaskOnAction();
-        task01.setTaskText("Hello! This is you! Your fraction green circled! Tap on the screen!");
+        task01.setMainTaskText("Hello! This is you! Your fraction green circled! Tap on the screen!");
         this.setLevelTapper(new LevelTapper() {
             @Override
             public void tapLevel(Level level, float x, float y) {
@@ -72,7 +72,7 @@ public class TutorialLevel extends Level {
             }
         });
         task02=new TimeTask(5000);
-        task02.setTaskText("After 5 sec I'll turn on Gravitation");
+        task02.setMainTaskText("After 5 sec I'll turn on Gravitation");
         task01.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
@@ -104,7 +104,7 @@ public class TutorialLevel extends Level {
             }
         });
         task03=new TaskOnAction();
-        task03.setTaskText("You can rotate your device to move your fraction. Tap to stop it!");
+        task03.setMainTaskText("You can rotate your device to move your fraction. Tap to stop it!");
         task03.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
@@ -124,7 +124,7 @@ public class TutorialLevel extends Level {
             }
         });
         task04=new TaskOnAction();
-        task04.setTaskText("Also you can control your particle via tapping your screen. Tap 5 times!");
+        task04.setMainTaskText("Also you can control your particle via tapping your screen. Tap 5 times!");
         task04.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
@@ -137,7 +137,7 @@ public class TutorialLevel extends Level {
             }
         });
         task05=new NullTask();
-        task05.setTaskText("You've finished first tutorial. Enjoy this level or try out another level!");
+        task05.setMainTaskText("You've finished first tutorial. Enjoy this level or try out another level!");
         mission.addTask(task01);
         mission.addTask(task02);
         mission.addTask(task03);

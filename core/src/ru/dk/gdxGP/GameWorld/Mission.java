@@ -43,11 +43,34 @@ public class Mission extends Task {
     }
 
     @Override
-    public String getTaskText() {
+    public String getMainTaskText() {
         if (currentTask != null)
-            return currentTask.getTaskText();
+            return currentTask.getMainTaskText();
         else
             return "";
+    }
+    @Override
+    public String getSecondaryTaskText() {
+        if (currentTask != null)
+            return currentTask.getSecondaryTaskText();
+        else
+            return "";
+    }
+
+    @Override
+    public void pause() {
+        super.pause();
+        if(this.currentTask!=null){
+            this.currentTask.pause();
+        }
+    }
+
+    @Override
+    public void resume() {
+        super.resume();
+        if(this.currentTask!=null){
+            this.currentTask.resume();
+        }
     }
 
     public void render(Batch batch) {

@@ -106,12 +106,12 @@ public class TestLevel01 extends Level {
         Task task02 = new TaskOnMass(mainFraction, 0.5f, 1f);
         task02.setOnce(true);
         final TaskCombination taskComb = new TaskCombination(new Task[]{task01, task02}, TaskCombination.TC_AND, true);
-        taskComb.setTaskText("Make your particle be approximately in coordinates 0,0 with mass 0.5");
+        taskComb.setMainTaskText("Make your particle be approximately in coordinates 0,0 with mass 0.5");
 
         mission.addTask(taskComb);
 
         Task task03=new TaskOnCoordinate(mainFraction,new Vector2(getWidth(),getHeight()), 1);
-        task03.setTaskText("you've completed it");
+        task03.setMainTaskText("you've completed it");
         mission.addTask(task03);
         return mission;
     }

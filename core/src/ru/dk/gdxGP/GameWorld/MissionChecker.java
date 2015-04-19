@@ -41,10 +41,12 @@ public class MissionChecker extends Timer {
     }
 
     public void pause() {
+        this.mission.pause();
         timerTask.cancel();
     }
 
     public void resume() {
+        this.mission.resume();
         scheduleTask();
     }
 
