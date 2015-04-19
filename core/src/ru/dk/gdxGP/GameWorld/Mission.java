@@ -2,6 +2,7 @@ package ru.dk.gdxGP.GameWorld;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import ru.dk.gdxGP.GameWorld.InterfacesForActions.MissionDrawer;
+import ru.dk.gdxGP.GameWorld.Tasks.NullTask;
 import ru.dk.gdxGP.GameWorld.Templates.MissionDrawerSet;
 
 import java.util.LinkedList;
@@ -16,6 +17,7 @@ public class Mission extends Task {
 
     public Mission(String title) {
         super(true, title);
+        if(title.equals("Null"))this.addTask(new NullTask());
     }
 
     public void addTask(Task task) {

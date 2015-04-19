@@ -30,7 +30,7 @@ static final public FractionDrawer solidDrawer=new FractionDrawer() {
         batch.draw(textureRegionFractionSolid, fraction.getPosition().x - 1.0f * r, fraction.getPosition().y - 1.0f * r, r, r, r * 2.0f, r * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
         if (fraction.getCharge() > 0) batch.setColor(1, 0, 0, 0.25f);
         else batch.setColor(0, 0, 1, 0.25f);
-        float r1 = (float) (r * (1 + Math.abs(Math.sqrt(fraction.getCharge()) * 2f)));
+        float r1 = (float) (r * (1 + Math.sqrt(Math.abs(fraction.getCharge()) * 2f)));
         //if (!(fraction.charge <= 0.1f && fraction.charge >= -0.1f))
         batch.draw(textureRegionCharge, fraction.getPosition().x - 1.0f * r1, fraction.getPosition().y - 1.0f * r1, r1, r1, r1 * 2.0f, r1 * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
         float r2 = r * 0.5f;
@@ -52,7 +52,7 @@ static final public FractionDrawer solidDrawer=new FractionDrawer() {
             batch.draw(textureRegionFractionSolid, fraction.getPosition().x - 1.0f * r, fraction.getPosition().y - 1.0f * r, r, r, r * 2.0f, r * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
             if (fraction.getCharge() > 0) batch.setColor(1, 0, 0, 0.25f);
             else batch.setColor(0, 0, 1, 0.25f);
-            float r1 = (float) (r * (1 + Math.abs(Math.sqrt(fraction.getCharge()) * 2f)));
+            float r1 = (float) (r * (1 + Math.sqrt(Math.abs(fraction.getCharge()) * 2f)));
             //if (!(fraction.charge <= 0.1f && fraction.charge >= -0.1f))
             batch.draw(textureRegionCharge, fraction.getPosition().x - 1.0f * r1, fraction.getPosition().y - 1.0f * r1, r1, r1, r1 * 2.0f, r1 * 2.0f, 1, 1, MathUtils.radiansToDegrees * fraction.getBody().getAngle());
             float r2 = r * 0.5f;

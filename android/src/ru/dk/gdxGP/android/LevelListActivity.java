@@ -32,7 +32,7 @@ public class LevelListActivity extends Activity {
             System.err.println("Null lv");
             return;
         }
-        final List<String> levelNames = GameLevels.getNames(true);
+        final List<String> levelNames = GameLevels.getNames(false);
         adapter = new ArrayAdapter<String>(this, R.layout.level_list_item, levelNames);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {

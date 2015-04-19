@@ -1,6 +1,7 @@
 package ru.dk.gdxGP.GameWorld.Levels;
 
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import ru.dk.gdxGP.GameWorld.*;
 import ru.dk.gdxGP.GameWorld.InterfacesForActions.ActionAfterAchievedTask;
@@ -12,6 +13,7 @@ import ru.dk.gdxGP.GameWorld.Tasks.TaskOnAction;
 import ru.dk.gdxGP.GameWorld.Tasks.TimeTask;
 import ru.dk.gdxGP.GameWorld.Templates.FractionDrawerSet;
 import ru.dk.gdxGP.GameWorld.Templates.LevelProceederSet;
+import ru.dk.gdxGP.GameWorld.Templates.PreRenderers.FadePreRenderer;
 import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
 import ru.dk.gdxGP.Screens.LevelScreen;
 
@@ -40,6 +42,7 @@ public class TutorialLevel extends Level {
                 screen.setCameraZoom((screen.getZoom() * 25 + 1) / 26);
             }
         });
+        this.setPreRenderer(new FadePreRenderer(new Color(1, 1, 1, 1), new Color(1f, 1f, 0.9f, 1), 600));
     }
 
     @Override

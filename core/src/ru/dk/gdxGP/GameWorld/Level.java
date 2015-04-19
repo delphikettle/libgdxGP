@@ -45,11 +45,16 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     private float prevAccelX;
     private float prevAccelY;
     private final Timer stepTimer;
-    private int xMin, xMax, yMin, yMax;
+    private float xMin;
+    private float xMax;
+    private float yMin;
+    private float yMax;
     private float G = 1;
     private float k = 1;
     private float chargingK = 1;
-    private MissionChecker currentMissionChecker = new MissionChecker(new Mission(""), 1000);
+
+    private float massFlowingK=1;
+    private MissionChecker currentMissionChecker = new MissionChecker(new Mission("Null"), 1000);
     private boolean isMove = false, isEnd = false;
     private float loaded;
 
@@ -342,6 +347,10 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
                 if (!this.actions.isEmpty()) {
                     this.actions.remove(0).doSomethingOnStep(this);
                 }
+                if(currentMissionChecker.isFinished()) {
+                    System.out.println(currentMissionChecker.isFinished());
+                    System.exit(0);
+                }
             }
         }
     }
@@ -386,43 +395,51 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         return this.G = newG;
     }
 
-    public int getWidth() {
+    public float getWidth() {
         return getXMax() - getXMin();
     }
 
-    public int getHeight() {
+    public float getHeight() {
         return getYMax() - getYMin();
     }
 
-    protected final int getXMin() {
+    public float getMassFlowingK() {
+        return massFlowingK;
+    }
+
+    public void setMassFlowingK(float massFlowingK) {
+        this.massFlowingK = massFlowingK;
+    }
+
+    protected final float getXMin() {
         return this.xMin;
     }
 
-    protected final int getYMin() {
+    protected final float getYMin() {
         return this.yMin;
     }
 
-    protected final int getXMax() {
+    protected final float getXMax() {
         return this.xMax;
     }
 
-    protected final int getYMax() {
+    protected final float getYMax() {
         return this.yMax;
     }
 
-    protected final int setXMin(int newXMin) {
+    protected final float setXMin(float newXMin) {
         return this.xMin = newXMin;
     }
 
-    protected final int setYMin(int newYMin) {
+    protected final float setYMin(float newYMin) {
         return this.yMin = newYMin;
     }
 
-    protected final int setXMax(int newXMax) {
+    protected final float setXMax(float newXMax) {
         return this.xMax = newXMax;
     }
 
-    protected final int setYMax(int newYMax) {
+    protected final float setYMax(float newYMax) {
         return this.yMax = newYMax;
     }
 
@@ -529,7 +546,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
                     from = f2;
                     to = f1;
                 }
-                float deltaMass = MathUtils.clamp(from.getMass() * to.getMass() * Level.this.G * 0.001f, 0.000001f, 1f);
+                float deltaMass = MathUtils.clamp(from.getMass() * to.getMass() * Level.this.G*Level.this.massFlowingK * 0.001f, 0.000001f, 1f);
                 try {
                     from.moveParameters(to, deltaMass, 0, 0, new Vector2(0, 0));
                 } catch (Fraction.NullMassException e) {
