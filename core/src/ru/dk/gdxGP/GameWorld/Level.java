@@ -546,7 +546,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
                     from = f2;
                     to = f1;
                 }
-                float deltaMass = MathUtils.clamp(from.getMass() * to.getMass() * Level.this.G*Level.this.massFlowingK * 0.001f, 0.000001f, 1f);
+                float deltaMass = MathUtils.clamp(from.getMass() * to.getMass() * Level.this.massFlowingK * 0.001f, 0.000001f, 1f);
                 try {
                     from.moveParameters(to, deltaMass, 0, 0, new Vector2(0, 0));
                 } catch (Fraction.NullMassException e) {
@@ -577,6 +577,16 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     }
 
     //methods for generating
+    public void addRandomFractions(final FractionDef fractionDef, final int count){
+        this.addAction(new ActionForNextStep() {
+            @Override
+            public void doSomethingOnStep(Level level) {
+                for (int i = 0; i < count; i++) {
+                    Level.this.addFraction(Level.this.generateRandomFraction(fractionDef));
+                }
+            }
+        });
+    }
 
     public Fraction generateRandomFraction(FractionDef fractionDef) {
         return new Fraction(this,this.getWorld(),

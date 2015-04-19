@@ -18,7 +18,8 @@ public class GameLevels {
                     //TestLevel01.class,
                     //UnnamedLevel.class,
                     TutorialLevel.class,
-                    ForcesTutorialLevel.class
+                    ForcesTutorialLevel.class,
+                    InteractionTutorialLevel.class
             )
     );
 
