@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">gdxGP</string>
     <string name="helpButton">Help</string>
     <string name="startButton">Start</string>
     <string name="exitButton">Exit</string>
+    <string name="appName">Gravity Particles</string>
 
 </resources>

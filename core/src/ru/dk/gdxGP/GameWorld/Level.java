@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.Timer;
 import ru.dk.gdxGP.GameWorld.InterfacesForActions.*;
 import ru.dk.gdxGP.GameWorld.Templates.LevelProceederSet;
 import ru.dk.gdxGP.GameWorld.WorldElements.Border;
-import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
+import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
 import ru.dk.gdxGP.Screens.LevelScreen;
 
 import java.util.ArrayList;
@@ -24,9 +24,9 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
             "images/PlusCharge.png",
             "images/NullCharge.png",
             "images/MinusCharge.png",
-            "images/FractionSolid01.png",
-            "images/FractionSolid.png",
-            "images/FractionLiquid.png",
+            "images/ParticleSolid01.png",
+            "images/ParticleSolid.png",
+            "images/ParticleLiquid.png",
             "images/charge.png",
             "border01.png"
     };
@@ -37,7 +37,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         }
     };
     private final World world;
-    private final ArrayList<Fraction> particles;
+    private final ArrayList<Particle> particles;
     private final ArrayList<Border> borders;
     private final ArrayList<Actor> otherElements;
     private final List<ActionForNextStep> actions;
@@ -66,7 +66,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     protected Level() {
         this.world = new World(new Vector2(0.0f, 0.0f), true);
         this.world.setContactListener(this);
-        particles = new ArrayList<Fraction>();
+        particles = new ArrayList<Particle>();
         borders = new ArrayList<Border>();
         otherElements = new ArrayList<Actor>();
         actions = Collections.synchronizedList(new ArrayList<ActionForNextStep>());
@@ -138,7 +138,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         if (this.levelScreen != null) {
             renderBorders();
             renderOthers();
-            renderFractions();
+            renderParticles();
         }
     }
 
@@ -150,8 +150,8 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         levelScreen.drawOthers();
     }
 
-    public void renderFractions() {
-        levelScreen.drawFractions();
+    public void renderParticles() {
+        levelScreen.drawParticles();
     }
 
     public final void afterRender() {
@@ -292,21 +292,21 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         return world;
     }
 
-    synchronized final public Fraction addFraction(Fraction f) {
+    synchronized final public Particle addParticle(Particle f) {
         if (f == null) return null;
         particles.add(f);
         if (levelScreen != null)
-            levelScreen.addFractionActor(f);
+            levelScreen.addParticleActor(f);
         return f;
     }
 
-    synchronized final public void removeFraction(Fraction fraction) {
-        System.out.println("removing fraction");
-        particles.remove(fraction);
-        fraction.getBody().setActive(false);
-        this.world.destroyBody(fraction.getBody());
+    synchronized final public void removeParticle(Particle particle) {
+        System.out.println("removing particle");
+        particles.remove(particle);
+        particle.getBody().setActive(false);
+        this.world.destroyBody(particle.getBody());
         if (levelScreen != null)
-            levelScreen.removeFractionActor(fraction);
+            levelScreen.removeParticleActor(particle);
     }
 
     synchronized final public Border addBorder(Border border) {
@@ -323,7 +323,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         return actor;
     }
 
-    public final Fraction getFraction(int index) {
+    public final Particle getParticle(int index) {
         return this.particles.get(index);
     }
 
@@ -442,7 +442,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         return this.currentMissionChecker.getMission();
     }
 
-    void contactFractions(Fraction f1, Fraction f2, Contact contact) {
+    void contactParticles(Particle f1, Particle f2, Contact contact) {
         flowMass(f1, f2);
     }
 
@@ -475,9 +475,9 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
 
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
-        if (contact.getFixtureA().getBody().getUserData() instanceof Fraction && contact.getFixtureB().getBody().getUserData() instanceof Fraction) {
-            Fraction f1 = (Fraction) contact.getFixtureA().getBody().getUserData(), f2 = (Fraction) contact.getFixtureB().getBody().getUserData();
-            contactFractions(f1, f2, contact);
+        if (contact.getFixtureA().getBody().getUserData() instanceof Particle && contact.getFixtureB().getBody().getUserData() instanceof Particle) {
+            Particle f1 = (Particle) contact.getFixtureA().getBody().getUserData(), f2 = (Particle) contact.getFixtureB().getBody().getUserData();
+            contactParticles(f1, f2, contact);
         }
 
     }
@@ -498,7 +498,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         }
     }
 
-    public void interactionBetweenFractions(Fraction f1, Fraction f2) {
+    public void interactionBetweenParticles(Particle f1, Particle f2) {
         d.set(f2.getBody().getPosition());
         d.add(-f1.getBody().getPosition().x, -f1.getBody().getPosition().y);
         float F = (((-this.k * f1.getCharge() * f2.getCharge() + this.G) * f1.getBody().getMass() * f2.getBody().getMass()) / (d.len() * d.len()));
@@ -514,29 +514,29 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         if (!Float.isNaN(deltaCharge) && !Float.isInfinite(deltaCharge))
             try {
                 f1.moveParameters(f2, 0, deltaCharge, 0, new Vector2(0, 0));
-            } catch (Fraction.NullMassException e) {
+            } catch (Particle.NullMassException e) {
                 System.out.println("NullException " + e.toString());
-                this.removeFraction(e.getFraction());
+                this.removeParticle(e.getParticle());
             }
 
     }
 
-    public void interactAllWithAllFractions() {
+    public void interactAllWithAllParticles() {
         for (int i = 0; i < particles.size(); i++) {
-            Fraction f1 = particles.get(i);
+            Particle f1 = particles.get(i);
             if (f1 != null) {
                 for (int j = i + 1; j < particles.size(); j++) {
-                    interactionBetweenFractions(f1, particles.get(j));
+                    interactionBetweenParticles(f1, particles.get(j));
                 }
             }
         }
     }
 
-    public void flowMass(final Fraction f1, final Fraction f2) {
+    public void flowMass(final Particle f1, final Particle f2) {
         this.addAction(new ActionForNextStep() {
             @Override
             public void doSomethingOnStep(Level level) {
-                Fraction from = f1, to = f2;
+                Particle from = f1, to = f2;
                 if (f1.getMass() > f2.getMass()) {
                     from = f2;
                     to = f1;
@@ -544,25 +544,25 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
                 float deltaMass = MathUtils.clamp(from.getMass() * to.getMass() * Level.this.massFlowingK * 0.001f, 0.000001f, 1f);
                 try {
                     from.moveParameters(to, deltaMass, 0, 0, new Vector2(0, 0));
-                } catch (Fraction.NullMassException e) {
-                    Level.this.removeFraction(e.getFraction());
+                } catch (Particle.NullMassException e) {
+                    Level.this.removeParticle(e.getParticle());
                 }
 
             }
         });
     }
 
-    public void divideOnTap(final Fraction fraction, final float speed, final float piece, final float x, final float y) {
+    public void divideOnTap(final Particle particle, final float speed, final float piece, final float x, final float y) {
         this.addAction(new ActionForNextStep() {
             @Override
             public void doSomethingOnStep(Level level) {
-                Vector2 v = new Vector2(fraction.getPosition());
+                Vector2 v = new Vector2(particle.getPosition());
                 v.rotate(180);
                 v.add(x, y);
                 v.setLength(speed);
-                Fraction newFraction = fraction.divide(Level.this.getFraction(0).getMass() * piece, v.x, v.y);
-                level.addFraction(
-                        newFraction
+                Particle newParticle = particle.divide(Level.this.getParticle(0).getMass() * piece, v.x, v.y);
+                level.addParticle(
+                        newParticle
                 );
 
             }
@@ -574,26 +574,26 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     }
 
     //methods for generating
-    public void addRandomFractions(final FractionDef fractionDef, final int count) {
+    public void addRandomParticles(final ParticleDef particleDef, final int count) {
         this.addAction(new ActionForNextStep() {
             @Override
             public void doSomethingOnStep(Level level) {
                 for (int i = 0; i < count; i++) {
-                    Level.this.addFraction(Level.this.generateRandomFraction(fractionDef));
+                    Level.this.addParticle(Level.this.generateRandomParticle(particleDef));
                 }
             }
         });
     }
 
-    public Fraction generateRandomFraction(FractionDef fractionDef) {
-        return new Fraction(this, this.getWorld(),
-                MathUtils.random(fractionDef.minX, fractionDef.maxX),
-                MathUtils.random(fractionDef.minY, fractionDef.maxY),
-                MathUtils.random(fractionDef.minVX, fractionDef.maxVX), MathUtils.random(fractionDef.minVY, fractionDef.maxVY),
-                MathUtils.random(fractionDef.minMass, fractionDef.maxMass), (MathUtils.random(fractionDef.minCharge, fractionDef.maxCharge)), 1, 1, 1, Fraction.Condition.Liquid,
-                new Color(MathUtils.random(fractionDef.rMin, fractionDef.rMax),
-                        MathUtils.random(fractionDef.gMin, fractionDef.gMax),
-                        MathUtils.random(fractionDef.bMin, fractionDef.bMax),
-                        MathUtils.random(fractionDef.aMin, fractionDef.aMax)));
+    public Particle generateRandomParticle(ParticleDef particleDef) {
+        return new Particle(this, this.getWorld(),
+                MathUtils.random(particleDef.minX, particleDef.maxX),
+                MathUtils.random(particleDef.minY, particleDef.maxY),
+                MathUtils.random(particleDef.minVX, particleDef.maxVX), MathUtils.random(particleDef.minVY, particleDef.maxVY),
+                MathUtils.random(particleDef.minMass, particleDef.maxMass), (MathUtils.random(particleDef.minCharge, particleDef.maxCharge)), 1, 1, 1, Particle.Condition.Liquid,
+                new Color(MathUtils.random(particleDef.rMin, particleDef.rMax),
+                        MathUtils.random(particleDef.gMin, particleDef.gMax),
+                        MathUtils.random(particleDef.bMin, particleDef.bMax),
+                        MathUtils.random(particleDef.aMin, particleDef.aMax)));
     }
 }

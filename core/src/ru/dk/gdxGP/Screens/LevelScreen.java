@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.WorldElements.Border;
-import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
+import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
 
 public class LevelScreen implements Screen {
     private final Stage particlesStage;
@@ -56,12 +56,12 @@ public class LevelScreen implements Screen {
         return level;
     }
 
-    public void addFractionActor(Fraction fraction) {
-        particlesStage.addActor(fraction);
+    public void addParticleActor(Particle particle) {
+        particlesStage.addActor(particle);
     }
 
-    public void removeFractionActor(Fraction fraction) {
-        particlesStage.getActors().removeValue(fraction, true);
+    public void removeParticleActor(Particle particle) {
+        particlesStage.getActors().removeValue(particle, true);
     }
 
     public void addBorderActor(Border border) {
@@ -72,15 +72,15 @@ public class LevelScreen implements Screen {
         othersStage.addActor(actor);
     }
 
-    public void drawFractions() {
+    public void drawParticles() {
         try {
             this.particlesStage.draw();
         } catch (NullPointerException e) {
             this.particlesStage.getBatch().end();
-            System.out.println("Exception " + e.toString() + " in drawFractions");
+            System.out.println("Exception " + e.toString() + " in drawParticles");
         } catch (IndexOutOfBoundsException e) {
             this.particlesStage.getBatch().end();
-            System.out.println("Exception " + e.toString() + " in drawFractions");
+            System.out.println("Exception " + e.toString() + " in drawParticles");
         }
     }
 

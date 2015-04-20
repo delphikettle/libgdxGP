@@ -2,7 +2,7 @@ package ru.dk.gdxGP.GameWorld.Levels;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
-import ru.dk.gdxGP.GameWorld.FractionDef;
+import ru.dk.gdxGP.GameWorld.ParticleDef;
 import ru.dk.gdxGP.GameWorld.InterfacesForActions.ActionAfterAchievedTask;
 import ru.dk.gdxGP.GameWorld.InterfacesForActions.CameraPositionChanger;
 import ru.dk.gdxGP.GameWorld.InterfacesForActions.LevelProceeder;
@@ -12,9 +12,9 @@ import ru.dk.gdxGP.GameWorld.Mission;
 import ru.dk.gdxGP.GameWorld.Task;
 import ru.dk.gdxGP.GameWorld.Tasks.TaskOnAction;
 import ru.dk.gdxGP.GameWorld.Tasks.TimeTask;
-import ru.dk.gdxGP.GameWorld.Templates.FractionDrawerSet;
+import ru.dk.gdxGP.GameWorld.Templates.ParticleDrawerSet;
 import ru.dk.gdxGP.GameWorld.Templates.PreRenderers.FadePreRenderer;
-import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
+import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
 import ru.dk.gdxGP.Screens.LevelScreen;
 
 /**
@@ -26,7 +26,7 @@ public class InteractionTutorialLevel extends Level {
     private TimeTask task03;
     private TimeTask task04;
     private TaskOnAction task05;
-    private Fraction mainFraction;
+    private Particle mainParticle;
 
     @Override
     protected void setSizes() {
@@ -41,7 +41,7 @@ public class InteractionTutorialLevel extends Level {
         InteractionTutorialLevel.this.setCameraPositionChanger(new CameraPositionChanger() {
             @Override
             public void changeCameraPosition(Level level, Camera camera, LevelScreen screen) {
-                InteractionTutorialLevel.this.moveCamera(mainFraction.getX(), mainFraction.getY(), 25);
+                InteractionTutorialLevel.this.moveCamera(mainParticle.getX(), mainParticle.getY(), 25);
                 screen.setCameraZoom((screen.getZoom() * 25 + 0.5f) / 26);
             }
         });
@@ -54,12 +54,12 @@ public class InteractionTutorialLevel extends Level {
 
     @Override
     protected void setParticles() {
-        FractionDef fractionDef = new FractionDef(0, 0, 0, 0);
-        fractionDef.minMass = fractionDef.maxMass = 1f;
-        fractionDef.minCharge = fractionDef.maxCharge = 5f;
-        mainFraction = super.generateRandomFraction(fractionDef);
-        mainFraction.setDrawer(FractionDrawerSet.mainDrawer);
-        this.addFraction(mainFraction);
+        ParticleDef particleDef = new ParticleDef(0, 0, 0, 0);
+        particleDef.minMass = particleDef.maxMass = 1f;
+        particleDef.minCharge = particleDef.maxCharge = 5f;
+        mainParticle = super.generateRandomParticle(particleDef);
+        mainParticle.setDrawer(ParticleDrawerSet.mainDrawer);
+        this.addParticle(mainParticle);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class InteractionTutorialLevel extends Level {
     protected Mission createMission() {
         Mission mission = new Mission("");
         task01 = new TimeTask(5000);
-        task01.setMainTaskText("This fraction has very positive charge.");
+        task01.setMainTaskText("This particle has very positive charge.");
         task01.setSecondaryTaskText("");
         task01.start();
         task01.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
@@ -87,21 +87,21 @@ public class InteractionTutorialLevel extends Level {
                 InteractionTutorialLevel.this.setLevelProceeder(new LevelProceeder() {
                     @Override
                     public void proceed(Level level, float delta) {
-                        level.interactAllWithAllFractions();
+                        level.interactAllWithAllParticles();
                     }
                 });
-                FractionDef fractionDef = new FractionDef(0.75f * getXMin(), 0.75f * getXMax(), 0.75f * getYMin(), 0.75f * getYMax());
-                fractionDef.minCharge = -2f;
-                fractionDef.maxCharge = -1f;
-                fractionDef.minMass = fractionDef.maxMass = 0.05f;
-                InteractionTutorialLevel.this.addRandomFractions(fractionDef, 25);
+                ParticleDef particleDef = new ParticleDef(0.75f * getXMin(), 0.75f * getXMax(), 0.75f * getYMin(), 0.75f * getYMax());
+                particleDef.minCharge = -2f;
+                particleDef.maxCharge = -1f;
+                particleDef.minMass = particleDef.maxMass = 0.05f;
+                InteractionTutorialLevel.this.addRandomParticles(particleDef, 25);
 
                 task02.start();
             }
         });
         task02 = new TimeTask(15000);
-        task02.setMainTaskText("And it can share its charge to other fractions");
-        task02.setSecondaryTaskText("As you can see, nearest fractions became more positive than furthest");
+        task02.setMainTaskText("And it can share its charge to other particles");
+        task02.setSecondaryTaskText("As you can see, nearest particles became more positive than furthest");
         task02.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
@@ -111,7 +111,7 @@ public class InteractionTutorialLevel extends Level {
             }
         });
         task03 = new TimeTask(7500);
-        task03.setMainTaskText("And if I turn on Coulomb's law, fractions will move");
+        task03.setMainTaskText("And if I turn on Coulomb's law, particles will move");
         task03.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
@@ -121,7 +121,7 @@ public class InteractionTutorialLevel extends Level {
                 InteractionTutorialLevel.this.setCameraPositionChanger(new CameraPositionChanger() {
                     @Override
                     public void changeCameraPosition(Level level, Camera camera, LevelScreen screen) {
-                        InteractionTutorialLevel.this.moveCamera(mainFraction.getX(), mainFraction.getY(), 25);
+                        InteractionTutorialLevel.this.moveCamera(mainParticle.getX(), mainParticle.getY(), 25);
                         screen.setCameraZoom((screen.getZoom() * 25 + 0.75f) / 26);
                     }
                 });
@@ -129,8 +129,8 @@ public class InteractionTutorialLevel extends Level {
             }
         });
         task04 = new TimeTask(15000);
-        task04.setMainTaskText("When fractions collide big fraction take some mass from small fractions");
-        task04.setSecondaryTaskText("And some of them even were absorbed by big fraction");
+        task04.setMainTaskText("When particles collide big particle take some mass from small particles");
+        task04.setSecondaryTaskText("And some of them even were absorbed by big particle");
         task04.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
@@ -150,7 +150,7 @@ public class InteractionTutorialLevel extends Level {
             }
         });
         task05 = new TaskOnAction();
-        task05.setMainTaskText("Now you know practically all about interactions between fractions in this game");
+        task05.setMainTaskText("Now you know practically all about interactions between particles in this game");
         task05.setSecondaryTaskText("You've finished all tutorials in this game. Now it's time to try out real level.");
 
 

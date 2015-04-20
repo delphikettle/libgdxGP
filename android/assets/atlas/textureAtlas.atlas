@@ -30,27 +30,6 @@ size: 1024,512
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-FractionLiquid
-  rotate: false
-  xy: 0, 256
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
-FractionSolid
-  rotate: false
-  xy: 0, 0
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
-FractionSolid01
-  rotate: false
-  xy: 256, 256
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
 MinusCharge
   rotate: false
   xy: 768, 348
@@ -63,6 +42,27 @@ NullCharge
   xy: 868, 448
   size: 64, 64
   orig: 64, 64
+  offset: 0, 0
+  index: -1
+ParticleLiquid
+  rotate: false
+  xy: 0, 256
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+ParticleSolid
+  rotate: false
+  xy: 0, 0
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+ParticleSolid01
+  rotate: false
+  xy: 256, 256
+  size: 256, 256
+  orig: 256, 256
   offset: 0, 0
   index: -1
 PlusCharge

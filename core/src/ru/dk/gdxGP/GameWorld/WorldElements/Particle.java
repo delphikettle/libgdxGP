@@ -5,13 +5,13 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import ru.dk.gdxGP.GameWorld.InterfacesForActions.FractionDrawer;
-import ru.dk.gdxGP.GameWorld.InterfacesForActions.FractionOperator;
+import ru.dk.gdxGP.GameWorld.InterfacesForActions.ParticleDrawer;
+import ru.dk.gdxGP.GameWorld.InterfacesForActions.ParticleOperator;
 import ru.dk.gdxGP.GameWorld.Level;
-import ru.dk.gdxGP.GameWorld.Templates.FractionDrawerSet;
-import ru.dk.gdxGP.GameWorld.Templates.FractionOperatorSet;
+import ru.dk.gdxGP.GameWorld.Templates.ParticleDrawerSet;
+import ru.dk.gdxGP.GameWorld.Templates.ParticleOperatorSet;
 
-public class Fraction extends Actor {
+public class Particle extends Actor {
     private static final FixtureDef blankFixtureDef;
 
     static {
@@ -23,24 +23,16 @@ public class Fraction extends Actor {
         blankFixtureDef.shape = new CircleShape();
         blankFixtureDef.shape.setRadius(0.00001f);
     }
-
-    /*
-    private static final TextureRegion textureRegionFractionSolid;
-    private static final TextureRegion textureRegionCharge;
-    private static final TextureRegion textureRegionNullCharge;
-    private static final TextureRegion textureRegionMinusCharge;
-    private static final TextureRegion textureRegionPlusCharge;
-    */
     private final Body body;
     private final Level level;
     private Condition condition;
-    private FractionDrawer drawer = null;
-    private FractionOperator operator = null;
+    private ParticleDrawer drawer = null;
+    private ParticleOperator operator = null;
     private float charge;
     private Color color;
     private float density = 1;
 
-    public Fraction(Level level, World world, float x, float y, float vx, float vy, float mass, float charge, float friction, float density, float restitution, Condition condition, Color color) {
+    public Particle(Level level, World world, float x, float y, float vx, float vy, float mass, float charge, float friction, float density, float restitution, Condition condition, Color color) {
         this.level = level;
 
         BodyDef bodyDef = new BodyDef();
@@ -69,8 +61,8 @@ public class Fraction extends Actor {
         fixtureDef.isSensor = false;
         body.createFixture(fixtureDef);
         body.setUserData(this);
-        this.setDrawer(FractionDrawerSet.solidDrawer);
-        this.setOperator(FractionOperatorSet.nullDrawer);
+        this.setDrawer(ParticleDrawerSet.solidDrawer);
+        this.setOperator(ParticleOperatorSet.nullOperator);
         this.condition = condition;
         this.charge = charge;
         this.color = color;
@@ -148,27 +140,27 @@ public class Fraction extends Actor {
         this.condition = condition;
     }
 
-    public void setOperator(FractionOperator operator) {
+    public void setOperator(ParticleOperator operator) {
         this.operator = operator;
     }
 
-    public void setDrawer(FractionDrawer drawer) {
+    public void setDrawer(ParticleDrawer drawer) {
         this.drawer = drawer;
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if (drawer != null) drawer.drawFraction(this, batch, batch.getColor());
+        if (drawer != null) drawer.drawParticle(this, batch, batch.getColor());
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (operator != null) operator.operateFraction(this, delta);
+        if (operator != null) operator.operateParticle(this, delta);
     }
 
-    synchronized public Fraction divide(float mass, float vx, float vy) {
+    synchronized public Particle divide(float mass, float vx, float vy) {
         if (mass >= this.body.getMass() || mass <= 0)//throw new IllegalArgumentException();
             return null;
         float newMass = this.body.getMass() - mass;
@@ -177,11 +169,11 @@ public class Fraction extends Actor {
         Vector2 coords = new Vector2(vx, vy);
         coords.setLength((float) (r + Math.sqrt(mass / Math.PI / getDensity())));
         coords.add(this.body.getPosition().x, this.body.getPosition().y);
-        return new Fraction(this.level, this.body.getWorld(), coords.x, coords.y, vx, vy, mass,
+        return new Particle(this.level, this.body.getWorld(), coords.x, coords.y, vx, vy, mass,
                 this.getCharge(), this.getFriction(), this.getDensity(), this.getRestitution(), this.getCondition(), this.getColor());
     }
 
-    public void moveParameters(Fraction to, float mass, float charge, float density, Vector2 velocity) throws NullMassException {
+    public void moveParameters(Particle to, float mass, float charge, float density, Vector2 velocity) throws NullMassException {
         synchronized (this.body) {
             if (mass == 0) {
                 to.charge += charge;
@@ -223,20 +215,20 @@ public class Fraction extends Actor {
 
     @Override
     public String toString() {
-        return "Fraction:mass=" + this.getBody().getMass() + ";vx=" + this.getBody().getLinearVelocity().x + ";vy=" + this.getBody().getLinearVelocity().y;
+        return "Particle:mass=" + this.getBody().getMass() + ";vx=" + this.getBody().getLinearVelocity().x + ";vy=" + this.getBody().getLinearVelocity().y;
     }
 
     public enum Condition {Liquid, Solid, Mixed}
 
     public class NullMassException extends Exception {
-        private final Fraction fraction;
+        private final Particle particle;
 
-        NullMassException(Fraction fraction) {
-            this.fraction = fraction;
+        NullMassException(Particle particle) {
+            this.particle = particle;
         }
 
-        public Fraction getFraction() {
-            return fraction;
+        public Particle getParticle() {
+            return particle;
         }
     }
 }

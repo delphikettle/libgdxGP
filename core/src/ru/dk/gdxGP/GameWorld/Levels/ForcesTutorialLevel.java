@@ -2,16 +2,16 @@ package ru.dk.gdxGP.GameWorld.Levels;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
-import ru.dk.gdxGP.GameWorld.FractionDef;
+import ru.dk.gdxGP.GameWorld.ParticleDef;
 import ru.dk.gdxGP.GameWorld.InterfacesForActions.*;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Mission;
 import ru.dk.gdxGP.GameWorld.Task;
 import ru.dk.gdxGP.GameWorld.Tasks.TaskOnAction;
 import ru.dk.gdxGP.GameWorld.Tasks.TimeTask;
-import ru.dk.gdxGP.GameWorld.Templates.FractionDrawerSet;
+import ru.dk.gdxGP.GameWorld.Templates.ParticleDrawerSet;
 import ru.dk.gdxGP.GameWorld.Templates.PreRenderers.FadePreRenderer;
-import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
+import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
 import ru.dk.gdxGP.Screens.LevelScreen;
 
 /**
@@ -20,7 +20,7 @@ import ru.dk.gdxGP.Screens.LevelScreen;
 public class ForcesTutorialLevel extends Level {
     private TimeTask task01, task02, task03, task04, task05, task06, task07;
     private TaskOnAction task08;
-    private Fraction mainFraction, secondParticle;
+    private Particle mainParticle, secondParticle;
 
     @Override
     protected void setSizes() {
@@ -35,7 +35,7 @@ public class ForcesTutorialLevel extends Level {
         ForcesTutorialLevel.this.setCameraPositionChanger(new CameraPositionChanger() {
             @Override
             public void changeCameraPosition(Level level, Camera camera, LevelScreen screen) {
-                ForcesTutorialLevel.this.moveCamera(mainFraction.getX(), mainFraction.getY(), 25);
+                ForcesTutorialLevel.this.moveCamera(mainParticle.getX(), mainParticle.getY(), 25);
                 screen.setCameraZoom((screen.getZoom() * 25 + 1) / 26);
             }
         });
@@ -48,16 +48,16 @@ public class ForcesTutorialLevel extends Level {
 
     @Override
     protected void setParticles() {
-        FractionDef fractionDef = new FractionDef(-2.5f, -2.5f, 0, 0);
-        fractionDef.minMass = fractionDef.maxMass = 0.5f;
-        fractionDef.minCharge = fractionDef.maxCharge = 0;
-        mainFraction = super.generateRandomFraction(fractionDef);
-        mainFraction.setDrawer(FractionDrawerSet.mainDrawer);
-        this.addFraction(mainFraction);
-        fractionDef = new FractionDef(2.5f, 2.5f, 0, 0);
-        fractionDef.minMass = fractionDef.maxMass = 0.25f;
-        fractionDef.minCharge = fractionDef.maxCharge = 0;
-        secondParticle = super.generateRandomFraction(fractionDef);
+        ParticleDef particleDef = new ParticleDef(-2.5f, -2.5f, 0, 0);
+        particleDef.minMass = particleDef.maxMass = 0.5f;
+        particleDef.minCharge = particleDef.maxCharge = 0;
+        mainParticle = super.generateRandomParticle(particleDef);
+        mainParticle.setDrawer(ParticleDrawerSet.mainDrawer);
+        this.addParticle(mainParticle);
+        particleDef = new ParticleDef(2.5f, 2.5f, 0, 0);
+        particleDef.minMass = particleDef.maxMass = 0.25f;
+        particleDef.minCharge = particleDef.maxCharge = 0;
+        secondParticle = super.generateRandomParticle(particleDef);
 
     }
 
@@ -71,7 +71,7 @@ public class ForcesTutorialLevel extends Level {
         Mission mission = new Mission("");
         task01 = new TimeTask(7000);
         task01.start();
-        task01.setMainTaskText("In this world there are many other fractions, which has its own characteristics.");
+        task01.setMainTaskText("In this world there are many other particles, which has its own characteristics.");
         task01.setSecondaryTaskText("E.g. mass, electric charge, color etc.");
         task01.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
@@ -79,7 +79,7 @@ public class ForcesTutorialLevel extends Level {
                 ForcesTutorialLevel.this.addAction(new ActionForNextStep() {
                     @Override
                     public void doSomethingOnStep(Level level) {
-                        ForcesTutorialLevel.this.addFraction(secondParticle);
+                        ForcesTutorialLevel.this.addParticle(secondParticle);
                     }
                 });
                 ForcesTutorialLevel.this.setCameraPositionChanger(new CameraPositionChanger() {
@@ -93,7 +93,7 @@ public class ForcesTutorialLevel extends Level {
             }
         });
         task02 = new TimeTask(7000);
-        task02.setMainTaskText("For example, this one has twice lower mass than your fraction");
+        task02.setMainTaskText("For example, this one has twice lower mass than your particle");
         task02.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
@@ -101,7 +101,7 @@ public class ForcesTutorialLevel extends Level {
                 ForcesTutorialLevel.this.setCameraPositionChanger(new CameraPositionChanger() {
                     @Override
                     public void changeCameraPosition(Level level, Camera camera, LevelScreen screen) {
-                        ForcesTutorialLevel.this.moveCamera(0 * (secondParticle.getX() + mainFraction.getX()) / 2f, 0 * (secondParticle.getY() + mainFraction.getY()) / 2f, 25);
+                        ForcesTutorialLevel.this.moveCamera(0 * (secondParticle.getX() + mainParticle.getX()) / 2f, 0 * (secondParticle.getY() + mainParticle.getY()) / 2f, 25);
                         screen.setCameraZoom((screen.getZoom() * 25 + 2) / 26);
                     }
                 });
@@ -121,7 +121,7 @@ public class ForcesTutorialLevel extends Level {
                 ForcesTutorialLevel.this.setLevelProceeder(new LevelProceeder() {
                     @Override
                     public void proceed(Level level, float delta) {
-                        level.interactAllWithAllFractions();
+                        level.interactAllWithAllParticles();
                     }
                 });
                 ForcesTutorialLevel.this.setG(100);
@@ -129,18 +129,18 @@ public class ForcesTutorialLevel extends Level {
             }
         });
         task04 = new TimeTask(15000);
-        task04.setMainTaskText("And every fraction can be influenced by this law");
+        task04.setMainTaskText("And every particle can be influenced by this law");
         task04.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
                 ForcesTutorialLevel.this.setK(100);
-                mainFraction.setCharge(2);
+                mainParticle.setCharge(2);
                 secondParticle.setCharge(2);
                 task05.start();
             }
         });
         task05 = new TimeTask(10000);
-        task05.setMainTaskText("But what happens if I make both fractions positive?");
+        task05.setMainTaskText("But what happens if I make both particles positive?");
         task05.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {

@@ -27,10 +27,10 @@ public class TestLevel extends Level {
         /*
         Random rnd = new Random();
         for (int i = 0; i < 500; i++) {
-            this.addFraction(new Fraction(this,this.getWorld(),
+            this.addParticle(new Particle(this,this.getWorld(),
                     (rnd.nextInt(this.getXMax() - this.getXMin()) + this.getXMin()),
                     (rnd.nextInt(this.getYMax() - this.getYMin()) + this.getYMin()),
-                    (rnd.nextInt(200) - 100), (rnd.nextInt(200) - 100), (rnd.nextInt(10000) + 81) * 0.25f, 0, 1, 1, 1, Fraction.Condition.Solid, new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f))));
+                    (rnd.nextInt(200) - 100), (rnd.nextInt(200) - 100), (rnd.nextInt(10000) + 81) * 0.25f, 0, 1, 1, 1, Particle.Condition.Solid, new Color(MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.1f, 1), MathUtils.random(0.5f, 0.75f))));
         }
         */
     }

@@ -2,7 +2,7 @@ package ru.dk.gdxGP.GameWorld.Tasks;
 
 import com.badlogic.gdx.math.MathUtils;
 import ru.dk.gdxGP.GameWorld.Task;
-import ru.dk.gdxGP.GameWorld.WorldElements.Fraction;
+import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,26 +11,26 @@ import java.util.Collections;
  * Created by DK on 15.04.2015.
  */
 public class TaskOnMass extends Task {
-    private final ArrayList<Fraction> fractions = new ArrayList<Fraction>();
+    private final ArrayList<Particle> particles = new ArrayList<Particle>();
     private final float mass;
     private float inaccuracy = 0.0f;
 
-    public TaskOnMass(Fraction[] fractions, float mass, float inaccuracy) {
+    public TaskOnMass(Particle[] particles, float mass, float inaccuracy) {
         super();
-        Collections.addAll(this.fractions, fractions);
+        Collections.addAll(this.particles, particles);
         this.mass = mass;
         this.inaccuracy = inaccuracy;
     }
 
-    public TaskOnMass(Fraction fraction, float mass, float inaccuracy) {
-        this(new Fraction[]{fraction}, mass, inaccuracy);
+    public TaskOnMass(Particle particle, float mass, float inaccuracy) {
+        this(new Particle[]{particle}, mass, inaccuracy);
     }
 
     @Override
     public boolean check() {
-        for (int i = 0; i < fractions.size(); i++) {
-            Fraction fraction = fractions.get(0);
-            if (!(MathUtils.isEqual(fraction.getMass(), mass, inaccuracy)))
+        for (int i = 0; i < particles.size(); i++) {
+            Particle particle = particles.get(0);
+            if (!(MathUtils.isEqual(particle.getMass(), mass, inaccuracy)))
                 return false;
         }
         return true;
