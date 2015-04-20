@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Timer;
 import ru.dk.gdxGP.GameWorld.InterfacesForActions.*;
 import ru.dk.gdxGP.GameWorld.Templates.LevelProceederSet;
+import ru.dk.gdxGP.GameWorld.Templates.ParticleDrawerSet;
 import ru.dk.gdxGP.GameWorld.WorldElements.Border;
 import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
 import ru.dk.gdxGP.Screens.LevelScreen;
@@ -130,6 +131,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     }
 
     public final void preRender() {
+        ParticleDrawerSet.updateStateTime();
         if (this.preRenderer != null)
             this.preRenderer.preRender(this);
     }

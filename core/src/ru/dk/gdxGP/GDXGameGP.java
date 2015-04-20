@@ -88,6 +88,7 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
     public void dispose() {
         getScreen().dispose();
         super.dispose();
+        System.exit(0);
     }
 
     @Override
