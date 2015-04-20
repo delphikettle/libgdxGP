@@ -115,7 +115,7 @@ public class InteractionTutorialLevel extends Level {
         task03.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
-                InteractionTutorialLevel.this.setK(10);
+                InteractionTutorialLevel.this.setK(50);
                 InteractionTutorialLevel.this.setChargingK(0.5f);
                 InteractionTutorialLevel.this.setMassFlowingK(250);
                 InteractionTutorialLevel.this.setCameraPositionChanger(new CameraPositionChanger() {

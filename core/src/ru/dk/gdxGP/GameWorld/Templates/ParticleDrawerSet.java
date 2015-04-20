@@ -29,7 +29,7 @@ public final class ParticleDrawerSet {
         for (int i = 0; i < 8; i++) {
             particleSolidFrames[i]=AtlasLoader.getRegion("ParticleFrames/ParticleSolidFrame0"+(i+1));
         }
-        particleSolidAnimation=new Animation(0.075f,particleSolidFrames);
+        particleSolidAnimation=new Animation(0.125f,particleSolidFrames);
     }
 
     static final public ParticleDrawer solidDrawer = new ParticleDrawer() {

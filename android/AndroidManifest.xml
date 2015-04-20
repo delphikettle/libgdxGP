@@ -18,7 +18,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".LevelListActivity" android:label="Choose a level"/>
-        <activity android:name=".AndroidLauncher" android:label="Play Game"/>
+        <activity android:name=".AndroidLauncher" android:label="Play Game"
+                android:screenOrientation="landscape"
+                android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+                />
     </application>
 
 </manifest>
