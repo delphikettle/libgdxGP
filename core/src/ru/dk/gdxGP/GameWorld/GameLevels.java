@@ -2,7 +2,7 @@ package ru.dk.gdxGP.GameWorld;
 
 import ru.dk.gdxGP.GameWorld.Levels.ForcesTutorialLevel;
 import ru.dk.gdxGP.GameWorld.Levels.InteractionTutorialLevel;
-import ru.dk.gdxGP.GameWorld.Levels.TutorialLevel;
+import ru.dk.gdxGP.GameWorld.Levels.ControlTutorialLevel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +19,7 @@ public class GameLevels {
                     //TestLevel.class,
                     //TestLevel01.class,
                     //UnnamedLevel.class,
-                    TutorialLevel.class,
+                    ControlTutorialLevel.class,
                     ForcesTutorialLevel.class,
                     InteractionTutorialLevel.class
             )
