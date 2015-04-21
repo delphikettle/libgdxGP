@@ -26,7 +26,7 @@ logo
   index: -1
 
 textureAtlas3.png
-size: 1024,512
+size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -46,21 +46,77 @@ NullCharge
   index: -1
 ParticleLiquid
   rotate: false
-  xy: 0, 256
+  xy: 0, 768
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 ParticleSolid
   rotate: false
-  xy: 0, 0
+  xy: 0, 512
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 ParticleSolid01
   rotate: false
+  xy: 256, 768
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+ParticleSolidFrame01
+  rotate: false
+  xy: 0, 256
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+ParticleSolidFrame02
+  rotate: false
+  xy: 0, 0
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+ParticleSolidFrame03
+  rotate: false
+  xy: 256, 512
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+ParticleSolidFrame04
+  rotate: false
+  xy: 512, 768
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+ParticleSolidFrame05
+  rotate: false
+  xy: 768, 768
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+ParticleSolidFrame06
+  rotate: false
   xy: 256, 256
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+ParticleSolidFrame07
+  rotate: false
+  xy: 256, 0
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+ParticleSolidFrame08
+  rotate: false
+  xy: 512, 512
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
@@ -81,7 +137,7 @@ border01
   index: -1
 charge
   rotate: false
-  xy: 256, 0
+  xy: 768, 512
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
