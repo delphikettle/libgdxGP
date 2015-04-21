@@ -153,6 +153,12 @@ public class InteractionTutorialLevel extends Level {
         task05.setMainTaskText("Now you know practically all about interactions between particles in this game");
         task05.setSecondaryTaskText("You've finished all tutorials in this game. Now it's time to try out real level.");
 
+        task05.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
+            @Override
+            public void actionAfterAchievedTask(Task task) {
+                System.exit(0);
+            }
+        });
 
         mission.addTask(task01);
         mission.addTask(task02);

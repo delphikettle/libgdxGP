@@ -344,10 +344,6 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
                 if (!this.actions.isEmpty()) {
                     this.actions.remove(0).doSomethingOnStep(this);
                 }
-                if (currentMissionChecker.isFinished()) {
-                    System.out.println(currentMissionChecker.isFinished());
-                    System.exit(0);
-                }
             }
         }
     }

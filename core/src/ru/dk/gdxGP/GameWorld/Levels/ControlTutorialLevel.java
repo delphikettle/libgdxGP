@@ -125,7 +125,7 @@ public class ControlTutorialLevel extends Level {
                 ControlTutorialLevel.this.setCameraPositionChanger(new CameraPositionChanger() {
                     @Override
                     public void changeCameraPosition(Level level, Camera camera, LevelScreen screen) {
-                        level.moveCamera(mainParticle.getX(),mainParticle.getY(),25);
+                        level.moveCamera(mainParticle.getX(), mainParticle.getY(), 25);
                         screen.setCameraZoom((screen.getZoom() * 25 + 0.5f) / 26);
                     }
                 });
@@ -165,6 +165,12 @@ public class ControlTutorialLevel extends Level {
         task05 = new NullTask();
         task05.setMainTaskText("You've finished first tutorial!");
         task05.setSecondaryTaskText("Now press 'Back' button and try out others");
+        task05.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
+            @Override
+            public void actionAfterAchievedTask(Task task) {
+                System.exit(0);
+            }
+        });
         mission.addTask(task01);
         mission.addTask(task02);
         mission.addTask(task03);

@@ -171,6 +171,12 @@ public class ForcesTutorialLevel extends Level {
         });
         task08 = new TaskOnAction();
         task08.setMainTaskText("You've finished ForcesTutorialLevel. Tap to exit.");
+        task08.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
+            @Override
+            public void actionAfterAchievedTask(Task task) {
+                System.exit(0);
+            }
+        });
 
         mission.addTask(task01);
         mission.addTask(task02);
