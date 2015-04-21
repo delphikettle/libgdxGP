@@ -31,6 +31,7 @@ public class Particle extends Actor {
     private float charge;
     private Color color;
     private float density = 1;
+    private float radius;
 
     public Particle(Level level, World world, float x, float y, float vx, float vy, float mass, float charge, float friction, float density, float restitution, Condition condition, Color color) {
         this.level = level;
@@ -67,6 +68,9 @@ public class Particle extends Actor {
         this.charge = charge;
         this.color = color;
         this.body.resetMassData();
+
+        this.density=density;
+        this.radius=circleShape.getRadius();
     }
 
     public float getMass() {
@@ -79,6 +83,12 @@ public class Particle extends Actor {
         } catch (IndexOutOfBoundsException e) {
         }
         return this.density;
+    }
+    public float getRadius() {
+        try {
+            this.radius=this.body.getFixtureList().get(0).getShape().getRadius();
+        }catch (IndexOutOfBoundsException e){}
+        return this.radius;
     }
 
     public float getRestitution() {
@@ -97,9 +107,6 @@ public class Particle extends Actor {
         this.charge = charge;
     }
 
-    public float getRadius() {
-        return this.body.getFixtureList().get(0).getShape().getRadius();
-    }
 
     public Vector2 getVelocity() {
         return this.body.getLinearVelocity();
@@ -176,13 +183,13 @@ public class Particle extends Actor {
     public void moveParameters(Particle to, float mass, float charge, float density, Vector2 velocity) throws NullMassException {
         synchronized (this.body) {
             if (mass == 0) {
-                to.charge += charge;
-                this.charge -= charge * to.getMass() / this.getMass();
-                this.body.applyLinearImpulse(-velocity.x * to.getMass(), -velocity.y * to.getMass(), getMassCenter().x, getMassCenter().y, true);
+                to.charge += charge / to.getMass();
+                this.charge -= charge / this.getMass();
+                this.body.applyLinearImpulse(-velocity.x , -velocity.y , getMassCenter().x, getMassCenter().y, true);
                 to.body.applyLinearImpulse(velocity.x, velocity.y, to.getMassCenter().x, to.getMassCenter().y, true);
                 if (density != 0) {
-                    this.body.getFixtureList().get(0).setDensity(this.getDensity() - density * to.getMass() / this.getMass());
-                    to.body.getFixtureList().get(0).setDensity(to.getDensity() + density);
+                    this.body.getFixtureList().get(0).setDensity(this.getDensity() - density / this.getMass());
+                    to.body.getFixtureList().get(0).setDensity(to.getDensity() + density/to.getMass());
                     this.recountRadius(this.getMass());
                     to.recountRadius(to.getMass());
                 }

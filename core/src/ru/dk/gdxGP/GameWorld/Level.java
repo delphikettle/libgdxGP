@@ -511,14 +511,13 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         f2.getBody().applyForceToCenter(buf.rotate(180), true);
 
         float q1 = f1.getCharge(), q2 = f2.getCharge(), m1 = f1.getMass(), m2 = f2.getMass();
-        float deltaCharge = this.chargingK * (((q1 * m1 + q2 * m2) / (m1 + m2) + 1024 * q2) / 1025 - q2) / (d.len() * d.len());
+        float deltaCharge = this.chargingK * (((q1 * m1 + q2 * m2) / (m1 + m2) + 1024 * q2) / 1025 - q2)*0.025f / (d.len() * d.len());
 
         if (!Float.isNaN(deltaCharge) && !Float.isInfinite(deltaCharge))
             try {
                 f1.moveParameters(f2, 0, deltaCharge, 0, new Vector2(0, 0));
             } catch (Particle.NullMassException e) {
-                System.out.println("NullException " + e.toString());
-                this.removeParticle(e.getParticle());
+                //this.removeParticle(e.getParticle());
             }
 
     }
@@ -544,12 +543,16 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
                     from = f2;
                     to = f1;
                 }
-                float deltaMass = (float) (Level.this.massFlowingK * (((from.getMass() + to.getMass()) / 2 + 1024 * from.getMass()) / 1025 - from.getMass()) *0.01f / (Math.pow((from.getRadius()+to.getRadius()),2)));
-                System.out.println(deltaMass+" = deltaMass");
+                float deltaMass = (float) (Level.this.massFlowingK * (((from.getMass() + to.getMass()) / 2 + 1024 * from.getMass()) / 1025 - from.getMass()) *0.005f / (Math.pow((from.getRadius()+to.getRadius()),2)));
                 try {
                     from.moveParameters(to, deltaMass, 0, 0, new Vector2(0, 0));
-                } catch (Particle.NullMassException e) {
-                    Level.this.removeParticle(e.getParticle());
+                } catch (final Particle.NullMassException e) {
+                    Level.this.addAction(new ActionForNextStep() {
+                        @Override
+                        public void doSomethingOnStep(Level level) {
+                            Level.this.removeParticle(e.getParticle());
+                        }
+                    });
                 }
 
             }
