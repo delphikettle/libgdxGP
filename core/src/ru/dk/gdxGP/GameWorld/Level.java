@@ -535,6 +535,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     }
 
     public void flowMass(final Particle f1, final Particle f2) {
+        if(this.massFlowingK==0)return;
         this.addAction(new ActionForNextStep() {
             @Override
             public void doSomethingOnStep(Level level) {
@@ -543,7 +544,8 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
                     from = f2;
                     to = f1;
                 }
-                float deltaMass = MathUtils.clamp(from.getMass() * to.getMass() * Level.this.massFlowingK * 0.001f, 0.000001f, 1f);
+                float deltaMass = (float) (Level.this.massFlowingK * (((from.getMass() + to.getMass()) / 2 + 1024 * from.getMass()) / 1025 - from.getMass()) *0.01f / (Math.pow((from.getRadius()+to.getRadius()),2)));
+                System.out.println(deltaMass+" = deltaMass");
                 try {
                     from.moveParameters(to, deltaMass, 0, 0, new Vector2(0, 0));
                 } catch (Particle.NullMassException e) {
