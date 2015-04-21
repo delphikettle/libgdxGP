@@ -30,8 +30,7 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
         this.setScreen(new LogoScreen(1));
         inputMultiplexer.addProcessor(this);
         inputMultiplexer.addProcessor(new GestureDetector(this));
-        this.backgroundMusic=(Gdx.app.getType()== Application.ApplicationType.Desktop)?Gdx.audio.newMusic(new FileHandle(Gdx.files.getLocalStoragePath()+"/audio/background01.mp3")):
-                Gdx.audio.newMusic(Gdx.files.internal("audio/background01.mp3"));
+        this.backgroundMusic=Gdx.audio.newMusic(Gdx.files.internal("audio/background01.mp3"));
         this.backgroundMusic.setLooping(true);
         this.backgroundMusic.play();
     }
