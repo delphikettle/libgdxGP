@@ -1,6 +1,9 @@
 package ru.dk.gdxGP;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
@@ -14,6 +17,7 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
     public static GDXGameGP currentGame;
     public final InputMultiplexer inputMultiplexer;
     private String levelName;
+    private Music backgroundMusic;
 
     public GDXGameGP(String levelName) {
         this.levelName = levelName;
@@ -26,6 +30,10 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
         this.setScreen(new LogoScreen(1));
         inputMultiplexer.addProcessor(this);
         inputMultiplexer.addProcessor(new GestureDetector(this));
+        //this.backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal());
+        this.backgroundMusic=Gdx.audio.newMusic(new FileHandle(Gdx.files.getLocalStoragePath()+"/audio/background01.mp3"));
+        this.backgroundMusic.setLooping(true);
+        this.backgroundMusic.play();
     }
 
     @Override
@@ -77,11 +85,13 @@ public class GDXGameGP extends Game implements GestureDetector.GestureListener, 
     @Override
     public void pause() {
         getScreen().pause();
+        this.backgroundMusic.pause();
     }
 
     @Override
     public void resume() {
         getScreen().resume();
+        this.backgroundMusic.play();
     }
 
     @Override

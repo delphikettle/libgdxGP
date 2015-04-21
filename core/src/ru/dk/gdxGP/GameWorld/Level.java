@@ -305,7 +305,6 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     synchronized final public void removeParticle(Particle particle) {
         System.out.println("removing particle");
         particles.remove(particle);
-        particle.getBody().setActive(false);
         this.world.destroyBody(particle.getBody());
         if (levelScreen != null)
             levelScreen.removeParticleActor(particle);
@@ -440,8 +439,9 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         return this.currentMissionChecker.getMission();
     }
 
-    void contactParticles(Particle f1, Particle f2, Contact contact) {
+    void contactParticles(final Particle f1, final Particle f2, Contact contact) {
         flowMass(f1, f2);
+
     }
 
     public void pauseLevel() {
@@ -530,6 +530,8 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     }
 
     public void flowMass(final Particle f1, final Particle f2) {
+        if(!(this.particles.contains(f1)&&this.particles.contains(f2)))
+            return;
         if(this.massFlowingK==0)return;
         this.addAction(new ActionForNextStep() {
             @Override
