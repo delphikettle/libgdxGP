@@ -144,7 +144,11 @@ public class LevelScreen implements Screen {
         if (this.level.getMission() != null)
             this.level.getMission().render(missionBatch);
         missionBatch.end();
+        float xTo=MathUtils.clamp(camera.position.x,level.getXMin(),level.getXMax()),
+                yTo=MathUtils.clamp(camera.position.y,level.getYMin(),level.getYMax()),delay=25;
+        this.camera.position.set((delay * camera.position.x + xTo) / (delay + 1), (delay * camera.position.y + yTo) / (delay + 1), 0);
         //box2DDebugRenderer.render(this.level.getWorld(), camera.combined);
+        this.setCameraZoom((this.getZoom() * 25 + MathUtils.clamp(this.getZoom(),0.1f,10f)) / 26);
     }
 
     public boolean zoom(float initialDistance, float distance) {

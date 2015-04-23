@@ -85,7 +85,7 @@ public class ChargeAllLevel extends Level {
                 ChargeAllLevel.this.setLevelTapper(new LevelTapper() {
                     @Override
                     public void tapLevel(Level level, float x, float y) {
-                        level.divideOnTap(mainParticle, 50, 0.01f, x, y);
+                        level.divideOnTap(mainParticle, 50, 0.01f, x, y,false,true);
                     }
                 });
                 System.out.print("firstFinished");
@@ -97,7 +97,7 @@ public class ChargeAllLevel extends Level {
             public boolean checkTask(Task task) {
                 task01.setSecondaryTaskText("Hurry up! You have "+subTask02.getTimeToFinish()+"ms");
                 for (int i = 0; i < particleList.size(); i++) {
-                    if(particleList.get(i).getCharge()<-0.0f)
+                    if(particleList.get(i).getCharge()<0.5f)
                         return false;
                 }
                 return true;
@@ -137,11 +137,10 @@ public class ChargeAllLevel extends Level {
             public void actionAfterAchievedTask(Task task) {
                 NullTask task03=new NullTask();
                 task03.setMainTaskText("My congratulations! You've completed your first mission!");
-                task03.setSecondaryTaskText("Tap to exit");
+                task03.setSecondaryTaskText("Tap 'back' button to exit");
                 ChargeAllLevel.this.setLevelTapper(new LevelTapper() {
                     @Override
                     public void tapLevel(Level level, float x, float y) {
-                        System.exit(0);
                     }
                 });
                 mission.addTask(task03);

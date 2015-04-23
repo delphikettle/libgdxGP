@@ -403,19 +403,19 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         this.massFlowingK = massFlowingK;
     }
 
-    protected final float getXMin() {
+    public final float getXMin() {
         return this.xMin;
     }
 
-    protected final float getYMin() {
+    public final float getYMin() {
         return this.yMin;
     }
 
-    protected final float getXMax() {
+    public final float getXMax() {
         return this.xMax;
     }
 
-    protected final float getYMax() {
+    public final float getYMax() {
         return this.yMax;
     }
 
@@ -557,7 +557,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         });
     }
 
-    public void divideOnTap(final Particle particle, final float speed, final float piece, final float x, final float y) {
+    public void divideOnTap(final Particle particle, final float speed, final float piece, final float x, final float y, final boolean underGravity, final boolean underCoulomb) {
         this.addAction(new ActionForNextStep() {
             @Override
             public void doSomethingOnStep(Level level) {
@@ -566,6 +566,8 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
                 v.add(x, y);
                 v.setLength(speed);
                 Particle newParticle = particle.divide(Level.this.getParticle(0).getMass() * piece, v.x, v.y);
+                newParticle.setUnderCoulomb(underCoulomb);
+                newParticle.setUnderGravity(underGravity);
                 level.addParticle(
                         newParticle
                 );
