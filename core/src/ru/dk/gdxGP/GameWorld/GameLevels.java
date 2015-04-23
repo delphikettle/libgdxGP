@@ -1,5 +1,6 @@
 package ru.dk.gdxGP.GameWorld;
 
+import ru.dk.gdxGP.GameWorld.Levels.ChargeAllLevel;
 import ru.dk.gdxGP.GameWorld.Levels.ForcesTutorialLevel;
 import ru.dk.gdxGP.GameWorld.Levels.InteractionTutorialLevel;
 import ru.dk.gdxGP.GameWorld.Levels.ControlTutorialLevel;
@@ -21,7 +22,8 @@ public class GameLevels {
                     //UnnamedLevel.class,
                     ControlTutorialLevel.class,
                     ForcesTutorialLevel.class,
-                    InteractionTutorialLevel.class
+                    InteractionTutorialLevel.class,
+                    ChargeAllLevel.class
             )
     );
 

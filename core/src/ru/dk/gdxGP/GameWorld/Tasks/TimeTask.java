@@ -16,6 +16,11 @@ public class TimeTask extends Task {
     };
     private float time;
     private Timer timeTimer;
+
+    public float getTimeToFinish() {
+        return timeToFinish=timeTask.getExecuteTimeMillis() - System.nanoTime() / 1000000;
+    }
+
     private float timeToFinish;
 
     public TimeTask(float time) {
@@ -33,6 +38,7 @@ public class TimeTask extends Task {
     @Override
     protected boolean check() {
         this.timeToFinish = timeTask.getExecuteTimeMillis() - System.nanoTime() / 1000000;
+        System.out.println(timeToFinish);
         return finished;
     }
 

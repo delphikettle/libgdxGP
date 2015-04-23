@@ -15,8 +15,8 @@ public class DesktopLauncher {
         //GDXGameGP.assetManager.load("images/logo.png", Texture.class);
         //GDXGameGP.assetManager.load("images/loadBall.png", Texture.class);
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-        config.width = 1024;
-        config.height = 846;
-        new LwjglApplication(new GDXGameGP("InteractionTutorialLevel"), config);
+        config.width = (int) (1024*0.8f);
+        config.height = (int) (846*0.8f);
+        new LwjglApplication(new GDXGameGP("ChargeAllLevel"), config);
     }
 }

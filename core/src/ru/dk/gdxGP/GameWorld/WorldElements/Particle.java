@@ -33,6 +33,24 @@ public class Particle extends Actor {
     private float density = 1;
     private float radius;
 
+    public boolean isUnderGravity() {
+        return underGravity;
+    }
+
+    public void setUnderGravity(boolean underGravity) {
+        this.underGravity = underGravity;
+    }
+
+    public boolean isUnderCoulomb() {
+        return underCoulomb;
+    }
+
+    public void setUnderCoulomb(boolean underCoulomb) {
+        this.underCoulomb = underCoulomb;
+    }
+
+    private boolean underGravity=false,underCoulomb=false;
+
     public Particle(Level level, World world, float x, float y, float vx, float vy, float mass, float charge, float friction, float density, float restitution, Condition condition, Color color) {
         this.level = level;
 

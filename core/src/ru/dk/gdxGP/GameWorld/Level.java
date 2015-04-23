@@ -499,7 +499,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     public void interactionBetweenParticles(Particle f1, Particle f2) {
         d.set(f2.getBody().getPosition());
         d.add(-f1.getBody().getPosition().x, -f1.getBody().getPosition().y);
-        float F = (((-this.k * f1.getCharge() * f2.getCharge() + this.G) * f1.getBody().getMass() * f2.getBody().getMass()) / (d.len() * d.len()));
+        float F = (((((f1.isUnderCoulomb()&&f2.isUnderCoulomb())?-1:0)*this.k * f1.getCharge() * f2.getCharge() + ((f1.isUnderCoulomb()&&f2.isUnderCoulomb())?1:0)*this.G) * f1.getBody().getMass() * f2.getBody().getMass()) / (d.len() * d.len()));
         buf.set(f2.getBody().getPosition().x - f1.getBody().getPosition().x, f2.getBody().getPosition().y - f1.getBody().getPosition().y);
         buf.setLength(F);
         if (F < 0) buf.rotate(180);
