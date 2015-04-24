@@ -1,16 +1,17 @@
 package ru.dk.gdxGP.GameWorld.Levels;
 
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.MathUtils;
-import ru.dk.gdxGP.GameWorld.InterfacesForActions.ActionAfterAchievedTask;
-import ru.dk.gdxGP.GameWorld.InterfacesForActions.CheckerForTask;
-import ru.dk.gdxGP.GameWorld.InterfacesForActions.LevelProceeder;
-import ru.dk.gdxGP.GameWorld.InterfacesForActions.LevelTapper;
+import ru.dk.gdxGP.GameWorld.InterfacesForActions.*;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Mission;
 import ru.dk.gdxGP.GameWorld.ParticleDef;
 import ru.dk.gdxGP.GameWorld.Task;
 import ru.dk.gdxGP.GameWorld.Tasks.*;
+import ru.dk.gdxGP.GameWorld.Templates.ParticleDefSet;
+import ru.dk.gdxGP.GameWorld.Templates.ParticleDrawerSet;
 import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
+import ru.dk.gdxGP.Screens.LevelScreen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,15 +37,16 @@ public class ChargeAllLevel extends Level {
         ParticleDef particleDef=new ParticleDef(0,0,0,0);
         particleDef.rMax=particleDef.rMin=particleDef.aMin=particleDef.aMax=1;
         particleDef.gMax=particleDef.gMin=particleDef.bMin=particleDef.bMax=0;
-        particleDef.minMass=particleDef.maxMass=5f;
+        particleDef.minMass=particleDef.maxMass=1f;
         particleDef.minCharge=particleDef.maxCharge=5f;
         this.mainParticle=this.generateRandomParticle(particleDef);
         this.mainParticle.setUnderCoulomb(true);
+        this.mainParticle.setDrawer(ParticleDrawerSet.mainDrawer);
         this.addParticle(mainParticle);
 
         particleDef=new ParticleDef(getXMin(),getXMax(),getYMin(),getYMax());
         particleDef.minMass=particleDef.maxMass=0.05f;
-        particleDef.minCharge=-0.1f;
+        particleDef.minCharge=-0.5f;
         particleDef.maxCharge=0.0f;
         Particle bufParticle;
         for (int i = 0; i < 25; i++) {
@@ -57,8 +59,15 @@ public class ChargeAllLevel extends Level {
 
     @Override
     protected void setParameters() {
-        this.setK(50);
-        this.setChargingK(2.5f);
+        this.setK(5);
+        this.setChargingK(1f);
+        this.getStage().setCameraZoom(2);
+        this.setCameraPositionChanger(new CameraPositionChanger() {
+            @Override
+            public void changeCameraPosition(Level level, Camera camera, LevelScreen screen) {
+                level.moveCamera(mainParticle.getX() * 0, mainParticle.getY() * 0, 25);
+            }
+        });
     }
 
     @Override
@@ -85,19 +94,18 @@ public class ChargeAllLevel extends Level {
                 ChargeAllLevel.this.setLevelTapper(new LevelTapper() {
                     @Override
                     public void tapLevel(Level level, float x, float y) {
-                        level.divideOnTap(mainParticle, 50, 0.01f, x, y,false,true);
+                        level.divideOnTap(mainParticle, 5, 0.05f, x, y,false,false);
                     }
                 });
-                System.out.print("firstFinished");
                 subTask02.start();
             }
         });
         subTask01 =new CustomTask(new CheckerForTask() {
             @Override
             public boolean checkTask(Task task) {
-                task01.setSecondaryTaskText("Hurry up! You have "+subTask02.getTimeToFinish()+"ms");
+                task01.setSecondaryTaskText("Hurry up! You have "+MathUtils.round(subTask02.getTimeToFinish()/1000)+"sec");
                 for (int i = 0; i < particleList.size(); i++) {
-                    if(particleList.get(i).getCharge()<0.5f)
+                    if(particleList.get(i).getCharge()<0.1f)
                         return false;
                 }
                 return true;
@@ -107,21 +115,15 @@ public class ChargeAllLevel extends Level {
         subTask02.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
-                System.out.println("firstFinished");
-                subTask01.setChecker(new CheckerForTask() {
-                    @Override
-                    public boolean checkTask(Task task) {
-                        return false;
-                    }
-                });
+                NullTask task03=new NullTask();
+                task03.setMainTaskText("You failed! You must be more quickly!");
+                task03.setSecondaryTaskText("Tap 'back' button to exit");
                 ChargeAllLevel.this.setLevelTapper(new LevelTapper() {
                     @Override
                     public void tapLevel(Level level, float x, float y) {
-                        System.exit(0);
                     }
                 });
-                task01.setMainTaskText("You failed! You must be more quickly!");
-                task01.setSecondaryTaskText("Tap to exit!");
+                mission.setCurrentTask(task03);
             }
         });
         task01=new TaskCombination(new Task[]{
@@ -129,9 +131,6 @@ public class ChargeAllLevel extends Level {
                 subTask01
         }, TaskCombination.TC_AND, true);
         task01.setMainTaskText("Charge all particles around during 10sec.");
-        task01.setSecondaryTaskText("Hurry up! You have 10000ms");
-
-
         task01.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {

@@ -12,6 +12,15 @@ import java.util.LinkedList;
  */
 public class Mission extends Task {
     private final LinkedList<Task> taskList = new LinkedList<Task>();
+
+    public Task getCurrentTask() {
+        return currentTask;
+    }
+
+    public void setCurrentTask(Task currentTask) {
+        this.currentTask = currentTask;
+    }
+
     private Task currentTask;
     private MissionDrawer missionDrawer = MissionDrawerSet.standardDrawer;
 

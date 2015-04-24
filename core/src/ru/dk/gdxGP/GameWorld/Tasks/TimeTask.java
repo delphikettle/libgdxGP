@@ -38,7 +38,6 @@ public class TimeTask extends Task {
     @Override
     protected boolean check() {
         this.timeToFinish = timeTask.getExecuteTimeMillis() - System.nanoTime() / 1000000;
-        System.out.println(timeToFinish);
         return finished;
     }
 

@@ -43,8 +43,6 @@ public class TestLevel extends Level {
         bodyDef.position.set(250, 250);
         bodyDef.fixedRotation = false;
         bodyDef.allowSleep = false;
-        System.out.println(getXMax());
-        System.out.println(getYMax());
         CircleShape shape = new CircleShape();
         shape.setRadius(250);
         shape.setPosition(new Vector2(0, 0));

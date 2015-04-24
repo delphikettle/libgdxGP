@@ -13,7 +13,6 @@ public class NotTask extends Task {
     }
     @Override
     protected boolean check() {
-        System.out.println("checking "+this.notTask.isAchieved());
         return !this.notTask.isAchieved();
     }
 }
