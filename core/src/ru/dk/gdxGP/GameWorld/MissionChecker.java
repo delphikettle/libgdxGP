@@ -17,7 +17,7 @@ public class MissionChecker extends Timer {
         public void run() {
             if (MissionChecker.this.mission != null) {
                 if (MissionChecker.this.mission.isAchieved()) {
-                    MissionChecker.this.stop();
+                    //MissionChecker.this.stop();
                     MissionChecker.this.finished = true;
                 }
             }

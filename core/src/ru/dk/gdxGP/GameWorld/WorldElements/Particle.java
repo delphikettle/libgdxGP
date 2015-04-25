@@ -5,13 +5,14 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import ru.dk.gdxGP.GameWorld.InterfacesForActions.LevelElement;
 import ru.dk.gdxGP.GameWorld.InterfacesForActions.ParticleDrawer;
 import ru.dk.gdxGP.GameWorld.InterfacesForActions.ParticleOperator;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Templates.ParticleDrawerSet;
 import ru.dk.gdxGP.GameWorld.Templates.ParticleOperatorSet;
 
-public class Particle extends Actor {
+public class Particle extends Actor implements LevelElement {
     private static final FixtureDef blankFixtureDef;
 
     static {
@@ -24,7 +25,7 @@ public class Particle extends Actor {
         blankFixtureDef.shape.setRadius(0.00001f);
     }
     private final Body body;
-
+    @Override
     public Level getLevel() {
         return level;
     }

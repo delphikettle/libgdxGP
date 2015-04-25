@@ -1,9 +1,6 @@
 package ru.dk.gdxGP.GameWorld;
 
-import ru.dk.gdxGP.GameWorld.Levels.ChargeAllLevel;
-import ru.dk.gdxGP.GameWorld.Levels.ForcesTutorialLevel;
-import ru.dk.gdxGP.GameWorld.Levels.InteractionTutorialLevel;
-import ru.dk.gdxGP.GameWorld.Levels.ControlTutorialLevel;
+import ru.dk.gdxGP.GameWorld.Levels.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +20,8 @@ public class GameLevels {
                     ControlTutorialLevel.class,
                     ForcesTutorialLevel.class,
                     InteractionTutorialLevel.class,
-                    ChargeAllLevel.class
+                    ChargeAllLevel.class,
+                    ChargeYourFriendLevel.class
             )
     );
 

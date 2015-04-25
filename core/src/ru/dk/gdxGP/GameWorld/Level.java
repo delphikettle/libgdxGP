@@ -20,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public abstract class Level extends Thread implements Runnable, ContactListener {
+public abstract class Level extends Thread implements Runnable {
     protected static final String[] standardAssetsPaths = new String[]{
             "images/PlusCharge.png",
             "images/NullCharge.png",
@@ -62,11 +62,32 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     private LevelTapper levelTapper;
     private CameraPositionChanger cameraPositionChanger;
     private LevelProceeder levelProceeder = LevelProceederSet.noneProceed;
+    public final ContactMultiListener multiListener;
     private Vector2 buf = new Vector2(), d = new Vector2();
 
     protected Level() {
         this.world = new World(new Vector2(0.0f, 0.0f), true);
-        this.world.setContactListener(this);
+        this.multiListener=new ContactMultiListener();
+        this.multiListener.addContactListener(new ContactListener() {
+            @Override
+            public void endContact(Contact contact) {
+            }
+
+            @Override
+            public void beginContact(Contact contact) {
+            }
+            @Override
+            public void preSolve(Contact contact, Manifold oldManifold) {
+                if (contact.getFixtureA().getBody().getUserData() instanceof Particle && contact.getFixtureB().getBody().getUserData() instanceof Particle) {
+                    Particle f1 = (Particle) contact.getFixtureA().getBody().getUserData(), f2 = (Particle) contact.getFixtureB().getBody().getUserData();
+                    contactParticles(f1, f2, contact);
+                }
+            }
+            @Override
+            public void postSolve(Contact contact, ContactImpulse impulse) {
+            }
+        });
+        this.world.setContactListener(multiListener);
         particles = new ArrayList<Particle>();
         borders = new ArrayList<Border>();
         otherElements = new ArrayList<Actor>();
@@ -260,7 +281,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
 
     protected abstract void setParticles();
 
-    abstract public void setOtherElements();
+    public void setOtherElements(){}
 
     protected abstract Mission createMission();
 
@@ -278,7 +299,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
                 getXMin(), getYMin()
         });
 
-        this.addBorder(new Border(this.getWorld(), 0, 0, shape, true));
+        this.addBorder(new Border(this,this.getWorld(), 0, 0, shape, true));
     }
 
     public final void tap(float x, float y) {
@@ -462,28 +483,6 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         this.currentMissionChecker.resume();
     }
 
-    @Override
-    public void endContact(Contact contact) {
-
-    }
-
-    @Override
-    public void beginContact(Contact contact) {
-    }
-
-    @Override
-    public void preSolve(Contact contact, Manifold oldManifold) {
-        if (contact.getFixtureA().getBody().getUserData() instanceof Particle && contact.getFixtureB().getBody().getUserData() instanceof Particle) {
-            Particle f1 = (Particle) contact.getFixtureA().getBody().getUserData(), f2 = (Particle) contact.getFixtureB().getBody().getUserData();
-            contactParticles(f1, f2, contact);
-        }
-
-    }
-
-
-    @Override
-    public void postSolve(Contact contact, ContactImpulse impulse) {
-    }
     //additional methods for management of the world and the particles
 
     public void processAccelerometer(float factor) {
@@ -499,7 +498,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
     public void interactionBetweenParticles(Particle f1, Particle f2) {
         d.set(f2.getBody().getPosition());
         d.add(-f1.getBody().getPosition().x, -f1.getBody().getPosition().y);
-        float F = (((((f1.isUnderCoulomb()&&f2.isUnderCoulomb())?-1:0)*this.k * f1.getCharge() * f2.getCharge() + ((f1.isUnderCoulomb()&&f2.isUnderCoulomb())?1:0)*this.G) * f1.getBody().getMass() * f2.getBody().getMass()) / (d.len() * d.len()));
+        float F = (((-this.k * f1.getCharge() * f2.getCharge() + this.G) * f1.getBody().getMass() * f2.getBody().getMass()) / (d.len() * d.len()));
         buf.set(f2.getBody().getPosition().x - f1.getBody().getPosition().x, f2.getBody().getPosition().y - f1.getBody().getPosition().y);
         buf.setLength(F);
         if (F < 0) buf.rotate(180);
@@ -591,6 +590,9 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
 
     public void moveCamera(float xTo, float yTo, float delay) {
         this.getStage().getCamera().position.set((delay * this.getStage().getCamera().position.x + xTo) / (delay + 1), (delay * this.getStage().getCamera().position.y + yTo) / (delay + 1), 0);
+    }
+    public void zoomCamera(float zoomTo, float delay){
+        this.getStage().setCameraZoom((this.getStage().getZoom() * delay + zoomTo) / (delay+1));
     }
 
     //methods for generating

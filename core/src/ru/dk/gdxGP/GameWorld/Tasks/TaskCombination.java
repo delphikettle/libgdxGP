@@ -26,8 +26,7 @@ public class TaskCombination extends Task {
 
     @Override
     public boolean check() {
-        boolean f;
-        f = flag == TC_AND;
+        boolean f = flag == TC_AND;
         for (Task task : tasks) {
             switch (flag) {
                 case TC_AND:

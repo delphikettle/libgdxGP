@@ -6,16 +6,20 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import ru.dk.gdxGP.AtlasLoader;
+import ru.dk.gdxGP.GameWorld.InterfacesForActions.LevelElement;
+import ru.dk.gdxGP.GameWorld.Level;
 
 /**
  * Created by DK on 21.02.15.
  */
-public class Border extends Actor {
+public class Border extends Actor implements LevelElement{
     private final TextureRegion textureRegion;
     private Body body;
     private boolean contour;
+    private final Level level;
 
-    public Border(World world, int x, int y, Shape shape, boolean contour) {
+    public Border( Level level,World world, int x, int y, Shape shape, boolean contour) {
+        this.level = level;
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.StaticBody;
         bodyDef.bullet = true;
@@ -61,5 +65,10 @@ public class Border extends Actor {
             batch.draw(textureRegion, xMin, yMax, xMax - xMin + 0.5f, 0.5f);
             batch.draw(textureRegion, xMax, yMin, 0.5f, yMax - yMin + 0.5f);
         }
+    }
+
+    @Override
+    public Level getLevel() {
+        return this.level;
     }
 }

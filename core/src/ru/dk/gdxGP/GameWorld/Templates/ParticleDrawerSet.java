@@ -73,7 +73,7 @@ public final class ParticleDrawerSet {
     public static final ParticleDrawer chargeDrawer=new ParticleDrawer() {
         @Override
         public void drawParticle(Particle particle, Batch batch, Color parentColor) {
-            float r2 = particle.getRadius() * 0.5f;
+            float r2 = particle.getRadius() * 1;
             if (particle.getCharge() > 0.125f)
                 batch.draw(textureRegionPlusCharge, particle.getPosition().x - 1.0f * r2, particle.getPosition().y - 1.0f * r2, r2, r2, r2 * 2.0f, r2 * 2.0f, 1, 1, MathUtils.radiansToDegrees * particle.getBody().getAngle());
             if (particle.getCharge() < -0.125f)
