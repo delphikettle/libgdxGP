@@ -24,6 +24,11 @@ public class Particle extends Actor {
         blankFixtureDef.shape.setRadius(0.00001f);
     }
     private final Body body;
+
+    public Level getLevel() {
+        return level;
+    }
+
     private final Level level;
     private Condition condition;
     private ParticleDrawer drawer = null;

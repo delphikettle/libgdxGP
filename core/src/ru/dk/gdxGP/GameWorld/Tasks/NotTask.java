@@ -15,4 +15,14 @@ public class NotTask extends Task {
     protected boolean check() {
         return !this.notTask.isAchieved();
     }
+
+    @Override
+    public void pause() {
+        this.notTask.pause();
+    }
+
+    @Override
+    public void resume() {
+        this.notTask.resume();
+    }
 }

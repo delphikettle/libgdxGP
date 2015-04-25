@@ -49,4 +49,18 @@ public class TaskCombination extends Task {
         return f;
 
     }
+
+    @Override
+    public void pause() {
+        for (int i = 0; i < tasks.size(); i++) {
+            tasks.get(0).pause();
+        }
+    }
+
+    @Override
+    public void resume() {
+        for (int i = 0; i < tasks.size(); i++) {
+            tasks.get(0).resume();
+        }
+    }
 }

@@ -557,7 +557,7 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
         });
     }
 
-    public void divideOnTap(final Particle particle, final float speed, final float piece, final float x, final float y, final boolean underGravity, final boolean underCoulomb) {
+    public void moveOnTap(final Particle particle,final float speed,  final float x, final float y){
         this.addAction(new ActionForNextStep() {
             @Override
             public void doSomethingOnStep(Level level) {
@@ -565,12 +565,25 @@ public abstract class Level extends Thread implements Runnable, ContactListener 
                 v.rotate(180);
                 v.add(x, y);
                 v.setLength(speed);
+                particle.getBody().applyLinearImpulse(v.x,v.y,particle.getMassCenter().x,particle.getMassCenter().y,true);
+            }
+        });
+    }
+    public void divideOnTap(final Particle particle, final float speed, final float piece, final float x, final float y, final boolean underGravity, final boolean underCoulomb, final ParticleSender particleSender) {
+        this.addAction(new ActionForNextStep() {
+            @Override
+            public void doSomethingOnStep(Level level) {
+                Vector2 v = new Vector2(particle.getPosition());
+                v.rotate(180);
+                v.add(x, y);
+                v.setLength(speed);
+                if(speed<0)v.rotate(180);
                 Particle newParticle = particle.divide(Level.this.getParticle(0).getMass() * piece, v.x, v.y);
                 newParticle.setUnderCoulomb(underCoulomb);
                 newParticle.setUnderGravity(underGravity);
-                level.addParticle(
-                        newParticle
-                );
+                level.addParticle(newParticle);
+                if(particleSender!=null)
+                    particleSender.sendParticle(newParticle);
 
             }
         });

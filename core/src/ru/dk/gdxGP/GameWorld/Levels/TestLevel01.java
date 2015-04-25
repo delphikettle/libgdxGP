@@ -58,7 +58,7 @@ public class TestLevel01 extends Level {
         this.setLevelTapper(new LevelTapper() {
             @Override
             public void tapLevel(Level level, float x, float y) {
-                TestLevel01.super.divideOnTap(mainParticle, 25, 0.125f, x, y,true,true);
+                TestLevel01.super.divideOnTap(mainParticle, 25, 0.125f, x, y,true,true,null);
             }
         });
         this.setPreRenderer(new FadePreRenderer(new Color(1f, 1f, 0.75f, 0), new Color(1, 1, 0.5f, 1f), 60));

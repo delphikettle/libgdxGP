@@ -134,7 +134,7 @@ public class ControlTutorialLevel extends Level {
 
                     @Override
                     public void tapLevel(Level level, float x, float y) {
-                        level.divideOnTap(mainParticle, 10, 0.1f, x, y,true,true);
+                        level.divideOnTap(mainParticle, 10, 0.1f, x, y,true,true,null);
                         times++;
                         if (times >= 5) task04.setCompleted(true);
                     }
@@ -143,7 +143,7 @@ public class ControlTutorialLevel extends Level {
         });
         task04 = new TaskOnAction();
         task04.setMainTaskText("Also you can control it by tapping your screen.");
-        task04.setSecondaryTaskText("Tap 5 times on the points you want it move to.");
+        task04.setSecondaryTaskText("Tap 5 times on the points you want it move away from.");
         task04.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {

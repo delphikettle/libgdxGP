@@ -37,18 +37,28 @@ public class TimeTask extends Task {
 
     @Override
     protected boolean check() {
-        this.timeToFinish = timeTask.getExecuteTimeMillis() - System.nanoTime() / 1000000;
+        updateTimeToFinish();
         return finished;
     }
 
     @Override
     public void pause() {
-        this.timeToFinish = timeTask.getExecuteTimeMillis() - System.nanoTime() / 1000000;
+        System.out.println("pausing "+this.timeToFinish);
+        updateTimeToFinish();
         timeTask.cancel();
+        System.out.println("paused " + this.timeToFinish);
     }
 
+    public void updateTimeToFinish(){
+        if(timeTask.isScheduled())
+            this.timeToFinish = timeTask.getExecuteTimeMillis() - System.nanoTime() / 1000000;
+    }
     @Override
     public void resume() {
+        System.out.println("resuming "+this.timeToFinish);
+        timeTask.cancel();
         timeTimer.scheduleTask(timeTask, timeToFinish / 1000f);
+        updateTimeToFinish();
+        System.out.println("resumed " + this.timeToFinish);
     }
 }

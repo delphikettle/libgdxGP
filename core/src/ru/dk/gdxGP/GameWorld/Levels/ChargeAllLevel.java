@@ -1,5 +1,6 @@
 package ru.dk.gdxGP.GameWorld.Levels;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.MathUtils;
 import ru.dk.gdxGP.GameWorld.InterfacesForActions.*;
@@ -59,7 +60,7 @@ public class ChargeAllLevel extends Level {
 
     @Override
     protected void setParameters() {
-        this.setK(5);
+        this.setK(25);
         this.setChargingK(1f);
         this.getStage().setCameraZoom(2);
         this.setCameraPositionChanger(new CameraPositionChanger() {
@@ -78,10 +79,10 @@ public class ChargeAllLevel extends Level {
     @Override
     protected Mission createMission() {
         final Mission mission=new Mission("");
-        task00=new TimeTask(3000);
+        task00=new TimeTask(7000);
         task00.start();
-        task00.setMainTaskText("You have a very positive charge.");
-        task00.setSecondaryTaskText("So you must charge all particles around.");
+        task00.setMainTaskText("You must charge all particles around, because of your big positive charge.");
+        task00.setSecondaryTaskText("You can control your particle via tapping the point you must move to");
         task00.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
@@ -89,12 +90,15 @@ public class ChargeAllLevel extends Level {
                     @Override
                     public void proceed(Level level, float delta) {
                         level.interactAllWithAllParticles();
+                        //mainParticle.getBody().applyForceToCenter(10*Gdx.input.getAccelerometerY(),-10*Gdx.input.getAccelerometerX(),true);
+                        //level.processAccelerometer(1);
                     }
                 });
                 ChargeAllLevel.this.setLevelTapper(new LevelTapper() {
                     @Override
                     public void tapLevel(Level level, float x, float y) {
-                        level.divideOnTap(mainParticle, 5, 0.05f, x, y,false,false);
+                        //level.divideOnTap(mainParticle, 1, 0.05f, x, y, false, false, null);
+                        level.moveOnTap(mainParticle,2.5f,x,y);
                     }
                 });
                 subTask02.start();
@@ -105,24 +109,26 @@ public class ChargeAllLevel extends Level {
             public boolean checkTask(Task task) {
                 task01.setSecondaryTaskText("Hurry up! You have "+MathUtils.round(subTask02.getTimeToFinish()/1000)+"sec");
                 for (int i = 0; i < particleList.size(); i++) {
-                    if(particleList.get(i).getCharge()<0.1f)
+                    if(particleList.get(i).getCharge()<0.05f)
                         return false;
                 }
                 return true;
             }
         });
-        subTask02=new TimeTask(10000);
+        subTask02=new TimeTask(30000);
         subTask02.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
                 NullTask task03=new NullTask();
                 task03.setMainTaskText("You failed! You must be more quickly!");
                 task03.setSecondaryTaskText("Tap 'back' button to exit");
+                /*
                 ChargeAllLevel.this.setLevelTapper(new LevelTapper() {
                     @Override
                     public void tapLevel(Level level, float x, float y) {
                     }
                 });
+                */
                 mission.setCurrentTask(task03);
             }
         });
@@ -130,18 +136,20 @@ public class ChargeAllLevel extends Level {
                 new NotTask(subTask02),
                 subTask01
         }, TaskCombination.TC_AND, true);
-        task01.setMainTaskText("Charge all particles around during 10sec.");
+        task01.setMainTaskText("Charge all particles around during 30sec.");
         task01.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
                 NullTask task03=new NullTask();
                 task03.setMainTaskText("My congratulations! You've completed your first mission!");
                 task03.setSecondaryTaskText("Tap 'back' button to exit");
+                /*
                 ChargeAllLevel.this.setLevelTapper(new LevelTapper() {
                     @Override
                     public void tapLevel(Level level, float x, float y) {
                     }
                 });
+                */
                 mission.addTask(task03);
             }
         });

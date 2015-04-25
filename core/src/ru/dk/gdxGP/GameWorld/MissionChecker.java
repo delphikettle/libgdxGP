@@ -31,7 +31,8 @@ public class MissionChecker extends Timer {
     }
 
     private void scheduleTask() {
-        schedule(timerTask, 0, this.period / 1000.0f);
+        if(!timerTask.isScheduled())
+            schedule(timerTask, 0, this.period / 1000.0f);
     }
 
     public boolean isFinished() {
