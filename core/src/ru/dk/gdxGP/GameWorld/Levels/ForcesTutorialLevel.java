@@ -43,7 +43,7 @@ public class ForcesTutorialLevel extends Level {
         this.setK(0);
         this.setChargingK(0);
         this.setMassFlowingK(0);
-        this.setPreRenderer(new FadePreRenderer(new Color(1, 1, 1, 1), new Color(0.9f, 1f, 0.9f, 1), 600));
+        this.setPreRenderer(new FadePreRenderer(new Color(1, 1, 1, 1), new Color(0.75f, 1f, 0.75f, 1), 250));
     }
 
     @Override

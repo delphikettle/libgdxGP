@@ -44,7 +44,7 @@ public class ControlTutorialLevel extends Level {
                 screen.setCameraZoom((screen.getZoom() * 25 + 0.5f) / 26);
             }
         });
-        this.setPreRenderer(new FadePreRenderer(new Color(1, 1, 1, 1), new Color(1f, 1f, 0.9f, 1), 600));
+        this.setPreRenderer(new FadePreRenderer(new Color(1, 1, 1, 1), new Color(1f, 1f, 0.75f, 1), 250));
     }
 
     @Override

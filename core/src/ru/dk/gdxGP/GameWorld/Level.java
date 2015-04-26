@@ -504,9 +504,11 @@ public abstract class Level extends Thread implements Runnable {
         if (F < 0) buf.rotate(180);
         f1.getBody().applyForceToCenter(buf, true);
         f2.getBody().applyForceToCenter(buf.rotate(180), true);
-
+        chargeBetweenParticle(f1,f2,d.len(),this.chargingK);
+    }
+    private void chargeBetweenParticle(Particle f1, Particle f2, float d, float chargingK){
         float q1 = f1.getCharge(), q2 = f2.getCharge(), m1 = f1.getMass(), m2 = f2.getMass();
-        float deltaCharge = this.chargingK * (((q1 * m1 + q2 * m2) / (m1 + m2) + 1024 * q2) / 1025 - q2)*0.025f / (d.len() * d.len());
+        float deltaCharge = chargingK * (((q1 * m1 + q2 * m2) / (m1 + m2) + 1024 * q2) / 1025 - q2)*0.025f / (d * d);
 
         if (!Float.isNaN(deltaCharge) && !Float.isInfinite(deltaCharge))
             try {
@@ -514,7 +516,11 @@ public abstract class Level extends Thread implements Runnable {
             } catch (Particle.NullMassException e) {
                 //this.removeParticle(e.getParticle());
             }
-
+    }
+    public void chargeBetweenParticle(Particle f1, Particle f2, float chargingK){
+        d.set(f2.getBody().getPosition());
+        d.add(-f1.getBody().getPosition().x, -f1.getBody().getPosition().y);
+        chargeBetweenParticle(f1, f2,d.len(),chargingK);
     }
 
     public void interactAllWithAllParticles() {

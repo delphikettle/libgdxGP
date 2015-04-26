@@ -3,6 +3,7 @@ package ru.dk.gdxGP.GameWorld.Levels;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -13,9 +14,7 @@ import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Mission;
 import ru.dk.gdxGP.GameWorld.ParticleDef;
 import ru.dk.gdxGP.GameWorld.Task;
-import ru.dk.gdxGP.GameWorld.Tasks.TaskCombination;
-import ru.dk.gdxGP.GameWorld.Tasks.TaskOnContact;
-import ru.dk.gdxGP.GameWorld.Tasks.TimeTask;
+import ru.dk.gdxGP.GameWorld.Tasks.*;
 import ru.dk.gdxGP.GameWorld.Templates.ParticleDefSet;
 import ru.dk.gdxGP.GameWorld.Templates.ParticleDrawerSet;
 import ru.dk.gdxGP.GameWorld.Templates.PreRenderers.FadePreRenderer;
@@ -34,6 +33,8 @@ public class ChargeYourFriendLevel extends Level {
     private TaskCombination task03;
     private TimeTask task04;
     private TaskOnContact subTask02;
+    private CustomTask task05;
+    private NullTask task06;
     @Override
     protected void setSizes() {
         setXMin(-10);
@@ -45,13 +46,15 @@ public class ChargeYourFriendLevel extends Level {
     @Override
     protected void setParticles() {
         ParticleDef particleDef=new ParticleDef(getXMin(), getXMax(), getYMin(), getYMax());
-        particleDef.minMass=particleDef.maxMass=0.1f;
+        particleDef.minMass=0.15f;
+        particleDef.maxMass=0.25f;
         particleDef.minCharge=particleDef.maxCharge=0;
         mainParticle=this.generateRandomParticle(particleDef);
         mainParticle.setDrawer(ParticleDrawerSet.mainDrawer);
 
         particleDef=new ParticleDef(getXMin(), getXMax(), getYMin(), getYMax());
-        particleDef.minMass=particleDef.maxMass=0.1f;
+        particleDef.minMass=0.15f;
+        particleDef.maxMass=0.25f;
         particleDef.minCharge=particleDef.maxCharge=0;
         friendParticle=this.generateRandomParticle(particleDef);
         friendParticle.setDrawer(new ParticleDrawer() {
@@ -66,16 +69,17 @@ public class ChargeYourFriendLevel extends Level {
         });
 
         particleDef=new ParticleDef(-10,0,0,10);
-        particleDef.minMass=particleDef.maxMass=0.1f;
+        particleDef.minMass=0.15f;
+        particleDef.maxMass=0.25f;
         particleDef.minCharge=particleDef.maxCharge=0;
         particleWithCharge=this.generateRandomParticle(particleDef);
 
         particleDef=new ParticleDef(getXMin(), getXMax(), getYMin(), getYMax());
-        particleDef.minMass= 0.05f;
-        particleDef.maxMass=0.15f;
+        particleDef.minMass= 0.1f;
+        particleDef.maxMass=0.3f;
         particleDef.minCharge=-0.01f;
         particleDef.maxCharge=0.01f;
-        this.addRandomParticles(particleDef, 25);
+        this.addRandomParticles(particleDef, 35);
 
         this.addParticle(mainParticle);
         this.addParticle(friendParticle);
@@ -95,6 +99,7 @@ public class ChargeYourFriendLevel extends Level {
                 level.zoomCamera(0.1f,25);
             }
         });
+        this.setPreRenderer(new FadePreRenderer(new Color(0.75f,1,0.75f,1),new Color(0.75f,0.75f,1,1),100 ));
         this.setLevelProceeder(new LevelProceeder() {
             @Override
             public void proceed(Level level, float delta) {
@@ -106,7 +111,7 @@ public class ChargeYourFriendLevel extends Level {
     @Override
     protected Mission createMission() {
         final Mission mission=new Mission("Charge your friend");
-        task01 = new TimeTask(500);
+        task01 = new TimeTask(7000);
         task01.setMainTaskText("Hello! Today you need charge you friend.");
         task01.setSecondaryTaskText("Your friend is yellow circled");
         task01.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
@@ -115,8 +120,8 @@ public class ChargeYourFriendLevel extends Level {
                 ChargeYourFriendLevel.this.setCameraPositionChanger(new CameraPositionChanger() {
                     @Override
                     public void changeCameraPosition(Level level, Camera camera, LevelScreen screen) {
-                        level.moveCamera(mainParticle.getX(), mainParticle.getY(), 25);
-                        level.zoomCamera(0.3f, 255);
+                        level.moveCamera(MathUtils.clamp(mainParticle.getX(),mainParticle.getX()-0.1f,mainParticle.getX()+0.1f), MathUtils.clamp(mainParticle.getY(),mainParticle.getY()-0.1f,mainParticle.getY()+0.1f), 25);
+                        level.zoomCamera(MathUtils.clamp(screen.getCameraZoom(),0.2f,1f), 255);
                     }
                 });
                 ChargeYourFriendLevel.this.setLevelTapper(new LevelTapper() {
@@ -129,7 +134,7 @@ public class ChargeYourFriendLevel extends Level {
             }
         });
 
-        task02 = new TimeTask(500);
+        task02 = new TimeTask(7000);
         task02.setMainTaskText("But firstly you need get charge");
         task02.setSecondaryTaskText("But how? Try to collide with other fractions.");
 
@@ -143,7 +148,7 @@ public class ChargeYourFriendLevel extends Level {
         });
         subTask02 = new TaskOnContact(mainParticle,particleWithCharge);
         subTask02.setMainTaskText("In this world there is one special Particle");
-        subTask02.setSecondaryTaskText("It can share its charge specially.");
+        subTask02.setSecondaryTaskText("It can share its charge specially. Find it!");
         subTask02.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
@@ -193,21 +198,55 @@ public class ChargeYourFriendLevel extends Level {
         task03.setMainTaskText("Find your friend particle");
         task03.setSecondaryTaskText("Or maybe another...");
         task04=new TimeTask(5000);
-        task04.setMainTaskText("What do you need from me?!");
-        task04.setSecondaryTaskText("If you collide me one more time I'll make you negative");
+        task04.setMainTaskText("-What do you need from me?!");
+        task04.setSecondaryTaskText("-If you collide me one more time I'll make you negative");
         task04.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
-                ChargeYourFriendLevel.this.setPreRenderer(null);
+                ChargeYourFriendLevel.this.setPreRenderer(new FadePreRenderer(new Color(0.75f,1,0.75f,1),new Color(0.75f,0.75f,1,1),100 ));
+                mission.addTask(task05);
+                mission.addTask(task06);
+                ChargeYourFriendLevel.this.multiListener.addContactListener(new ContactListener() {
+                    @Override
+                    public void beginContact(Contact contact) {
+
+                    }
+
+                    @Override
+                    public void endContact(Contact contact) {
+
+                    }
+
+                    @Override
+                    public void preSolve(Contact contact, Manifold oldManifold) {
+
+                    }
+
+                    @Override
+                    public void postSolve(Contact contact, ContactImpulse impulse) {
+                        if ((contact.getFixtureA().getBody().getUserData() == mainParticle && contact.getFixtureB().getBody().getUserData() == friendParticle)
+                                || (contact.getFixtureA().getBody().getUserData() == friendParticle && contact.getFixtureB().getBody().getUserData() == mainParticle))
+                            ChargeYourFriendLevel.this.chargeBetweenParticle(mainParticle,friendParticle,50);
+                    }
+                });
             }
         });
+        task05=new CustomTask(new CheckerForTask() {
+            @Override
+            public boolean checkTask(Task task) {
+                task05.setSecondaryTaskText("You need charge it "+(-0.125f-friendParticle.getCharge())+" more");
+                return friendParticle.getCharge()<=-0.125f;
+            }
+        });
+        task05.setMainTaskText("Charge you friend");
 
-
+        task06=new NullTask();
+        task06.setMainTaskText("You've charged your friend as needed");
+        task06.setSecondaryTaskText("Tap 'exit' button to exit");
 
         mission.addTask(task01);
         mission.addTask(task02);
         mission.addTask(task03);
-        //mission.addTask(task04);
         task01.start();
         return mission;
     }

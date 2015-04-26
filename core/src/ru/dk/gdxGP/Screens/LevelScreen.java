@@ -129,6 +129,10 @@ public class LevelScreen implements Screen {
         this.bordersStage.getViewport().setCamera(camera);
         this.othersStage.getViewport().setCamera(camera);
         this.startColor = this.particlesStage.getBatch().getColor();
+        this.xMin=level.getXMin();
+        this.xMax=level.getXMax();
+        this.yMin=level.getYMin();
+        this.yMax=level.getYMax();
     }
 
     @Override
@@ -144,11 +148,76 @@ public class LevelScreen implements Screen {
         if (this.level.getMission() != null)
             this.level.getMission().render(missionBatch);
         missionBatch.end();
-        float xTo=MathUtils.clamp(camera.position.x,level.getXMin(),level.getXMax()),
-                yTo=MathUtils.clamp(camera.position.y,level.getYMin(),level.getYMax()),delay=25;
-        this.camera.position.set((delay * camera.position.x + xTo) / (delay + 1), (delay * camera.position.y + yTo) / (delay + 1), 0);
+        float xTo=MathUtils.clamp(camera.position.x,xMin,xMax),
+                yTo=MathUtils.clamp(camera.position.y,yMin,yMax);
+        this.camera.position.set((coordsDelay * camera.position.x + xTo) / (coordsDelay + 1), (coordsDelay * camera.position.y + yTo) / (coordsDelay + 1), 0);
         //box2DDebugRenderer.render(this.level.getWorld(), camera.combined);
-        this.setCameraZoom((this.getZoom() * delay + MathUtils.clamp(this.getZoom(),0.1f,2f)) / (delay+1));
+        this.setCameraZoom((this.getZoom() * cameraDelay + MathUtils.clamp(this.getZoom(),zoomMin,zoomMax)) / (cameraDelay+1));
+    }
+    private float xMin,xMax,yMin,yMax,zoomMin=0.1f,zoomMax=2f,coordsDelay=25,cameraDelay=25;
+
+    public float getCameraDelay() {
+        return cameraDelay;
+    }
+
+    public void setCameraDelay(float cameraDelay) {
+        this.cameraDelay = cameraDelay;
+    }
+
+    public float getXMin() {
+        return xMin;
+    }
+
+    public void setXMin(float xMin) {
+        this.xMin = xMin;
+    }
+
+    public float getXMax() {
+        return xMax;
+    }
+
+    public void setXMax(float xMax) {
+        this.xMax = xMax;
+    }
+
+    public float getYMin() {
+        return yMin;
+    }
+
+    public void setYMin(float yMin) {
+        this.yMin = yMin;
+    }
+
+    public float getYMax() {
+        return yMax;
+    }
+
+    public void setYMax(float yMax) {
+        this.yMax = yMax;
+    }
+
+    public float getZoomMin() {
+        return zoomMin;
+    }
+
+    public void setZoomMin(float zoomMin) {
+        this.zoomMin = zoomMin;
+    }
+
+    public float getZoomMax() {
+        return zoomMax;
+    }
+
+    public void setZoomMax(float zoomMax) {
+        this.zoomMax = zoomMax;
+    }
+
+    public float getCoordsDelay() {
+        return coordsDelay;
+    }
+
+    public void setCoordsDelay(float coordsDelay) {
+        this.coordsDelay = coordsDelay;
     }
 
     public boolean zoom(float initialDistance, float distance) {
