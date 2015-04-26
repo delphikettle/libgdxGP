@@ -1,6 +1,6 @@
 package ru.dk.gdxGP.GameWorld.Tasks;
 
-import ru.dk.gdxGP.GameWorld.InterfacesForActions.CheckerForTask;
+import ru.dk.gdxGP.GameWorld.Interfaces.CheckerForTask;
 import ru.dk.gdxGP.GameWorld.Task;
 
 /**

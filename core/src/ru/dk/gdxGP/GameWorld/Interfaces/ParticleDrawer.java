@@ -1,4 +1,4 @@
-package ru.dk.gdxGP.GameWorld.InterfacesForActions;
+package ru.dk.gdxGP.GameWorld.Interfaces;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;

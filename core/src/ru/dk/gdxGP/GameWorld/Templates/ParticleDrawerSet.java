@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import ru.dk.gdxGP.AtlasLoader;
-import ru.dk.gdxGP.GameWorld.InterfacesForActions.ParticleDrawer;
+import ru.dk.gdxGP.GameWorld.Interfaces.ParticleDrawer;
 import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
 
 public final class ParticleDrawerSet {

@@ -177,20 +177,20 @@
       <file leaf-file-name="ChargeYourFriendLevel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Levels/ChargeYourFriendLevel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="8.344828" vertical-offset="1075" max-vertical-offset="3213">
-              <caret line="49" column="34" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
+            <state vertical-scroll-proportion="8.344828" vertical-offset="1024" max-vertical-offset="3162">
+              <caret line="46" column="34" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5966#6148#0" expanded="true" />
-                <element signature="e#6147#6148#0" expanded="true" />
-                <element signature="e#6437#8638#0" expanded="true" />
-                <element signature="class#7488:8612" expanded="false" />
-                <element signature="e#8637#8638#0" expanded="true" />
-                <element signature="e#9098#10521#0" expanded="true" />
-                <element signature="class#9515:10495" expanded="false" />
-                <element signature="e#10520#10521#0" expanded="true" />
-                <element signature="e#10554#10845#0" expanded="true" />
-                <element signature="e#10844#10845#0" expanded="true" />
+                <element signature="e#5872#6054#0" expanded="true" />
+                <element signature="e#6053#6054#0" expanded="true" />
+                <element signature="e#6343#8544#0" expanded="true" />
+                <element signature="class#7394:8518" expanded="false" />
+                <element signature="e#8543#8544#0" expanded="true" />
+                <element signature="e#9004#10427#0" expanded="true" />
+                <element signature="class#9421:10401" expanded="false" />
+                <element signature="e#10426#10427#0" expanded="true" />
+                <element signature="e#10460#10751#0" expanded="true" />
+                <element signature="e#10750#10751#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -199,8 +199,8 @@
       <file leaf-file-name="ChargeAllLevel.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Levels/ChargeAllLevel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.39895698" vertical-offset="884" max-vertical-offset="2516">
-              <caret line="73" column="79" selection-start-line="73" selection-start-column="79" selection-end-line="73" selection-end-column="80" />
+            <state vertical-scroll-proportion="0.70328104" vertical-offset="850" max-vertical-offset="2482">
+              <caret line="82" column="34" selection-start-line="82" selection-start-column="34" selection-end-line="82" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -212,7 +212,7 @@
         <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Levels/ControlTutorialLevel.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2091">
-              <caret line="46" column="102" selection-start-line="46" selection-start-column="102" selection-end-line="46" selection-end-column="102" />
+              <caret line="45" column="102" selection-start-line="45" selection-start-column="102" selection-end-line="45" selection-end-column="102" />
               <folding />
             </state>
           </provider>
@@ -224,8 +224,8 @@
             <state vertical-scroll-proportion="0.0" vertical-offset="185" max-vertical-offset="2397">
               <caret line="45" column="105" selection-start-line="45" selection-start-column="105" selection-end-line="45" selection-end-column="105" />
               <folding>
-                <element signature="e#7528#7698#0" expanded="true" />
-                <element signature="e#7697#7698#0" expanded="true" />
+                <element signature="e#7518#7688#0" expanded="true" />
+                <element signature="e#7687#7688#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -259,8 +259,8 @@
             <state vertical-scroll-proportion="0.0" vertical-offset="536" max-vertical-offset="1224">
               <caret line="81" column="40" selection-start-line="81" selection-start-column="40" selection-end-line="81" selection-end-column="40" />
               <folding>
-                <element signature="e#3877#4922#0" expanded="true" />
-                <element signature="e#4921#4922#0" expanded="true" />
+                <element signature="e#3867#4912#0" expanded="true" />
+                <element signature="e#4911#4912#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -332,7 +332,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1236" />
+    <option name="width" value="2064" />
     <option name="height" value="1128" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -478,6 +478,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdxGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libgdxGP_15_04_25" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdxGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameWorld" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Interfaces" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -518,7 +548,7 @@
       <recent name="D:\Programming\GDXProjects\gdxGP" />
     </key>
   </component>
-  <component name="RunManager" selected="Android Application.AndroidRun">
+  <component name="RunManager" selected="Application.DesktopRun">
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -759,7 +789,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1236" height="1128" extended-state="6" />
+    <frame x="-8" y="-8" width="2064" height="1128" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
@@ -773,11 +803,11 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26880643" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26880643" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925585" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18956871" sideWeight="0.6317365" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18956871" sideWeight="0.6317365" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29081634" sideWeight="0.8890532" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17065868" sideWeight="0.8890532" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39217654" sideWeight="0.36826348" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24151696" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -861,7 +891,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/InterfacesForActions/PreRenderer.java">
+    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Interfaces/PreRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2042042" vertical-offset="0" max-vertical-offset="666">
           <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
@@ -890,7 +920,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/InterfacesForActions/AfterRenderer.java">
+    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Interfaces/AfterRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272">
           <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
@@ -904,7 +934,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/InterfacesForActions/MissionDrawer.java">
+    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Interfaces/MissionDrawer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.21715328" vertical-offset="0" max-vertical-offset="548">
           <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
@@ -935,14 +965,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/InterfacesForActions/ParticleDrawer.java">
+    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Interfaces/ParticleDrawer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="204">
           <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/InterfacesForActions/ParticleOperator.java">
+    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Interfaces/ParticleOperator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
           <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
@@ -996,6 +1026,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="42" max-vertical-offset="561">
           <caret line="22" column="39" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1006,7 +1039,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/InterfacesForActions/CheckerForTask.java">
+    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Interfaces/CheckerForTask.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
           <caret line="5" column="38" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
@@ -1018,24 +1051,24 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="107" max-vertical-offset="1309">
           <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
           <folding>
-            <element signature="e#693#694#0" expanded="false" />
-            <element signature="e#739#740#0" expanded="false" />
-            <element signature="e#1421#1422#0" expanded="false" />
-            <element signature="e#1456#1457#0" expanded="false" />
-            <element signature="e#1512#1513#0" expanded="false" />
-            <element signature="e#1560#1561#0" expanded="false" />
-            <element signature="e#1604#1605#0" expanded="false" />
-            <element signature="e#1644#1645#0" expanded="false" />
-            <element signature="e#1710#1711#0" expanded="false" />
-            <element signature="e#1768#1769#0" expanded="false" />
-            <element signature="e#1799#1800#0" expanded="false" />
-            <element signature="e#1826#1827#0" expanded="false" />
-            <element signature="e#1867#1868#0" expanded="false" />
-            <element signature="e#1899#1900#0" expanded="false" />
-            <element signature="e#1931#1932#0" expanded="false" />
-            <element signature="e#1959#1960#0" expanded="false" />
-            <element signature="e#2001#2002#0" expanded="false" />
-            <element signature="e#2035#2036#0" expanded="false" />
+            <element signature="e#683#684#0" expanded="false" />
+            <element signature="e#729#730#0" expanded="false" />
+            <element signature="e#1411#1412#0" expanded="false" />
+            <element signature="e#1446#1447#0" expanded="false" />
+            <element signature="e#1502#1503#0" expanded="false" />
+            <element signature="e#1550#1551#0" expanded="false" />
+            <element signature="e#1594#1595#0" expanded="false" />
+            <element signature="e#1634#1635#0" expanded="false" />
+            <element signature="e#1700#1701#0" expanded="false" />
+            <element signature="e#1758#1759#0" expanded="false" />
+            <element signature="e#1789#1790#0" expanded="false" />
+            <element signature="e#1816#1817#0" expanded="false" />
+            <element signature="e#1857#1858#0" expanded="false" />
+            <element signature="e#1889#1890#0" expanded="false" />
+            <element signature="e#1921#1922#0" expanded="false" />
+            <element signature="e#1949#1950#0" expanded="false" />
+            <element signature="e#1991#1992#0" expanded="false" />
+            <element signature="e#2025#2026#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1044,6 +1077,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
           <caret line="9" column="40" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1094,17 +1130,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/InterfacesForActions/ParticleSender.java">
+    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Interfaces/ParticleSender.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.20574887" vertical-offset="0" max-vertical-offset="661">
           <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/InterfacesForActions/LevelElement.java">
+    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Interfaces/LevelElement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272">
           <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1112,6 +1150,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="546" max-vertical-offset="1207">
           <caret line="71" column="25" selection-start-line="71" selection-start-column="25" selection-end-line="71" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1153,8 +1192,8 @@
           <caret line="27" column="48" selection-start-line="27" selection-start-column="48" selection-end-line="29" selection-end-column="141" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2092#2093#0" expanded="true" />
-            <element signature="e#2124#2125#0" expanded="true" />
+            <element signature="e#2082#2083#0" expanded="true" />
+            <element signature="e#2114#2115#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1195,8 +1234,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="536" max-vertical-offset="1224">
           <caret line="81" column="40" selection-start-line="81" selection-start-column="40" selection-end-line="81" selection-end-column="40" />
           <folding>
-            <element signature="e#3877#4922#0" expanded="true" />
-            <element signature="e#4921#4922#0" expanded="true" />
+            <element signature="e#3867#4912#0" expanded="true" />
+            <element signature="e#4911#4912#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1275,20 +1314,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Levels/ChargeYourFriendLevel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="8.344828" vertical-offset="1075" max-vertical-offset="3213">
-          <caret line="49" column="34" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
+        <state vertical-scroll-proportion="8.344828" vertical-offset="1024" max-vertical-offset="3162">
+          <caret line="46" column="34" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5966#6148#0" expanded="true" />
-            <element signature="e#6147#6148#0" expanded="true" />
-            <element signature="e#6437#8638#0" expanded="true" />
-            <element signature="class#7488:8612" expanded="false" />
-            <element signature="e#8637#8638#0" expanded="true" />
-            <element signature="e#9098#10521#0" expanded="true" />
-            <element signature="class#9515:10495" expanded="false" />
-            <element signature="e#10520#10521#0" expanded="true" />
-            <element signature="e#10554#10845#0" expanded="true" />
-            <element signature="e#10844#10845#0" expanded="true" />
+            <element signature="e#5872#6054#0" expanded="true" />
+            <element signature="e#6053#6054#0" expanded="true" />
+            <element signature="e#6343#8544#0" expanded="true" />
+            <element signature="class#7394:8518" expanded="false" />
+            <element signature="e#8543#8544#0" expanded="true" />
+            <element signature="e#9004#10427#0" expanded="true" />
+            <element signature="class#9421:10401" expanded="false" />
+            <element signature="e#10426#10427#0" expanded="true" />
+            <element signature="e#10460#10751#0" expanded="true" />
+            <element signature="e#10750#10751#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1296,7 +1335,7 @@
     <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Levels/ControlTutorialLevel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2091">
-          <caret line="46" column="102" selection-start-line="46" selection-start-column="102" selection-end-line="46" selection-end-column="102" />
+          <caret line="45" column="102" selection-start-line="45" selection-start-column="102" selection-end-line="45" selection-end-column="102" />
           <folding />
         </state>
       </provider>
@@ -1306,8 +1345,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="185" max-vertical-offset="2397">
           <caret line="45" column="105" selection-start-line="45" selection-start-column="105" selection-end-line="45" selection-end-column="105" />
           <folding>
-            <element signature="e#7528#7698#0" expanded="true" />
-            <element signature="e#7697#7698#0" expanded="true" />
+            <element signature="e#7518#7688#0" expanded="true" />
+            <element signature="e#7687#7688#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1322,8 +1361,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Levels/ChargeAllLevel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39895698" vertical-offset="884" max-vertical-offset="2516">
-          <caret line="73" column="79" selection-start-line="73" selection-start-column="79" selection-end-line="73" selection-end-column="80" />
+        <state vertical-scroll-proportion="0.70328104" vertical-offset="850" max-vertical-offset="2482">
+          <caret line="82" column="34" selection-start-line="82" selection-start-column="34" selection-end-line="82" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -4,7 +4,7 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import ru.dk.gdxGP.GameWorld.InterfacesForActions.LevelElement;
+import ru.dk.gdxGP.GameWorld.Interfaces.LevelElement;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Task;
 

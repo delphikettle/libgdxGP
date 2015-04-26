@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import ru.dk.gdxGP.GameWorld.InterfacesForActions.MissionDrawer;
+import ru.dk.gdxGP.GameWorld.Interfaces.MissionDrawer;
 import ru.dk.gdxGP.GameWorld.Mission;
 
 /**

@@ -1,6 +1,6 @@
 package ru.dk.gdxGP.GameWorld;
 
-import ru.dk.gdxGP.GameWorld.InterfacesForActions.ActionAfterAchievedTask;
+import ru.dk.gdxGP.GameWorld.Interfaces.ActionAfterAchievedTask;
 
 /**
  * Created by Андрей on 11.01.2015.

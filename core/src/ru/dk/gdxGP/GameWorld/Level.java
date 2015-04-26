@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Timer;
-import ru.dk.gdxGP.GameWorld.InterfacesForActions.*;
+import ru.dk.gdxGP.GameWorld.Interfaces.*;
 import ru.dk.gdxGP.GameWorld.Templates.LevelProceederSet;
 import ru.dk.gdxGP.GameWorld.Templates.ParticleDrawerSet;
 import ru.dk.gdxGP.GameWorld.WorldElements.Border;

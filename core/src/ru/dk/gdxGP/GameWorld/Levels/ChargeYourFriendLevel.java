@@ -9,19 +9,16 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import ru.dk.gdxGP.GameWorld.InterfacesForActions.*;
+import ru.dk.gdxGP.GameWorld.Interfaces.*;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Mission;
 import ru.dk.gdxGP.GameWorld.ParticleDef;
 import ru.dk.gdxGP.GameWorld.Task;
 import ru.dk.gdxGP.GameWorld.Tasks.*;
-import ru.dk.gdxGP.GameWorld.Templates.ParticleDefSet;
 import ru.dk.gdxGP.GameWorld.Templates.ParticleDrawerSet;
 import ru.dk.gdxGP.GameWorld.Templates.PreRenderers.FadePreRenderer;
 import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
 import ru.dk.gdxGP.Screens.LevelScreen;
-
-import java.util.TimerTask;
 
 /**
  * Created by DK on 25.04.2015.

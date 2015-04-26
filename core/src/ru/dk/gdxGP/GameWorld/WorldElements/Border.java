@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import ru.dk.gdxGP.AtlasLoader;
-import ru.dk.gdxGP.GameWorld.InterfacesForActions.LevelElement;
+import ru.dk.gdxGP.GameWorld.Interfaces.LevelElement;
 import ru.dk.gdxGP.GameWorld.Level;
 
 /**

@@ -1,16 +1,14 @@
 package ru.dk.gdxGP.GameWorld.Levels;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
-import ru.dk.gdxGP.GameWorld.InterfacesForActions.*;
+import ru.dk.gdxGP.GameWorld.Interfaces.*;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Mission;
 import ru.dk.gdxGP.GameWorld.ParticleDef;
 import ru.dk.gdxGP.GameWorld.Task;
 import ru.dk.gdxGP.GameWorld.Tasks.*;
-import ru.dk.gdxGP.GameWorld.Templates.ParticleDefSet;
 import ru.dk.gdxGP.GameWorld.Templates.ParticleDrawerSet;
 import ru.dk.gdxGP.GameWorld.Templates.PreRenderers.FadePreRenderer;
 import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
