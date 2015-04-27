@@ -1,21 +1,25 @@
 package ru.dk.gdxGP.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import ru.dk.gdxGP.GDXGameGP;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.WorldElements.Border;
 import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
 
-public class LevelScreen implements Screen {
+public class LevelScreen implements GestureDetector.GestureListener, InputProcessor,Screen {
     private final Stage particlesStage;
     private final Stage bordersStage;
     private final Stage othersStage;
@@ -129,6 +133,9 @@ public class LevelScreen implements Screen {
         this.xMax=level.getXMax();
         this.yMin=level.getYMin();
         this.yMax=level.getYMax();
+
+        GDXGameGP.currentGame.inputMultiplexer.addProcessor(this);
+        GDXGameGP.currentGame.inputMultiplexer.addProcessor(new GestureDetector(this));
     }
 
     @Override
@@ -216,14 +223,44 @@ public class LevelScreen implements Screen {
         this.coordsDelay = coordsDelay;
     }
 
-    public boolean zoom(float initialDistance, float distance) {
-        this.zoom = MathUtils.clamp(initialScale * initialDistance / distance, 0.001f, 1000.0f);
-        return true;
+    @Override
+    public boolean touchDown(float x, float y, int pointer, int button) {
+        this.setInitialScale(this.getCameraZoom());
+        return false;
     }
 
-    public void drag(float dx, float dy) {
-        this.camera.position.add(dx * camera.viewportWidth / Gdx.graphics.getWidth() * zoom, dy * camera.viewportHeight / Gdx.graphics.getHeight() * zoom, 0);
+    @Override
+    public boolean tap(float x, float y, int count, int button) {
+        Vector3 tapCoords = this.camera.unproject(new Vector3(x, y, 0));
+        this.level.tap(tapCoords.x, tapCoords.y);
+        return false;
     }
+
+    @Override
+    public boolean longPress(float x, float y) {
+        return false;
+    }
+
+    @Override
+    public boolean fling(float velocityX, float velocityY, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean pan(float x, float y, float deltaX, float deltaY) {
+        return false;
+    }
+
+    @Override
+    public boolean panStop(float x, float y, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
+        return false;
+    }
+
 
     public Batch getBatch() {
         return this.particlesStage.getBatch();
@@ -233,10 +270,6 @@ public class LevelScreen implements Screen {
     public void resize(int width, int height) {
     }
 
-    public void tap(float screenX, float screenY) {
-        Vector3 tapCoords = this.camera.unproject(new Vector3(screenX, screenY, 0));
-        this.level.tap(tapCoords.x, tapCoords.y);
-    }
 
     public float getCameraZoom() {
         return this.camera.zoom;
@@ -264,5 +297,54 @@ public class LevelScreen implements Screen {
     @Override
     public void dispose() {
 
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyTyped(char character) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        float dx=-Gdx.input.getDeltaX(pointer),dy= Gdx.input.getDeltaY(pointer);
+        this.camera.position.add(dx * camera.viewportWidth / Gdx.graphics.getWidth() * zoom, dy * camera.viewportHeight / Gdx.graphics.getHeight() * zoom, 0);
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+
+    public boolean zoom(float initialDistance, float distance) {
+        this.zoom = MathUtils.clamp(initialScale * initialDistance / distance, 0.001f, 1000.0f);
+        return true;
+    }
+
+    @Override
+    public boolean scrolled(int amount) {
+        this.setInitialScale(this.getCameraZoom());
+        this.zoom(this.getZoom(), (float) (this.getZoom() * Math.pow(1.1f, -amount)));
+        return false;
     }
 }

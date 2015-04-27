@@ -3,11 +3,8 @@ package ru.dk.gdxGP.GameWorld.Levels;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
+import ru.dk.gdxGP.GameWorld.Interfaces.Actions.*;
 import ru.dk.gdxGP.GameWorld.ParticleDef;
-import ru.dk.gdxGP.GameWorld.Interfaces.Actions.ActionAfterAchievedTask;
-import ru.dk.gdxGP.GameWorld.Interfaces.Actions.CameraPositionChanger;
-import ru.dk.gdxGP.GameWorld.Interfaces.Actions.LevelProceeder;
-import ru.dk.gdxGP.GameWorld.Interfaces.Actions.LevelTapper;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Mission;
 import ru.dk.gdxGP.GameWorld.Task;
@@ -122,8 +119,19 @@ public class ControlTutorialLevel extends Level {
                 ControlTutorialLevel.this.setCameraPositionChanger(new CameraPositionChanger() {
                     @Override
                     public void changeCameraPosition(Level level, Camera camera, LevelScreen screen) {
-                        level.moveCamera(mainParticle.getX(), mainParticle.getY(), 25);
                         screen.setCameraZoom((screen.getZoom() * 25 + 0.5f) / 26);
+                    }
+                });
+                ControlTutorialLevel.this.setLevelProceeder(new LevelProceeder() {
+                    @Override
+                    public void proceed(Level level, float delta) {
+                        level.proceedParticles(delta);
+                    }
+                });
+                mainParticle.setOperator(new ParticleOperator() {
+                    @Override
+                    public void operateParticle(Particle particle, float deltaTime) {
+                        ControlTutorialLevel.this.moveCamera(particle.getX(), particle.getY(), 25);
                     }
                 });
                 ControlTutorialLevel.this.setLevelTapper(new LevelTapper() {

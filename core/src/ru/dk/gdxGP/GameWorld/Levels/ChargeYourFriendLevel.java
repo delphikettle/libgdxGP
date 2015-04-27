@@ -17,6 +17,7 @@ import ru.dk.gdxGP.GameWorld.ParticleDef;
 import ru.dk.gdxGP.GameWorld.Task;
 import ru.dk.gdxGP.GameWorld.Tasks.*;
 import ru.dk.gdxGP.GameWorld.Templates.ParticleDrawerSet;
+import ru.dk.gdxGP.GameWorld.Templates.ParticleOperatorSet;
 import ru.dk.gdxGP.GameWorld.Templates.PreRenderers.FadePreRenderer;
 import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
 import ru.dk.gdxGP.Screens.LevelScreen;
@@ -101,6 +102,7 @@ public class ChargeYourFriendLevel extends Level {
             @Override
             public void proceed(Level level, float delta) {
                 level.interactAllWithAllParticles();
+                level.proceedParticles(delta);
             }
         });
     }
@@ -114,10 +116,15 @@ public class ChargeYourFriendLevel extends Level {
         task01.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
+                mainParticle.setOperator(new ParticleOperator() {
+                    @Override
+                    public void operateParticle(Particle particle, float deltaTime) {
+                        particle.getLevel().moveCamera(MathUtils.clamp(mainParticle.getX(), mainParticle.getX() - 0.1f, mainParticle.getX() + 0.1f), MathUtils.clamp(mainParticle.getY(), mainParticle.getY() - 0.1f, mainParticle.getY() + 0.1f), 25);
+                    }
+                });
                 ChargeYourFriendLevel.this.setCameraPositionChanger(new CameraPositionChanger() {
                     @Override
                     public void changeCameraPosition(Level level, Camera camera, LevelScreen screen) {
-                        level.moveCamera(MathUtils.clamp(mainParticle.getX(),mainParticle.getX()-0.1f,mainParticle.getX()+0.1f), MathUtils.clamp(mainParticle.getY(),mainParticle.getY()-0.1f,mainParticle.getY()+0.1f), 25);
                         level.zoomCamera(MathUtils.clamp(screen.getCameraZoom(),0.2f,1f), 255);
                     }
                 });
