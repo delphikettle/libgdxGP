@@ -7,9 +7,6 @@ import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- * Created by DK on 15.04.2015.
- */
 public class TaskOnMass extends Task {
     private final ArrayList<Particle> particles = new ArrayList<Particle>();
     private final float mass;

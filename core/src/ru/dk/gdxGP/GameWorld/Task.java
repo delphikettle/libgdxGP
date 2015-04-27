@@ -1,10 +1,7 @@
 package ru.dk.gdxGP.GameWorld;
 
-import ru.dk.gdxGP.GameWorld.Interfaces.ActionAfterAchievedTask;
+import ru.dk.gdxGP.GameWorld.Interfaces.Actions.ActionAfterAchievedTask;
 
-/**
- * Created by Андрей on 11.01.2015.
- */
 public abstract class Task {
     private boolean isAchieved = false, once;
     private String title = "";
@@ -34,7 +31,6 @@ public abstract class Task {
     }
 
     public final boolean isAchieved() {
-        //if(!isAchieved) isAchieved =check();
         if (once) {
             if (!isAchieved) {
                 isAchieved = check();

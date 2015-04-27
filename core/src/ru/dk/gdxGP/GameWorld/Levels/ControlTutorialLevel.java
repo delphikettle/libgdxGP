@@ -4,10 +4,10 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import ru.dk.gdxGP.GameWorld.ParticleDef;
-import ru.dk.gdxGP.GameWorld.Interfaces.ActionAfterAchievedTask;
-import ru.dk.gdxGP.GameWorld.Interfaces.CameraPositionChanger;
-import ru.dk.gdxGP.GameWorld.Interfaces.LevelProceeder;
-import ru.dk.gdxGP.GameWorld.Interfaces.LevelTapper;
+import ru.dk.gdxGP.GameWorld.Interfaces.Actions.ActionAfterAchievedTask;
+import ru.dk.gdxGP.GameWorld.Interfaces.Actions.CameraPositionChanger;
+import ru.dk.gdxGP.GameWorld.Interfaces.Actions.LevelProceeder;
+import ru.dk.gdxGP.GameWorld.Interfaces.Actions.LevelTapper;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Mission;
 import ru.dk.gdxGP.GameWorld.Task;
@@ -19,9 +19,7 @@ import ru.dk.gdxGP.GameWorld.Templates.PreRenderers.FadePreRenderer;
 import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
 import ru.dk.gdxGP.Screens.LevelScreen;
 
-/**
- * Created by STUDENT_7 on 16.04.2015.
- */
+
 public class ControlTutorialLevel extends Level {
     private Particle mainParticle;
     private TaskOnAction task01,task02, task04, task03;

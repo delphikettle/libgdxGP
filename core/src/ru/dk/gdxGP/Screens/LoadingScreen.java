@@ -78,7 +78,6 @@ public class LoadingScreen extends Stage implements Screen {
             this.setActive(false);
             GDXGameGP.currentGame.setScreen(nextScreen);
         }
-        //System.out.println("LoadingScreen drawn");
     }
 
     public boolean isActive() {

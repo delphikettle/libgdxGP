@@ -6,8 +6,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import ru.dk.gdxGP.GameWorld.Interfaces.LevelElement;
-import ru.dk.gdxGP.GameWorld.Interfaces.ParticleDrawer;
-import ru.dk.gdxGP.GameWorld.Interfaces.ParticleOperator;
+import ru.dk.gdxGP.GameWorld.Interfaces.Drawers.ParticleDrawer;
+import ru.dk.gdxGP.GameWorld.Interfaces.Actions.ParticleOperator;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Templates.ParticleDrawerSet;
 import ru.dk.gdxGP.GameWorld.Templates.ParticleOperatorSet;
@@ -192,7 +192,7 @@ public class Particle extends Actor implements LevelElement {
     }
 
     synchronized public Particle divide(float mass, float vx, float vy) {
-        if (mass >= this.body.getMass() || mass <= 0)//throw new IllegalArgumentException();
+        if (mass >= this.body.getMass() || mass <= 0)
             return null;
         float newMass = this.body.getMass() - mass;
         float r = recountRadius(newMass);

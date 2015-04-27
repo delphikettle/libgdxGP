@@ -1,15 +1,12 @@
 package ru.dk.gdxGP.GameWorld;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import ru.dk.gdxGP.GameWorld.Interfaces.MissionDrawer;
+import ru.dk.gdxGP.GameWorld.Interfaces.Drawers.MissionDrawer;
 import ru.dk.gdxGP.GameWorld.Tasks.NullTask;
 import ru.dk.gdxGP.GameWorld.Templates.MissionDrawerSet;
 
 import java.util.LinkedList;
 
-/**
- * Created by DK on 14.04.2015.
- */
 public class Mission extends Task {
     private final LinkedList<Task> taskList = new LinkedList<Task>();
 

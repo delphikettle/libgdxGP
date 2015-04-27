@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import ru.dk.gdxGP.AtlasLoader;
-import ru.dk.gdxGP.GameWorld.Interfaces.ParticleDrawer;
+import ru.dk.gdxGP.GameWorld.Interfaces.Drawers.ParticleDrawer;
 import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
 
 public final class ParticleDrawerSet {
@@ -66,7 +66,6 @@ public final class ParticleDrawerSet {
             if (particle.getCharge() > 0) batch.setColor(1, 0, 0, 0.25f);
             else batch.setColor(0, 0, 1, 0.25f);
             float r1 = (float) (particle.getRadius() * (1 + Math.sqrt(Math.abs(particle.getCharge()) * 2f)));
-            //if (!(particle.charge <= 0.1f && particle.charge >= -0.1f))
             batch.draw(textureRegionCharge, particle.getPosition().x - 1.0f * r1, particle.getPosition().y - 1.0f * r1, r1, r1, r1 * 2.0f, r1 * 2.0f, 1, 1, MathUtils.radiansToDegrees * particle.getBody().getAngle());
         }
     };

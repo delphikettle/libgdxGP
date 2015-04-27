@@ -3,12 +3,9 @@ package ru.dk.gdxGP.GameWorld.Templates.PreRenderers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import ru.dk.gdxGP.GameWorld.Interfaces.PreRenderer;
+import ru.dk.gdxGP.GameWorld.Interfaces.Drawers.PreRenderer;
 import ru.dk.gdxGP.GameWorld.Level;
 
-/**
- * Created by DK on 18.04.2015.
- */
 public class FadePreRenderer implements PreRenderer {
     final float rStep, gStep, bStep, aStep;
     float rFrom;

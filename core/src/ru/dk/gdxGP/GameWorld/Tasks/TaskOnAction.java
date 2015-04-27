@@ -2,9 +2,6 @@ package ru.dk.gdxGP.GameWorld.Tasks;
 
 import ru.dk.gdxGP.GameWorld.Task;
 
-/**
- * Created by STUDENT_7 on 16.04.2015.
- */
 public class TaskOnAction extends Task {
     private boolean completed = false;
 

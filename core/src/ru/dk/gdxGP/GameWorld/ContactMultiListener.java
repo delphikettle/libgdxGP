@@ -8,9 +8,6 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by DK on 25.04.2015.
- */
 public class ContactMultiListener implements ContactListener {
     private final List<ContactListener> contactListeners=new ArrayList<ContactListener>();
     public ContactMultiListener(){}

@@ -7,16 +7,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by DK on 31.03.2015.
- */
 public class GameLevels {
     @SuppressWarnings("unchecked")
     public static final List<Class<? extends Level>> LEVELS = new ArrayList<Class<? extends Level>>(
             Arrays.asList(
                     //TestLevel.class,
                     //TestLevel01.class,
-                    //UnnamedLevel.class,
+                    //NullTemplateLevel.class,
                     ControlTutorialLevel.class,
                     ForcesTutorialLevel.class,
                     InteractionTutorialLevel.class,

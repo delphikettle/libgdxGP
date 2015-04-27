@@ -1,6 +1,6 @@
 package ru.dk.gdxGP.GameWorld.Templates;
 
-import ru.dk.gdxGP.GameWorld.Interfaces.ActionForNextStep;
+import ru.dk.gdxGP.GameWorld.Interfaces.Actions.ActionForNextStep;
 import ru.dk.gdxGP.GameWorld.Level;
 
 public final class ActionForNextStepSet {

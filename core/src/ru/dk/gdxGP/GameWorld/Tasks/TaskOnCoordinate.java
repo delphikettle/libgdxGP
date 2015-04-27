@@ -8,9 +8,6 @@ import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- * Created by Андрей on 07.02.2015.
- */
 public class TaskOnCoordinate extends Task {
     private ArrayList<Particle> particles = new ArrayList<Particle>();
     private float inaccuracy = 0.0f;

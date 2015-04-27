@@ -5,9 +5,6 @@ import ru.dk.gdxGP.GameWorld.Task;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- * Created by Андрей on 23.01.2015.
- */
 public class TaskCombination extends Task {
     public static final byte TC_AND = 0, TC_OR = 1, TC_NOT = 2, TC_XOR = 3;
     private final ArrayList<Task> tasks;

@@ -8,9 +8,6 @@ import ru.dk.gdxGP.GameWorld.Interfaces.LevelElement;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Task;
 
-/**
- * Created by DK on 25.04.2015.
- */
 public class TaskOnContact extends Task {
     private final LevelElement element1;
     private final LevelElement element2;

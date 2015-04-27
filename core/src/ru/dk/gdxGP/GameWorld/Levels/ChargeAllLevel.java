@@ -3,7 +3,7 @@ package ru.dk.gdxGP.GameWorld.Levels;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
-import ru.dk.gdxGP.GameWorld.Interfaces.*;
+import ru.dk.gdxGP.GameWorld.Interfaces.Actions.*;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Mission;
 import ru.dk.gdxGP.GameWorld.ParticleDef;
@@ -91,14 +91,11 @@ public class ChargeAllLevel extends Level {
                     @Override
                     public void proceed(Level level, float delta) {
                         level.interactAllWithAllParticles();
-                        //mainParticle.getBody().applyForceToCenter(10*Gdx.input.getAccelerometerY(),-10*Gdx.input.getAccelerometerX(),true);
-                        //level.processAccelerometer(1);
                     }
                 });
                 ChargeAllLevel.this.setLevelTapper(new LevelTapper() {
                     @Override
                     public void tapLevel(Level level, float x, float y) {
-                        //level.divideOnTap(mainParticle, 1, 0.05f, x, y, false, false, null);
                         level.moveOnTap(mainParticle,1f,x,y);
                     }
                 });
@@ -123,13 +120,6 @@ public class ChargeAllLevel extends Level {
                 NullTask task03=new NullTask();
                 task03.setMainTaskText("You failed! You must be more quickly!");
                 task03.setSecondaryTaskText("Tap 'back' button to exit");
-                /*
-                ChargeAllLevel.this.setLevelTapper(new LevelTapper() {
-                    @Override
-                    public void tapLevel(Level level, float x, float y) {
-                    }
-                });
-                */
                 mission.setCurrentTask(task03);
             }
         });
@@ -144,13 +134,6 @@ public class ChargeAllLevel extends Level {
                 NullTask task03=new NullTask();
                 task03.setMainTaskText("My congratulations! You've completed your first mission at "+MathUtils.round(subTask02.getTimeToFinish()/100)/10f+"sec before fail!");
                 task03.setSecondaryTaskText("Tap 'back' button to exit");
-                /*
-                ChargeAllLevel.this.setLevelTapper(new LevelTapper() {
-                    @Override
-                    public void tapLevel(Level level, float x, float y) {
-                    }
-                });
-                */
                 mission.addTask(task03);
             }
         });

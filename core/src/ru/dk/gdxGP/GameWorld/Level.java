@@ -9,6 +9,13 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Timer;
 import ru.dk.gdxGP.GameWorld.Interfaces.*;
+import ru.dk.gdxGP.GameWorld.Interfaces.Actions.ActionForNextStep;
+import ru.dk.gdxGP.GameWorld.Interfaces.Actions.CameraPositionChanger;
+import ru.dk.gdxGP.GameWorld.Interfaces.Actions.LevelProceeder;
+import ru.dk.gdxGP.GameWorld.Interfaces.Actions.LevelTapper;
+import ru.dk.gdxGP.GameWorld.Interfaces.Drawers.AfterRenderer;
+import ru.dk.gdxGP.GameWorld.Interfaces.Drawers.PreRenderer;
+import ru.dk.gdxGP.GameWorld.Templates.ActionForNextStepSet;
 import ru.dk.gdxGP.GameWorld.Templates.LevelProceederSet;
 import ru.dk.gdxGP.GameWorld.Templates.ParticleDrawerSet;
 import ru.dk.gdxGP.GameWorld.WorldElements.Border;
@@ -30,12 +37,6 @@ public abstract class Level extends Thread implements Runnable {
             "images/ParticleLiquid.png",
             "images/charge.png",
             "border01.png"
-    };
-    private final static ActionForNextStep moveAction = new ActionForNextStep() {
-        @Override
-        public void doSomethingOnStep(Level level) {
-            level.Move(16);
-        }
     };
     private final World world;
     private final ArrayList<Particle> particles;
@@ -100,7 +101,7 @@ public abstract class Level extends Thread implements Runnable {
         this.stepTimer.scheduleTask(new Timer.Task() {
             @Override
             public void run() {
-                Level.this.addAction(moveAction);
+                Level.this.addAction(ActionForNextStepSet.moveAction);
             }
         }, 0, 32 / 1000f);
         this.stepTimer.start();
@@ -370,14 +371,14 @@ public abstract class Level extends Thread implements Runnable {
 
     private synchronized boolean isMoveActionPresent() {
         synchronized (this.actions) {
-            return this.actions.contains(moveAction);
+            return this.actions.contains(ActionForNextStepSet.moveAction);
         }
     }
 
     protected synchronized final void addAction(ActionForNextStep action) {
         synchronized (this.actions) {
 
-            if (action == moveAction && isMoveActionPresent()) {
+            if (action == ActionForNextStepSet.moveAction && isMoveActionPresent()) {
                 return;
             }
             this.actions.add(action);
@@ -477,7 +478,7 @@ public abstract class Level extends Thread implements Runnable {
         this.stepTimer.scheduleTask(new Timer.Task() {
             @Override
             public void run() {
-                Level.this.addAction(moveAction);
+                Level.this.addAction(ActionForNextStepSet.moveAction);
             }
         }, 0, 32 / 1000f);
         this.currentMissionChecker.resume();
@@ -514,7 +515,6 @@ public abstract class Level extends Thread implements Runnable {
             try {
                 f1.moveParameters(f2, 0, deltaCharge, 0, new Vector2(0, 0));
             } catch (Particle.NullMassException e) {
-                //this.removeParticle(e.getParticle());
             }
     }
     public void chargeBetweenParticle(Particle f1, Particle f2, float chargingK){

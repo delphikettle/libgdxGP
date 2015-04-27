@@ -1,8 +1,5 @@
 package ru.dk.gdxGP.GameWorld;
 
-/**
- * Created by DK on 11.04.2015.
- */
 public class ParticleDef {
     public float minX, maxX, minY, maxY;
     public float minCharge = -1f, maxCharge = 1f;

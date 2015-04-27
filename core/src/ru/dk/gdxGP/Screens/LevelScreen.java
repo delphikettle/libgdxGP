@@ -77,10 +77,8 @@ public class LevelScreen implements Screen {
             this.particlesStage.draw();
         } catch (NullPointerException e) {
             this.particlesStage.getBatch().end();
-            System.out.println("Exception " + e.toString() + " in drawParticles");
         } catch (IndexOutOfBoundsException e) {
             this.particlesStage.getBatch().end();
-            System.out.println("Exception " + e.toString() + " in drawParticles");
         }
     }
 
@@ -89,7 +87,6 @@ public class LevelScreen implements Screen {
             this.bordersStage.draw();
         } catch (NullPointerException e) {
             this.bordersStage.getBatch().end();
-            System.out.println("Exception " + e.toString() + " in drawBorders");
         }
     }
 
@@ -98,7 +95,6 @@ public class LevelScreen implements Screen {
             this.othersStage.draw();
         } catch (NullPointerException e) {
             this.othersStage.getBatch().end();
-            System.out.println("Exception " + e.toString() + " in drawOthers");
         }
 
     }

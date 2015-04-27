@@ -26,134 +26,50 @@ logo
   index: -1
 
 textureAtlas3.png
-size: 1024,1024
+size: 1024,256
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 MinusCharge
   rotate: false
-  xy: 768, 348
+  xy: 512, 192
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 NullCharge
   rotate: false
-  xy: 868, 448
+  xy: 512, 128
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 ParticleLiquid
   rotate: false
-  xy: 0, 768
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
-ParticleSolid
-  rotate: false
-  xy: 0, 512
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
-ParticleSolid01
-  rotate: false
-  xy: 256, 768
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
-ParticleSolidFrame01
-  rotate: false
-  xy: 0, 256
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
-ParticleSolidFrame02
-  rotate: false
   xy: 0, 0
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
-ParticleSolidFrame03
-  rotate: false
-  xy: 256, 512
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
-ParticleSolidFrame04
-  rotate: false
-  xy: 512, 768
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
-ParticleSolidFrame05
-  rotate: false
-  xy: 768, 768
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
-ParticleSolidFrame06
-  rotate: false
-  xy: 256, 256
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
-ParticleSolidFrame07
-  rotate: false
-  xy: 256, 0
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
-ParticleSolidFrame08
-  rotate: false
-  xy: 512, 512
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 PlusCharge
   rotate: false
-  xy: 768, 284
+  xy: 576, 192
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-border01
-  rotate: false
-  xy: 768, 412
-  size: 100, 100
-  orig: 100, 100
-  offset: 0, 0
-  index: -1
 charge
   rotate: false
-  xy: 768, 512
+  xy: 256, 0
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
-charge_
+pixel
   rotate: false
-  xy: 512, 256
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
-circle
-  rotate: false
-  xy: 512, 0
-  size: 256, 256
-  orig: 256, 256
+  xy: 512, 127
+  size: 1, 1
+  orig: 1, 1
   offset: 0, 0
   index: -1
 

@@ -2,8 +2,8 @@ package ru.dk.gdxGP.GameWorld.Levels;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
+import ru.dk.gdxGP.GameWorld.Interfaces.Actions.*;
 import ru.dk.gdxGP.GameWorld.ParticleDef;
-import ru.dk.gdxGP.GameWorld.Interfaces.*;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Mission;
 import ru.dk.gdxGP.GameWorld.Task;
@@ -14,9 +14,6 @@ import ru.dk.gdxGP.GameWorld.Templates.PreRenderers.FadePreRenderer;
 import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
 import ru.dk.gdxGP.Screens.LevelScreen;
 
-/**
- * Created by DK on 19.04.2015.
- */
 public class ForcesTutorialLevel extends Level {
     private TimeTask task01, task02, task03, task04, task05, task06, task07;
     private TaskOnAction task08;

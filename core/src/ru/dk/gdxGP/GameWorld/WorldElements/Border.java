@@ -9,9 +9,6 @@ import ru.dk.gdxGP.AtlasLoader;
 import ru.dk.gdxGP.GameWorld.Interfaces.LevelElement;
 import ru.dk.gdxGP.GameWorld.Level;
 
-/**
- * Created by DK on 21.02.15.
- */
 public class Border extends Actor implements LevelElement{
     private final TextureRegion textureRegion;
     private Body body;
@@ -40,7 +37,7 @@ public class Border extends Actor implements LevelElement{
         fixtureDef.isSensor = false;
         body.createFixture(fixtureDef);
         body.setUserData(this);
-        this.textureRegion = AtlasLoader.getRegion("border01");
+        this.textureRegion = AtlasLoader.getRegion("pixel");
     }
 
     public Body getBody() {
@@ -60,10 +57,12 @@ public class Border extends Actor implements LevelElement{
             chainShape.getVertex(2, vector2);
             xMax = vector2.x;
             yMax = vector2.y;
+            batch.setColor(0.1f,1,0.5f,1f);
             batch.draw(textureRegion, xMin - 0.5f, yMin - 0.5f, xMax - xMin + 1, 0.5f);
             batch.draw(textureRegion, xMin - 0.5f, yMin - 0.5f, 0.5f, yMax - yMin + 1);
             batch.draw(textureRegion, xMin, yMax, xMax - xMin + 0.5f, 0.5f);
             batch.draw(textureRegion, xMax, yMin, 0.5f, yMax - yMin + 0.5f);
+            batch.setColor(parentAlpha);
         }
     }
 

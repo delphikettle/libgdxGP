@@ -1,11 +1,8 @@
 package ru.dk.gdxGP.GameWorld.Tasks;
 
-import ru.dk.gdxGP.GameWorld.Interfaces.CheckerForTask;
+import ru.dk.gdxGP.GameWorld.Interfaces.Actions.CheckerForTask;
 import ru.dk.gdxGP.GameWorld.Task;
 
-/**
- * Created by STUDENT_7 on 23.04.2015.
- */
 public class CustomTask extends Task {
     public CheckerForTask getChecker() {
         return checker;
