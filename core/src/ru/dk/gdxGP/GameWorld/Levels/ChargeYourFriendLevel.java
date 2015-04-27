@@ -74,6 +74,8 @@ public class ChargeYourFriendLevel extends Level {
         particleDef.maxMass=0.3f;
         particleDef.minCharge=-0.01f;
         particleDef.maxCharge=0.01f;
+        particleDef.minVY=particleDef.minVX=-1f;
+        particleDef.maxVY=particleDef.maxVX=1f;
         this.addRandomParticles(particleDef, 35);
 
         this.addParticle(mainParticle);
