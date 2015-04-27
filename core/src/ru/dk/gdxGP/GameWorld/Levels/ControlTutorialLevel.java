@@ -139,7 +139,7 @@ public class ControlTutorialLevel extends Level {
 
                     @Override
                     public void tapLevel(Level level, float x, float y) {
-                        level.divideOnTap(mainParticle, 10, 0.1f, x, y,true,true,null);
+                        level.divideOnTap(mainParticle, 10, 0.1f, x, y,null);
                         times++;
                         if (times >= 5) task04.setCompleted(true);
                     }

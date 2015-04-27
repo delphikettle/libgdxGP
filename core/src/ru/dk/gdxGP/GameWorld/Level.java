@@ -486,6 +486,10 @@ public abstract class Level extends Thread implements Runnable {
 
     //additional methods for management of the world and the particles
 
+    /**
+     *
+     * @param factor
+     */
     public void processAccelerometer(float factor) {
         float y = Gdx.input.getAccelerometerY();
         float x = Gdx.input.getAccelerometerX();
@@ -512,6 +516,14 @@ public abstract class Level extends Thread implements Runnable {
         f2.getBody().applyForceToCenter(buf.rotate(180), true);
         chargeBetweenParticle(f1,f2,d.len(),this.chargingK);
     }
+
+    /**
+     *
+     * @param f1
+     * @param f2
+     * @param d
+     * @param chargingK
+     */
     private void chargeBetweenParticle(Particle f1, Particle f2, float d, float chargingK){
         if(chargingK==0)return;
         float q1 = f1.getCharge(), q2 = f2.getCharge(), m1 = f1.getMass(), m2 = f2.getMass();
@@ -523,12 +535,22 @@ public abstract class Level extends Thread implements Runnable {
             } catch (Particle.NullMassException e) {
             }
     }
+
+    /**
+     *
+     * @param f1
+     * @param f2
+     * @param chargingK
+     */
     public void chargeBetweenParticle(Particle f1, Particle f2, float chargingK){
         d.set(f2.getBody().getPosition());
         d.add(-f1.getBody().getPosition().x, -f1.getBody().getPosition().y);
         chargeBetweenParticle(f1, f2,d.len(),chargingK);
     }
 
+    /**
+     *
+     */
     public void interactAllWithAllParticles() {
         for (int i = 0; i < particles.size(); i++) {
             Particle f1 = particles.get(i);
@@ -540,6 +562,11 @@ public abstract class Level extends Thread implements Runnable {
         }
     }
 
+    /**
+     * Proceeds the flowing of mass between two particles
+     * @param f1 first particle
+     * @param f2 second particle
+     */
     public void flowMass(final Particle f1, final Particle f2) {
         if(!(this.particles.contains(f1)&&this.particles.contains(f2)))
             return;
@@ -568,6 +595,13 @@ public abstract class Level extends Thread implements Runnable {
         });
     }
 
+    /**
+     * Must be used in {@link ru.dk.gdxGP.GameWorld.Interfaces.Actions.LevelTapper} for main particle moving
+     * @param particle particle that must be moved
+     * @param speed particle speed
+     * @param x x coordinate of a point particle must move to
+     * @param y y coordinate of a point particle must move to
+     */
     public void moveOnTap(final Particle particle,final float speed,  final float x, final float y){
         this.addAction(new ActionForNextStep() {
             @Override
@@ -580,7 +614,17 @@ public abstract class Level extends Thread implements Runnable {
             }
         });
     }
-    public void divideOnTap(final Particle particle, final float speed, final float piece, final float x, final float y, final boolean underGravity, final boolean underCoulomb, final ParticleSender particleSender) {
+
+    /**
+     * Must be used in {@link ru.dk.gdxGP.GameWorld.Interfaces.Actions.LevelTapper} for main particle division
+     * @param particle particle that must be divided
+     * @param speed
+     * @param piece a part of particle that must be divided
+     * @param x x coordinate of a point new particle must move to
+     * @param y y coordinate of a point new particle must move to
+     * @param particleSender object to which particle can be send
+     */
+    public void divideOnTap(final Particle particle, final float speed, final float piece, final float x, final float y,  final ParticleSender particleSender) {
         this.addAction(new ActionForNextStep() {
             @Override
             public void doSomethingOnStep(Level level) {
@@ -590,8 +634,6 @@ public abstract class Level extends Thread implements Runnable {
                 v.setLength(speed);
                 if(speed<0)v.rotate(180);
                 Particle newParticle = particle.divide(Level.this.getParticle(0).getMass() * piece, v.x, v.y);
-                newParticle.setUnderCoulomb(underCoulomb);
-                newParticle.setUnderGravity(underGravity);
                 level.addParticle(newParticle);
                 if(particleSender!=null)
                     particleSender.sendParticle(newParticle);
@@ -600,9 +642,21 @@ public abstract class Level extends Thread implements Runnable {
         });
     }
 
+    /**
+     * Must be used in{@link ru.dk.gdxGP.GameWorld.Interfaces.Actions.CameraPositionChanger} for smooth moving
+     * @param xTo target x position
+     * @param yTo target y position
+     * @param delay smooth of move
+     */
     public void moveCamera(float xTo, float yTo, float delay) {
         this.getStage().getCamera().position.set((delay * this.getStage().getCamera().position.x + xTo) / (delay + 1), (delay * this.getStage().getCamera().position.y + yTo) / (delay + 1), 0);
     }
+
+    /**
+     * Must be used in{@link ru.dk.gdxGP.GameWorld.Interfaces.Actions.CameraPositionChanger} for smooth zooming
+     * @param zoomTo target zoom
+     * @param delay smooth of zoom
+     */
     public void zoomCamera(float zoomTo, float delay){
         this.getStage().setCameraZoom((this.getStage().getZoom() * delay + zoomTo) / (delay+1));
     }
