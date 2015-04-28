@@ -378,6 +378,10 @@ public abstract class Level extends Thread implements Runnable {
         }
     }
 
+    /**
+     * Adds action to the queue of actions in level thread
+     * @param action action that must be added
+     */
     protected synchronized final void addAction(ActionForNextStep action) {
         synchronized (this.actions) {
 
@@ -464,17 +468,22 @@ public abstract class Level extends Thread implements Runnable {
         return this.currentMissionChecker.getMission();
     }
 
-    void contactParticles(final Particle f1, final Particle f2, Contact contact) {
+    public void contactParticles(final Particle f1, final Particle f2, Contact contact) {
         flowMass(f1, f2);
-
     }
 
+    /**
+     * Pauses level for a while
+     */
     public void pauseLevel() {
         this.isMove = false;
         this.stepTimer.stop();
         this.currentMissionChecker.pause();
     }
 
+    /**
+     * Resumes level
+     */
     public void resumeLevel() {
         this.isMove = true;
         this.stepTimer.start();
