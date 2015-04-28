@@ -14,7 +14,7 @@
             android:enabled="true" android:elegantTextHeight="true" android:textSize="64sp"
             android:textColor="#ff424242" android:alpha="255"
             android:focusableInTouchMode="false"
-            android:theme="@android:style/Theme.Holo.Light"/>
+            android:theme="@android:style/Theme.Material.Light"/>
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
             android:enabled="true" android:elegantTextHeight="true" android:textSize="64sp"
             android:textColor="#ff424242" android:alpha="255"
             android:focusableInTouchMode="false"
-            android:theme="@android:style/Theme.Holo.Light"/>
+            android:theme="@android:style/Theme.Material.Light"/>
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,5 +34,5 @@
             android:clickable="true" android:textStyle="normal|bold|italic" android:singleLine="false"
             android:enabled="true" android:elegantTextHeight="true" android:textSize="64sp"
             android:textColor="#ff424242" android:alpha="255" android:focusableInTouchMode="false"
-            android:theme="@android:style/Theme.Holo.Light"/>
+            android:theme="@android:style/Theme.Material.Light"/>
 </RelativeLayout>

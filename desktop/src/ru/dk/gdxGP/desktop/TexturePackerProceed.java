@@ -2,9 +2,7 @@ package ru.dk.gdxGP.desktop;
 
 import com.badlogic.gdx.tools.texturepacker.TexturePacker;
 
-/**
- * Created by DK on 27.04.2015.
- */
+
 public class TexturePackerProceed {
     public static void main(String[] arg) {
         System.out.println("starting");
