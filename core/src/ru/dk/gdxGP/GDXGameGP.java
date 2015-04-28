@@ -1,12 +1,7 @@
 package ru.dk.gdxGP;
 
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.input.GestureDetector;
-import com.badlogic.gdx.math.Vector2;
 import ru.dk.gdxGP.GameWorld.GameLevels;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.Screens.LevelScreen;
@@ -17,7 +12,6 @@ public class GDXGameGP extends Game implements ApplicationListener {
     public static GDXGameGP currentGame;
     public final InputMultiplexer inputMultiplexer;
     private String levelName;
-    private Music backgroundMusic;
 
     public GDXGameGP(String levelName) {
         this.levelName = levelName;
@@ -28,11 +22,12 @@ public class GDXGameGP extends Game implements ApplicationListener {
     @Override
     public void create() {
         this.setScreen(new LogoScreen(1));
-        this.backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/back01.mp3"));
-        this.backgroundMusic.setLooping(true);
-        this.backgroundMusic.play();
+        AudioPlayer.startPlayBackground();
     }
-
+private boolean ifBounceSoundMustBePlayed=false;
+    public void playBounceSound(){
+        this.ifBounceSoundMustBePlayed=true;
+    }
     @Override
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -40,6 +35,10 @@ public class GDXGameGP extends Game implements ApplicationListener {
         super.render();
         if ((getScreen() instanceof LogoScreen) && !((LogoScreen) getScreen()).isActive())
             startGame();
+        if(ifBounceSoundMustBePlayed){
+            ifBounceSoundMustBePlayed=!ifBounceSoundMustBePlayed;
+            AudioPlayer.playRandomBounce();
+        }
     }
 
     public void startGame() {
@@ -82,13 +81,13 @@ public class GDXGameGP extends Game implements ApplicationListener {
     @Override
     public void pause() {
         getScreen().pause();
-        this.backgroundMusic.pause();
+        AudioPlayer.pauseBackground();
     }
 
     @Override
     public void resume() {
         getScreen().resume();
-        this.backgroundMusic.play();
+        AudioPlayer.startPlayBackground();
     }
 
     @Override

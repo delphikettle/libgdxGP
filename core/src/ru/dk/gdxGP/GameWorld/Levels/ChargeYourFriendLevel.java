@@ -75,9 +75,9 @@ public class ChargeYourFriendLevel extends Level {
         particleDef.maxMass=0.3f;
         particleDef.minCharge=-0.01f;
         particleDef.maxCharge=0.01f;
-        particleDef.minVY=particleDef.minVX=-1f;
-        particleDef.maxVY=particleDef.maxVX=1f;
-        this.addRandomParticles(particleDef, 35);
+        particleDef.minVY=particleDef.minVX=-2f;
+        particleDef.maxVY=particleDef.maxVX=2f;
+        this.addRandomParticles(particleDef, 37);
 
         this.addParticle(mainParticle);
         this.addParticle(friendParticle);
@@ -119,7 +119,7 @@ public class ChargeYourFriendLevel extends Level {
                 mainParticle.setOperator(new ParticleOperator() {
                     @Override
                     public void operateParticle(Particle particle, float deltaTime) {
-                        particle.getLevel().moveCamera(MathUtils.clamp(mainParticle.getX(), mainParticle.getX() - 0.1f, mainParticle.getX() + 0.1f), MathUtils.clamp(mainParticle.getY(), mainParticle.getY() - 0.1f, mainParticle.getY() + 0.1f), 25);
+                        particle.getLevel().moveCamera(MathUtils.clamp(mainParticle.getX(), mainParticle.getX() - 0.2f, mainParticle.getX() + 0.2f), MathUtils.clamp(mainParticle.getY(), mainParticle.getY() - 0.2f, mainParticle.getY() + 0.2f), 25);
                     }
                 });
                 ChargeYourFriendLevel.this.setCameraPositionChanger(new CameraPositionChanger() {
@@ -156,7 +156,7 @@ public class ChargeYourFriendLevel extends Level {
         subTask02.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
-                ChargeYourFriendLevel.this.setPreRenderer(new FadePreRenderer(new Color(0, 1, 0, 1), new Color(1, 1, 0, 1), 20));
+                ChargeYourFriendLevel.this.setPreRenderer(new FadePreRenderer(new Color(1, 0, 0, 1), new Color(0, 0, 1, 1), 20));
                 particleWithCharge.setDrawer(new ParticleDrawer() {
                     @Override
                     public void drawParticle(Particle particle, Batch batch, Color parentColor) {

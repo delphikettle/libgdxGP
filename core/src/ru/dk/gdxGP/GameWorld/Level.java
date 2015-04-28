@@ -8,6 +8,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Timer;
+import ru.dk.gdxGP.AudioPlayer;
+import ru.dk.gdxGP.GDXGameGP;
 import ru.dk.gdxGP.GameWorld.Interfaces.*;
 import ru.dk.gdxGP.GameWorld.Interfaces.Actions.ActionForNextStep;
 import ru.dk.gdxGP.GameWorld.Interfaces.Actions.CameraPositionChanger;
@@ -66,6 +68,12 @@ public abstract class Level extends Thread implements Runnable {
     public final ContactMultiListener multiListener;
     private Vector2 buf = new Vector2(), d = new Vector2();
 
+    public int getActionsCount(){
+        return actions.size();
+    }
+    public int getParticlesCount(){
+        return particles.size();
+    }
     protected Level() {
         this.world = new World(new Vector2(0.0f, 0.0f), true);
         this.multiListener=new ContactMultiListener();
@@ -76,6 +84,7 @@ public abstract class Level extends Thread implements Runnable {
 
             @Override
             public void beginContact(Contact contact) {
+                GDXGameGP.currentGame.playBounceSound();
             }
             @Override
             public void preSolve(Contact contact, Manifold oldManifold) {
@@ -300,7 +309,7 @@ public abstract class Level extends Thread implements Runnable {
                 getXMin(), getYMin()
         });
 
-        this.addBorder(new Border(this,this.getWorld(), 0, 0, shape, true));
+        this.addBorder(new Border(this,this.getWorld(), 0, 0, shape));
     }
 
     public final void tap(float x, float y) {

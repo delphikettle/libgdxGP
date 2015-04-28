@@ -12,10 +12,9 @@ import ru.dk.gdxGP.GameWorld.Level;
 public class Border extends Actor implements LevelElement{
     private final TextureRegion textureRegion;
     private Body body;
-    private boolean contour;
     private final Level level;
 
-    public Border( Level level,World world, int x, int y, Shape shape, boolean contour) {
+    public Border(Level level,World world, int x, int y, Shape shape) {
         this.level = level;
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.StaticBody;
@@ -31,7 +30,6 @@ public class Border extends Actor implements LevelElement{
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.friction = 1.0f;
         fixtureDef.shape = shape;
-        this.contour = (contour && shape instanceof ChainShape);
         fixtureDef.density = 1.0f;
         fixtureDef.restitution = 1.0f;
         fixtureDef.isSensor = false;
@@ -47,23 +45,21 @@ public class Border extends Actor implements LevelElement{
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if (this.contour) {
-            ChainShape chainShape = (ChainShape) this.body.getFixtureList().get(0).getShape();
-            float xMin, yMin, xMax, yMax;
-            Vector2 vector2 = new Vector2();
-            chainShape.getVertex(0, vector2);
-            xMin = vector2.x;
-            yMin = vector2.y;
-            chainShape.getVertex(2, vector2);
-            xMax = vector2.x;
-            yMax = vector2.y;
-            batch.setColor(0.1f,1,0.5f,1f);
-            batch.draw(textureRegion, xMin - 0.5f, yMin - 0.5f, xMax - xMin + 1, 0.5f);
-            batch.draw(textureRegion, xMin - 0.5f, yMin - 0.5f, 0.5f, yMax - yMin + 1);
-            batch.draw(textureRegion, xMin, yMax, xMax - xMin + 0.5f, 0.5f);
-            batch.draw(textureRegion, xMax, yMin, 0.5f, yMax - yMin + 0.5f);
-            batch.setColor(parentAlpha);
-        }
+        ChainShape chainShape = (ChainShape) this.body.getFixtureList().get(0).getShape();
+        float xMin, yMin, xMax, yMax;
+        Vector2 vector2 = new Vector2();
+        chainShape.getVertex(0, vector2);
+        xMin = vector2.x;
+        yMin = vector2.y;
+        chainShape.getVertex(2, vector2);
+        xMax = vector2.x;
+        yMax = vector2.y;
+        batch.setColor(0.1f,1,0.5f,1f);
+        batch.draw(textureRegion, xMin - 0.5f, yMin - 0.5f, xMax - xMin + 1, 0.5f);
+        batch.draw(textureRegion, xMin - 0.5f, yMin - 0.5f, 0.5f, yMax - yMin + 1);
+        batch.draw(textureRegion, xMin, yMax, xMax - xMin + 0.5f, 0.5f);
+        batch.draw(textureRegion, xMax, yMin, 0.5f, yMax - yMin + 0.5f);
+        batch.setColor(parentAlpha);
     }
 
     @Override

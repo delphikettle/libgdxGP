@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.MathUtils;
@@ -138,6 +139,12 @@ public class LevelScreen implements GestureDetector.GestureListener, InputProces
         GDXGameGP.currentGame.inputMultiplexer.addProcessor(new GestureDetector(this));
     }
 
+    private BitmapFont bitmapFont=new BitmapFont();
+    private SpriteBatch fontBatch=new SpriteBatch();
+    {
+        bitmapFont.setColor(new Color(1,1,1,1));
+        bitmapFont.setScale(1);
+    }
     @Override
     public void render(float delta) {
         this.camera.zoom = zoom;
@@ -156,6 +163,9 @@ public class LevelScreen implements GestureDetector.GestureListener, InputProces
         this.camera.position.set((coordsDelay * camera.position.x + xTo) / (coordsDelay + 1), (coordsDelay * camera.position.y + yTo) / (coordsDelay + 1), 0);
         //box2DDebugRenderer.render(this.level.getWorld(), camera.combined);
         this.setCameraZoom((this.getZoom() * cameraDelay + MathUtils.clamp(this.getZoom(),zoomMin,zoomMax)) / (cameraDelay+1));
+        this.fontBatch.begin();
+        bitmapFont.draw(this.fontBatch,"FPS:"+Gdx.graphics.getFramesPerSecond()+"; actions count:"+this.level.getActionsCount()+";"+" particles count:"+this.level.getParticlesCount()+";",0,Gdx.graphics.getHeight()-10);
+        this.fontBatch.end();
     }
     private float xMin,xMax,yMin,yMax,zoomMin=0.1f,zoomMax=2f,coordsDelay=25,cameraDelay=25;
 
