@@ -9,12 +9,12 @@ import ru.dk.gdxGP.AtlasLoader;
 import ru.dk.gdxGP.GameWorld.Interfaces.LevelElement;
 import ru.dk.gdxGP.GameWorld.Level;
 
-public class Border extends Actor implements LevelElement{
+public class Border extends Actor implements LevelElement {
     private final TextureRegion textureRegion;
-    private Body body;
     private final Level level;
+    private Body body;
 
-    public Border(Level level,World world, int x, int y, Shape shape) {
+    public Border(Level level, World world, int x, int y, Shape shape) {
         this.level = level;
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.StaticBody;
@@ -54,7 +54,7 @@ public class Border extends Actor implements LevelElement{
         chainShape.getVertex(2, vector2);
         xMax = vector2.x;
         yMax = vector2.y;
-        batch.setColor(0.1f,1,0.5f,1f);
+        batch.setColor(0.1f, 1, 0.5f, 1f);
         batch.draw(textureRegion, xMin - 0.5f, yMin - 0.5f, xMax - xMin + 1, 0.5f);
         batch.draw(textureRegion, xMin - 0.5f, yMin - 0.5f, 0.5f, yMax - yMin + 1);
         batch.draw(textureRegion, xMin, yMax, xMax - xMin + 0.5f, 0.5f);

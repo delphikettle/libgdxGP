@@ -12,6 +12,7 @@ public class GDXGameGP extends Game implements ApplicationListener {
     public static GDXGameGP currentGame;
     public final InputMultiplexer inputMultiplexer;
     private String levelName;
+    private boolean ifBounceSoundMustBePlayed = false;
 
     public GDXGameGP(String levelName) {
         this.levelName = levelName;
@@ -24,10 +25,11 @@ public class GDXGameGP extends Game implements ApplicationListener {
         this.setScreen(new LogoScreen(1));
         AudioPlayer.startPlayBackground();
     }
-private boolean ifBounceSoundMustBePlayed=false;
-    public void playBounceSound(){
-        this.ifBounceSoundMustBePlayed=true;
+
+    public void playBounceSound() {
+        this.ifBounceSoundMustBePlayed = true;
     }
+
     @Override
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -35,8 +37,8 @@ private boolean ifBounceSoundMustBePlayed=false;
         super.render();
         if ((getScreen() instanceof LogoScreen) && !((LogoScreen) getScreen()).isActive())
             startGame();
-        if(ifBounceSoundMustBePlayed){
-            ifBounceSoundMustBePlayed=!ifBounceSoundMustBePlayed;
+        if (ifBounceSoundMustBePlayed) {
+            ifBounceSoundMustBePlayed = !ifBounceSoundMustBePlayed;
             AudioPlayer.playRandomBounce();
         }
     }

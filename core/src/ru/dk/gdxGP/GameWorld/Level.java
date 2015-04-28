@@ -8,15 +8,14 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Timer;
-import ru.dk.gdxGP.AudioPlayer;
 import ru.dk.gdxGP.GDXGameGP;
-import ru.dk.gdxGP.GameWorld.Interfaces.*;
 import ru.dk.gdxGP.GameWorld.Interfaces.Actions.ActionForNextStep;
 import ru.dk.gdxGP.GameWorld.Interfaces.Actions.CameraPositionChanger;
 import ru.dk.gdxGP.GameWorld.Interfaces.Actions.LevelProceeder;
 import ru.dk.gdxGP.GameWorld.Interfaces.Actions.LevelTapper;
 import ru.dk.gdxGP.GameWorld.Interfaces.Drawers.AfterRenderer;
 import ru.dk.gdxGP.GameWorld.Interfaces.Drawers.PreRenderer;
+import ru.dk.gdxGP.GameWorld.Interfaces.ParticleSender;
 import ru.dk.gdxGP.GameWorld.Templates.ActionForNextStepSet;
 import ru.dk.gdxGP.GameWorld.Templates.LevelProceederSet;
 import ru.dk.gdxGP.GameWorld.Templates.ParticleDrawerSet;
@@ -30,16 +29,7 @@ import java.util.List;
 
 
 public abstract class Level extends Thread implements Runnable {
-    protected static final String[] standardAssetsPaths = new String[]{
-            "images/PlusCharge.png",
-            "images/NullCharge.png",
-            "images/MinusCharge.png",
-            "images/ParticleSolid01.png",
-            "images/ParticleSolid.png",
-            "images/ParticleLiquid.png",
-            "images/charge.png",
-            "border01.png"
-    };
+    public final ContactMultiListener multiListener;
     private final World world;
     private final ArrayList<Particle> particles;
     private final ArrayList<Border> borders;
@@ -65,18 +55,11 @@ public abstract class Level extends Thread implements Runnable {
     private LevelTapper levelTapper;
     private CameraPositionChanger cameraPositionChanger;
     private LevelProceeder levelProceeder = LevelProceederSet.noneProceed;
-    public final ContactMultiListener multiListener;
     private Vector2 buf = new Vector2(), d = new Vector2();
 
-    public int getActionsCount(){
-        return actions.size();
-    }
-    public int getParticlesCount(){
-        return particles.size();
-    }
     protected Level() {
         this.world = new World(new Vector2(0.0f, 0.0f), true);
-        this.multiListener=new ContactMultiListener();
+        this.multiListener = new ContactMultiListener();
         this.multiListener.addContactListener(new ContactListener() {
             @Override
             public void endContact(Contact contact) {
@@ -86,6 +69,7 @@ public abstract class Level extends Thread implements Runnable {
             public void beginContact(Contact contact) {
                 GDXGameGP.currentGame.playBounceSound();
             }
+
             @Override
             public void preSolve(Contact contact, Manifold oldManifold) {
                 if (contact.getFixtureA().getBody().getUserData() instanceof Particle && contact.getFixtureB().getBody().getUserData() instanceof Particle) {
@@ -93,6 +77,7 @@ public abstract class Level extends Thread implements Runnable {
                     contactParticles(f1, f2, contact);
                 }
             }
+
             @Override
             public void postSolve(Contact contact, ContactImpulse impulse) {
             }
@@ -114,6 +99,14 @@ public abstract class Level extends Thread implements Runnable {
             }
         }, 0, 32 / 1000f);
         this.stepTimer.start();
+    }
+
+    public int getActionsCount() {
+        return actions.size();
+    }
+
+    public int getParticlesCount() {
+        return particles.size();
     }
 
     public AfterRenderer getAfterRenderer() {
@@ -291,7 +284,8 @@ public abstract class Level extends Thread implements Runnable {
 
     protected abstract void setParticles();
 
-    public void setOtherElements(){}
+    public void setOtherElements() {
+    }
 
     protected abstract Mission createMission();
 
@@ -309,7 +303,7 @@ public abstract class Level extends Thread implements Runnable {
                 getXMin(), getYMin()
         });
 
-        this.addBorder(new Border(this,this.getWorld(), 0, 0, shape));
+        this.addBorder(new Border(this, this.getWorld(), 0, 0, shape));
     }
 
     public final void tap(float x, float y) {
@@ -496,8 +490,9 @@ public abstract class Level extends Thread implements Runnable {
     //additional methods for management of the world and the particles
 
     /**
+     * Proceeds world gravity changing accordingly to accelerometer
      *
-     * @param factor
+     * @param factor factor of accelerometer acceleration
      */
     public void processAccelerometer(float factor) {
         float y = Gdx.input.getAccelerometerY();
@@ -510,9 +505,10 @@ public abstract class Level extends Thread implements Runnable {
     }
 
     /**
+     * Proceeds interact between two particles
      *
-     * @param f1
-     * @param f2
+     * @param f1 first particle
+     * @param f2 second particle
      */
     public void interactionBetweenParticles(Particle f1, Particle f2) {
         d.set(f2.getBody().getPosition());
@@ -523,20 +519,21 @@ public abstract class Level extends Thread implements Runnable {
         if (F < 0) buf.rotate(180);
         f1.getBody().applyForceToCenter(buf, true);
         f2.getBody().applyForceToCenter(buf.rotate(180), true);
-        chargeBetweenParticle(f1,f2,d.len(),this.chargingK);
+        chargeBetweenParticle(f1, f2, d.len(), this.chargingK);
     }
 
     /**
+     * Proceeds charge changing between two particles
      *
-     * @param f1
-     * @param f2
-     * @param d
-     * @param chargingK
+     * @param f1        first particle
+     * @param f2        second particle
+     * @param d         distance between particles
+     * @param chargingK charging factor, usually equals to the level's chargingK
      */
-    private void chargeBetweenParticle(Particle f1, Particle f2, float d, float chargingK){
-        if(chargingK==0)return;
+    private void chargeBetweenParticle(Particle f1, Particle f2, float d, float chargingK) {
+        if (chargingK == 0) return;
         float q1 = f1.getCharge(), q2 = f2.getCharge(), m1 = f1.getMass(), m2 = f2.getMass();
-        float deltaCharge = chargingK * (((q1 * m1 + q2 * m2) / (m1 + m2) + 1024 * q2) / 1025 - q2)*0.025f / (d * d);
+        float deltaCharge = chargingK * (((q1 * m1 + q2 * m2) / (m1 + m2) + 1024 * q2) / 1025 - q2) * 0.025f / (d * d);
 
         if (!Float.isNaN(deltaCharge) && !Float.isInfinite(deltaCharge))
             try {
@@ -546,19 +543,20 @@ public abstract class Level extends Thread implements Runnable {
     }
 
     /**
+     * Proceeds charge changing between two particles
      *
-     * @param f1
-     * @param f2
-     * @param chargingK
+     * @param f1        first particle
+     * @param f2        second particle
+     * @param chargingK charging factor, usually equals to the level's chargingK
      */
-    public void chargeBetweenParticle(Particle f1, Particle f2, float chargingK){
+    public void chargeBetweenParticle(Particle f1, Particle f2, float chargingK) {
         d.set(f2.getBody().getPosition());
         d.add(-f1.getBody().getPosition().x, -f1.getBody().getPosition().y);
-        chargeBetweenParticle(f1, f2,d.len(),chargingK);
+        chargeBetweenParticle(f1, f2, d.len(), chargingK);
     }
 
     /**
-     *
+     * Proceeds interacts all particles between others
      */
     public void interactAllWithAllParticles() {
         for (int i = 0; i < particles.size(); i++) {
@@ -573,13 +571,14 @@ public abstract class Level extends Thread implements Runnable {
 
     /**
      * Proceeds the flowing of mass between two particles
+     *
      * @param f1 first particle
      * @param f2 second particle
      */
     public void flowMass(final Particle f1, final Particle f2) {
-        if(!(this.particles.contains(f1)&&this.particles.contains(f2)))
+        if (!(this.particles.contains(f1) && this.particles.contains(f2)))
             return;
-        if(this.massFlowingK==0)return;
+        if (this.massFlowingK == 0) return;
         this.addAction(new ActionForNextStep() {
             @Override
             public void doSomethingOnStep(Level level) {
@@ -588,7 +587,7 @@ public abstract class Level extends Thread implements Runnable {
                     from = f2;
                     to = f1;
                 }
-                float deltaMass = (float) (Level.this.massFlowingK * (((from.getMass() + to.getMass()) / 2 + 1024 * from.getMass()) / 1025 - from.getMass()) *0.005f / (Math.pow((from.getRadius()+to.getRadius()),2)));
+                float deltaMass = (float) (Level.this.massFlowingK * (((from.getMass() + to.getMass()) / 2 + 1024 * from.getMass()) / 1025 - from.getMass()) * 0.005f / (Math.pow((from.getRadius() + to.getRadius()), 2)));
                 try {
                     from.moveParameters(to, deltaMass, 0, 0, new Vector2(0, 0));
                 } catch (final Particle.NullMassException e) {
@@ -606,12 +605,13 @@ public abstract class Level extends Thread implements Runnable {
 
     /**
      * Must be used in {@link ru.dk.gdxGP.GameWorld.Interfaces.Actions.LevelTapper} for main particle moving
+     *
      * @param particle particle that must be moved
-     * @param speed particle speed
-     * @param x x coordinate of a point particle must move to
-     * @param y y coordinate of a point particle must move to
+     * @param speed    particle speed
+     * @param x        x coordinate of a point particle must move to
+     * @param y        y coordinate of a point particle must move to
      */
-    public void moveOnTap(final Particle particle,final float speed,  final float x, final float y){
+    public void moveOnTap(final Particle particle, final float speed, final float x, final float y) {
         this.addAction(new ActionForNextStep() {
             @Override
             public void doSomethingOnStep(Level level) {
@@ -619,21 +619,22 @@ public abstract class Level extends Thread implements Runnable {
                 v.rotate(180);
                 v.add(x, y);
                 v.setLength(speed);
-                particle.getBody().applyLinearImpulse(v.x,v.y,particle.getMassCenter().x,particle.getMassCenter().y,true);
+                particle.getBody().applyLinearImpulse(v.x, v.y, particle.getMassCenter().x, particle.getMassCenter().y, true);
             }
         });
     }
 
     /**
      * Must be used in {@link ru.dk.gdxGP.GameWorld.Interfaces.Actions.LevelTapper} for main particle division
-     * @param particle particle that must be divided
-     * @param speed
-     * @param piece a part of particle that must be divided
-     * @param x x coordinate of a point new particle must move to
-     * @param y y coordinate of a point new particle must move to
+     *
+     * @param particle       particle that must be divided
+     * @param speed          speed of the new particle
+     * @param piece          a part of particle that must be divided
+     * @param x              x coordinate of a point new particle must move to
+     * @param y              y coordinate of a point new particle must move to
      * @param particleSender object to which particle can be send
      */
-    public void divideOnTap(final Particle particle, final float speed, final float piece, final float x, final float y,  final ParticleSender particleSender) {
+    public void divideOnTap(final Particle particle, final float speed, final float piece, final float x, final float y, final ParticleSender particleSender) {
         this.addAction(new ActionForNextStep() {
             @Override
             public void doSomethingOnStep(Level level) {
@@ -641,10 +642,10 @@ public abstract class Level extends Thread implements Runnable {
                 v.rotate(180);
                 v.add(x, y);
                 v.setLength(speed);
-                if(speed<0)v.rotate(180);
+                if (speed < 0) v.rotate(180);
                 Particle newParticle = particle.divide(Level.this.getParticle(0).getMass() * piece, v.x, v.y);
                 level.addParticle(newParticle);
-                if(particleSender!=null)
+                if (particleSender != null)
                     particleSender.sendParticle(newParticle);
 
             }
@@ -653,8 +654,9 @@ public abstract class Level extends Thread implements Runnable {
 
     /**
      * Must be used in{@link ru.dk.gdxGP.GameWorld.Interfaces.Actions.CameraPositionChanger} for smooth moving
-     * @param xTo target x position
-     * @param yTo target y position
+     *
+     * @param xTo   target x position
+     * @param yTo   target y position
      * @param delay smooth of move
      */
     public void moveCamera(float xTo, float yTo, float delay) {
@@ -663,19 +665,21 @@ public abstract class Level extends Thread implements Runnable {
 
     /**
      * Must be used in{@link ru.dk.gdxGP.GameWorld.Interfaces.Actions.CameraPositionChanger} for smooth zooming
+     *
      * @param zoomTo target zoom
-     * @param delay smooth of zoom
+     * @param delay  smooth of zoom
      */
-    public void zoomCamera(float zoomTo, float delay){
-        this.getStage().setCameraZoom((this.getStage().getZoom() * delay + zoomTo) / (delay+1));
+    public void zoomCamera(float zoomTo, float delay) {
+        this.getStage().setCameraZoom((this.getStage().getZoom() * delay + zoomTo) / (delay + 1));
     }
 
     //methods for generating
 
     /**
      * Adds particles generated by {@link #generateRandomParticle} method
+     *
      * @param particleDef definition of particle that must be generated
-     * @param count number of particles that must be generated
+     * @param count       number of particles that must be generated
      */
     public void addRandomParticles(final ParticleDef particleDef, final int count) {
         this.addAction(new ActionForNextStep() {
@@ -690,11 +694,12 @@ public abstract class Level extends Thread implements Runnable {
 
     /**
      * Generates and returns random particle from given ParticleDef
+     *
      * @param particleDef definition of particle that must be generated
      * @return generated {@link Particle}
      */
     public Particle generateRandomParticle(ParticleDef particleDef) {
-        Particle particle= new Particle(this, this.getWorld(),
+        Particle particle = new Particle(this, this.getWorld(),
                 MathUtils.random(particleDef.minX, particleDef.maxX),
                 MathUtils.random(particleDef.minY, particleDef.maxY),
                 MathUtils.random(particleDef.minVX, particleDef.maxVX), MathUtils.random(particleDef.minVY, particleDef.maxVY),

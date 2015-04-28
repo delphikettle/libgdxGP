@@ -9,14 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContactMultiListener implements ContactListener {
-    private final List<ContactListener> contactListeners=new ArrayList<ContactListener>();
-    public ContactMultiListener(){}
-    public void addContactListener(ContactListener contactListener){
+    private final List<ContactListener> contactListeners = new ArrayList<ContactListener>();
+
+    public ContactMultiListener() {
+    }
+
+    public void addContactListener(ContactListener contactListener) {
         contactListeners.add(contactListener);
     }
-    public void removeContactListener(ContactListener contactListener){
+
+    public void removeContactListener(ContactListener contactListener) {
         contactListeners.remove(contactListener);
     }
+
     @Override
     public void beginContact(Contact contact) {
         for (ContactListener contactListener : contactListeners) {

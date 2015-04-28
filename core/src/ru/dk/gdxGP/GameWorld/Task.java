@@ -13,8 +13,9 @@ public abstract class Task {
     protected Task() {
         this(true, "");
     }
-    protected Task(boolean once){
-        this(once,"");
+
+    protected Task(boolean once) {
+        this(once, "");
     }
 
     protected Task(boolean once, String title) {

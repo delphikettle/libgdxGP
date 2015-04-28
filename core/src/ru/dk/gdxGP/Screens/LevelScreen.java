@@ -20,7 +20,7 @@ import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.WorldElements.Border;
 import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
 
-public class LevelScreen implements GestureDetector.GestureListener, InputProcessor,Screen {
+public class LevelScreen implements GestureDetector.GestureListener, InputProcessor, Screen {
     private final Stage particlesStage;
     private final Stage bordersStage;
     private final Stage othersStage;
@@ -31,6 +31,13 @@ public class LevelScreen implements GestureDetector.GestureListener, InputProces
     private Color startColor;
     private float initialScale = 1;
     private Batch missionBatch = new SpriteBatch();
+    private BitmapFont bitmapFont = new BitmapFont();
+    private SpriteBatch fontBatch = new SpriteBatch();
+    {
+        bitmapFont.setColor(new Color(1, 1, 1, 1));
+        bitmapFont.setScale(1);
+    }
+    private float xMin, xMax, yMin, yMax, zoomMin = 0.1f, zoomMax = 2f, coordsDelay = 25, cameraDelay = 25;
 
     public LevelScreen(Level level, float w, float h) {
         this.level = level;
@@ -130,21 +137,15 @@ public class LevelScreen implements GestureDetector.GestureListener, InputProces
         this.bordersStage.getViewport().setCamera(camera);
         this.othersStage.getViewport().setCamera(camera);
         this.startColor = this.particlesStage.getBatch().getColor();
-        this.xMin=level.getXMin();
-        this.xMax=level.getXMax();
-        this.yMin=level.getYMin();
-        this.yMax=level.getYMax();
+        this.xMin = level.getXMin();
+        this.xMax = level.getXMax();
+        this.yMin = level.getYMin();
+        this.yMax = level.getYMax();
 
         GDXGameGP.currentGame.inputMultiplexer.addProcessor(this);
         GDXGameGP.currentGame.inputMultiplexer.addProcessor(new GestureDetector(this));
     }
 
-    private BitmapFont bitmapFont=new BitmapFont();
-    private SpriteBatch fontBatch=new SpriteBatch();
-    {
-        bitmapFont.setColor(new Color(1,1,1,1));
-        bitmapFont.setScale(1);
-    }
     @Override
     public void render(float delta) {
         this.camera.zoom = zoom;
@@ -158,16 +159,15 @@ public class LevelScreen implements GestureDetector.GestureListener, InputProces
         if (this.level.getMission() != null)
             this.level.getMission().render(missionBatch);
         missionBatch.end();
-        float xTo=MathUtils.clamp(camera.position.x,xMin,xMax),
-                yTo=MathUtils.clamp(camera.position.y,yMin,yMax);
+        float xTo = MathUtils.clamp(camera.position.x, xMin, xMax),
+                yTo = MathUtils.clamp(camera.position.y, yMin, yMax);
         this.camera.position.set((coordsDelay * camera.position.x + xTo) / (coordsDelay + 1), (coordsDelay * camera.position.y + yTo) / (coordsDelay + 1), 0);
         //box2DDebugRenderer.render(this.level.getWorld(), camera.combined);
-        this.setCameraZoom((this.getZoom() * cameraDelay + MathUtils.clamp(this.getZoom(),zoomMin,zoomMax)) / (cameraDelay+1));
+        this.setCameraZoom((this.getZoom() * cameraDelay + MathUtils.clamp(this.getZoom(), zoomMin, zoomMax)) / (cameraDelay + 1));
         this.fontBatch.begin();
-        bitmapFont.draw(this.fontBatch,"FPS:"+Gdx.graphics.getFramesPerSecond()+"; actions count:"+this.level.getActionsCount()+";"+" particles count:"+this.level.getParticlesCount()+";",0,Gdx.graphics.getHeight()-10);
+        bitmapFont.draw(this.fontBatch, "FPS:" + Gdx.graphics.getFramesPerSecond() + "; actions count:" + this.level.getActionsCount() + ";" + " particles count:" + this.level.getParticlesCount() + ";", 0, Gdx.graphics.getHeight() - 10);
         this.fontBatch.end();
     }
-    private float xMin,xMax,yMin,yMax,zoomMin=0.1f,zoomMax=2f,coordsDelay=25,cameraDelay=25;
 
     public float getCameraDelay() {
         return cameraDelay;
@@ -333,9 +333,10 @@ public class LevelScreen implements GestureDetector.GestureListener, InputProces
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         return false;
     }
+
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        float dx=-Gdx.input.getDeltaX(pointer),dy= Gdx.input.getDeltaY(pointer);
+        float dx = -Gdx.input.getDeltaX(pointer), dy = Gdx.input.getDeltaY(pointer);
         this.camera.position.add(dx * camera.viewportWidth / Gdx.graphics.getWidth() * zoom, dy * camera.viewportHeight / Gdx.graphics.getHeight() * zoom, 0);
         return false;
     }

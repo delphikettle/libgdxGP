@@ -9,6 +9,13 @@ import java.util.LinkedList;
 
 public class Mission extends Task {
     private final LinkedList<Task> taskList = new LinkedList<Task>();
+    private Task currentTask;
+    private MissionDrawer missionDrawer = MissionDrawerSet.standardDrawer;
+
+    public Mission(String title) {
+        super(true, title);
+        if (title.equals("Null")) this.addTask(new NullTask());
+    }
 
     public Task getCurrentTask() {
         return currentTask;
@@ -16,14 +23,6 @@ public class Mission extends Task {
 
     public void setCurrentTask(Task currentTask) {
         this.currentTask = currentTask;
-    }
-
-    private Task currentTask;
-    private MissionDrawer missionDrawer = MissionDrawerSet.standardDrawer;
-
-    public Mission(String title) {
-        super(true, title);
-        if (title.equals("Null")) this.addTask(new NullTask());
     }
 
     public void addTask(Task task) {

@@ -4,6 +4,12 @@ import ru.dk.gdxGP.GameWorld.Interfaces.Actions.CheckerForTask;
 import ru.dk.gdxGP.GameWorld.Task;
 
 public class CustomTask extends Task {
+    private CheckerForTask checker;
+
+    public CustomTask(CheckerForTask checker) {
+        this.checker = checker;
+    }
+
     public CheckerForTask getChecker() {
         return checker;
     }
@@ -12,10 +18,6 @@ public class CustomTask extends Task {
         this.checker = checker;
     }
 
-    private CheckerForTask checker;
-    public CustomTask(CheckerForTask checker){
-        this.checker=checker;
-    }
     @Override
     protected boolean check() {
         return checker.checkTask(this);

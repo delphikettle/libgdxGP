@@ -5,9 +5,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import ru.dk.gdxGP.GameWorld.Interfaces.LevelElement;
-import ru.dk.gdxGP.GameWorld.Interfaces.Drawers.ParticleDrawer;
 import ru.dk.gdxGP.GameWorld.Interfaces.Actions.ParticleOperator;
+import ru.dk.gdxGP.GameWorld.Interfaces.Drawers.ParticleDrawer;
+import ru.dk.gdxGP.GameWorld.Interfaces.LevelElement;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Templates.ParticleDrawerSet;
 import ru.dk.gdxGP.GameWorld.Templates.ParticleOperatorSet;
@@ -24,12 +24,8 @@ public class Particle extends Actor implements LevelElement {
         blankFixtureDef.shape = new CircleShape();
         blankFixtureDef.shape.setRadius(0.00001f);
     }
-    private final Body body;
-    @Override
-    public Level getLevel() {
-        return level;
-    }
 
+    private final Body body;
     private final Level level;
     private Condition condition;
     private ParticleDrawer drawer = null;
@@ -38,24 +34,7 @@ public class Particle extends Actor implements LevelElement {
     private Color color;
     private float density = 1;
     private float radius;
-
-    public boolean isUnderGravity() {
-        return underGravity;
-    }
-
-    public void setUnderGravity(boolean underGravity) {
-        this.underGravity = underGravity;
-    }
-
-    public boolean isUnderCoulomb() {
-        return underCoulomb;
-    }
-
-    public void setUnderCoulomb(boolean underCoulomb) {
-        this.underCoulomb = underCoulomb;
-    }
-
-    private boolean underGravity=false,underCoulomb=false;
+    private boolean underGravity = false, underCoulomb = false;
 
     public Particle(Level level, World world, float x, float y, float vx, float vy, float mass, float charge, float friction, float density, float restitution, Condition condition, Color color) {
         this.level = level;
@@ -93,8 +72,29 @@ public class Particle extends Actor implements LevelElement {
         this.color = color;
         this.body.resetMassData();
 
-        this.density=density;
-        this.radius=circleShape.getRadius();
+        this.density = density;
+        this.radius = circleShape.getRadius();
+    }
+
+    @Override
+    public Level getLevel() {
+        return level;
+    }
+
+    public boolean isUnderGravity() {
+        return underGravity;
+    }
+
+    public void setUnderGravity(boolean underGravity) {
+        this.underGravity = underGravity;
+    }
+
+    public boolean isUnderCoulomb() {
+        return underCoulomb;
+    }
+
+    public void setUnderCoulomb(boolean underCoulomb) {
+        this.underCoulomb = underCoulomb;
     }
 
     public float getMass() {
@@ -108,10 +108,12 @@ public class Particle extends Actor implements LevelElement {
         }
         return this.density;
     }
+
     public float getRadius() {
         try {
-            this.radius=this.body.getFixtureList().get(0).getShape().getRadius();
-        }catch (IndexOutOfBoundsException e){}
+            this.radius = this.body.getFixtureList().get(0).getShape().getRadius();
+        } catch (IndexOutOfBoundsException e) {
+        }
         return this.radius;
     }
 
@@ -209,11 +211,11 @@ public class Particle extends Actor implements LevelElement {
             if (mass == 0) {
                 to.charge += charge / to.getMass();
                 this.charge -= charge / this.getMass();
-                this.body.applyLinearImpulse(-velocity.x , -velocity.y , getMassCenter().x, getMassCenter().y, true);
+                this.body.applyLinearImpulse(-velocity.x, -velocity.y, getMassCenter().x, getMassCenter().y, true);
                 to.body.applyLinearImpulse(velocity.x, velocity.y, to.getMassCenter().x, to.getMassCenter().y, true);
                 if (density != 0) {
                     this.body.getFixtureList().get(0).setDensity(this.getDensity() - density / this.getMass());
-                    to.body.getFixtureList().get(0).setDensity(to.getDensity() + density/to.getMass());
+                    to.body.getFixtureList().get(0).setDensity(to.getDensity() + density / to.getMass());
                     this.recountRadius(this.getMass());
                     to.recountRadius(to.getMass());
                 }

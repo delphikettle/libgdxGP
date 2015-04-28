@@ -4,14 +4,14 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import ru.dk.gdxGP.GameWorld.Interfaces.Actions.*;
-import ru.dk.gdxGP.GameWorld.ParticleDef;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.Mission;
+import ru.dk.gdxGP.GameWorld.ParticleDef;
 import ru.dk.gdxGP.GameWorld.Task;
 import ru.dk.gdxGP.GameWorld.Tasks.NullTask;
 import ru.dk.gdxGP.GameWorld.Tasks.TaskOnAction;
-import ru.dk.gdxGP.GameWorld.Templates.ParticleDrawerSet;
 import ru.dk.gdxGP.GameWorld.Templates.LevelProceederSet;
+import ru.dk.gdxGP.GameWorld.Templates.ParticleDrawerSet;
 import ru.dk.gdxGP.GameWorld.Templates.PreRenderers.FadePreRenderer;
 import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
 import ru.dk.gdxGP.Screens.LevelScreen;
@@ -19,7 +19,7 @@ import ru.dk.gdxGP.Screens.LevelScreen;
 
 public class ControlTutorialLevel extends Level {
     private Particle mainParticle;
-    private TaskOnAction task01,task02, task04, task03;
+    private TaskOnAction task01, task02, task04, task03;
     private NullTask task05;
 
 
@@ -139,7 +139,7 @@ public class ControlTutorialLevel extends Level {
 
                     @Override
                     public void tapLevel(Level level, float x, float y) {
-                        level.divideOnTap(mainParticle, 10, 0.1f, x, y,null);
+                        level.divideOnTap(mainParticle, 10, 0.1f, x, y, null);
                         times++;
                         if (times >= 5) task04.setCompleted(true);
                     }

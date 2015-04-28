@@ -13,16 +13,15 @@ public class TimeTask extends Task {
     };
     private float time;
     private Timer timeTimer;
-
-    public float getTimeToFinish() {
-        return timeToFinish=timeTask.getExecuteTimeMillis() - System.nanoTime() / 1000000;
-    }
-
     private float timeToFinish;
 
     public TimeTask(float time) {
         super();
         this.time = time;
+    }
+
+    public float getTimeToFinish() {
+        return timeToFinish = timeTask.getExecuteTimeMillis() - System.nanoTime() / 1000000;
     }
 
     public void start() {
@@ -40,19 +39,20 @@ public class TimeTask extends Task {
 
     @Override
     public void pause() {
-        System.out.println("pausing "+this.timeToFinish);
+        System.out.println("pausing " + this.timeToFinish);
         updateTimeToFinish();
         timeTask.cancel();
         System.out.println("paused " + this.timeToFinish);
     }
 
-    public void updateTimeToFinish(){
-        if(timeTask.isScheduled())
+    public void updateTimeToFinish() {
+        if (timeTask.isScheduled())
             this.timeToFinish = timeTask.getExecuteTimeMillis() - System.nanoTime() / 1000000;
     }
+
     @Override
     public void resume() {
-        System.out.println("resuming "+this.timeToFinish);
+        System.out.println("resuming " + this.timeToFinish);
         timeTask.cancel();
         timeTimer.scheduleTask(timeTask, timeToFinish / 1000f);
         updateTimeToFinish();

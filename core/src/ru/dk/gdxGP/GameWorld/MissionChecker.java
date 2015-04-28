@@ -7,7 +7,6 @@ import com.badlogic.gdx.utils.Timer;
 public class MissionChecker extends Timer {
 
     private final ru.dk.gdxGP.GameWorld.Mission mission;
-    private long period;
     private final Timer.Task timerTask = new Timer.Task() {
         @Override
         public void run() {
@@ -16,6 +15,7 @@ public class MissionChecker extends Timer {
             }
         }
     };
+    private long period;
 
     public MissionChecker(ru.dk.gdxGP.GameWorld.Mission mission, long period) {
         this.mission = mission;
@@ -24,7 +24,7 @@ public class MissionChecker extends Timer {
     }
 
     private void scheduleTask() {
-        if(!timerTask.isScheduled())
+        if (!timerTask.isScheduled())
             schedule(timerTask, 0, this.period / 1000.0f);
     }
 
