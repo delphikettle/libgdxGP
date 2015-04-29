@@ -11,7 +11,9 @@ public final class AudioPlayer {
     private static Music backgroundMusic;
     private static ArrayList<Sound> bounceSounds;
 
-    private AudioPlayer(){}
+    private AudioPlayer() {
+    }
+
     static {
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/back01.mp3"));
         bounceSounds = new ArrayList<Sound>();
@@ -49,8 +51,7 @@ public final class AudioPlayer {
     public static void playRandomBounce() {
         try {
             int i = MathUtils.random(0, 3);
-            long id = bounceSounds.get(i).play();
-            bounceSounds.get(i).setVolume(id, 0.1f);
+            long id = bounceSounds.get(i).play(0.05f);
         } catch (Exception e) {
             e.printStackTrace();
         }

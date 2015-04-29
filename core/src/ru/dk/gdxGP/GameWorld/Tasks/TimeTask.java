@@ -39,10 +39,8 @@ public class TimeTask extends Task {
 
     @Override
     public void pause() {
-        System.out.println("pausing " + this.timeToFinish);
         updateTimeToFinish();
         timeTask.cancel();
-        System.out.println("paused " + this.timeToFinish);
     }
 
     public void updateTimeToFinish() {
@@ -52,10 +50,8 @@ public class TimeTask extends Task {
 
     @Override
     public void resume() {
-        System.out.println("resuming " + this.timeToFinish);
         timeTask.cancel();
         timeTimer.scheduleTask(timeTask, timeToFinish / 1000f);
         updateTimeToFinish();
-        System.out.println("resumed " + this.timeToFinish);
     }
 }

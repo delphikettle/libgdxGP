@@ -11,6 +11,26 @@ import ru.dk.gdxGP.GameWorld.Interfaces.Drawers.ParticleDrawer;
 import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
 
 public final class ParticleDrawerSet {
+    static final public ParticleDrawer solidDrawer = new ParticleDrawer() {
+        @Override
+        public void drawParticle(Particle particle, Batch batch, Color parentColor) {
+            baseParticleDrawer.drawParticle(particle, batch, parentColor);
+            chargeCloudDrawer.drawParticle(particle, batch, parentColor);
+            batch.setColor(0, 0, 0, 1f);
+            chargeDrawer.drawParticle(particle, batch, parentColor);
+            batch.setColor(parentColor);
+        }
+    };
+    public static final ParticleDrawer mainDrawer = new ParticleDrawer() {
+        @Override
+        public void drawParticle(Particle particle, Batch batch, Color parentColor) {
+            baseParticleDrawer.drawParticle(particle, batch, parentColor);
+            chargeCloudDrawer.drawParticle(particle, batch, parentColor);
+            batch.setColor(0, 1, 0, 1f);
+            chargeDrawer.drawParticle(particle, batch, parentColor);
+            batch.setColor(parentColor);
+        }
+    };
     private static final TextureRegion textureRegionParticleSolid;
     private static final TextureRegion textureRegionCharge;
     public static final ParticleDrawer chargeCloudDrawer = new ParticleDrawer() {
@@ -57,26 +77,6 @@ public final class ParticleDrawerSet {
             float r = particle.getRadius();
             batch.setColor(particle.getColor());
             batch.draw(particleSolidAnimation.getKeyFrame(stateTime, true), particle.getPosition().x - 1.0f * r, particle.getPosition().y - 1.0f * r, r, r, r * 2.0f, r * 2.0f, 1, 1, MathUtils.radiansToDegrees * particle.getBody().getAngle());
-        }
-    };
-    static final public ParticleDrawer solidDrawer = new ParticleDrawer() {
-        @Override
-        public void drawParticle(Particle particle, Batch batch, Color parentColor) {
-            baseParticleDrawer.drawParticle(particle, batch, parentColor);
-            chargeCloudDrawer.drawParticle(particle, batch, parentColor);
-            batch.setColor(0, 0, 0, 1f);
-            chargeDrawer.drawParticle(particle, batch, parentColor);
-            batch.setColor(parentColor);
-        }
-    };
-    public static final ParticleDrawer mainDrawer = new ParticleDrawer() {
-        @Override
-        public void drawParticle(Particle particle, Batch batch, Color parentColor) {
-            baseParticleDrawer.drawParticle(particle, batch, parentColor);
-            chargeCloudDrawer.drawParticle(particle, batch, parentColor);
-            batch.setColor(0, 1, 0, 1f);
-            chargeDrawer.drawParticle(particle, batch, parentColor);
-            batch.setColor(parentColor);
         }
     };
 

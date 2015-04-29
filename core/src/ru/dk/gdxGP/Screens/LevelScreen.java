@@ -33,10 +33,12 @@ public class LevelScreen implements GestureDetector.GestureListener, InputProces
     private Batch missionBatch = new SpriteBatch();
     private BitmapFont bitmapFont = new BitmapFont();
     private SpriteBatch fontBatch = new SpriteBatch();
+
     {
         bitmapFont.setColor(new Color(1, 1, 1, 1));
         bitmapFont.setScale(1);
     }
+
     private float xMin, xMax, yMin, yMax, zoomMin = 0.1f, zoomMax = 2f, coordsDelay = 25, cameraDelay = 25;
 
     public LevelScreen(Level level, float w, float h) {

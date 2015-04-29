@@ -24,6 +24,7 @@ public class GameLevels {
 
     /**
      * Returns the list of levels
+     *
      * @param sorted if levels must be sorted by names
      * @return {@link java.util.ArrayList} of String with levels' names
      */
@@ -43,6 +44,7 @@ public class GameLevels {
 
     /**
      * Return the instance of {@link ru.dk.gdxGP.GameWorld.Level} from given name
+     *
      * @param levelName name of the level that must be given
      * @return instance of level or null if level with given name is not exist
      */
@@ -59,7 +61,8 @@ public class GameLevels {
 
     /**
      * Return the class extends {@link ru.dk.gdxGP.GameWorld.Level} from given name
-     * @param levels list of levels' classes
+     *
+     * @param levels    list of levels' classes
      * @param levelName name of the level' class that must be given
      * @return class of level
      */

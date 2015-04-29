@@ -16,6 +16,7 @@ public class GDXGameGP extends Game implements ApplicationListener {
 
     /**
      * Creates game from given levelName
+     *
      * @param levelName string name of the level
      */
     public GDXGameGP(String levelName) {
@@ -54,7 +55,6 @@ public class GDXGameGP extends Game implements ApplicationListener {
     }
 
     private void startGame() {
-        System.out.println("starting game");
         final Level level = GameLevels.instantiateLevel(levelName);
         final LevelScreen levelScreen = new LevelScreen(level, 0.1f * Gdx.graphics.getWidth(), 0.1f * Gdx.graphics.getHeight());
         this.setScreen(new LoadingScreen((LogoScreen) screen, new LoadingScreen.LoaderForLoadingScreen() {

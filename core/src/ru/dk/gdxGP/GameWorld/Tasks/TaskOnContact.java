@@ -22,11 +22,9 @@ public class TaskOnContact extends Task {
         level.multiListener.addContactListener(new ContactListener() {
             @Override
             public void beginContact(Contact contact) {
-                System.out.println("contacted");
                 if ((contact.getFixtureA().getBody().getUserData() == element1 && contact.getFixtureB().getBody().getUserData() == element2)
                         || (contact.getFixtureA().getBody().getUserData() == element2 && contact.getFixtureB().getBody().getUserData() == element1)) {
                     contacted = true;
-                    System.out.println("contacted with");
                 }
             }
 

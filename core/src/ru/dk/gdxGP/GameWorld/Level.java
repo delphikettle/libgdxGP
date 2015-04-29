@@ -192,6 +192,7 @@ public abstract class Level extends Thread implements Runnable {
 
     /**
      * Loads level. Creates particles, borders etc. Must be called after creating level.
+     *
      * @param screen LevelScreen where level must be displayed
      */
     public final void load(final LevelScreen screen) {
@@ -271,7 +272,6 @@ public abstract class Level extends Thread implements Runnable {
     }
 
     private void setLoaded(float loaded) {
-        System.out.println(loaded);
         this.loaded = loaded;
     }
 
@@ -323,7 +323,6 @@ public abstract class Level extends Thread implements Runnable {
     }
 
     synchronized final public void removeParticle(Particle particle) {
-        System.out.println("removing particle");
         particles.remove(particle);
         this.world.destroyBody(particle.getBody());
         if (levelScreen != null)
@@ -375,6 +374,7 @@ public abstract class Level extends Thread implements Runnable {
 
     /**
      * Adds action to the queue of actions in level thread
+     *
      * @param action action that must be added
      */
     protected synchronized final void addAction(ActionForNextStep action) {
