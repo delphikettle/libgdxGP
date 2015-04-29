@@ -109,187 +109,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Level.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Level.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Level.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.862069" vertical-offset="4471" max-vertical-offset="11832">
-              <caret line="273" column="42" selection-start-line="273" selection-start-column="42" selection-end-line="273" selection-end-column="42" />
+            <state vertical-scroll-proportion="1.0029498" vertical-offset="306" max-vertical-offset="10761">
+              <caret line="38" column="28" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2737#2738#0" expanded="true" />
-                <element signature="e#2808#2809#0" expanded="true" />
-                <element signature="e#3917#4084#0" expanded="true" />
-                <element signature="e#4083#4084#0" expanded="true" />
-                <element signature="e#4174#4175#0" expanded="true" />
-                <element signature="e#4211#4212#0" expanded="true" />
-                <element signature="e#4249#4250#0" expanded="true" />
-                <element signature="e#4288#4289#0" expanded="true" />
-                <element signature="e#4335#4336#0" expanded="true" />
-                <element signature="e#4371#4372#0" expanded="true" />
-                <element signature="e#4436#4437#0" expanded="true" />
-                <element signature="e#4486#4487#0" expanded="true" />
-                <element signature="e#4529#4530#0" expanded="true" />
-                <element signature="e#4563#4564#0" expanded="true" />
-                <element signature="e#4622#4623#0" expanded="true" />
-                <element signature="e#4668#4669#0" expanded="true" />
-                <element signature="e#4711#4712#0" expanded="true" />
-                <element signature="e#4745#4746#0" expanded="true" />
-                <element signature="e#4804#4805#0" expanded="true" />
-                <element signature="e#4850#4851#0" expanded="true" />
-                <element signature="e#4913#4914#0" expanded="true" />
-                <element signature="e#4957#4958#0" expanded="true" />
-                <element signature="e#5161#5162#0" expanded="true" />
-                <element signature="e#5198#5199#0" expanded="true" />
-                <element signature="e#5266#5267#0" expanded="true" />
-                <element signature="e#5318#5319#0" expanded="true" />
-                <element signature="e#5926#5927#0" expanded="true" />
-                <element signature="e#5967#5968#0" expanded="true" />
-                <element signature="e#6001#6002#0" expanded="true" />
-                <element signature="e#6041#6042#0" expanded="true" />
-                <element signature="e#6078#6079#0" expanded="true" />
-                <element signature="e#6121#6122#0" expanded="true" />
-                <element signature="e#6317#6318#0" expanded="true" />
-                <element signature="e#6364#6365#0" expanded="true" />
-                <element signature="e#6616#9054#0" expanded="true" />
-                <element signature="e#8527#8799#0" expanded="true" />
-                <element signature="e#8798#8799#0" expanded="true" />
-                <element signature="e#9053#9054#0" expanded="true" />
-                <element signature="e#9123#9124#0" expanded="true" />
-                <element signature="e#9164#9165#0" expanded="true" />
-                <element signature="e#9196#9197#0" expanded="true" />
-                <element signature="e#9225#9226#0" expanded="true" />
+                <element signature="e#9269#9270#0" expanded="true" />
                 <element signature="e#9305#9306#0" expanded="true" />
-                <element signature="e#10111#10112#0" expanded="true" />
-                <element signature="e#10150#10151#0" expanded="true" />
-                <element signature="e#10181#10182#0" expanded="true" />
-                <element signature="e#10209#10210#0" expanded="true" />
-                <element signature="e#11151#11152#0" expanded="true" />
-                <element signature="e#11199#11200#0" expanded="true" />
-                <element signature="e#12872#12873#0" expanded="true" />
-                <element signature="e#12907#12908#0" expanded="true" />
-                <element signature="e#12962#12963#0" expanded="true" />
-                <element signature="e#13010#13011#0" expanded="true" />
-                <element signature="e#13046#13047#0" expanded="true" />
-                <element signature="e#13078#13079#0" expanded="true" />
-                <element signature="e#13114#13115#0" expanded="true" />
-                <element signature="e#13146#13147#0" expanded="true" />
-                <element signature="e#13182#13183#0" expanded="true" />
-                <element signature="e#13214#13215#0" expanded="true" />
-                <element signature="e#13250#13251#0" expanded="true" />
-                <element signature="e#13282#13283#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TaskOnContact.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Tasks/TaskOnContact.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="177" max-vertical-offset="884">
-              <caret line="23" column="55" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="55" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TimeTask.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Tasks/TimeTask.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="377" max-vertical-offset="969">
-              <caret line="54" column="29" selection-start-line="54" selection-start-column="29" selection-end-line="54" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LevelListActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/android/src/ru/dk/gdxGP/android/LevelListActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
-              <caret line="18" column="53" selection-start-line="18" selection-start-column="53" selection-end-line="18" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TexturePackerProceed.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/desktop/src/ru/dk/gdxGP/desktop/TexturePackerProceed.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
-              <caret line="6" column="43" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AudioPlayer.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/AudioPlayer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.10364146" vertical-offset="235" max-vertical-offset="969">
-              <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainMenuActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/android/src/ru/dk/gdxGP/android/MainMenuActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="190" max-vertical-offset="782">
-              <caret line="40" column="16" selection-start-line="40" selection-start-column="16" selection-end-line="40" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GDXGameGP.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GDXGameGP.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="670" max-vertical-offset="2074">
-              <caret line="56" column="30" selection-start-line="56" selection-start-column="30" selection-end-line="56" selection-end-column="30" />
-              <folding>
-                <element signature="e#1032#1033#0" expanded="true" />
-                <element signature="e#1085#1086#0" expanded="true" />
-                <element signature="e#1977#1978#0" expanded="true" />
-                <element signature="e#2032#2033#0" expanded="true" />
-                <element signature="e#2285#2286#0" expanded="true" />
-                <element signature="e#2341#2342#0" expanded="true" />
-                <element signature="e#2417#2418#0" expanded="true" />
-                <element signature="e#2460#2461#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameLevels.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/GameLevels.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="1428">
-              <caret line="77" column="9" selection-start-line="77" selection-start-column="9" selection-end-line="77" selection-end-column="9" />
-              <folding>
-                <element signature="e#209#239#0" expanded="true" />
-                <element signature="e#1038#1046#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Mission.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Mission.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="874" max-vertical-offset="1462">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-              <folding>
-                <element signature="e#651#652#0" expanded="true" />
-                <element signature="e#685#686#0" expanded="true" />
-                <element signature="e#737#738#0" expanded="true" />
-                <element signature="e#783#784#0" expanded="true" />
-                <element signature="e#821#822#0" expanded="true" />
-                <element signature="e#860#861#0" expanded="true" />
-                <element signature="e#1299#1300#0" expanded="true" />
-                <element signature="e#1349#1350#0" expanded="true" />
-                <element signature="e#2073#2074#0" expanded="true" />
-                <element signature="e#2132#2133#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -345,12 +173,12 @@
         <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/GameLevels.java" />
         <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Mission.java" />
         <option value="$PROJECT_DIR$/android/src/ru/dk/gdxGP/android/LevelListActivity.java" />
-        <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GDXGameGP.java" />
         <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Level.java" />
         <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Tasks/TaskOnContact.java" />
         <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Tasks/TimeTask.java" />
         <option value="$PROJECT_DIR$/desktop/src/ru/dk/gdxGP/desktop/TexturePackerProceed.java" />
         <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/AudioPlayer.java" />
+        <option value="$PROJECT_DIR$/core/src/ru/dk/gdxGP/GDXGameGP.java" />
       </list>
     </option>
   </component>
@@ -361,8 +189,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="2064" />
-    <option name="height" value="1128" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -427,8 +255,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -443,7 +269,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="libgdxGP_15_04_28" />
+              <option name="myItemId" value="libgdxGP_15_04_29" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -453,7 +279,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="libgdxGP_15_04_28" />
+              <option name="myItemId" value="libgdxGP_15_04_29" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -467,29 +293,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="libgdxGP_15_04_28" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="desktop" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="desktop" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gdxGP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="libgdxGP_15_04_28" />
+              <option name="myItemId" value="libgdxGP_15_04_29" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -500,6 +304,10 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="desktop" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -507,7 +315,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="libgdxGP_15_04_28" />
+              <option name="myItemId" value="libgdxGP_15_04_29" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="desktop" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdxGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libgdxGP_15_04_29" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -521,7 +347,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="libgdxGP_15_04_28" />
+              <option name="myItemId" value="libgdxGP_15_04_29" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -543,7 +369,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="libgdxGP_15_04_28" />
+              <option name="myItemId" value="libgdxGP_15_04_29" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -569,7 +395,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="libgdxGP_15_04_28" />
+              <option name="myItemId" value="libgdxGP_15_04_29" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -595,7 +421,37 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="libgdxGP_15_04_28" />
+              <option name="myItemId" value="libgdxGP_15_04_29" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdxGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameWorld" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WorldElements" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdxGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libgdxGP_15_04_29" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -619,8 +475,238 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdxGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libgdxGP_15_04_29" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdxGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameWorld" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PreRenderers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdxGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libgdxGP_15_04_29" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdxGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameWorld" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Tasks" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdxGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libgdxGP_15_04_29" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdxGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameWorld" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Levels" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdxGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libgdxGP_15_04_29" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdxGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameWorld" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Interfaces" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdxGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libgdxGP_15_04_29" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdxGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameWorld" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Interfaces" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Drawers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdxGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libgdxGP_15_04_29" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdxGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameWorld" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Interfaces" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Actions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdxGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libgdxGP_15_04_29" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdxGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libgdxGP_15_04_29" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -921,8 +1007,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2064" height="1128" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -935,11 +1021,11 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38214645" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38134205" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925585" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.61384153" sideWeight="0.6317365" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.05728314" sideWeight="0.6317365" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1482036" sideWeight="0.8890532" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3023426" sideWeight="0.8890532" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39217654" sideWeight="0.36826348" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3781344" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2406639" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1037,7 +1123,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2261">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1328,7 +1413,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
           <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1336,7 +1420,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
           <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1363,10 +1446,6 @@
           <folding>
             <element signature="e#537#979#0" expanded="false" />
             <element signature="e#978#979#0" expanded="false" />
-            <marker date="1430334249791" expanded="false" signature="-1:-1" placeholder="(particle, batch, parentColor) → {" />
-            <marker date="1430334249791" expanded="false" signature="-1:-1" placeholder="}" />
-            <marker date="1430334249791" expanded="false" signature="-1:-1" placeholder="(particle, batch, parentColor) → {" />
-            <marker date="1430334249791" expanded="false" signature="-1:-1" placeholder="}" />
           </folding>
         </state>
       </provider>
@@ -1375,7 +1454,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.07683616" vertical-offset="0" max-vertical-offset="885">
           <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1387,155 +1465,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/GameLevels.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="1428">
-          <caret line="77" column="9" selection-start-line="77" selection-start-column="9" selection-end-line="77" selection-end-column="9" />
-          <folding>
-            <element signature="e#209#239#0" expanded="true" />
-            <element signature="e#1038#1046#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Mission.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="874" max-vertical-offset="1462">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding>
-            <element signature="e#651#652#0" expanded="true" />
-            <element signature="e#685#686#0" expanded="true" />
-            <element signature="e#737#738#0" expanded="true" />
-            <element signature="e#783#784#0" expanded="true" />
-            <element signature="e#821#822#0" expanded="true" />
-            <element signature="e#860#861#0" expanded="true" />
-            <element signature="e#1299#1300#0" expanded="true" />
-            <element signature="e#1349#1350#0" expanded="true" />
-            <element signature="e#2073#2074#0" expanded="true" />
-            <element signature="e#2132#2133#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/AtlasLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4047619" vertical-offset="0" max-vertical-offset="588">
           <caret line="15" column="73" selection-start-line="15" selection-start-column="73" selection-end-line="15" selection-end-column="73" />
-          <folding>
-            <element signature="e#611#612#0" expanded="true" />
-            <element signature="e#663#664#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/ru/dk/gdxGP/android/LevelListActivity.java">
+    <entry file="file://$PROJECT_DIR$/javaDoc/ru/dk/gdxGP/GameWorld/WorldElements/Particle.Condition.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
-          <caret line="18" column="53" selection-start-line="18" selection-start-column="53" selection-end-line="18" selection-end-column="53" />
+        <state vertical-scroll-proportion="0.33215547" vertical-offset="1580" max-vertical-offset="7310">
+          <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/desktop/src/ru/dk/gdxGP/desktop/TexturePackerProceed.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18545455" vertical-offset="0" max-vertical-offset="550">
+          <caret line="6" column="43" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/android/src/ru/dk/gdxGP/android/MainMenuActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="190" max-vertical-offset="782">
+        <state vertical-scroll-proportion="0.73636365" vertical-offset="190" max-vertical-offset="782">
           <caret line="40" column="16" selection-start-line="40" selection-start-column="16" selection-end-line="40" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GDXGameGP.java">
+    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/AudioPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="670" max-vertical-offset="2074">
-          <caret line="56" column="30" selection-start-line="56" selection-start-column="30" selection-end-line="56" selection-end-column="30" />
-          <folding>
-            <element signature="e#1032#1033#0" expanded="true" />
-            <element signature="e#1085#1086#0" expanded="true" />
-            <element signature="e#1977#1978#0" expanded="true" />
-            <element signature="e#2032#2033#0" expanded="true" />
-            <element signature="e#2285#2286#0" expanded="true" />
-            <element signature="e#2341#2342#0" expanded="true" />
-            <element signature="e#2417#2418#0" expanded="true" />
-            <element signature="e#2460#2461#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.036363635" vertical-offset="235" max-vertical-offset="969">
+          <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Level.java">
+    <entry file="file://$PROJECT_DIR$/android/src/ru/dk/gdxGP/android/LevelListActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.862069" vertical-offset="4471" max-vertical-offset="11832">
-          <caret line="273" column="42" selection-start-line="273" selection-start-column="42" selection-end-line="273" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2737#2738#0" expanded="true" />
-            <element signature="e#2808#2809#0" expanded="true" />
-            <element signature="e#3917#4084#0" expanded="true" />
-            <element signature="e#4083#4084#0" expanded="true" />
-            <element signature="e#4174#4175#0" expanded="true" />
-            <element signature="e#4211#4212#0" expanded="true" />
-            <element signature="e#4249#4250#0" expanded="true" />
-            <element signature="e#4288#4289#0" expanded="true" />
-            <element signature="e#4335#4336#0" expanded="true" />
-            <element signature="e#4371#4372#0" expanded="true" />
-            <element signature="e#4436#4437#0" expanded="true" />
-            <element signature="e#4486#4487#0" expanded="true" />
-            <element signature="e#4529#4530#0" expanded="true" />
-            <element signature="e#4563#4564#0" expanded="true" />
-            <element signature="e#4622#4623#0" expanded="true" />
-            <element signature="e#4668#4669#0" expanded="true" />
-            <element signature="e#4711#4712#0" expanded="true" />
-            <element signature="e#4745#4746#0" expanded="true" />
-            <element signature="e#4804#4805#0" expanded="true" />
-            <element signature="e#4850#4851#0" expanded="true" />
-            <element signature="e#4913#4914#0" expanded="true" />
-            <element signature="e#4957#4958#0" expanded="true" />
-            <element signature="e#5161#5162#0" expanded="true" />
-            <element signature="e#5198#5199#0" expanded="true" />
-            <element signature="e#5266#5267#0" expanded="true" />
-            <element signature="e#5318#5319#0" expanded="true" />
-            <element signature="e#5926#5927#0" expanded="true" />
-            <element signature="e#5967#5968#0" expanded="true" />
-            <element signature="e#6001#6002#0" expanded="true" />
-            <element signature="e#6041#6042#0" expanded="true" />
-            <element signature="e#6078#6079#0" expanded="true" />
-            <element signature="e#6121#6122#0" expanded="true" />
-            <element signature="e#6317#6318#0" expanded="true" />
-            <element signature="e#6364#6365#0" expanded="true" />
-            <element signature="e#6616#9054#0" expanded="true" />
-            <element signature="e#8527#8799#0" expanded="true" />
-            <element signature="e#8798#8799#0" expanded="true" />
-            <element signature="e#9053#9054#0" expanded="true" />
-            <element signature="e#9123#9124#0" expanded="true" />
-            <element signature="e#9164#9165#0" expanded="true" />
-            <element signature="e#9196#9197#0" expanded="true" />
-            <element signature="e#9225#9226#0" expanded="true" />
-            <element signature="e#9305#9306#0" expanded="true" />
-            <element signature="e#10111#10112#0" expanded="true" />
-            <element signature="e#10150#10151#0" expanded="true" />
-            <element signature="e#10181#10182#0" expanded="true" />
-            <element signature="e#10209#10210#0" expanded="true" />
-            <element signature="e#11151#11152#0" expanded="true" />
-            <element signature="e#11199#11200#0" expanded="true" />
-            <element signature="e#12872#12873#0" expanded="true" />
-            <element signature="e#12907#12908#0" expanded="true" />
-            <element signature="e#12962#12963#0" expanded="true" />
-            <element signature="e#13010#13011#0" expanded="true" />
-            <element signature="e#13046#13047#0" expanded="true" />
-            <element signature="e#13078#13079#0" expanded="true" />
-            <element signature="e#13114#13115#0" expanded="true" />
-            <element signature="e#13146#13147#0" expanded="true" />
-            <element signature="e#13182#13183#0" expanded="true" />
-            <element signature="e#13214#13215#0" expanded="true" />
-            <element signature="e#13250#13251#0" expanded="true" />
-            <element signature="e#13282#13283#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Tasks/TaskOnContact.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="177" max-vertical-offset="884">
-          <caret line="23" column="55" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="55" />
+        <state vertical-scroll-proportion="0.34" vertical-offset="0" max-vertical-offset="550">
+          <caret line="18" column="53" selection-start-line="18" selection-start-column="53" selection-end-line="18" selection-end-column="53" />
           <folding />
         </state>
       </provider>
@@ -1548,27 +1519,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/javaDoc/ru/dk/gdxGP/GameWorld/WorldElements/Particle.Condition.html">
+    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GDXGameGP.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33215547" vertical-offset="1580" max-vertical-offset="7310">
-          <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="1921">
+          <caret line="17" column="40" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/desktop/src/ru/dk/gdxGP/desktop/TexturePackerProceed.java">
+    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/GameLevels.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
-          <caret line="6" column="43" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1428">
+          <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/AudioPlayer.java">
+    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Mission.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10364146" vertical-offset="235" max-vertical-offset="969">
-          <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="1292">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Tasks/TaskOnContact.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20856611" vertical-offset="177" max-vertical-offset="884">
+          <caret line="23" column="55" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/ru/dk/gdxGP/GameWorld/Level.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0029498" vertical-offset="306" max-vertical-offset="10761">
+          <caret line="38" column="28" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#9269#9270#0" expanded="true" />
+            <element signature="e#9305#9306#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1615,7 +1606,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.8</last-edited>
+          <last-edited>1.7</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
