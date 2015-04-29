@@ -14,12 +14,19 @@ public class GDXGameGP extends Game implements ApplicationListener {
     private String levelName;
     private boolean ifBounceSoundMustBePlayed = false;
 
+    /**
+     * Creates game from given levelName
+     * @param levelName string name of the level
+     */
     public GDXGameGP(String levelName) {
         this.levelName = levelName;
         inputMultiplexer = new InputMultiplexer();
         currentGame = this;
     }
 
+    /**
+     * Must be called only by libGDX
+     */
     @Override
     public void create() {
         this.setScreen(new LogoScreen(1));
@@ -30,6 +37,9 @@ public class GDXGameGP extends Game implements ApplicationListener {
         this.ifBounceSoundMustBePlayed = true;
     }
 
+    /**
+     * Must be called only by libGDX
+     */
     @Override
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -43,7 +53,7 @@ public class GDXGameGP extends Game implements ApplicationListener {
         }
     }
 
-    public void startGame() {
+    private void startGame() {
         System.out.println("starting game");
         final Level level = GameLevels.instantiateLevel(levelName);
         final LevelScreen levelScreen = new LevelScreen(level, 0.1f * Gdx.graphics.getWidth(), 0.1f * Gdx.graphics.getHeight());
@@ -74,24 +84,36 @@ public class GDXGameGP extends Game implements ApplicationListener {
 
     }
 
+    /**
+     * Must be called only by libGDX
+     */
     @Override
     public void resize(int width, int height) {
         if (Gdx.app.getType() != Application.ApplicationType.Android)
             getScreen().resize(width, height);
     }
 
+    /**
+     * Must be called only by libGDX
+     */
     @Override
     public void pause() {
         getScreen().pause();
         AudioPlayer.pauseBackground();
     }
 
+    /**
+     * Must be called only by libGDX
+     */
     @Override
     public void resume() {
         getScreen().resume();
-        AudioPlayer.startPlayBackground();
+        AudioPlayer.resumeBackground();
     }
 
+    /**
+     * Must be called only by libGDX
+     */
     @Override
     public void dispose() {
         getScreen().dispose();

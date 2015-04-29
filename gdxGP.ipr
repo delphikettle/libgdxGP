@@ -40,7 +40,7 @@
           <option name="keyStoreUrl" value="file://" />
           <option name="proGuardCfgFiles">
             <list>
-              <option value="file://%MODULE_SDK_HOME%/tools/proguard/proguard-android.txt" />
+              <option value="file://C:/Program Files/Java/jdk1.8.0_05/tools/proguard/proguard-android.txt" />
             </list>
           </option>
         </options>
@@ -111,7 +111,7 @@
     <option name="OTHER_OPTIONS" />
     <option name="HEAP_SIZE" />
     <option name="LOCALE" />
-    <option name="OPEN_IN_BROWSER" value="true" />
+    <option name="OPEN_IN_BROWSER" value="false" />
     <option name="OPTION_INCLUDE_LIBS" value="false" />
   </component>
   <component name="Palette2">
@@ -243,7 +243,7 @@
       <module fileurl="file://$PROJECT_DIR$/gdxGP.iml" filepath="$PROJECT_DIR$/gdxGP.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.8 for DK user" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="SvnBranchConfigurationManager">

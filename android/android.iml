@@ -3,6 +3,9 @@
   <component name="FacetManager">
     <facet type="android" name="Android">
       <configuration>
+        <proGuardCfgFiles>
+          <file>file://C:/Program Files/Java/jdk1.8.0_05/tools/proguard/proguard-android.txt</file>
+        </proGuardCfgFiles>
         <option name="UPDATE_PROPERTY_FILES" value="true" />
       </configuration>
     </facet>
@@ -15,7 +18,7 @@
       <excludeFolder url="file://$MODULE_DIR$/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
     </content>
-    <orderEntry type="jdk" jdkName="Android API 21 Platform for DK user" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android API 21 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="core" exported="" />
     <orderEntry type="module-library" exported="">

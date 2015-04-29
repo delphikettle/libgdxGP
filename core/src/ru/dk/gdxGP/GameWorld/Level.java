@@ -190,19 +190,14 @@ public abstract class Level extends Thread implements Runnable {
         this.levelScreen.proceed(delta);
     }
 
+    /**
+     * Loads level. Creates particles, borders etc. Must be called after creating level.
+     * @param screen LevelScreen where level must be displayed
+     */
     public final void load(final LevelScreen screen) {
-        //loadAssets();
         new Thread(new Runnable() {
             @Override
             public void run() {
-                /*
-                while (getAssetsLoaded() < 1) {
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }*/
                 try {
                     Thread.sleep(MathUtils.random(0, 100));
                 } catch (InterruptedException e) {
@@ -448,18 +443,38 @@ public abstract class Level extends Thread implements Runnable {
         return this.yMax;
     }
 
+    /**
+     * Sets a new value to xMin
+     * @param newXMin new value of xMin
+     * @return newXMin
+     */
     protected final float setXMin(float newXMin) {
         return this.xMin = newXMin;
     }
 
+    /**
+     * Sets a new value to yMin
+     * @param newYMin new value of yMin
+     * @return newYMin
+     */
     protected final float setYMin(float newYMin) {
         return this.yMin = newYMin;
     }
 
+    /**
+     * Sets a new value to xMax
+     * @param newXMax new value of xMax
+     * @return newXMax
+     */
     protected final float setXMax(float newXMax) {
         return this.xMax = newXMax;
     }
 
+    /**
+     * Sets a new value to yMax
+     * @param newYMax new value of yMax
+     * @return newYMax
+     */
     protected final float setYMax(float newYMax) {
         return this.yMax = newYMax;
     }
