@@ -19,6 +19,7 @@ import ru.dk.gdxGP.GDXGameGP;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.WorldElements.Border;
 import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
+import ru.dk.gdxGP.utils.Graphics;
 
 public class LevelScreen implements GestureDetector.GestureListener, InputProcessor, Screen {
     private final Stage particlesStage;
@@ -143,6 +144,7 @@ public class LevelScreen implements GestureDetector.GestureListener, InputProces
         this.xMax = level.getXMax();
         this.yMin = level.getYMin();
         this.yMax = level.getYMax();
+        Graphics.setCurrentCamera(camera);
 
         GDXGameGP.currentGame.inputMultiplexer.addProcessor(this);
         GDXGameGP.currentGame.inputMultiplexer.addProcessor(new GestureDetector(this));
@@ -151,21 +153,29 @@ public class LevelScreen implements GestureDetector.GestureListener, InputProces
     @Override
     public void render(float delta) {
         this.camera.zoom = zoom;
-        this.level.setCameraPosition();
+        //this.level.setCameraPosition();
         this.level.preRender();
         this.particlesStage.getBatch().setColor(startColor);
         this.level.render(delta);
         this.particlesStage.getBatch().setColor(startColor);
         this.level.afterRender();
-        missionBatch.begin();
-        if (this.level.getMission() != null)
+
+        if (this.level.getMission() != null) {
+            missionBatch.begin();
             this.level.getMission().render(missionBatch);
-        missionBatch.end();
+            missionBatch.end();
+        }
+
         float xTo = MathUtils.clamp(camera.position.x, xMin, xMax),
                 yTo = MathUtils.clamp(camera.position.y, yMin, yMax);
-        this.camera.position.set((coordsDelay * camera.position.x + xTo) / (coordsDelay + 1), (coordsDelay * camera.position.y + yTo) / (coordsDelay + 1), 0);
+        //this.camera.position.set((coordsDelay * camera.position.x + xTo) / (coordsDelay + 1), (coordsDelay * camera.position.y + yTo) / (coordsDelay + 1), 0);
+        //this.setCameraZoom((this.getZoom() * cameraDelay + MathUtils.clamp(this.getZoom(), zoomMin, zoomMax)) / (cameraDelay + 1));
+
+        drawDebug();
+    }
+
+    private void drawDebug() {
         //box2DDebugRenderer.render(this.level.getWorld(), camera.combined);
-        this.setCameraZoom((this.getZoom() * cameraDelay + MathUtils.clamp(this.getZoom(), zoomMin, zoomMax)) / (cameraDelay + 1));
         this.fontBatch.begin();
         bitmapFont.draw(this.fontBatch, "FPS:" + Gdx.graphics.getFramesPerSecond() + "; actions count:" + this.level.getActionsCount() + ";" + " particles count:" + this.level.getParticlesCount() + ";", 0, Gdx.graphics.getHeight() - 10);
         this.fontBatch.end();

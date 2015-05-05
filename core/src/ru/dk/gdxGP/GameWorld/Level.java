@@ -151,7 +151,7 @@ public abstract class Level extends Thread implements Runnable {
 
     public final void setCameraPosition() {
         if (this.cameraPositionChanger != null)
-            this.cameraPositionChanger.changeCameraPosition(this, this.getStage().getCamera(), this.getStage());
+            this.cameraPositionChanger.changeCameraPosition(this, this.getScreen().getCamera(), this.getScreen());
     }
 
     public final void preRender() {
@@ -297,7 +297,6 @@ public abstract class Level extends Thread implements Runnable {
                 getXMax(), getYMin(),
                 getXMin(), getYMin()
         });
-
         this.addBorder(new Border(this, this.getWorld(), 0, 0, shape));
     }
 
@@ -306,7 +305,7 @@ public abstract class Level extends Thread implements Runnable {
             this.levelTapper.tapLevel(this, x, y);
     }
 
-    final public LevelScreen getStage() {
+    final public LevelScreen getScreen() {
         return this.levelScreen;
     }
 
@@ -684,7 +683,7 @@ public abstract class Level extends Thread implements Runnable {
      * @param delay smooth of move
      */
     public void moveCamera(float xTo, float yTo, float delay) {
-        this.getStage().getCamera().position.set((delay * this.getStage().getCamera().position.x + xTo) / (delay + 1), (delay * this.getStage().getCamera().position.y + yTo) / (delay + 1), 0);
+        this.getScreen().getCamera().position.set((delay * this.getScreen().getCamera().position.x + xTo) / (delay + 1), (delay * this.getScreen().getCamera().position.y + yTo) / (delay + 1), 0);
     }
 
     /**
@@ -694,7 +693,7 @@ public abstract class Level extends Thread implements Runnable {
      * @param delay  smooth of zoom
      */
     public void zoomCamera(float zoomTo, float delay) {
-        this.getStage().setCameraZoom((this.getStage().getZoom() * delay + zoomTo) / (delay + 1));
+        this.getScreen().setCameraZoom((this.getScreen().getZoom() * delay + zoomTo) / (delay + 1));
     }
 
     //methods for generating

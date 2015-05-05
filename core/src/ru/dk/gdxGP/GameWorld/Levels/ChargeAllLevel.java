@@ -62,7 +62,7 @@ public class ChargeAllLevel extends Level {
     protected void setParameters() {
         this.setK(25);
         this.setChargingK(1f);
-        this.getStage().setCameraZoom(2);
+        this.getScreen().setCameraZoom(2);
         this.setCameraPositionChanger(new CameraPositionChanger() {
             @Override
             public void changeCameraPosition(Level level, Camera camera, LevelScreen screen) {

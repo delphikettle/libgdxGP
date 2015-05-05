@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import ru.dk.gdxGP.AtlasLoader;
+import ru.dk.gdxGP.utils.AtlasLoader;
 
 import java.util.Timer;
 import java.util.TimerTask;

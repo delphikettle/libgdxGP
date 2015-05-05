@@ -7,6 +7,7 @@ import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.Screens.LevelScreen;
 import ru.dk.gdxGP.Screens.LoadingScreen;
 import ru.dk.gdxGP.Screens.LogoScreen;
+import ru.dk.gdxGP.utils.AudioPlayer;
 
 public class GDXGameGP extends Game implements ApplicationListener {
     public static GDXGameGP currentGame;
