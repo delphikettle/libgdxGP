@@ -15,7 +15,7 @@ public class BorderDrawerSet {
         public void drawBorder(Border border, Batch batch, Color parentColor) {
             Shape shape = border.getShape();
             if(shape instanceof ChainShape){
-                Graphics.drawChain(border.getVertexes(),new Color(0.1f, 1, 0.5f, 1f), 100);
+                Graphics.drawChain(border.getVertexes(),new Color(0.1f, 1, 0.5f, 1f), 1);
                 return;
             }
 

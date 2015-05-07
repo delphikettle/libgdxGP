@@ -299,7 +299,12 @@ public abstract class Level extends Thread implements Runnable {
         });
         this.addBorder(new Border(this, this.getWorld(), 0, 0, shape));
     }
-
+private static Vector2 dist=new Vector2();
+    public static float getDistance(float x1,float y1,float x2,float y2){
+        dist.set(x2,y2);
+        dist.add(-x1, -y1);
+        return dist.len();
+    }
     public final void tap(float x, float y) {
         if (this.levelTapper != null)
             this.levelTapper.tapLevel(this, x, y);
