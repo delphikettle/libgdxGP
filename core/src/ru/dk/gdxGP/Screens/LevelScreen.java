@@ -145,6 +145,7 @@ public class LevelScreen implements GestureDetector.GestureListener, InputProces
         this.yMin = level.getYMin();
         this.yMax = level.getYMax();
         Graphics.setCurrentCamera(camera);
+        this.box2DDebugRenderer.SHAPE_AWAKE.set(0,0,0,0.5f);
 
         GDXGameGP.currentGame.inputMultiplexer.addProcessor(this);
         GDXGameGP.currentGame.inputMultiplexer.addProcessor(new GestureDetector(this));
@@ -153,7 +154,7 @@ public class LevelScreen implements GestureDetector.GestureListener, InputProces
     @Override
     public void render(float delta) {
         this.camera.zoom = zoom;
-        //this.level.setCameraPosition();
+        this.level.setCameraPosition();
         this.level.preRender();
         this.particlesStage.getBatch().setColor(startColor);
         this.level.render(delta);
@@ -168,14 +169,14 @@ public class LevelScreen implements GestureDetector.GestureListener, InputProces
 
         float xTo = MathUtils.clamp(camera.position.x, xMin, xMax),
                 yTo = MathUtils.clamp(camera.position.y, yMin, yMax);
-        //this.camera.position.set((coordsDelay * camera.position.x + xTo) / (coordsDelay + 1), (coordsDelay * camera.position.y + yTo) / (coordsDelay + 1), 0);
-        //this.setCameraZoom((this.getZoom() * cameraDelay + MathUtils.clamp(this.getZoom(), zoomMin, zoomMax)) / (cameraDelay + 1));
+        this.camera.position.set((coordsDelay * camera.position.x + xTo) / (coordsDelay + 1), (coordsDelay * camera.position.y + yTo) / (coordsDelay + 1), 0);
+        this.setCameraZoom((this.getZoom() * cameraDelay + MathUtils.clamp(this.getZoom(), zoomMin, zoomMax)) / (cameraDelay + 1));
 
         drawDebug();
     }
 
     private void drawDebug() {
-        //box2DDebugRenderer.render(this.level.getWorld(), camera.combined);
+        box2DDebugRenderer.render(this.level.getWorld(), camera.combined);
         this.fontBatch.begin();
         bitmapFont.draw(this.fontBatch, "FPS:" + Gdx.graphics.getFramesPerSecond() + "; actions count:" + this.level.getActionsCount() + ";" + " particles count:" + this.level.getParticlesCount() + ";", 0, Gdx.graphics.getHeight() - 10);
         this.fontBatch.end();
