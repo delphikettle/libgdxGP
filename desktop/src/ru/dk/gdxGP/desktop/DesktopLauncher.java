@@ -2,7 +2,6 @@ package ru.dk.gdxGP.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.google.gson.Gson;
 import ru.dk.gdxGP.GDXGameGP;
 
 public class DesktopLauncher {

@@ -17,6 +17,7 @@ public class GDXGameGP extends Game implements ApplicationListener {
 
     /**
      * Creates game from given levelName
+     *
      * @param levelName string name of the level
      */
     public GDXGameGP(String levelName) {

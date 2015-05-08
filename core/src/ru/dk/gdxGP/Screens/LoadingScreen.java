@@ -5,8 +5,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import ru.dk.gdxGP.utils.AtlasLoader;
 import ru.dk.gdxGP.GDXGameGP;
+import ru.dk.gdxGP.utils.AtlasLoader;
 
 
 public class LoadingScreen extends Stage implements Screen {

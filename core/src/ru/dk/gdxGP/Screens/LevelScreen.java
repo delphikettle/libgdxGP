@@ -145,7 +145,7 @@ public class LevelScreen implements GestureDetector.GestureListener, InputProces
         this.yMin = level.getYMin();
         this.yMax = level.getYMax();
         Graphics.setCurrentCamera(camera);
-        this.box2DDebugRenderer.SHAPE_AWAKE.set(0,0,0,0.5f);
+        this.box2DDebugRenderer.SHAPE_AWAKE.set(0, 0, 0, 0.5f);
 
         GDXGameGP.currentGame.inputMultiplexer.addProcessor(this);
         GDXGameGP.currentGame.inputMultiplexer.addProcessor(new GestureDetector(this));

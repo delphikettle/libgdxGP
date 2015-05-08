@@ -8,13 +8,6 @@ import ru.dk.gdxGP.GameWorld.Interfaces.Drawers.MissionDrawer;
 import ru.dk.gdxGP.GameWorld.Mission;
 
 public final class MissionDrawerSet {
-    public static final MissionDrawer standardDrawer = new MissionDrawer() {
-        @Override
-        public void drawMission(Mission mission, Batch batch) {
-            mainTextDrawer.drawMission(mission, batch);
-            secondaryTextDrawer.drawMission(mission, batch);
-        }
-    };
     private static final BitmapFont englishBitmapFont;
     public static final MissionDrawer mainTextDrawer = new MissionDrawer() {
         @Override
@@ -35,6 +28,13 @@ public final class MissionDrawerSet {
         @Override
         public void drawMission(Mission mission, Batch batch) {
             russianBitmapFont.draw(batch, mission.getSecondaryTaskText(), Gdx.graphics.getWidth() * 0.05f, Gdx.graphics.getHeight() * 0.05f);
+        }
+    };
+    public static final MissionDrawer standardDrawer = new MissionDrawer() {
+        @Override
+        public void drawMission(Mission mission, Batch batch) {
+            mainTextDrawer.drawMission(mission, batch);
+            secondaryTextDrawer.drawMission(mission, batch);
         }
     };
 }

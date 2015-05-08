@@ -29,6 +29,7 @@ import java.util.List;
 
 
 public abstract class Level extends Thread implements Runnable {
+    private static Vector2 dist = new Vector2();
     public final ContactMultiListener multiListener;
     private final World world;
     private final ArrayList<Particle> particles;
@@ -99,6 +100,12 @@ public abstract class Level extends Thread implements Runnable {
             }
         }, 0, 32 / 1000f);
         this.stepTimer.start();
+    }
+
+    public static float getDistance(float x1, float y1, float x2, float y2) {
+        dist.set(x2, y2);
+        dist.add(-x1, -y1);
+        return dist.len();
     }
 
     public int getActionsCount() {
@@ -288,23 +295,25 @@ public abstract class Level extends Thread implements Runnable {
     }
 
     public void createWalls() {
-        ChainShape shape = new ChainShape();
-        shape.createChain(new float[]{
+        this.addBorder(new Border(this, this.getWorld(), 0, 0, getRectWorldBorderShape()));
+    }
 
+    /**
+     * Creates and returns the shape of standard world border. This border is a rectangle with sizes according level sizes
+     *
+     * @return world border shape
+     */
+    public final ChainShape getRectWorldBorderShape() {
+        ChainShape shape = new ChainShape();
+        shape.createLoop(new float[]{
                 getXMin(), getYMin(),
                 getXMin(), getYMax(),
                 getXMax(), getYMax(),
-                getXMax(), getYMin(),
-                getXMin(), getYMin()
+                getXMax(), getYMin()
         });
-        this.addBorder(new Border(this, this.getWorld(), 0, 0, shape));
+        return shape;
     }
-private static Vector2 dist=new Vector2();
-    public static float getDistance(float x1,float y1,float x2,float y2){
-        dist.set(x2,y2);
-        dist.add(-x1, -y1);
-        return dist.len();
-    }
+
     public final void tap(float x, float y) {
         if (this.levelTapper != null)
             this.levelTapper.tapLevel(this, x, y);
@@ -449,6 +458,7 @@ private static Vector2 dist=new Vector2();
 
     /**
      * Sets a new value to xMin
+     *
      * @param newXMin new value of xMin
      * @return newXMin
      */
@@ -458,6 +468,7 @@ private static Vector2 dist=new Vector2();
 
     /**
      * Sets a new value to yMin
+     *
      * @param newYMin new value of yMin
      * @return newYMin
      */
@@ -467,6 +478,7 @@ private static Vector2 dist=new Vector2();
 
     /**
      * Sets a new value to xMax
+     *
      * @param newXMax new value of xMax
      * @return newXMax
      */
@@ -476,6 +488,7 @@ private static Vector2 dist=new Vector2();
 
     /**
      * Sets a new value to yMax
+     *
      * @param newYMax new value of yMax
      * @return newYMax
      */
