@@ -209,8 +209,8 @@ public class Particle extends Actor implements LevelElement {
     public void moveParameters(Particle to, float mass, float charge, float density, Vector2 velocity) throws NullMassException {
         synchronized (this.body) {
             if (mass == 0) {
-                to.charge += charge / to.getMass();
-                this.charge -= charge / this.getMass();
+                to.charge += charge;
+                this.charge -= charge;
                 this.body.applyLinearImpulse(-velocity.x, -velocity.y, getMassCenter().x, getMassCenter().y, true);
                 to.body.applyLinearImpulse(velocity.x, velocity.y, to.getMassCenter().x, to.getMassCenter().y, true);
                 if (density != 0) {

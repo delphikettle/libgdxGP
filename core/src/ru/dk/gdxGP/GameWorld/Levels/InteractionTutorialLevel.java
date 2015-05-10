@@ -53,7 +53,7 @@ public class InteractionTutorialLevel extends Level {
     protected void setParticles() {
         ParticleDef particleDef = new ParticleDef(0, 0, 0, 0);
         particleDef.minMass = particleDef.maxMass = 1f;
-        particleDef.minCharge = particleDef.maxCharge = 5f;
+        particleDef.minCharge = particleDef.maxCharge = 25f;
         mainParticle = super.generateRandomParticle(particleDef);
         mainParticle.setDrawer(ParticleDrawerSet.mainDrawer);
         this.addParticle(mainParticle);

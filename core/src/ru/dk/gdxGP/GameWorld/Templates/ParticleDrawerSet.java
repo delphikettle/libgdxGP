@@ -18,7 +18,7 @@ public final class ParticleDrawerSet {
         public void drawParticle(Particle particle, Batch batch, Color parentColor) {
             if (particle.getCharge() > 0) batch.setColor(1, 0, 0, 0.25f);
             else batch.setColor(0, 0, 1, 0.25f);
-            float r1 = (float) (particle.getRadius() * (1 + Math.sqrt(Math.abs(particle.getCharge()) * 2f)));
+            float r1 = (particle.getRadius() + 0.05f*Math.abs(particle.getCharge()));
             batch.draw(textureRegionCharge, particle.getPosition().x - 1.0f * r1, particle.getPosition().y - 1.0f * r1, r1, r1, r1 * 2.0f, r1 * 2.0f, 1, 1, MathUtils.radiansToDegrees * particle.getBody().getAngle());
         }
     };

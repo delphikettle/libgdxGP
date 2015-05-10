@@ -88,7 +88,7 @@ public class ChargeYourFriendLevel extends Level {
     protected void setParameters() {
         this.setK(100);
         this.setG(0);
-        this.setChargingK(10);
+        this.setChargingK(1);
         this.setMassFlowingK(0);
         this.setCameraPositionChanger(new CameraPositionChanger() {
             @Override
@@ -190,7 +190,7 @@ public class ChargeYourFriendLevel extends Level {
                         if ((contact.getFixtureA().getBody().getUserData() == mainParticle && contact.getFixtureB().getBody().getUserData() == particleWithCharge)
                                 || (contact.getFixtureA().getBody().getUserData() == particleWithCharge && contact.getFixtureB().getBody().getUserData() == mainParticle))
                             try {
-                                mainParticle.moveParameters(particleWithCharge, 0, 0.01f, 0, new Vector2(0, 0));
+                                mainParticle.moveParameters(particleWithCharge, 0, 0.025f, 0, new Vector2(0, 0));
                             } catch (Particle.NullMassException e) {
                             }
                     }

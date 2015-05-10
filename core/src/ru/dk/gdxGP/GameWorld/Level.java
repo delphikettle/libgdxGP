@@ -413,7 +413,7 @@ public abstract class Level extends Thread implements Runnable {
     }
 
     protected void setK(float k) {
-        this.k = k;
+        this.k = 0.125f*k;
     }
 
     final public float getG() {
@@ -554,7 +554,8 @@ public abstract class Level extends Thread implements Runnable {
     public void interactionBetweenParticles(Particle f1, Particle f2) {
         d.set(f2.getBody().getPosition());
         d.add(-f1.getBody().getPosition().x, -f1.getBody().getPosition().y);
-        float F = (((-this.k * f1.getCharge() * f2.getCharge() + this.G) * f1.getBody().getMass() * f2.getBody().getMass()) / (d.len() * d.len()));
+        float F = ((this.G * f1.getBody().getMass() * f2.getBody().getMass()-this.k * f1.getCharge() * f2.getCharge() )
+                / (d.len() * d.len()));
         buf.set(f2.getBody().getPosition().x - f1.getBody().getPosition().x, f2.getBody().getPosition().y - f1.getBody().getPosition().y);
         buf.setLength(F);
         if (F < 0) buf.rotate(180);
@@ -573,8 +574,8 @@ public abstract class Level extends Thread implements Runnable {
      */
     private void chargeBetweenParticle(Particle f1, Particle f2, float d, float chargingK) {
         if (chargingK == 0) return;
-        float q1 = f1.getCharge(), q2 = f2.getCharge(), m1 = f1.getMass(), m2 = f2.getMass();
-        float deltaCharge = chargingK * (((q1 * m1 + q2 * m2) / (m1 + m2) + 1024 * q2) / 1025 - q2) * 0.025f / (d * d);
+        float q1 = f1.getCharge(), q2 = f2.getCharge();
+        float deltaCharge = chargingK * ((q1 * 1 + q2 * 1) / 2 - q2) *0.0005f/ (d * d);
 
         if (!Float.isNaN(deltaCharge) && !Float.isInfinite(deltaCharge))
             try {

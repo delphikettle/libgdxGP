@@ -39,7 +39,7 @@ public class ChargeAllLevel extends Level {
         particleDef.rMax = particleDef.rMin = particleDef.aMin = particleDef.aMax = 1;
         particleDef.gMax = particleDef.gMin = particleDef.bMin = particleDef.bMax = 0;
         particleDef.minMass = particleDef.maxMass = 1f;
-        particleDef.minCharge = particleDef.maxCharge = 5f;
+        particleDef.minCharge = particleDef.maxCharge = 50f;
         this.mainParticle = this.generateRandomParticle(particleDef);
         this.mainParticle.setUnderCoulomb(true);
         this.mainParticle.setDrawer(ParticleDrawerSet.mainDrawer);
@@ -60,7 +60,7 @@ public class ChargeAllLevel extends Level {
 
     @Override
     protected void setParameters() {
-        this.setK(25);
+        this.setK(2.5f);
         this.setChargingK(1f);
         this.getScreen().setCameraZoom(2);
         this.setCameraPositionChanger(new CameraPositionChanger() {
