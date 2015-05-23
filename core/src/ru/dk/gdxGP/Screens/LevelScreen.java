@@ -172,7 +172,7 @@ public class LevelScreen implements GestureDetector.GestureListener, InputProces
         this.camera.position.set((coordsDelay * camera.position.x + xTo) / (coordsDelay + 1), (coordsDelay * camera.position.y + yTo) / (coordsDelay + 1), 0);
         this.setCameraZoom((this.getZoom() * cameraDelay + MathUtils.clamp(this.getZoom(), zoomMin, zoomMax)) / (cameraDelay + 1));
 
-        drawDebug();
+        //drawDebug();
     }
 
     private void drawDebug() {

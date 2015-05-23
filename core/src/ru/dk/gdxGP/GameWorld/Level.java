@@ -102,12 +102,6 @@ public abstract class Level extends Thread implements Runnable {
         this.stepTimer.start();
     }
 
-    public static float getDistance(float x1, float y1, float x2, float y2) {
-        dist.set(x2, y2);
-        dist.add(-x1, -y1);
-        return dist.len();
-    }
-
     public int getActionsCount() {
         return actions.size();
     }
@@ -282,18 +276,35 @@ public abstract class Level extends Thread implements Runnable {
         this.loaded = loaded;
     }
 
+    /**
+     * Must be overridden for setting initial sizes of the world
+     */
     abstract protected void setSizes();
 
+    /**
+     * Must be overridden for setting initial particles
+     */
     protected abstract void setParticles();
 
-    public void setOtherElements() {
-    }
+    /**
+     * May be overridden for setting special objects of the world
+     */
+    public void setOtherElements() {}
 
+    /**
+     * Method must be overridden and must describe mission for the level
+     * @return mission for the level
+     */
     protected abstract Mission createMission();
 
-    protected void setParameters() {
-    }
+    /**
+     * May be overridden for setting special parameters of the level
+     */
+    protected void setParameters() {}
 
+    /**
+     * Creates standard world borders. May be overridden.
+     */
     public void createWalls() {
         this.addBorder(new Border(this, this.getWorld(), 0, 0, getRectWorldBorderShape()));
     }

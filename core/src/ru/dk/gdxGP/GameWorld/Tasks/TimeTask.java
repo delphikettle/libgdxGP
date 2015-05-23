@@ -3,6 +3,9 @@ package ru.dk.gdxGP.GameWorld.Tasks;
 import com.badlogic.gdx.utils.Timer;
 import ru.dk.gdxGP.GameWorld.Task;
 
+/**
+ * Task for mission that completes after specified time
+ */
 public class TimeTask extends Task {
     private boolean finished = false;
     private final Timer.Task timeTask = new Timer.Task() {

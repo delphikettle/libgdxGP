@@ -26,6 +26,12 @@ public final class Graphics {
         Graphics.currentCamera = currentCamera;
     }
 
+    /**
+     * Draws smoothed chain
+     * @param vertexes vertexes of chain
+     * @param color the color of the chain
+     * @param thickness the thickness of the chain
+     */
     public static void drawChain(float[] vertexes, Color color, float thickness) {
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
