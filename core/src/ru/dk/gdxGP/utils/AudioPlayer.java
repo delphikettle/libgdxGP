@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
+import ru.dk.gdxGP.Settings;
 
 import java.util.ArrayList;
 
@@ -27,7 +28,7 @@ public final class AudioPlayer {
      */
     public static void startPlayBackground() {
         backgroundMusic.setLooping(true);
-        backgroundMusic.setVolume(10);
+        backgroundMusic.setVolume(Settings.getMusicVolume());
         backgroundMusic.play();
     }
 
@@ -51,7 +52,7 @@ public final class AudioPlayer {
     public static void playRandomBounce() {
         try {
             int i = MathUtils.random(0, 3);
-            bounceSounds.get(i).play(0.05f);
+            bounceSounds.get(i).play(0.05f*Settings.getSoundVolume());
         } catch (Exception e) {
             e.printStackTrace();
         }
