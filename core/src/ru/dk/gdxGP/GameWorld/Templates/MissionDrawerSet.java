@@ -12,17 +12,19 @@ public final class MissionDrawerSet {
     public static final MissionDrawer mainTextDrawer = new MissionDrawer() {
         @Override
         public void drawMission(Mission mission, Batch batch) {
-            englishBitmapFont.draw(batch, mission.getMainTaskText(), Gdx.graphics.getWidth() * 0.05f, Gdx.graphics.getHeight() * 0.1f);
+            englishBitmapFont.draw(batch, mission.getMainTaskText(),
+                    Gdx.graphics.getWidth() * 0.05f,
+                    Gdx.graphics.getHeight() * 0.1f);
         }
     };
     private static final BitmapFont russianBitmapFont;
     static {
         englishBitmapFont = new BitmapFont();
         englishBitmapFont.setColor(Color.BLACK);
-        englishBitmapFont.setScale(3);
+        englishBitmapFont.setScale(3*Gdx.graphics.getDensity()*160/455);
         russianBitmapFont = new BitmapFont();
         russianBitmapFont.setColor(0.9f, 0.9f, 0.9f, 1);
-        russianBitmapFont.setScale(2f);
+        russianBitmapFont.setScale(2f*Gdx.graphics.getDensity()*160/455);
     }
     public static final MissionDrawer secondaryTextDrawer = new MissionDrawer() {
         @Override

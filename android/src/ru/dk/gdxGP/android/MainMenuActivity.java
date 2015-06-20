@@ -11,6 +11,7 @@ public class MainMenuActivity extends Activity implements View.OnClickListener {
     private Button startButton;
     private Button helpButton;
     private Button exitButton;
+    private Button settingsButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -21,9 +22,11 @@ public class MainMenuActivity extends Activity implements View.OnClickListener {
         startButton = (Button) findViewById(R.id.newGameButton);
         helpButton = (Button) findViewById(R.id.helpButton);
         exitButton = (Button) findViewById(R.id.exitButton);
+        settingsButton = (Button) findViewById(R.id.settingsButton);
         startButton.setOnClickListener(this);
         helpButton.setOnClickListener(this);
         exitButton.setOnClickListener(this);
+        settingsButton.setOnClickListener(this);
     }
 
 
@@ -31,14 +34,18 @@ public class MainMenuActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.newGameButton:
-                Intent intent = new Intent(MainMenuActivity.this, LevelListActivity.class);
-                startActivity(intent);
+                Intent levelListIntent = new Intent(MainMenuActivity.this, LevelListActivity.class);
+                startActivity(levelListIntent);
                 break;
             case R.id.helpButton:
                 Toast.makeText(this, "Tap Start button", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.exitButton:
                 System.exit(0);
+                break;
+            case R.id.settingsButton:
+                Intent settingsIntent = new Intent(MainMenuActivity.this, SettingsActivity.class);
+                startActivity(settingsIntent);
                 break;
         }
 
