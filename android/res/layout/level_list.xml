@@ -2,6 +2,6 @@
 <ListView xmlns:android="http://schemas.android.com/apk/res/android"
           android:layout_width="match_parent"
           android:layout_height="match_parent" android:id="@+id/levelList" style="@android:style/Theme.Material.Light"
-          android:theme="@android:style/Theme.Material.Light" android:background="@android:color/background_light">
+          android:theme="@android:style/Theme.Material.Light" android:background="#FF64B5F6">
 
 </ListView>
