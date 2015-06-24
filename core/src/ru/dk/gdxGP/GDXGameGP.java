@@ -24,6 +24,7 @@ public class GDXGameGP extends Game implements ApplicationListener {
         this.levelName = levelName;
         inputMultiplexer = new InputMultiplexer();
         currentGame = this;
+        Settings.save();
     }
 
     /**
