@@ -13,7 +13,7 @@ public class AndroidLauncher extends AndroidApplication {
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
         Intent intent = getIntent();
         String levelName = intent.getStringExtra("LEVEL_NAME");
-        initialize(new GDXGameGP(levelName), config);
+        this.initialize(new GDXGameGP(levelName), config);
     }
 
 }

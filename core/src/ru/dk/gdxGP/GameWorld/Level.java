@@ -200,53 +200,25 @@ public abstract class Level extends Thread implements Runnable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(MathUtils.random(0, 100));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                sleep();
                 setLoaded(0.0f / 7);
                 setSizes();
-                try {
-                    Thread.sleep(MathUtils.random(0, 100));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                sleep();
                 setLoaded(1.0f / 7);
                 setLevelScreen(screen);
-                try {
-                    Thread.sleep(MathUtils.random(0, 100));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                sleep();
                 setLoaded(2.0f / 7);
                 createWalls();
-                try {
-                    Thread.sleep(MathUtils.random(0, 100));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                sleep();
                 setLoaded(3.0f / 7);
                 setParticles();
-                try {
-                    Thread.sleep(MathUtils.random(0, 100));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                sleep();
                 setLoaded(4.0f / 7);
                 setOtherElements();
-                try {
-                    Thread.sleep(MathUtils.random(0, 100));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                sleep();
                 setLoaded(5.0f / 7);
                 setParameters();
-                try {
-                    Thread.sleep(MathUtils.random(0, 100));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                sleep();
                 setLoaded(6.0f / 7);
                 Level.this.addAction(new ActionForNextStep() {
                     @Override
@@ -254,12 +226,16 @@ public abstract class Level extends Thread implements Runnable {
                         Level.this.currentMissionChecker = new MissionChecker(Level.this.createMission(), 100);
                     }
                 });
+                sleep();
+                setLoaded(7.0f / 7);
+            }
+
+            private void sleep() {
                 try {
                     Thread.sleep(MathUtils.random(0, 100));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                setLoaded(7.0f / 7);
             }
         }).start();
     }
