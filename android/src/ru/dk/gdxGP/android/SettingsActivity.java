@@ -16,12 +16,12 @@ public class SettingsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         SeekBar musicVolumeChanger = (SeekBar) findViewById(R.id.MusicVolSeekBar);
-        musicVolumeChanger.setProgress((int) (100*Settings.getMusicVolume()));
-        Log.i("Volume",""+(int) (100*Settings.getMusicVolume()));
+        musicVolumeChanger.setProgress((int) (100*Settings.getCurrentSettings().getMusicVolume()));
+        Log.i("Volume",""+(int) (100*Settings.getCurrentSettings().getMusicVolume()));
         musicVolumeChanger.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                Settings.setMusicVolume(progress*0.01f);
+                Settings.getCurrentSettings().setMusicVolume(progress*0.01f);
             }
 
             @Override

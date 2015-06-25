@@ -11,7 +11,6 @@ import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
 import ru.dk.gdxGP.utils.AtlasLoader;
 
 public final class ParticleDrawerSet {
-    private static final TextureRegion textureRegionParticleSolid;
     private static final TextureRegion textureRegionCharge;
     public static final ParticleDrawer chargeCloudDrawer = new ParticleDrawer() {
         @Override
@@ -39,7 +38,6 @@ public final class ParticleDrawerSet {
     };
     private static final Animation particleSolidAnimation;
     static {
-        textureRegionParticleSolid = AtlasLoader.getRegion("ParticleSolid01");
         textureRegionCharge = AtlasLoader.getRegion("charge");
         textureRegionPlusCharge = AtlasLoader.getRegion("PlusCharge");
         textureRegionNullCharge = AtlasLoader.getRegion("NullCharge");

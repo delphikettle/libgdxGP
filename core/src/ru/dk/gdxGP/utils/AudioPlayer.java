@@ -28,7 +28,7 @@ public final class AudioPlayer {
      */
     public static void startPlayBackground() {
         backgroundMusic.setLooping(true);
-        backgroundMusic.setVolume(Settings.getMusicVolume());
+        backgroundMusic.setVolume(Settings.getCurrentSettings().getMusicVolume());
         backgroundMusic.play();
     }
 
@@ -52,7 +52,7 @@ public final class AudioPlayer {
     public static void playRandomBounce() {
         try {
             int i = MathUtils.random(0, 3);
-            bounceSounds.get(i).play(0.05f*Settings.getSoundVolume());
+            bounceSounds.get(i).play(0.05f*Settings.getCurrentSettings().getSoundVolume());
         } catch (Exception e) {
             e.printStackTrace();
         }

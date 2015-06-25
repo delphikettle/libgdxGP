@@ -19,6 +19,7 @@ import ru.dk.gdxGP.GDXGameGP;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.WorldElements.Border;
 import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
+import ru.dk.gdxGP.Settings;
 import ru.dk.gdxGP.utils.Graphics;
 
 public class LevelScreen implements GestureDetector.GestureListener, InputProcessor, Screen {
@@ -172,7 +173,8 @@ public class LevelScreen implements GestureDetector.GestureListener, InputProces
         this.camera.position.set((coordsDelay * camera.position.x + xTo) / (coordsDelay + 1), (coordsDelay * camera.position.y + yTo) / (coordsDelay + 1), 0);
         this.setCameraZoom((this.getZoom() * cameraDelay + MathUtils.clamp(this.getZoom(), zoomMin, zoomMax)) / (cameraDelay + 1));
 
-        //drawDebug();
+        if(Settings.getCurrentSettings().isDebug())
+            drawDebug();
     }
 
     private void drawDebug() {
