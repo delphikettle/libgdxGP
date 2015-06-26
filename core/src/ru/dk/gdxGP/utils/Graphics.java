@@ -6,13 +6,23 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import ru.dk.gdxGP.GameWorld.Templates.MissionDrawerSet;
+import ru.dk.gdxGP.GameWorld.Templates.ParticleDrawerSet;
 
 public final class Graphics {
-    public static final ShapeRenderer shapeRenderer;
+    public static ShapeRenderer shapeRenderer;
 
     static {
-        shapeRenderer = new ShapeRenderer();
+        load();
     }
+
+    public static void load() {
+        AtlasLoader.load();
+        shapeRenderer = new ShapeRenderer();
+        MissionDrawerSet.load();
+        ParticleDrawerSet.load();
+    }
+
     private static OrthographicCamera currentCamera;
 
     private Graphics() {

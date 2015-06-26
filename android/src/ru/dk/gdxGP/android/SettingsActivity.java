@@ -3,10 +3,8 @@ package ru.dk.gdxGP.android;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.SeekBar;
-import ru.dk.gdxGP.Settings;
+import ru.dk.gdxGP.utils.Settings;
 
 
 public class SettingsActivity extends Activity {

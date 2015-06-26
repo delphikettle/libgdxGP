@@ -7,7 +7,8 @@ import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.Screens.LevelScreen;
 import ru.dk.gdxGP.Screens.LoadingScreen;
 import ru.dk.gdxGP.Screens.LogoScreen;
-import ru.dk.gdxGP.utils.AudioPlayer;
+import ru.dk.gdxGP.utils.*;
+import ru.dk.gdxGP.utils.Graphics;
 
 public class GDXGameGP extends Game implements ApplicationListener {
     public static GDXGameGP currentGame;
@@ -24,7 +25,6 @@ public class GDXGameGP extends Game implements ApplicationListener {
         this.levelName = levelName;
         inputMultiplexer = new InputMultiplexer();
         currentGame = this;
-        Settings.save();
     }
 
     /**
@@ -32,7 +32,10 @@ public class GDXGameGP extends Game implements ApplicationListener {
      */
     @Override
     public void create() {
+        Graphics.load();
+        AudioPlayer.load();
         this.setScreen(new LogoScreen(1));
+        Settings.save();
         AudioPlayer.startPlayBackground();
     }
 
@@ -120,6 +123,7 @@ public class GDXGameGP extends Game implements ApplicationListener {
     public void dispose() {
         getScreen().dispose();
         super.dispose();
-        System.exit(0);
+        Settings.save();
+        Settings.load();
     }
 }

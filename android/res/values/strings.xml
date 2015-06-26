@@ -12,5 +12,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="choose_the_level">Choose a level</string>
+    <string name="title_activity_logo">Logo</string>
 
 </resources>

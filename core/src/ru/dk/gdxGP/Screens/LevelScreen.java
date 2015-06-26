@@ -19,7 +19,7 @@ import ru.dk.gdxGP.GDXGameGP;
 import ru.dk.gdxGP.GameWorld.Level;
 import ru.dk.gdxGP.GameWorld.WorldElements.Border;
 import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
-import ru.dk.gdxGP.Settings;
+import ru.dk.gdxGP.utils.Settings;
 import ru.dk.gdxGP.utils.Graphics;
 
 public class LevelScreen implements GestureDetector.GestureListener, InputProcessor, Screen {

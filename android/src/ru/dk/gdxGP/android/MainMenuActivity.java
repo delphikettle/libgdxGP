@@ -3,6 +3,7 @@ package ru.dk.gdxGP.android;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -16,9 +17,11 @@ public class MainMenuActivity extends Activity implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(savedInstanceState==null){
+            Intent logoIntent = new Intent(MainMenuActivity.this, LogoActivity.class);
+            startActivity(logoIntent);
+        }
         setContentView(R.layout.main_menu);
-        //GDXGameGP.assetManager.load("images/logo.png", Texture.class);
-        //GDXGameGP.assetManager.load("images/loadBall.png", Texture.class);
         startButton = (Button) findViewById(R.id.newGameButton);
         helpButton = (Button) findViewById(R.id.helpButton);
         exitButton = (Button) findViewById(R.id.exitButton);

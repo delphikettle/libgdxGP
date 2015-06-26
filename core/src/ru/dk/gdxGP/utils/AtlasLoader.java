@@ -4,12 +4,15 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public final class AtlasLoader {
-    private static final TextureAtlas textureAtlas;
+    private static TextureAtlas textureAtlas;
 
     private AtlasLoader() {
     }
 
     static {
+        load();
+    }
+    public static void load() {
         textureAtlas = new TextureAtlas("atlas/textureAtlas.atlas");
     }
 

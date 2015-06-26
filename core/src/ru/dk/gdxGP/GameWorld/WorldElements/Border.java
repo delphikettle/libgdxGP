@@ -12,7 +12,6 @@ import ru.dk.gdxGP.GameWorld.Templates.BorderDrawerSet;
 import ru.dk.gdxGP.utils.AtlasLoader;
 
 public class Border extends Actor implements LevelElement {
-    private final TextureRegion textureRegion;
     private final Level level;
     private Body body;
     private float[] vertexes;
@@ -39,7 +38,6 @@ public class Border extends Actor implements LevelElement {
         fixtureDef.isSensor = false;
         body.createFixture(fixtureDef);
         body.setUserData(this);
-        this.textureRegion = AtlasLoader.getRegion("pixel");
     }
 
     public void updateVertexes() {
@@ -71,24 +69,6 @@ public class Border extends Actor implements LevelElement {
         super.draw(batch, parentAlpha);
         if (drawer != null)
             drawer.drawBorder(this, batch, batch.getColor());
-
-        /*
-        ChainShape chainShape = (ChainShape) this.body.getFixtureList().get(0).getShape();
-        float xMin, yMin, xMax, yMax;
-        Vector2 vector2 = new Vector2();
-        chainShape.getVertex(0, vector2);
-        xMin = vector2.x;
-        yMin = vector2.y;
-        chainShape.getVertex(2, vector2);
-        xMax = vector2.x;
-        yMax = vector2.y;
-        batch.setColor(0.1f, 1, 0.5f, 1f);
-        batch.draw(textureRegion, xMin - 0.5f, yMin - 0.5f, xMax - xMin + 1, 0.5f);
-        batch.draw(textureRegion, xMin - 0.5f, yMin - 0.5f, 0.5f, yMax - yMin + 1);
-        batch.draw(textureRegion, xMin, yMax, xMax - xMin + 0.5f, 0.5f);
-        batch.draw(textureRegion, xMax, yMin, 0.5f, yMax - yMin + 0.5f);
-        batch.setColor(parentAlpha);
-         */
     }
 
     public Shape getShape() {

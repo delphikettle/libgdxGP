@@ -11,7 +11,7 @@ import ru.dk.gdxGP.GameWorld.WorldElements.Particle;
 import ru.dk.gdxGP.utils.AtlasLoader;
 
 public final class ParticleDrawerSet {
-    private static final TextureRegion textureRegionCharge;
+    private static TextureRegion textureRegionCharge;
     public static final ParticleDrawer chargeCloudDrawer = new ParticleDrawer() {
         @Override
         public void drawParticle(Particle particle, Batch batch, Color parentColor) {
@@ -21,9 +21,9 @@ public final class ParticleDrawerSet {
             batch.draw(textureRegionCharge, particle.getPosition().x - 1.0f * r1, particle.getPosition().y - 1.0f * r1, r1, r1, r1 * 2.0f, r1 * 2.0f, 1, 1, MathUtils.radiansToDegrees * particle.getBody().getAngle());
         }
     };
-    private static final TextureRegion textureRegionNullCharge;
-    private static final TextureRegion textureRegionMinusCharge;
-    private static final TextureRegion textureRegionPlusCharge;
+    private static TextureRegion textureRegionNullCharge;
+    private static TextureRegion textureRegionMinusCharge;
+    private static TextureRegion textureRegionPlusCharge;
     public static final ParticleDrawer chargeDrawer = new ParticleDrawer() {
         @Override
         public void drawParticle(Particle particle, Batch batch, Color parentColor) {
@@ -36,8 +36,12 @@ public final class ParticleDrawerSet {
                 batch.draw(textureRegionNullCharge, particle.getPosition().x - 1.0f * r2, particle.getPosition().y - 1.0f * r2, r2, r2, r2 * 2.0f, r2 * 2.0f, 1, 1, MathUtils.radiansToDegrees * particle.getBody().getAngle());
         }
     };
-    private static final Animation particleSolidAnimation;
+    private static Animation particleSolidAnimation;
     static {
+        load();
+    }
+
+    public static void load() {
         textureRegionCharge = AtlasLoader.getRegion("charge");
         textureRegionPlusCharge = AtlasLoader.getRegion("PlusCharge");
         textureRegionNullCharge = AtlasLoader.getRegion("NullCharge");
@@ -48,6 +52,7 @@ public final class ParticleDrawerSet {
         }
         particleSolidAnimation = new Animation(1 / 16f, particleSolidFrames);
     }
+
     private static float stateTime = 0;
     public static final ParticleDrawer baseParticleDrawer = new ParticleDrawer() {
         @Override

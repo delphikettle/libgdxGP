@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
-import ru.dk.gdxGP.Settings;
 
 import java.util.ArrayList;
 
@@ -16,6 +15,9 @@ public final class AudioPlayer {
     }
 
     static {
+        load();
+    }
+    public static void load() {
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/back01.mp3"));
         bounceSounds = new ArrayList<Sound>();
         for (int i = 1; i <= 4; i++) {

@@ -8,7 +8,7 @@ import ru.dk.gdxGP.GameWorld.Interfaces.Drawers.MissionDrawer;
 import ru.dk.gdxGP.GameWorld.Mission;
 
 public final class MissionDrawerSet {
-    private static final BitmapFont englishBitmapFont;
+    private static  BitmapFont englishBitmapFont;
     public static final MissionDrawer mainTextDrawer = new MissionDrawer() {
         @Override
         public void drawMission(Mission mission, Batch batch) {
@@ -17,15 +17,20 @@ public final class MissionDrawerSet {
                     Gdx.graphics.getHeight() * 0.1f);
         }
     };
-    private static final BitmapFont russianBitmapFont;
+    private static BitmapFont russianBitmapFont;
     static {
+        load();
+    }
+
+    public static void load() {
         englishBitmapFont = new BitmapFont();
         englishBitmapFont.setColor(Color.BLACK);
-        englishBitmapFont.setScale(3*Gdx.graphics.getDensity()*160/455);
+        englishBitmapFont.setScale(3* Gdx.graphics.getDensity()*160/455);
         russianBitmapFont = new BitmapFont();
         russianBitmapFont.setColor(0.9f, 0.9f, 0.9f, 1);
         russianBitmapFont.setScale(2f*Gdx.graphics.getDensity()*160/455);
     }
+
     public static final MissionDrawer secondaryTextDrawer = new MissionDrawer() {
         @Override
         public void drawMission(Mission mission, Batch batch) {

@@ -1,20 +1,19 @@
-package ru.dk.gdxGP;
+package ru.dk.gdxGP.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.MathUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonSyntaxException;
-
-import java.io.File;
 
 public class Settings {
+    private static Settings currentSettings;
     static{
-        load();
+        if(currentSettings==null){
+            currentSettings=new Settings();
+        }
     }
     public static Settings getCurrentSettings() {
-        load();
         return currentSettings;
     }
 
@@ -23,35 +22,28 @@ public class Settings {
         save();
     }
 
-    private static Settings currentSettings;
     public float getMusicVolume() {
         return musicVolume;
     }
 
     public static Settings load(){
-        try {
-            FileHandle file = Gdx.files.internal("data/settings.json");
-            if(file.exists()){
-                currentSettings = new Gson().fromJson(file.readString(),Settings.class);
-            } else {
-                currentSettings = new Settings();
-            }
-        } catch (NullPointerException e) {
-            
+        FileHandle file = Gdx.files.local("settings.json");
+        if(file.exists()){
+            currentSettings = new Gson().fromJson(file.readString(),Settings.class);
+        } else {
+            currentSettings = new Settings();
         }
         return currentSettings;
     }
     public static void save(){
-        FileHandle file = Gdx.files.internal("data/settings.json");
+        FileHandle file = Gdx.files.local("settings.json");
         if(file.exists()){
             file.delete();
-        } else {
-            file.writeString(currentSettings.toString(),false);
         }
+        file.writeString(currentSettings.toString(),false);
     }
     public void setMusicVolume(float musicVolume) {
         this.musicVolume = MathUtils.clamp(musicVolume,0,1);
-        save();
     }
 
     public Settings(float musicVolume, float soundVolume, boolean isDebug) {
@@ -72,7 +64,6 @@ public class Settings {
 
     public  void setSoundVolume(float soundVolume) {
         this.soundVolume = MathUtils.clamp(soundVolume,0,1);
-        save();
     }
 
     private float musicVolume, soundVolume;
@@ -84,7 +75,6 @@ public class Settings {
 
     public void setDebug(boolean isDebug) {
         this.isDebug = isDebug;
-        save();
     }
 
 

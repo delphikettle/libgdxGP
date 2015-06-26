@@ -47,6 +47,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ru.dk.gdxGP.android.MainMenuActivity" />
         </activity>
+        <activity
+            android:name=".LogoActivity"
+            android:label="@string/title_activity_logo" >
+        </activity>
     </application>
 
 </manifest>
