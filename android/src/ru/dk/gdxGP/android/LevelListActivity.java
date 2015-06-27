@@ -17,7 +17,7 @@ public class LevelListActivity extends Activity {
         super.onCreate(icicle);
         setContentView(R.layout.level_list);
         lv = (ListView) findViewById(R.id.levelList);
-        final List<String> levelNames = GameLevels.getNames(false);
+        final List<String> levelNames = GameLevels.getLevelsNames(false);
         adapter = new ArrayAdapter<String>(this, R.layout.level_list_item, levelNames);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {

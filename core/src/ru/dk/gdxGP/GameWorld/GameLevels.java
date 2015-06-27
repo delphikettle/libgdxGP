@@ -11,14 +11,15 @@ public class GameLevels {
     @SuppressWarnings("unchecked")
     public static final List<Class<? extends Level>> LEVELS = new ArrayList<Class<? extends Level>>(
             Arrays.asList(
-                    //TestLevel.class,
-                    //TestLevel01.class,
-                    //NullTemplateLevel.class,
-                    ControlTutorialLevel.class,
-                    ForcesTutorialLevel.class,
-                    InteractionTutorialLevel.class,
                     ChargeAllLevel.class,
                     ChargeYourFriendLevel.class
+            )
+    );
+    public static final List<Class<? extends Level>> TUTORIALS = new ArrayList<Class<? extends Level>>(
+            Arrays.asList(
+                    ControlTutorialLevel.class,
+                    ForcesTutorialLevel.class,
+                    InteractionTutorialLevel.class
             )
     );
 
@@ -28,10 +29,29 @@ public class GameLevels {
      * @param sorted if levels must be sorted by names
      * @return {@link java.util.ArrayList} of String with levels' names
      */
-    public static List<String> getNames(boolean sorted) {
+    public static List<String> getLevelsNames(boolean sorted) {
         List<String> names = new ArrayList<String>(GameLevels.LEVELS.size());
 
         for (Class<? extends Level> level : GameLevels.LEVELS) {
+            names.add(level.getSimpleName());
+        }
+
+        if (sorted) {
+            Collections.sort(names);
+        }
+
+        return names;
+    }
+    /**
+     * Returns the list of levels
+     *
+     * @param sorted if levels must be sorted by names
+     * @return {@link java.util.ArrayList} of String with levels' names
+     */
+    public static List<String> getTutorialsNames(boolean sorted) {
+        List<String> names = new ArrayList<String>(GameLevels.TUTORIALS.size());
+
+        for (Class<? extends Level> level : GameLevels.TUTORIALS) {
             names.add(level.getSimpleName());
         }
 
@@ -51,6 +71,13 @@ public class GameLevels {
     public static Level instantiateLevel(String levelName) {
         try {
             return forName(GameLevels.LEVELS, levelName).newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        try {
+            return forName(GameLevels.TUTORIALS, levelName).newInstance();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
