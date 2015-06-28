@@ -13,6 +13,7 @@ public class TaskOnContact extends Task {
     private final LevelElement element2;
     private boolean contacted = false;
 
+
     public TaskOnContact(final LevelElement element1, final LevelElement element2) {
         this.element1 = element1;
         this.element2 = element2;
