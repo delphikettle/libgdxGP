@@ -106,14 +106,14 @@ public class ChargeAllLevel extends Level {
             @Override
             public boolean checkTask(Task task) {
                 task01.setSecondaryTaskText("Hurry up! You have " + MathUtils.round(subTask02.getTimeToFinish() / 1000) + "sec");
-                for (int i = 0; i < particleList.size(); i++) {
-                    if (particleList.get(i).getCharge() < 0.0005f)
+                for (Particle aParticleList : particleList) {
+                    if (aParticleList.getCharge() < 0.125f)
                         return false;
                 }
                 return true;
             }
         });
-        subTask02 = new TimeTask(30000);
+        subTask02 = new TimeTask(15000);
         subTask02.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {
@@ -127,7 +127,7 @@ public class ChargeAllLevel extends Level {
                 new NotTask(subTask02),
                 subTask01
         }, TaskCombination.TC_AND, true);
-        task01.setMainTaskText("Charge all particles around during 30sec.");
+        task01.setMainTaskText("Charge all particles around during 15sec.");
         task01.setActionAfterAchievedTask(new ActionAfterAchievedTask() {
             @Override
             public void actionAfterAchievedTask(Task task) {

@@ -18,7 +18,7 @@ public final class AudioPlayer {
         load();
     }
     public static void load() {
-        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/back01.mp3"));
+        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/background01.mp3"));
         bounceSounds = new ArrayList<Sound>();
         for (int i = 1; i <= 4; i++) {
             bounceSounds.add(Gdx.audio.newSound(Gdx.files.internal("audio/bounce" + i + ".ogg")));

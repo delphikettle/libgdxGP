@@ -66,6 +66,7 @@ public class GDXGameGP extends Game implements ApplicationListener {
 
             @Override
             public void startLoad() {
+                assert level != null;
                 level.load(levelScreen);
             }
 
@@ -77,6 +78,7 @@ public class GDXGameGP extends Game implements ApplicationListener {
 
             @Override
             public float getProgress() {
+                assert level != null;
                 return level.getLoaded();
             }
 

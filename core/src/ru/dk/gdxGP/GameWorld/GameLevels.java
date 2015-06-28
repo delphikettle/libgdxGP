@@ -71,17 +71,12 @@ public class GameLevels {
     public static Level instantiateLevel(String levelName) {
         try {
             return forName(GameLevels.LEVELS, levelName).newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        try {
-            return forName(GameLevels.TUTORIALS, levelName).newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+        } catch (Exception e12) {
+            try {
+                return forName(GameLevels.TUTORIALS, levelName).newInstance();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
         }
         return null;
     }

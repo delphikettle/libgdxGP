@@ -5,5 +5,4 @@
         android:layout_height="wrap_content"
         android:layout_width="fill_parent" style="@android:style/TextAppearance.Material"
         android:theme="@android:style/Theme.Material.Light" android:textSize="32sp"
-        android:textColor="#FF000000"
-        android:textAlignment="center"/>
+        android:textColor="#FF000000"/>
