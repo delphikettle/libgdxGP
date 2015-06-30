@@ -19,7 +19,7 @@ public class FadePreRenderer implements PreRenderer {
     float r, g, b, a;
     int stepTimes;
     int currentStepTimes = 0;
-    boolean rize = true;
+    boolean rise = true;
 
     public FadePreRenderer(float rFrom, float gFrom, float bFrom, float aFrom, float rTo, float gTo, float bTo, float aTo, int stepTimes) {
         this.rFrom = rFrom;
@@ -54,13 +54,13 @@ public class FadePreRenderer implements PreRenderer {
 
     public void step() {
         if (currentStepTimes == stepTimes) {
-            rize = !rize;
+            rise = !rise;
             currentStepTimes = 0;
         }
-        r += rStep * (rize ? 1 : -1);
-        g += gStep * (rize ? 1 : -1);
-        b += bStep * (rize ? 1 : -1);
-        a += aStep * (rize ? 1 : -1);
+        r += rStep * (rise ? 1 : -1);
+        g += gStep * (rise ? 1 : -1);
+        b += bStep * (rise ? 1 : -1);
+        a += aStep * (rise ? 1 : -1);
         currentStepTimes++;
     }
 
